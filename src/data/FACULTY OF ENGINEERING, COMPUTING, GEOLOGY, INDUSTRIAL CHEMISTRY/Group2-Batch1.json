@@ -1,0 +1,131 @@
+{
+  "book": "FACULTY OF ENGINEERING, COMPUTING, GEOLOGY, INDUSTRIAL CHEMISTRY/PHYSICS & OTHER SCIENCES",
+  "sessions": [
+    {
+      "session": "2024/2025",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "The general was known for his valiant efforts during the war.", "options": ["brave", "cowardly", "bold", "fearless"], "answer": "B"},
+          {"number": 2, "question": "The solution to the problem is transparent to everyone.", "options": ["clear", "obvious", "vague", "evident"], "answer": "C"},
+          {"number": 3, "question": "Her ideas are always novel and thought-provoking.", "options": ["outdated", "creative", "rare", "futuristic"], "answer": "A"},
+          {"number": 4, "question": "The atmosphere in the room was tense during the negotiations.", "options": ["stressful", "tight", "relaxed", "nervous"], "answer": "C"},
+          {"number": 5, "question": "The manager gave a stern warning.", "options": ["soft", "gentle", "strict", "playful"], "answer": "C"},
+          {"number": 6, "question": "The ceremony was a solemn occasion.", "options": ["joyful", "serious", "chaotic", "festive"], "answer": "B"},
+          {"number": 7, "question": "She devoured the novel in one sitting.", "options": ["read slowly", "destroyed", "read eagerly", "ignored"], "answer": "C"},
+          {"number": 8, "question": "His tone was cordial and welcoming.", "options": ["harsh", "polite", "cold", "dismissive"], "answer": "B"},
+          {"number": 9, "question": "He was ecstatic about the promotion.", "options": ["angry", "overjoyed", "nervous", "irritated"], "answer": "B"},
+          {"number": 10, "question": "The problems of Nigeria's worsening economy seem to have **defied** an immediate solution.", "options": ["defined", "defied", "reflected", "rewarded"], "answer": "B"},
+          {"number": 11, "question": "After the 1980 Ogunpa floods, our association received many letters from those adversely affected and we resolved to **assist** them.", "options": ["assist", "invite", "respond", "pity"], "answer": "A"},
+          {"number": 12, "question": "**Unemployment** reached 18.7% of the US population.", "options": ["Employed", "Unemployment", "Employers", "Employees"], "answer": "B"},
+          {"number": 13, "question": "Now that I realize the full extent of your **duplicity**, I am afraid it will be impossible for me to ever trust you again.", "options": ["dubiousness", "corruption", "deceptiveness", "duplicity"], "answer": "D"},
+          {"number": 14, "question": "He must be a good student because he is a **voracious** reader.", "options": ["Romanesque", "veracious", "voracious", "mendacious"], "answer": "C"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "Given that 10ˣ = 0.2 and log₁₀2 = 0.3010, find x.", "options": ["-1.3010", "-0.6990", "0.6990", "1.3010"], "answer": "B"},
+          {"number": 16, "question": "A micrometre is defined as one millionth of a millimetre. A length of 12,000 micrometres may be represented as", "options": ["0.00012m", "0.0000012m", "0.000012m", "0.00000012m"], "answer": "C"},
+          {"number": 17, "question": "If a rod of length 250cm is measured as 255cm long in error, what is the percentage error in the measurement?", "options": ["55", "10", "5", "2"], "answer": "D"},
+          {"number": 18, "question": "The diameter of a metal rod is measured as 23.40 cm to four significant figures. What is the maximum error in the measurement?", "options": ["0.05cm", "0.5cm", "0.045cm", "0.005cm"], "answer": "D"},
+          {"number": 19, "question": "If a rod of length 250cm is measured as 255cm long in error, what is the percentage error in the measurement? (duplicate corrected)", "options": ["55", "10", "5", "2"], "answer": "D"},
+          {"number": 20, "question": "A 5.0g of salts was weighed by Tunde as 5.1g. What is the percentage error?", "options": ["20", "2", "1", "0.2"], "answer": "B"},
+          {"number": 21, "question": "Express 62 ÷ 3 as a decimal correct to 3 significant figures.", "options": ["20.6", "20.667", "20.67", "20.7"], "answer": "D"},
+          {"number": 22, "question": "Evaluate 3524 / 0.05 correct to 3 significant figures.", "options": ["705", "70000", "70480", "70500"], "answer": "D"},
+          {"number": 23, "question": "By selling an article for N45.00 a man makes a profit of 8%. For how much should he have sold it in order to make a profit of 32%?", "options": ["N180.00", "N59.00", "N63.00", "N55.00"], "answer": "D"},
+          {"number": 24, "question": "A man bought a wrist watch for N150 but was only able to sell it for N120. Find the loss per cent on the transaction.", "options": ["25%", "11½%", "20%", "80%"], "answer": "C"},
+          {"number": 25, "question": "A housewife bought 3 kilograms of garri at N13.00 per kg. She deposited N160.00 for half a cow and bought 24 oranges at 10k each. She came back home with N20.60. She therefore left home with", "options": ["N220.00", "N222.00", "N201.40", "N180.80"], "answer": "B"},
+          {"number": 26, "question": "A sum of money was invested at 8% per annum simple interest. If after 4 years the money amounts to N 330.00, find the amount originally invested.", "options": ["N180.00", "N165.00", "N150.00", "N250.00"], "answer": "C"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "A magnet is moved through a coil of wire. The e.m.f. produced in the wire depends on", "options": ["the number of turns in the coil", "the strength of the magnet", "the speed at which the magnet is moved", "all of the above"], "answer": "D"},
+          {"number": 28, "question": "The direction of the magnetic field at a point in the vicinity of a bar magnet is", "options": ["Always towards the north pole of the magnet", "Always away from the south pole of the magnet", "Along the line joining the point to the neutral point", "In the direction the north pole of a compass needle would point"], "answer": "D"},
+          {"number": 29, "question": "Two resistors, R₁ = 4Ω and R₂ = 5Ω are connected in parallel across a potential difference. If P1 and P2 represent the power dissipated in R₁ and R₂ respectively, the ratio P1:P2 is", "options": ["4:5", "5:4", "16:25", "25:16"], "answer": "B"},
+          {"number": 30, "question": "What is the cost of running five 50W lamps and four 100W lamps for 10 hours if electrical energy costs 2 kobo per kWh?", "options": ["N 0.65", "N 0.13", "N 3.90", "N39.00"], "answer": "B"},
+          {"number": 31, "question": "One of the properties of the earth's magnetic field is that the", "options": ["North pole lies in the northern hemisphere", "Geographic and magnetic meridians coincide", "Earth's magnetic flux is entirely horizontal at a place where the magnetic vertical dip is zero", "Earth's magnetic flux is entirely vertical at a place where the magnetic dip is zero"], "answer": "C"},
+          {"number": 32, "question": "The angle between the direction of the earth's magnetic field and the horizontal is called the", "options": ["Angle of deviation", "Magnetic declination", "Magnetic meridian", "Angle of dip"], "answer": "D"},
+          {"number": 33, "question": "At different locations on the earth's surface, the earth's magnetic field is", "options": ["The same in magnitude and direction", "The same in magnitude but different in direction", "Different in both magnitude and direction", "Different in magnitude but not in direction"], "answer": "C"},
+          {"number": 34, "question": "A milliammeter of resistance 5Ω and full scale deflection of 50mA is to be used to measure a potential difference of 50V. The resistance of the multiplier should be", "options": ["95Ω", "110Ω", "595Ω", "995Ω"], "answer": "D"},
+          {"number": 35, "question": "On which of the following does the operation of a moving coil ammeter depend? I. Electromagnetic induction. II. Force on a current-carrying conductor in a magnetic field III. Magnetic effect of an electric current.", "options": ["I only", "II only", "III only", "II and III"], "answer": "D"},
+          {"number": 36, "question": "A galvanometer of resistance 2Ω is to be provided with a shunt that 1/10 of the whole current in a circuit passes through the galvanometer. The resistance of the shunt is", "options": ["2.00Ω", "2.22Ω", "18.00Ω", "18.22Ω"], "answer": "B"},
+          {"number": 37, "question": "What is the angle of dip at the magnetic equator?", "options": ["45°", "0°", "90°", "180°"], "answer": "B"},
+          {"number": 38, "question": "When two parallel wires carry currents in opposite directions, the force on either wire is", "options": ["Away from the other wire", "Zero, because the currents cancel each other", "Twice as much as when the currents are in the same direction", "Towards the other wire"], "answer": "A"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "What is the partial pressure of hydrogen gas collected over water at standard atmospheric pressure and 25°C if the saturation vapour pressure of water is 23mmHg at that temperature?", "options": ["737mmHg", "763mmHg", "777mmHg", "783mmHg"], "answer": "A"},
+          {"number": 40, "question": "Which of the following is used in fire extinguisher?", "options": ["carbon (II) oxide", "carbon (IV) oxide", "sulphur (IV) oxide", "Ammonia"], "answer": "B"},
+          {"number": 41, "question": "Safety matches contains sulphur and", "options": ["potassium trioxochlorate(V)", "potassium trioxonitrate(V)", "charcoal", "phosphorus sulphide"], "answer": "B"},
+          {"number": 42, "question": "Which of the following is the electronic configuration of sodium [atomic number of Na = 11]?", "options": ["1s²2s²2p⁶3s²", "1s²2s²2p⁶3s²3p¹", "1s²2s²2p⁶3s¹", "1s²2s²2p⁶3s⁰"], "answer": "C"},
+          {"number": 43, "question": "The removal of rust from iron by treatment with tetraoxosulphate (VI) acid is based on the", "options": ["hydrolysis of the iron", "reaction of acid with base", "oxidation of the rust", "dehydration of the iron"], "answer": "B"},
+          {"number": 44, "question": "If 1 litre of 2.2M sulphuric acid is poured into a bucket containing 10 litres of water, and the resulting solution mixed thoroughly, the resulting sulphuric acid concentration will be?", "options": ["2.2M", "1.1M", "0.22M", "0.20M"], "answer": "D"},
+          {"number": 45, "question": "The process involved in the conversion of an oil into margarine is known as", "options": ["hydrogenation", "condensation", "hydrolysis", "dehydration"], "answer": "A"},
+          {"number": 46, "question": "What is discharged at cathode during the electrolysis of copper (II) tetraoxosulphate(VI) solution?", "options": ["Cu²⁺ only", "H⁺ only", "Cu²⁺ and H⁺", "Cu²⁺ and SO₄²⁻"], "answer": "A"},
+          {"number": 47, "question": "Which of the following gases will diffuse fastest when passed through a porous plug [H=1, C=12, N=14, O=16]?", "options": ["propane", "oxygen", "methane", "ammonia"], "answer": "D"},
+          {"number": 48, "question": "Metals of the first transition series have special properties which are different from those of groups I and II elements because they have partially filled", "options": ["s orbitals", "p orbitals", "d orbitals", "f orbitals"], "answer": "C"},
+          {"number": 49, "question": "Which of the following metals will liberate hydrogen from steam or dilute acid?", "options": ["copper", "iron", "lead", "mercury"], "answer": "B"},
+          {"number": 50, "question": "Smoke consists of", "options": ["solid particles dispersed in liquid", "solid or liquid particles dispersed in gas", "gas or liquid particles dispersed in solid", "liquid particles dispersed in liquid"], "answer": "B"}
+        ]
+      }
+    },
+    {
+      "session": "2023/2024",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "The manager gave a stern warning.", "options": ["soft", "gentle", "strict", "playful"], "answer": "C"},
+          {"number": 2, "question": "The ceremony was a solemn occasion.", "options": ["joyful", "serious", "chaotic", "festive"], "answer": "B"},
+          {"number": 3, "question": "She devoured the novel in one sitting.", "options": ["read slowly", "destroyed", "read eagerly", "ignored"], "answer": "C"},
+          {"number": 4, "question": "His tone was cordial and welcoming.", "options": ["harsh", "polite", "cold", "dismissive"], "answer": "B"},
+          {"number": 5, "question": "He gave a concise summary of the event.", "options": ["brief", "short", "lengthy", "compressed"], "answer": "C"},
+          {"number": 6, "question": "The professor's comments were constructive and helpful.", "options": ["destructive", "positive", "beneficial", "insightful"], "answer": "A"},
+          {"number": 7, "question": "The CEO was praised for his integrity.", "options": ["honesty", "deceit", "transparency", "loyalty"], "answer": "B"},
+          {"number": 8, "question": "The students gave a superficial answer to a deep question.", "options": ["shallow", "deep", "fake", "careless"], "answer": "B"},
+          {"number": 9, "question": "It is very difficult to capture the subtle **connotations** of words when translated from one language to another.", "options": ["essence", "denotations", "connotations", "inflexions"], "answer": "C"},
+          {"number": 10, "question": "The solution to the problem has so far **eluded** the scientists.", "options": ["defied", "allured", "eluded", "denied"], "answer": "C"},
+          {"number": 11, "question": "The boy was born before his parents actually got married and so the court has declared him **illegitimate**.", "options": ["illegal", "illegitimate", "illicit", "unlawful"], "answer": "B"},
+          {"number": 12, "question": "Tennyson and Browning lived about the same time and are therefore **contemporary** poets.", "options": ["contrary", "contractual", "contemporaneous", "contemporary"], "answer": "D"},
+          {"number": 13, "question": "He was caught red-handed.", "options": ["injured in the hand", "caught while committing a crime", "surprised with a gift", "arrested wrongly"], "answer": "B"},
+          {"number": 14, "question": "The teacher's warning fell on deaf ears.", "options": ["was ignored", "was praised", "was followed", "was feared"], "answer": "A"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "Audu bought an article for ₦50,000 and sold it to Femi at a loss of x%. Femi later sold the article to Oche at a profit of 40%. If Femi made a profit of ₦10,000, find the value of x.", "options": ["60", "50", "40", "20"], "answer": "B"},
+          {"number": 16, "question": "When a dealer sells a bicycle for N81 he makes a profit of 8%. What did he pay for the bicycle?", "options": ["N74", "N74.52", "N75", "N75.52"], "answer": "C"},
+          {"number": 17, "question": "A bed costing N10,500 was sold at 20% gain, what was the amount paid for it?", "options": ["N126,000", "N12,100", "N12,600", "N8,400"], "answer": "C"},
+          {"number": 18, "question": "A man on a diet manages to reduce his weight from 100kg to 89.5kg. What is his percentage reduction in weight?", "options": ["25%", "10.5%", "15.5%", "12.5%"], "answer": "B"},
+          {"number": 19, "question": "If three numbers p, q, r are in the ratio 6:4:5, find the value of (3p - q)/(4q + r).", "options": ["3/2", "2/3", "2", "3"], "answer": "C"},
+          {"number": 20, "question": "Find the least length of a rod which can be cut into exactly equal strips, each of either 40cm or 48cm in length.", "options": ["120cm", "240cm", "360cm", "480cm"], "answer": "B"},
+          {"number": 21, "question": "Two brothers invested a total of N5,000.00 on a farm project. The farm yield was sold for N15,000.00 at the end of the season. If the profit was shared in the ratio 2:3, what is the difference in the amount of profit received by the brothers?", "options": ["N2,000.00", "N4,000.00", "N6,000.00", "N10,000.00"], "answer": "A"},
+          {"number": 22, "question": "Two sisters, Taiwo and Kehinde, own a store. The ratio of Taiwo's share to Kehinde's is 11:9. Later Kehinde sells 2/3 of her share to Taiwo for ₦720.00. Find the value of the store.", "options": ["N1,080.00", "N2,400.00", "N3,000.00", "N3,600.00"], "answer": "D"},
+          {"number": 23, "question": "Assuming log₁₀4.4 = 1.4816 and log₁₀7.7 = 2.0142, then the value of log₁₀74 is.", "options": ["0.5326", "3.4958", "0.4616", "0.0142"], "answer": "A"},
+          {"number": 24, "question": "Given that 10ˣ = 0.2 and log₁₀2 = 0.3010, find x.", "options": ["-1.3010", "-0.6990", "0.6990", "1.3010"], "answer": "B"},
+          {"number": 25, "question": "Without using tables find the numerical value of log₇49 + log₇(1/7).", "options": ["1", "2", "3", "7"], "answer": "A"},
+          {"number": 26, "question": "Simplify √27 + 3/√3.", "options": ["4√3", "4/√3", "3√3", "√3/4"], "answer": "A"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "A current-carrying conductor experiences a force when placed in a magnetic field because the", "options": ["Conductor is magnetized", "Magnetic field of the current interacts with external magnetic field", "Force is due to the motor principle", "Electric field of the current interacts with the external magnetic field"], "answer": "B"},
+          {"number": 28, "question": "The primary winding of a transformer has 400 turns and its secondary has 100 turns. If a source of e.m.f. of 12V is applied to the primary, the secondary e.m.f. will be", "options": ["3 V", "6 V", "24 V", "48 V"], "answer": "A"},
+          {"number": 29, "question": "The carbon-granule microphone works on the principle of change in", "options": ["Capacitance", "Voltage", "Inductance", "Resistance"], "answer": "D"},
+          {"number": 30, "question": "The electrochemical equivalent of silver is 0.0012g/C. If 36.0g of silver is to be deposited by electrolysis on a surface by passing a steady current for 5.0 minutes, the current must be", "options": ["6000A", "100A", "10A", "1 A"], "answer": "B"},
+          {"number": 31, "question": "The electrochemical equivalent of platinum is 5.0 × 10⁻⁷ kgC⁻¹. To plate out 1.0 kg of platinum, a current of 100A must be passed through an appropriate vessel for", "options": ["5.6 hours", "56 hours", "1.4 × 10⁴ hours", "2.0 × 10⁴ hours"], "answer": "B"},
+          {"number": 32, "question": "The mass of a proton is approximately equal to that of", "options": ["an α-particle", "a β-particle", "A γ-ray", "a neutron"], "answer": "D"},
+          {"number": 33, "question": "Which of the following symbolic representations is correct for an atom X with 22 electrons and 43 neutrons?", "options": ["⁴³₂₂X", "⁶⁵₄₃X", "⁶⁵₂₂X", "⁶⁵₂₂X"], "answer": "D"},
+          {"number": 34, "question": "When an atom loses or gains a charge, it becomes", "options": ["An electron", "An ion", "A neutron", "A proton"], "answer": "B"},
+          {"number": 35, "question": "Cathode rays are", "options": ["High-energy electromagnetic waves", "Protons", "Streams of electrons", "Neutrons"], "answer": "C"},
+          {"number": 36, "question": "A transformer has 300 turns of wire in the primary coil and 30 turns in the secondary coil. If the input voltage is 100 volts, the output voltage is", "options": ["5 volts", "10 volts", "15 volts", "20 volts"], "answer": "B"}
+        ],
+        "CHEMISTRY": [
+          {"number": 37, "question": "Which of the following type of bonding does not involve the formation of new substances?", "options": ["metallic", "covalent", "co-ordinate", "electrovalent"], "answer": "A"},
+          {"number": 38, "question": "A given amount of gas occupies 10.0dm³ at 4 atm and 273°C. The number of moles of the gas present is [molar volume of gas at S.T.P = 22.4dm³]", "options": ["0.89 mol", "1.90 mol", "3.80 mol", "5.70 mol"], "answer": "A"},
+          {"number": 39, "question": "Hardening of an oil may be achieved by", "options": ["boiling the oil with water", "boiling the oil with a catalyst", "treating the oil with sodium hydroxide", "treating the oil with hydrogen and catalyst"], "answer": "D"},
+          {"number": 40, "question": "10g of a solid is in equilibrium with its own vapour. When 1g of a small amount of solid is added, the vapour pressure", "options": ["remains the same", "drops", "increases", "fluctuates"], "answer": "A"},
+          {"number": 41, "question": "Water for town supply is chlorinated to make it free from", "options": ["bad odour", "bacteria", "temporary hardness", "permanent hardness"], "answer": "B"},
+          {"number": 42, "question": "The product formed at the cathode during the electrolysis of sodium chloride solution with carbon electrodes is", "options": ["sodium", "chlorine", "hydrogen", "sodium hydroxide"], "answer": "C"},
+          {"number": 43, "question": "Hydrogen is used in oxy-hydrogen flames for melting metals because it", "options": ["evolves a lot of heat when burnt", "combines explosively with oxygen", "is a very light gas", "is a rocket fuel"], "answer": "A"},
+          {"number": 44, "question": "The oxidation state of chlorine in potassium chlorate (KClO₃) is", "options": ["+1", "+2", "+3", "+5"], "answer": "D"},
+          {"number": 45, "question": "What volume of 1.0M hydrochloric acid must be diluted to obtain 1dm³ of 0.05M acid?", "options": ["0.05dm³", "0.10dm³", "0.55dm³", "11.0dm³"], "answer": "A"},
+          {"number": 46, "question": "20cm³ of 1M H₂SO₄ is mixed with 20cm³ of 1M NaOH. The resulting solution is", "options": ["acidic with a molarity of 0.50M H₂SO₄", "acidic with molarity of 0.25M H₂SO₄", "neutral", "alkaline with a molarity of 0.25M NaOH"], "answer": "B"},
+          {"number": 47, "question": "Sodium hydroxide on exposure to air absorbs a gas and ultimately gives another alkaline substance with the molecular formula", "options": ["NaOH·H₂O", "NaOH·N₂", "Na₂CO₃", "NaHCO₃"], "answer": "C"},
+          {"number": 48, "question": "An element X has two isotopes, present in the ratio of 1:3. The relative atomic mass of X is", "options": ["20.5", "21", "21.5", "22.0"], "answer": "C"},
+          {"number": 49, "question": "Which one of the following metals is not normally extracted by chemical reduction because of its position in the electrochemical series?", "options": ["copper", "iron", "lead", "potassium"], "answer": "D"},
+          {"number": 50, "question": "The reaction of carbide with water gives", "options": ["ethyne", "ethene", "ethane", "ethanol"], "answer": "A"}
+        ]
+      }
+    }
+  ]
+}

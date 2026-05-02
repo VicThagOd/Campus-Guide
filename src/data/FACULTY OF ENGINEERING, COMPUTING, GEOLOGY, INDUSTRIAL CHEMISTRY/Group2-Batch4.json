@@ -1,0 +1,552 @@
+{
+  "book": "FACULTY OF ENGINEERING, COMPUTING, GEOLOGY, INDUSTRIAL CHEMISTRY/PHYSICS & OTHER SCIENCES",
+  "sessions": [
+    {
+      "session": "2013/2014",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "The scientist gave a tentative explanation.", "options": ["temporary", "confirmed", "initial", "doubtful"], "answer": "B"},
+          {"number": 2, "question": "They launched an offensive against the enemy.", "options": ["attack", "defense", "strike", "aggression"], "answer": "B"},
+          {"number": 3, "question": "He gave a fictitious account of the event.", "options": ["true", "false", "imaginary", "fabricated"], "answer": "A"},
+          {"number": 4, "question": "His comment was very derogatory.", "options": ["insulting", "respectful", "dismissive", "sarcastic"], "answer": "B"},
+          {"number": 5, "question": "She was indifferent to the whole situation.", "options": ["uncaring", "sympathetic", "aloof", "passive"], "answer": "B"},
+          {"number": 6, "question": "She gave a succinct reply.", "options": ["long", "brief", "harsh", "rude"], "answer": "B"},
+          {"number": 7, "question": "He was irate after hearing the news.", "options": ["pleased", "tired", "furious", "shocked"], "answer": "C"},
+          {"number": 8, "question": "The old man was frail.", "options": ["weak", "strong", "tall", "healthy"], "answer": "A"},
+          {"number": 9, "question": "Their ideas were compatible.", "options": ["matching", "different", "odd", "invalid"], "answer": "A"},
+          {"number": 10, "question": "His method is very innovative.", "options": ["old-fashioned", "traditional", "creative", "average"], "answer": "C"},
+          {"number": 11, "question": "A few years ago, nobody would have believed that the economy would turnaround.", "options": ["deteriorate", "improve", "stagnate", "change"], "answer": "B"},
+          {"number": 12, "question": "Before announcing his retirement, Ochima resolved to settle an account with the bank.", "options": ["pay back all he owes", "close his account", "retire his loans", "get back at"], "answer": "A"},
+          {"number": 13, "question": "The judge with his son … travelling to Lagos now.", "options": ["were", "shall", "is", "are"], "answer": "C"},
+          {"number": 14, "question": "Ours … based venture.", "options": ["are a resource", "is a resource", "are resources", "is a resourced"], "answer": "B"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "The mean of a set of six numbers is 60. If the mean of the first five is 50, find the sixth number.", "options": ["110", "105", "100", "95"], "answer": "A"},
+          {"number": 16, "question": "The mean age of a group of students is 15 years. When the age of a teacher, 45 years old, is added, the mean becomes 18 years. Find the number of students.", "options": ["7", "9", "15", "42"], "answer": "B"},
+          {"number": 17, "question": "Find the mean deviation of the set of numbers 4, 5, 9.", "options": ["0", "2", "5", "6"], "answer": "B"},
+          {"number": 18, "question": "If the mean of 0, x+2, 3x+6, 4x+8 is 4, find their mean deviation.", "options": ["0", "2", "3", "4"], "answer": "C"},
+          {"number": 19, "question": "The range of the data k+2, k-3, k+4, k-2, k, k-5, k+3, k-1, k+6 is", "options": ["6", "8", "10", "11"], "answer": "D"},
+          {"number": 20, "question": "If n is the median and m is the mode of 2,4,2,1,1,6,2,6,2,6,3,7,2,1,2,6, then (n,m) is", "options": ["(2.6,2.6)", "(2.5,2.6)", "(2.6,2.5)", "(2.5,2.1)"], "answer": "B"},
+          {"number": 21, "question": "Five people to be arranged in a row; married couple insists on sitting next to each other. Number of arrangements?", "options": ["48", "24", "2", "10"], "answer": "A"},
+          {"number": 22, "question": "Differentiate x/cos x with respect to x.", "options": ["1+x sec x tan x", "1+sec²x", "cos x + x tan x", "sec x + x sec x tan x"], "answer": "D"},
+          {"number": 23, "question": "Differentiate (2x+5)(x-4) with respect to x.", "options": ["(2x+5)(6x-11)", "(2x+5)(2x-13)", "4(2x+5)(x-4)", "4(2x+5)(4x-3)"], "answer": "A"},
+          {"number": 24, "question": "Simplify cos²x (sec²x + sec²x tan²x).", "options": ["tan x", "tan x sec x", "2+sin 2x", "cosec 2x"], "answer": "B"},
+          {"number": 25, "question": "A ladder resting on a vertical wall makes an angle whose tangent is 2.4 with the ground. Distance from foot to wall is 50cm. Length of ladder?", "options": ["1m", "1.1m", "1.2m", "1.3m"], "answer": "D"},
+          {"number": 26, "question": "Solve 3 tan θ + 2 = -1 for 0°<θ<360°.", "options": ["135° or 315°", "45° or 135°", "315° or 45°", "315° or 180°"], "answer": "A"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "The frictional force between two bodies", "options": ["opposes motion", "depends on normal reaction", "relatively independent of area", "has all these characteristics"], "answer": "D"},
+          {"number": 28, "question": "Force 10N drags mass 10kg on horizontal table with acceleration 0.2ms⁻² (g=10ms⁻²). Coefficient of friction?", "options": ["0.02", "0.08", "0.20", "0.80"], "answer": "B"},
+          {"number": 29, "question": "Which is in neutral equilibrium?", "options": ["heavy weight on string", "cone resting on slant edge", "heavy based table lamp", "beam of a balance in use"], "answer": "B"},
+          {"number": 30, "question": "Machine gun mass 5kg fires 50g bullet at 100ms⁻¹. Recoil speed?", "options": ["0.5ms⁻¹", "1.5ms⁻¹", "1.0ms⁻¹", "2.0ms⁻¹"], "answer": "C"},
+          {"number": 31, "question": "Body mass 100g moving 10.0ms⁻¹ collides with wall, rebounds at 2.0ms⁻¹ opposite direction. Change in momentum?", "options": ["0.8Ns", "1.2Ns", "12.0Ns", "80.0Ns"], "answer": "B"},
+          {"number": 32, "question": "Object just begins to slide on surface inclined at 30° to horizontal. Coefficient of friction?", "options": ["√3", "√3/2", "1/√2", "1/√3"], "answer": "D"},
+          {"number": 33, "question": "Tendon length 0.01m; force 5N stretches it by 2.0×10⁻⁵m. Calculate strain.", "options": ["5×10⁶", "5×10³", "2×10⁻³", "2×10⁻⁷"], "answer": "C"},
+          {"number": 34, "question": "Stress on wire 10⁷Nm⁻², stretched from 10.00cm to 10.05cm. Young's Modulus?", "options": ["5.0×10⁴Nm⁻²", "5.0×10⁵Nm⁻²", "2.0×10⁸Nm⁻²", "2.0×10⁹Nm⁻²"], "answer": "D"},
+          {"number": 35, "question": "Ball mass 0.1kg thrown vertically up at 10ms⁻¹ from top of 10m tower. Total energy just before hitting ground (g=10ms⁻²)?", "options": ["5 J", "10 J", "15 J", "20 J"], "answer": "C"},
+          {"number": 36, "question": "Spring force constant 500Nm⁻¹, mass 5×10⁻³kg placed, compressed 0.02m and released. Height mass is projected?", "options": ["2m", "8m", "1m", "4m"], "answer": "A"},
+          {"number": 37, "question": "The area under a force-distance graph represents", "options": ["Acceleration", "Velocity", "Power", "Work"], "answer": "D"},
+          {"number": 38, "question": "Stone of mass m kg held h meters above floor for 50s. Work done in joules?", "options": ["mh", "mgh", "mgh/50", "0"], "answer": "D"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "The shape of ammonia molecules is", "options": ["trigonal planar", "octahedral", "square planar", "tetrahedral"], "answer": "D"},
+          {"number": 40, "question": "Which is used in the manufacture of bleaching powder?", "options": ["sulphur dioxide", "chlorine", "hydrogen tetraoxosulphate(IV)", "hydrogen sulphide"], "answer": "B"},
+          {"number": 41, "question": "Which metal does not form a stable trioxocarbonate (IV)?", "options": ["Fe", "Al", "Zn", "Pb"], "answer": "A"},
+          {"number": 42, "question": "The number of atoms in one mole of substance is equal to", "options": ["atomic number", "Avogadro's number", "gas constant", "the number of electrons"], "answer": "B"},
+          {"number": 43, "question": "When chlorine gas is passed into a solution of sulphur dioxide", "options": ["SO₂ reduced to sulphur", "chlorine oxidized to HCl", "dilute H₂SO₄ and HCl produced", "HCl and sulphur produced"], "answer": "C"},
+          {"number": 44, "question": "Element X config 1s²2s²2p⁴, Y 1s²2s²2p⁶3s²3p¹. Formula of compound?", "options": ["XY", "YX", "X₂Y₃", "Y₂X₃"], "answer": "D"},
+          {"number": 45, "question": "Which electronic configuration indicates atom with highest ionization energy?", "options": ["2,8,7", "2,8,8,1", "2,8,8,2", "2,8,8,7"], "answer": "A"},
+          {"number": 46, "question": "Zn + H₂SO₄ → ZnSO₄ + H₂. Rate greatly increased if", "options": ["zinc in powdered form", "greater volume of acid used", "smaller volume of acid used", "reaction vessel immersed in ice-bath"], "answer": "A"},
+          {"number": 47, "question": "A burning candle produces water and", "options": ["carbon(II) oxide", "carbon(IV) oxide", "oxygen", "hydrogen"], "answer": "B"},
+          {"number": 48, "question": "Ordinary glass is manufactured from silica, CaCO₃ and", "options": ["NaHCO₃", "K₂SO₄", "K₂CO₃", "Na₂CO₃"], "answer": "D"},
+          {"number": 49, "question": "The characteristic reaction of carbonyl compounds is", "options": ["substitution", "elimination", "addition", "saponification"], "answer": "C"},
+          {"number": 50, "question": "Function of conc H₂SO₄ in esterification of ethanoic acid with ethanol is to", "options": ["serve as dehydrating agent", "serve as solvent", "act as catalyst", "prevent side reaction"], "answer": "C"}
+        ]
+      }
+    },
+    {
+      "session": "2012/2013",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "I would have helped you …", "options": ["Has it been that you asked me", "Had it been that you asked me", "If you have asked me", "If you had asked me"], "answer": "D"},
+          {"number": 2, "question": "Kunle was annoyed for arriving late … put him out of temper", "options": ["also Kemi's rather insolent manner", "also that Kemi's insolent manner", "and Kemi's rather insolent manner also", "and Kemi is also insolent which"], "answer": "C"},
+          {"number": 3, "question": "All the cattle on Lamidi's farm … tick-free", "options": ["is", "are", "is ticks-free", "are ticks-free"], "answer": "B"},
+          {"number": 4, "question": "The director, no less than his workers, … to blame", "options": ["is", "are", "were", "ought"], "answer": "A"},
+          {"number": 5, "question": "Her mother said to her, I … the dinner now", "options": ["would rather you cooked", "would rather you cook", "would rather you not cook", "would rather you have cooked"], "answer": "A"},
+          {"number": 6, "question": "Late (rhyme)", "options": ["State", "Wait", "Gate", "Fate"], "answer": "D"},
+          {"number": 7, "question": "Sore (rhyme)", "options": ["Pour", "More", "Floor", "Store"], "answer": "D"},
+          {"number": 8, "question": "Lace (rhyme)", "options": ["Place", "Face", "Mace", "Base"], "answer": "A"},
+          {"number": 9, "question": "Tide (rhyme)", "options": ["Side", "Ride", "Glide", "Hide"], "answer": "B"},
+          {"number": 10, "question": "Wreck (rhyme)", "options": ["Deck", "Neck", "Peck", "Check"], "answer": "D"},
+          {"number": 11, "question": "She was at her wit's end.", "options": ["very tired", "extremely smart", "completely confused", "very hopeful"], "answer": "C"},
+          {"number": 12, "question": "His promotion is up in the air.", "options": ["very certain", "undecided", "high level", "confusing"], "answer": "B"},
+          {"number": 13, "question": "They are on cloud nine after their wedding.", "options": ["very happy", "flying", "confused", "doubtful"], "answer": "A"},
+          {"number": 14, "question": "That plan is just a pipe dream.", "options": ["easily achievable", "a false hope", "an urgent need", "a useful tool"], "answer": "B"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "The locus of a point equidistant from two intersecting straight lines is the", "options": ["perpendicular bisector of the two lines", "angle bisector of the two lines", "bisector of the two lines", "line parallel to the two lines"], "answer": "B"},
+          {"number": 16, "question": "What is the locus of a point P which moves on one side of a straight line XY, so that the angle XPY is always equal to 90°?", "options": ["The perpendicular bisector of XY", "A right-angled triangle", "A circle", "A semi-circle"], "answer": "D"},
+          {"number": 17, "question": "P is a point on one side of straight-line UV and moves in same direction as UV. If ST is on the locus of P and ∠VUS=50°, find ∠UST.", "options": ["310°", "130°", "80°", "50°"], "answer": "B"},
+          {"number": 18, "question": "Find p if the line through (-1, -p) and (-2p, 2) is parallel to 2y+8x-17=0.", "options": ["-2/7", "7/6", "-6/7", "6/7"], "answer": "C"},
+          {"number": 19, "question": "Find equation of line through (5,7) parallel to 7x+5y=12.", "options": ["5x+7y=120", "7x+5y=70", "x+y=7", "15x+17y=90"], "answer": "B"},
+          {"number": 20, "question": "Angle between positive horizontal axis and a given line is 135°. Equation if it passes through (2,3)?", "options": ["x-y=1", "x+y=1", "x+y=5", "x-y=5"], "answer": "C"},
+          {"number": 21, "question": "3y=4x-1 and Ky=x+3 are perpendicular. Find k.", "options": ["4/3", "3/4", "-3/4", "-4/3"], "answer": "B"},
+          {"number": 22, "question": "Find equation of set of points equidistant from parallel lines x=1 and x=7.", "options": ["y=4", "y=3", "x=3", "x=4"], "answer": "D"},
+          {"number": 23, "question": "Evaluate without tables sin(-1290°).", "options": ["√3/2", "-√3/2", "√2/2", "-√2/2"], "answer": "B"},
+          {"number": 24, "question": "Vectors a=2i-3j, b=-i+2j. Find magnitude of a+3b.", "options": ["2", "4", "√13+3√5", "√10"], "answer": "D"},
+          {"number": 25, "question": "Simplify √((1-cos x)/(1+cos x)).", "options": ["(1-cos x)/sin x", "1-cos x", "sin x", "1+cos x"], "answer": "A"},
+          {"number": 26, "question": "A surveyor walks 500m up a hill sloping at 30°. Calculate vertical height risen.", "options": ["250m", "500√3/3 m", "250√2 m", "250√3 m"], "answer": "A"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "Kinetic energy. (c) Potential energy. (d) Acceleration.", "options": [], "answer": "C"},
+          {"number": 28, "question": "Normal atmospheric pressure at sea-level is 10⁵Nm⁻², g≈10ms⁻², atmosphere uniform density 1kgm⁻³. Its height is", "options": ["100m", "1000m", "10000m", "100000m"], "answer": "C"},
+          {"number": 29, "question": "A man exerts pressure 2.8×10³Nm⁻² on ground, contact area 4×10⁻²m². His weight?", "options": ["112N", "140N", "102N", "70N"], "answer": "A"},
+          {"number": 30, "question": "Density of 400cm³ palm oil before frying 0.9gcm⁻³, after 0.6gcm⁻³ (no loss). New volume?", "options": ["360cm³", "600cm³", "240cm³", "800cm³"], "answer": "B"},
+          {"number": 31, "question": "What volume of alcohol (density 0.84×10²kgm⁻³) has same mass as 4.2m³ petrol (density 0.72×10²kgm⁻³)?", "options": ["1.4m³", "3.6m³", "4.9m³", "5.0m³"], "answer": "B"},
+          {"number": 32, "question": "Correct statements for pressures in liquids? I. Pressure acts equally in all directions. II. Increases with depth. III. Depends on shape of container. IV. Same depth in different liquids proportional to densities.", "options": ["I,II,III only", "I,II,IV only", "I,III,IV only", "II,III,IV only"], "answer": "B"},
+          {"number": 33, "question": "At a fixed point below liquid surface, pressure downward is P1, upward is P2. It can be deduced that", "options": ["P1=P2", "P1>P2", "P1<P2", "P1>=P2"], "answer": "A"},
+          {"number": 34, "question": "Body mass 2kg, volume 500cm³ just floats when completely immersed. Density of liquid?", "options": ["4.0×10²kgm⁻³", "4.0×10³kgm⁻³", "1.0×10³kgm⁻³", "1.0×10⁶kgm⁻³"], "answer": "B"},
+          {"number": 35, "question": "40cm³ liquid P (density 1.00gcm⁻³) mixed with 60cm³ liquid Q (density 1.6gcm⁻³). Density of mixture?", "options": ["0.05gcm⁻³", "1.25gcm⁻³", "1.30gcm⁻³", "1.36gcm⁻³"], "answer": "D"},
+          {"number": 36, "question": "Empty 60 litre petrol tank mass 10kg. Mass when full of fuel relative density 0.72?", "options": ["7.2kg", "33.2kg", "43.2kg", "53.2kg"], "answer": "D"},
+          {"number": 37, "question": "Object mass 400g, density 600kgm⁻³, suspended half immersed in paraffin (density 900kgm⁻³). Tension in string?", "options": ["1.0N", "3.0N", "4.0N", "5.0N"], "answer": "B"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "In C₅H₁₀O₅ → 6C + 5H₂O, conc H₂SO₄ acts as", "options": ["reducing agent", "oxidising agent", "dehydrating agent", "catalyst"], "answer": "C"},
+          {"number": 40, "question": "Alloys are often used in preference to pure metals because", "options": ["metals are too hard", "metals are ductile", "metallic properties are improved", "alloy are mixture of metal"], "answer": "C"},
+          {"number": 41, "question": "When sodium reacts with water, the resulting solution is", "options": ["alkaline", "acidic", "neutral", "weakly acidic"], "answer": "A"},
+          {"number": 42, "question": "Starch can be converted to ethyl alcohol by", "options": ["distillation", "fermentation", "isomerization", "cracking"], "answer": "B"},
+          {"number": 43, "question": "When sodium is added to ethanol, the products are", "options": ["sodium hydroxide and water", "sodium hydroxide and hydrogen", "sodium ethoxide and water", "sodium ethoxide and hydrogen"], "answer": "D"},
+          {"number": 44, "question": "3Cl₂ + 2NH₃ → N₂ + 6HCl. In the above reaction ammonia acts as", "options": ["reducing agent", "oxidizing agent", "acid", "catalyst"], "answer": "A"},
+          {"number": 45, "question": "3.06g KClO₃ makes saturated solution with 10cm³ water at 25°C. Solubility? (K=39,Cl=35.5,O=16)", "options": ["5.0 moldm⁻³", "3.0 moldm⁻³", "2.5 moldm⁻³", "1.0 moldm⁻³"], "answer": "C"},
+          {"number": 46, "question": "0.1 faraday deposits 2.95g nickel during electrolysis. Number of moles of nickel deposited by 0.4 faraday? (Ni=58.7)", "options": ["0.2", "0.3", "0.04", "5.87"], "answer": "A"},
+          {"number": 47, "question": "A gas can behave as reducing agent towards chlorine and oxidising agent towards hydrogen sulphide. It is", "options": ["O₂", "NO", "SO₂", "NH₃"], "answer": "C"},
+          {"number": 48, "question": "Sodium hydroxide is prepared commercially from sodium chloride solution by", "options": ["electrolysis using mercury as cathode", "hydrolysis in steam using cathode", "electrolysis using iron as anode", "treating with ammonia and CO₂"], "answer": "A"},
+          {"number": 49, "question": "Fermentation is the", "options": ["breaking down of carbohydrate to glucose", "breaking down of sugar to carbohydrate", "conversion of sugar to alcohol in presence of yeast", "conversion of alcohol to sugar in presence of yeast"], "answer": "C"},
+          {"number": 50, "question": "Oxygen mixture of two isotopes with relative abundance 90% and 10%. Relative atomic mass?", "options": ["16.0", "16.2", "17.0", "18.0"], "answer": "B"}
+        ]
+      }
+    },
+    {
+      "session": "2011/2012",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Loop (rhyme)", "options": ["Scoop", "Soup", "Group", "Troop"], "answer": "A"},
+          {"number": 2, "question": "Zone (rhyme)", "options": ["Phone", "Cone", "Loan", "Stone"], "answer": "D"},
+          {"number": 3, "question": "Grind (rhyme)", "options": ["Mind", "Blind", "Find", "Kind"], "answer": "C"},
+          {"number": 4, "question": "Chore (rhyme)", "options": ["Shore", "Pour", "Store", "Score"], "answer": "D"},
+          {"number": 5, "question": "Braid (rhyme)", "options": ["Trade", "Made", "Fade", "Aid"], "answer": "A"},
+          {"number": 6, "question": "Frost (rhyme)", "options": ["Lost", "Cost", "Tossed", "Dosed"], "answer": "A"},
+          {"number": 7, "question": "The students were in high spirits.", "options": ["drunk", "excited and cheerful", "shouting loudly", "afraid"], "answer": "B"},
+          {"number": 8, "question": "The baby slept like a log.", "options": ["uncomfortably", "very deeply", "on the floor", "with eyes open"], "answer": "B"},
+          {"number": 9, "question": "The soldier was on the ball.", "options": ["dancing", "attentive and alert", "careless", "lost"], "answer": "B"},
+          {"number": 10, "question": "They are burning the midnight oil.", "options": ["wasting fuel", "studying late", "heating the room", "lighting candles"], "answer": "B"},
+          {"number": 11, "question": "The suspect spilled the beans during interrogation.", "options": ["cooked food", "confessed", "destroyed evidence", "kept silent"], "answer": "B"},
+          {"number": 12, "question": "That argument was redundant.", "options": ["unnecessary", "essential", "logical", "false"], "answer": "A"},
+          {"number": 13, "question": "The athlete is in peak condition.", "options": ["poor", "best", "worst", "unstable"], "answer": "B"},
+          {"number": 14, "question": "The witness gave a vivid description.", "options": ["dull", "detailed", "brief", "fake"], "answer": "B"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "If y = x sin x, find dy/dx when x=π/2.", "options": ["π/2", "1", "-1", "-π/2"], "answer": "B"},
+          {"number": 16, "question": "Find the derivative of y = sin²(5x) with respect to x.", "options": ["2sin5x cos5x", "5sin5x cos5x", "10sin5x cos5x", "15sin5x cos5x"], "answer": "C"},
+          {"number": 17, "question": "A world congress of mathematicians had 800 participants: 300 Europe, 200 America, 150 Asia, 45 Africa, 105 Australia. Pie chart angle for Asia?", "options": ["150°", "67½°", "67°", "135°"], "answer": "B"},
+          {"number": 18, "question": "The mean of 1.2, 1.0, 0.9, 1.4, 0.8, 0.8, 1.2, 1.1 is", "options": ["1.5", "0.8", "1.0", "1.02"], "answer": "D"},
+          {"number": 19, "question": "7 pupils average age 12 leave class of 25 average 14. 6 new pupils average 11 join. New average age?", "options": ["13 years", "12 years 7½ months", "13 years 5 months", "13 years 10 months"], "answer": "A"},
+          {"number": 20, "question": "If scores of 3 students are 5,6,7, find the standard deviation.", "options": ["2/3", "3/(2√3)", "√(2/3)", "√3/2"], "answer": "C"},
+          {"number": 21, "question": "Find the median of 89,141,130,161,120,131,131,100,108,119.", "options": ["131", "125", "123", "120"], "answer": "B"},
+          {"number": 22, "question": "A student calculated mean of 5 numbers as 45.3. Total was short by 20.5. Correct mean?", "options": ["24.8", "41.2", "49.4", "65.8"], "answer": "C"},
+          {"number": 23, "question": "Family of 21 average age 14. Excluding grandfather, average becomes 12. Age of grandfather?", "options": ["35 years", "40 years", "42 years", "54 years"], "answer": "D"},
+          {"number": 24, "question": "d/dx cos(3x²-2x) is equal to", "options": ["-sin(6x-2)", "-sin(3x²-2x)", "-(6x-2)sin(3x²-2x)", "(6x-2)sin(3x²-2x)"], "answer": "C"},
+          {"number": 25, "question": "If dy/dx = 2x - 3 and y = 3 when x = 0, find y in terms of x.", "options": ["x² - 3x", "x² - 3x + 3", "2x² - 3x", "x² - 3x - 3"], "answer": "B"},
+          {"number": 26, "question": "If y = 3x²(x³+1)^(1/2), find dy/dx.", "options": ["6x(x²+1)+3x² / (2(x³+1)^(1/2))", "12x(x³+1)+3x² / (2(x³+1)^(1/2))", "(15x⁴+6x) / (6x²(x³+1)^(1/2))", "12x(x³+1)+9x⁴ / (2(x³+1)^(1/2))"], "answer": "D"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "A short response time is obtained in liquid-in-glass thermometer when the", "options": ["bulb is large and thick walled", "stem is long and thin", "bulb is small and thick-walled", "liquid is of high density and bore is large"], "answer": "C"},
+          {"number": 28, "question": "Distance between fixed points of centigrade thermometer is 20cm. Temperature when mercury level is 4.5cm above lower mark?", "options": ["22.5°C", "29.0°C", "90.0°C", "100.0°C"], "answer": "A"},
+          {"number": 29, "question": "When left in freezer, a bottle full of water cracks on freezing because of", "options": ["decrease in volume of water", "contraction of bottle", "expansion of bottle", "increase in volume of water"], "answer": "D"},
+          {"number": 30, "question": "Rod length 10cm heated through 100°C; final length 10.26cm. Coefficient of linear expansion?", "options": ["0.026 per °C", "0.00026 per °C", "0.26 per °C", "1.0026 per °C"], "answer": "B"},
+          {"number": 31, "question": "Bar initial length L₀, heated through Δt to length L. Linear expansivity α is", "options": ["(L-L₀)/(L₀Δt)", "(L-L₀)/(LΔt)", "L₀(1+Δt)", "(L-L₀)/(L₀(1+Δt))"], "answer": "A"},
+          {"number": 32, "question": "Brass rod 2m long at certain temperature. Length for temperature rise 100K? (expansivity=18×10⁻⁶K⁻¹)", "options": ["2.0036m", "2.0018m", "2.1800m", "2.0360m"], "answer": "A"},
+          {"number": 33, "question": "Linear expansivity of brass 2×10⁻⁵°C⁻¹. Volume at 0°C is 15.00cm³, volume at 100°C?", "options": ["16.03cm³", "16.00cm³", "15.09cm³", "15.03cm³"], "answer": "C"},
+          {"number": 34, "question": "On cool rainy day 20°C, steel railroad track 20m. Length on hot dry day 40°C? (α=11×10⁻⁶K⁻¹)", "options": ["20.009m", "20.002m", "20.013m", "20.004m"], "answer": "D"},
+          {"number": 35, "question": "In a gas experiment, pressure plotted against reciprocal of volume at constant temperature. The unit of the slope is", "options": ["Force", "Force/m", "Work", "Force×m"], "answer": "C"},
+          {"number": 36, "question": "Gas at volume V₀, pressure P₀ compressed to one-fifth of its volume, constant temperature. New pressure?", "options": ["P₀/5", "4/5 P₀", "P₀", "5P₀"], "answer": "D"},
+          {"number": 37, "question": "Gas occupies 300cm³ at 27°C. What is its volume at 54°C when pressure is constant?", "options": ["150cm³", "273cm³", "327cm³", "600cm³"], "answer": "C"},
+          {"number": 38, "question": "The equation PˣVʸTᶻ = constant is Charles' law when", "options": ["x=1, y=-1, z=1", "x=0, y=1, z=-1", "x=1, y=0, z=-1", "x=0, y=1, z=1"], "answer": "B"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "56.00cm³ of a gas at s.t.p weighed 0.11g. What is the vapour density? (molar volume=22.4dm³)", "options": ["11.00", "22.00", "33.00", "44.00"], "answer": "D"},
+          {"number": 40, "question": "A given quantity of gas occupies 228cm³ at 750mmHg. What will be its volume at atmospheric pressure?", "options": ["200cm³", "225cm³", "230cm³", "235cm³"], "answer": "B"},
+          {"number": 41, "question": "A phenomenon where an element exists in different form in the same physical state is known as", "options": ["isomerism", "amorphism", "allotropy", "isotopy"], "answer": "C"},
+          {"number": 42, "question": "Fats and oils are", "options": ["addition products of fatty acids and alkali", "addition products of fatty acids and glycerol", "condensation products of fatty acids and glycerol", "condensation product of formaldehyde and glycerol"], "answer": "C"},
+          {"number": 43, "question": "Hydrogenation may be affected by", "options": ["removal of hydrogen from alkane with catalyst", "addition of hydrogen to alkane with catalyst", "addition of hydrogen to alkene", "removal of hydrogen from alkyne"], "answer": "C"},
+          {"number": 44, "question": "In industrial preparation of hydrogen from natural gas, CO₂ produced along with hydrogen is removed by", "options": ["washing under pressure", "passing into lime water", "using ammoniacal copper(I) chloride", "drying over phosphorus(V) oxide"], "answer": "C"},
+          {"number": 45, "question": "In which are water molecules in the most disorderly arrangement?", "options": ["ice at -10°C", "ice at 0°C", "water at 100°C", "steam at 100°C"], "answer": "D"},
+          {"number": 46, "question": "The number of the valence shell on an element of atomic number 14 is", "options": ["1", "2", "3", "4"], "answer": "D"},
+          {"number": 47, "question": "The reaction between ethanoic acid and sodium hydroxide is an example of", "options": ["esterification", "neutralization", "hydrolyzation", "hydrolysis"], "answer": "B"},
+          {"number": 48, "question": "The three-dimensional shape of methane is", "options": ["hexagonal", "trigonal", "linear", "tetrahedral"], "answer": "D"},
+          {"number": 49, "question": "Mass of magnesium obtained by passing current of 2A for 2hrs 30mins through molten MgCl₂? (Mg=24, F=96500Cmol⁻¹)", "options": ["2.24g", "1.12g", "4.48g", "2.00g"], "answer": "A"},
+          {"number": 50, "question": "Which indicates the numbers of bonds which can be formed by an atom?", "options": ["oxidation number", "valency", "atomic number", "electronegativity"], "answer": "B"}
+        ]
+      }
+    },
+    {
+      "session": "2010/2011",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Defects like … in government's development plans … for extra vigilance.", "options": ["this/calls", "these/calls", "this/call", "these/call"], "answer": "D"},
+          {"number": 2, "question": "Before the bill could be settled, Chuwang … all the money.", "options": ["has spent", "will have spent", "had spent", "will spend"], "answer": "C"},
+          {"number": 3, "question": "She asked me whether I … the letter for her.", "options": ["minded to post", "mind to post", "minded posting", "minded to posting"], "answer": "C"},
+          {"number": 4, "question": "Knowledge of figures of speech as well as of idioms and lexical items … in this section.", "options": ["is tested", "have been tested", "are tested", "were tested"], "answer": "A"},
+          {"number": 5, "question": "A student's natural ability should be a … factor in his choosing a course of study.", "options": ["determined", "determining", "determinant", "determinate"], "answer": "B"},
+          {"number": 6, "question": "… with him for two years, I cannot guarantee his good behaviour.", "options": ["To work", "Having worked", "To have worked", "By working"], "answer": "B"},
+          {"number": 7, "question": "The meeting was quite tedious.", "options": ["interesting", "boring", "short", "loud"], "answer": "B"},
+          {"number": 8, "question": "The officer acted with precision.", "options": ["carelessness", "speed", "accuracy", "confusion"], "answer": "C"},
+          {"number": 9, "question": "The house looked gloomy.", "options": ["bright", "sad", "cheerful", "noisy"], "answer": "B"},
+          {"number": 10, "question": "They acted in a covert manner.", "options": ["secret", "open", "undercover", "hidden"], "answer": "B"},
+          {"number": 11, "question": "Her attitude is complacent despite the warnings.", "options": ["arrogant", "content", "humble", "indifferent"], "answer": "C"},
+          {"number": 12, "question": "Mint (rhyme)", "options": ["Hint", "Print", "Lint", "Glint"], "answer": "A"},
+          {"number": 13, "question": "Crash (rhyme)", "options": ["Flash", "Bash", "Trash", "Dash"], "answer": "C"},
+          {"number": 14, "question": "Thief (rhyme)", "options": ["Leaf", "Reef", "Chief", "Brief"], "answer": "C"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "Which of the following is a factor of rs+tr-pt-ps?", "options": ["(p-s)", "(s-p)", "(r-p)", "(r+p)"], "answer": "B"},
+          {"number": 16, "question": "If the function y=5x is graphed, what would be its intercept on the y-axis?", "options": ["5", "5/1", "1", "0"], "answer": "D"},
+          {"number": 17, "question": "Make t the subject: s=ut+½at².", "options": ["(1/a)[u±√(u²-2as)]", "(1/a)[-u±√(u²-2as)]", "(1/a)[u±√(u²+2as)]", "(1/a)[-u±√(u²+2as)]"], "answer": "D"},
+          {"number": 18, "question": "Make y the subject: Z=x²+1/y³.", "options": ["y=1/(Z-x²)^(1/3)", "y=1/(Z+x²)^(1/3)", "y=1/(Z-x²)^3", "y=1/(Z²-x²)^3"], "answer": "C"},
+          {"number": 19, "question": "In a class of 40, 32 offer Math, 24 offer Physics, 4 offer neither. How many offer both?", "options": ["16", "4", "20", "8"], "answer": "C"},
+          {"number": 20, "question": "Simplify 1/(√3+2) in the form a+b√3.", "options": ["-2-3√3", "-2+3√3", "2-√3", "2+√3"], "answer": "C"},
+          {"number": 21, "question": "Simplify 3log₆9+log₆12+log₆64-log₆72.", "options": ["5", "7776", "log₆31", "log₆7776"], "answer": "A"},
+          {"number": 22, "question": "Solve without tables log₅(62.5)-log₅(1/2).", "options": ["3", "4", "5", "8"], "answer": "C"},
+          {"number": 23, "question": "Given logₐ2=0.693, logₐ3=1.097, find logₐ13.5.", "options": ["1.404", "1.790", "2.598", "2.790"], "answer": "C"},
+          {"number": 24, "question": "Teams P and Q in a football game. Probability game ends in a draw?", "options": ["1/4", "1/3", "1/2", "2/3"], "answer": "B"},
+          {"number": 25, "question": "Probability student passes exam is 2/3. Takes three exams, probability he will not pass any?", "options": ["1/27", "8/27", "1/9", "4/9"], "answer": "A"},
+          {"number": 26, "question": "Sine, cosine, tangent of 210° respectively?", "options": ["-1/2, -√3/2, √3/3", "1/2, √3/2, √3/3", "√3/2, 1/2, √3", "-√3/2, -1/2, √3/3"], "answer": "A"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "A gas has volume 100cm³ at 27°C. Heated to T until volume 120cm³ (constant pressure). Calculate T.", "options": ["33°C", "60°C", "87°C", "114°C"], "answer": "C"},
+          {"number": 28, "question": "Tyre pressure 3×10⁵Nm⁻² at 27°C, rose to 4×10⁵Nm⁻². Temperature after journey (constant volume)?", "options": ["400°C", "300°C", "273°C", "127°C"], "answer": "D"},
+          {"number": 29, "question": "Mass of gas at 7°C, 70cmHg, volume 1200cm³. Volume at 27°C, 75cmHg?", "options": ["1200cm³", "1378cm³", "4320cm³", "4629cm³"], "answer": "A"},
+          {"number": 30, "question": "Pressure on 100cm³ ideal gas doubled while Kelvin temperature halved. New volume?", "options": ["25cm³", "50cm³", "100cm³", "200cm³"], "answer": "A"},
+          {"number": 31, "question": "200g water at 90°C mixed with 100g water at 30°C. Final temperature?", "options": ["50°C", "60°C", "70°C", "80°C"], "answer": "C"},
+          {"number": 32, "question": "2kg iron rod at 257°C dropped into water, raising its temperature from 20°C to 30°C. Specific heat of iron? (specific heat water=4200Jkg⁻¹K⁻¹)", "options": ["2.27kg", "6.34kg", "9.16kg", "5.45kg"], "answer": "A"},
+          {"number": 33, "question": "Given quantity of heat raises 150g water from 9°C to 15°C, and 100g oil from 9°C to 25°C. Ratio of specific heat of oil to water?", "options": ["0.36", "0.46", "0.56", "0.76"], "answer": "C"},
+          {"number": 34, "question": "Which waves can propagate through a vacuum?", "options": ["High velocity sound waves", "Ultrasonic waves", "Acoustic waves", "Infrared waves"], "answer": "D"},
+          {"number": 35, "question": "Radio waves velocity 3×10⁸ms⁻¹. Broadcast frequency 800KHz. Wavelength?", "options": ["375.0m", "267.0m", "240.0m", "37.5m"], "answer": "A"},
+          {"number": 36, "question": "Wave has frequency 2Hz and wavelength 30cm. Velocity?", "options": ["60.0ms⁻¹", "6.0ms⁻¹", "1.5ms⁻¹", "0.6ms⁻¹"], "answer": "D"},
+          {"number": 37, "question": "Vibrator frequency 60Hz generating transverse stationary waves. Average distance between successive nodes 45cm. Speed of transverse waves?", "options": ["27ms⁻¹", "54ms⁻¹", "90ms⁻¹", "108ms⁻¹"], "answer": "B"},
+          {"number": 38, "question": "Equation of transverse wave: y=0.3 sin(0.5x-50t). Maximum displacement from equilibrium position?", "options": ["50.0cm", "2.5cm", "0.5cm", "0.3cm"], "answer": "D"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "Calculate mass of magnesium produced by electrolysis of MgCl₂ for 24hrs at 500A. (F=96500Cmol⁻¹, Mg=24)", "options": ["2.7kg", "5.4kg", "10.8kg", "21.7kg"], "answer": "B"},
+          {"number": 40, "question": "The chemical used for coagulation in water purification is", "options": ["copper tetraoxosulphate(VI)", "sodium tetraoxosulphate(VI)", "aluminium tetraoxosulphate(VI)", "calcium tetraoxosulphate(VI)"], "answer": "C"},
+          {"number": 41, "question": "Arrangement of elements in order of decreasing number of outer electrons; one wrongly placed. Which? Al, Cl, Si, Mg, Na", "options": ["chlorine", "aluminium", "silicon", "magnesium"], "answer": "B"},
+          {"number": 42, "question": "The most volatile fraction from fractional distillation of crude petroleum contains", "options": ["butane", "propane and kerosene", "butane, propane and petrol", "ethane, methane and propane"], "answer": "D"},
+          {"number": 43, "question": "The process by which CO₂ returns to the atmosphere includes", "options": ["photosynthesis, respiration, transpiration", "respiration, decay, combustion", "photosynthesis, decay, respiration", "ozone depletion, combustion, decay"], "answer": "B"},
+          {"number": 44, "question": "Salt Y gained weight, salt Z became liquid overnight. Conclusion?", "options": ["Z is efflorescent", "Y and Z are efflorescent", "Y and Z are deliquescent", "Y is hygroscopic, Z is deliquescent"], "answer": "D"},
+          {"number": 45, "question": "When a solid substance disappears completely as a gas on heating, it has undergone", "options": ["sublimation", "crystallization", "distillation", "evaporation"], "answer": "A"},
+          {"number": 46, "question": "When air is compressed", "options": ["its density decreases", "it solidifies", "its temperature decreases", "its temperature increases"], "answer": "D"},
+          {"number": 47, "question": "Which is an example of a mixture?", "options": ["sand", "washing soda", "common salt", "blood"], "answer": "D"},
+          {"number": 48, "question": "Which physical property decreases across the periodic table?", "options": ["ionization potential", "electron affinity", "electronegativity", "atomic radius"], "answer": "D"},
+          {"number": 49, "question": "Which solution gives a white precipitate with BaCl₂ and a green flame test?", "options": ["Na₂SO₄", "CuSO₄", "CaSO₄", "CaCl₂"], "answer": "B"},
+          {"number": 50, "question": "Zinc oxide is a", "options": ["basic oxide", "acidic oxide", "amphoteric oxide", "neutral oxide"], "answer": "C"}
+        ]
+      }
+    },
+    {
+      "session": "2009/2010",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Fame (rhyme)", "options": ["Game", "Lame", "Name", "Tame"], "answer": "C"},
+          {"number": 2, "question": "Tame (rhyme)", "options": ["Blame", "Frame", "Same", "Flame"], "answer": "D"},
+          {"number": 3, "question": "Host (rhyme)", "options": ["Toast", "Ghost", "Post", "Most"], "answer": "C"},
+          {"number": 4, "question": "Clock (rhyme)", "options": ["Rock", "Shock", "Mock", "Block"], "answer": "D"},
+          {"number": 5, "question": "Sight (rhyme)", "options": ["Height", "Kite", "Might", "Light"], "answer": "B"},
+          {"number": 6, "question": "Because of the … he did to my car, I am going to sue him for …", "options": ["damage/damages", "damages/damage", "damages/damages", "damage/damage"], "answer": "A"},
+          {"number": 7, "question": "We saw him … over a wall as the police approached.", "options": ["leaped", "leap", "leapt", "leaping"], "answer": "C"},
+          {"number": 8, "question": "After the team had conceded two goals, their enthusiasm …", "options": ["was beginning to wane", "was waning", "began to wane", "had begun to wane"], "answer": "C"},
+          {"number": 9, "question": "Each of the contestants … a chance to win.", "options": ["has", "have", "get", "gets"], "answer": "A"},
+          {"number": 10, "question": "The very moment she … her folly, she will come back to apologize.", "options": ["realized", "is realizing", "will realize", "realizes"], "answer": "D"},
+          {"number": 11, "question": "The lawyer's argument was above board.", "options": ["dishonest", "legal and honest", "too difficult", "not useful"], "answer": "B"},
+          {"number": 12, "question": "His advice was worth its weight in gold.", "options": ["very valuable", "heavy", "unnecessary", "confusing"], "answer": "A"},
+          {"number": 13, "question": "He will call it a day soon.", "options": ["resign", "go home", "stop working for the day", "attend a meeting"], "answer": "C"},
+          {"number": 14, "question": "She let the cat out of the bag.", "options": ["freed an animal", "revealed a secret", "shouted loudly", "made a mistake"], "answer": "B"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "A rectangular picture 6cm by 8cm enclosed by frame ½cm wide. Area of frame?", "options": ["15sqcm", "20sqcm", "13sqcm", "16sqcm"], "answer": "A"},
+          {"number": 16, "question": "Chord ST of a circle equals radius r. Length of arc ST?", "options": ["πr/2", "πr/3", "πr/6", "πr/12"], "answer": "B"},
+          {"number": 17, "question": "Each interior angle of regular polygon is 140°. Number of sides?", "options": ["9", "8", "7", "5"], "answer": "A"},
+          {"number": 18, "question": "6th term of AP is 11, first term 1. Common difference?", "options": ["12/3", "5/3", "-2", "2"], "answer": "D"},
+          {"number": 19, "question": "Find two values of y satisfying x+y=5, x²-2y²=1.", "options": ["12,2", "-12,12", "-12,2", "2,-2"], "answer": "D"},
+          {"number": 20, "question": "Solve 2x+5y=11, 7x+4y=2.", "options": ["x=-8,y=1", "x=-2,y=3", "x=2,y=-3", "x=34/27,y=73/27"], "answer": "B"},
+          {"number": 21, "question": "If 3²ʸ-6(3ʸ)=27, find y.", "options": ["3", "-1", "2", "-3"], "answer": "C"},
+          {"number": 22, "question": "Solve 8x⁻²=2/25.", "options": ["4", "6", "8", "10"], "answer": "D"},
+          {"number": 23, "question": "Value of x satisfying 4²ˣ/4ˣ=2?", "options": ["-2", "-1/2", "1/2", "2"], "answer": "D"},
+          {"number": 24, "question": "Canal rectangular cross-section 10cm wide, 1m breadth; water density 1gcm⁻³ flows at 1000mm/min. Adjacent sea is?", "options": ["100 000", "1000 000", "120 000", "30 000"], "answer": "B"},
+          {"number": 25, "question": "Car painter ₦40/day, assistant ₦10/day. Total paid ₦2,000, painter worked 10 days more than assistant. How much did assistant receive?", "options": ["₦32.00", "₦320.00", "₦420.00", "₦680.00"], "answer": "B"},
+          {"number": 26, "question": "Udoh deposited ₦150. After 5 years simple interest ₦55. Rate per annum?", "options": ["11%", "7⅓%", "5%", "3½%"], "answer": "B"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "How long does a 750W heater take to raise 1kg water from 20°C to 50°C? (c=4200Jkg⁻¹K⁻¹)", "options": ["84s", "112s", "168s", "280s"], "answer": "C"},
+          {"number": 28, "question": "Electric kettle 2000W, 2.0kg water 20°C to 100°C. How long? (c=4200Jkg⁻¹K⁻¹)", "options": ["420s", "336s", "168s", "84s"], "answer": "B"},
+          {"number": 29, "question": "Heater 50W evaporates 0.005kg boiling water in 50s. Specific latent heat of vaporization?", "options": ["5.0×10⁶ J/kg", "1.0×10⁶ J/kg", "2.5×10⁶ J/kg", "5.0×10⁵ J/kg"], "answer": "D"},
+          {"number": 30, "question": "Electric heater melts 1.5kg ice at 0°C, powered by 12V, 20A. Time? (Lf=336×10³Jkg⁻¹)", "options": ["76.0 min", "35.0 min", "21.0 min", "2.9 min"], "answer": "B"},
+          {"number": 31, "question": "1kg copper transferred from boiling water to ice. Mass of ice melted? (ccopper=400Jkg⁻¹K⁻¹, Lf=333×10³Jkg⁻¹)", "options": ["60g", "67g", "120g", "133g"], "answer": "C"},
+          {"number": 32, "question": "Change of state is accompanied by change of", "options": ["temperature", "volume", "heat content", "temperature and volume"], "answer": "C"},
+          {"number": 33, "question": "If a solid changes directly into a gas when heat is applied, the process is called", "options": ["Vaporization", "Evaporation", "Sublimation", "Ionization"], "answer": "C"},
+          {"number": 34, "question": "What are the units of thermal conductivity?", "options": ["kg.m.sec⁻²", "Joule sec⁻¹m⁻¹K⁻¹", "kg.m", "Newton sec⁻¹m⁻¹K⁻¹"], "answer": "B"},
+          {"number": 35, "question": "Satellite communication network makes use of", "options": ["infra-red rays", "sound wave", "Visible light", "radio wave"], "answer": "D"},
+          {"number": 36, "question": "Which is the exclusive property of a transverse wave?", "options": ["Diffraction", "Refraction", "Compression", "Polarization"], "answer": "D"},
+          {"number": 37, "question": "A ship receives echo after 3.5s, later after 2.5s. Speed of sound 250ms⁻¹. How much closer is the ship?", "options": ["10m", "125m", "175m", "350m"], "answer": "B"},
+          {"number": 38, "question": "A man hears his echo from a nearby hill 2s after shouting. Frequency 260Hz, wavelength 1.29m. How far is the hill?", "options": ["330.0m", "335.4m", "660.0m", "670.8m"], "answer": "B"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "60cm³ hydrogen sparked with 20cm³ oxygen at 100°C, 1atm. Total volume of residual gas?", "options": ["60cm³", "40cm³", "30cm³", "70cm³"], "answer": "B"},
+          {"number": 40, "question": "A solid that absorbs water from the atmosphere and forms an aqueous solution is", "options": ["hydrophilic", "efflorescent", "deliquescent", "hygroscopic"], "answer": "C"},
+          {"number": 41, "question": "An example of a strong electrolyte is", "options": ["ethyl acetate", "ethanol", "glucose", "sodium formate"], "answer": "D"},
+          {"number": 42, "question": "Methanoic acid mixes with water, sand present. How to obtain pure water from sand, water, methanoic acid?", "options": ["fractional distillation", "filtration then distillation", "neutralization then distillation", "neutralization then filtration"], "answer": "B"},
+          {"number": 43, "question": "Sodium hydroxide should be stored in properly closed container because it", "options": ["readily absorbs water vapour", "easily oxidized", "turns golden yellow exposed to light", "melts at low temperature"], "answer": "A"},
+          {"number": 44, "question": "Catalyst in contact process for tetraoxosulphate(VI) acid is", "options": ["manganese(IV) oxide", "manganese(II) tetraoxosulphate(IV)", "vanadium(V) oxide", "iron metal"], "answer": "C"},
+          {"number": 45, "question": "Densities of gases X and Y are 0.5gdm⁻³ and 2.0gdm⁻³. Rate of diffusion of X relative to Y?", "options": ["0.1", "0.5", "2.0", "4.0"], "answer": "C"},
+          {"number": 46, "question": "IUPAC names: CH₃COOH and CH₂=CH₂?", "options": ["acetic acid, ethane", "ethanoic acid, ethene", "methanoic acid, ethylene", "ethanol, ethane"], "answer": "B"},
+          {"number": 47, "question": "3C(s)+2Fe₂O₃(s)→4Fe(s)+3CO₂(g) ΔH=+46.0kJ. Reaction is", "options": ["adiabatic", "isobaric", "endothermic", "exothermic"], "answer": "C"},
+          {"number": 48, "question": "Chemical balance scale made of iron coated with copper electrolytically because", "options": ["iron less susceptible to corrosion", "copper more susceptible to corrosion", "copper less susceptible than iron", "copper and iron equally susceptible"], "answer": "C"},
+          {"number": 49, "question": "Ca(OH)₂ heated with (NH₄)₂SO₄, gas given off may be collected by", "options": ["bubbling through conc H₂SO₄", "bubbling through water then CaO", "passing directly through CaO", "passing directly through CaCl₂"], "answer": "C"},
+          {"number": 50, "question": "Which one is a physical change?", "options": ["adding iron filings to aerated water", "adding sodium metal to water", "cooling solution of iron(II) sulphate to obtain hydrated salt", "cooling water to obtain ice"], "answer": "D"}
+        ]
+      }
+    },
+    {
+      "session": "2008/2009",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "He is always barking up the wrong tree.", "options": ["climbing trees", "blaming the wrong person", "making loud noise", "acting wisely"], "answer": "B"},
+          {"number": 2, "question": "The singer stole the show.", "options": ["left early", "impressed everyone", "caused confusion", "was arrested"], "answer": "B"},
+          {"number": 3, "question": "His story held water.", "options": ["was true", "was full of lies", "was lengthy", "was watery"], "answer": "A"},
+          {"number": 4, "question": "That exam was a piece of cake.", "options": ["very hard", "very easy", "not attempted", "poorly set"], "answer": "B"},
+          {"number": 5, "question": "The coach told them to step up their game.", "options": ["play another match", "improve performance", "change clothes", "stop playing"], "answer": "B"},
+          {"number": 6, "question": "Grave (rhyme)", "options": ["Brave", "Slave", "Wave", "Save"], "answer": "A"},
+          {"number": 7, "question": "Tough (rhyme)", "options": ["Stuff", "Bluff", "Rough", "Puff"], "answer": "C"},
+          {"number": 8, "question": "My … is for you to refuse the … of the wicked.", "options": ["advise/advice", "advice/advice", "advice/advice", "advise/advice"], "answer": "B"},
+          {"number": 9, "question": "When the beggar was tired he … down by the roadside.", "options": ["lied", "laid", "layed", "lay"], "answer": "D"}
+        ],
+        "MATHEMATICS": [
+          {"number": 14, "question": "At what rate would ₦100 deposited for 5 years raise an interest of ₦7.50?", "options": ["1½%", "2½%", "15%", "25%"], "answer": "A"},
+          {"number": 15, "question": "Arrange 3/5, 9/16, 34/59, 71/97 in ascending order.", "options": ["9/16,34/59,3/5,71/97", "3/5,9/16,34/59,71/97", "34/59,3/5,9/16,71/97", "9/16,3/5,71/97,34/59"], "answer": "A"},
+          {"number": 16, "question": "Express 62÷3 as a decimal correct to 3 significant figures.", "options": ["20.6", "20.667", "20.67", "20.7"], "answer": "A"},
+          {"number": 17, "question": "Prime factors of 2520.", "options": ["2,9,5", "2,7", "2,3,5,7", "2,3,7,9"], "answer": "C"},
+          {"number": 18, "question": "Smallest number by which 252 can be multiplied to obtain a perfect square.", "options": ["2", "3", "5", "7"], "answer": "D"},
+          {"number": 19, "question": "Musa borrows ₦10 at 2% per month, repays ₦8 after 4 months. How much still owed?", "options": ["₦10.80", "₦10.67", "₦2.07", "₦2.67"], "answer": "A"},
+          {"number": 20, "question": "Calculate simple interest on ₦7500 for 8 years at 5% p.a.", "options": ["₦3,000", "₦600", "₦300", "₦150"], "answer": "A"},
+          {"number": 21, "question": "A man drove 4 hrs at certain speed, doubled speed for next 3 hrs, total 600km. Speed last 3 hrs?", "options": ["120km/hr", "60km/hr", "600/7km/hr", "50km/hr"], "answer": "A"},
+          {"number": 22, "question": "₦560.70 shared in ratio 7:2:1. Smallest share?", "options": ["₦392.49", "₦56.70", "₦113.40", "₦56.07"], "answer": "D"},
+          {"number": 23, "question": "Solve for x: 25ˣ+3(5ˣ)=4.", "options": ["1 or -4", "0", "1", "-4 or 0"], "answer": "D"},
+          {"number": 24, "question": "Simplify log₂96 - 2log₂6.", "options": ["2+log₂3", "3-log₂3", "log₂3-3", "log₂3-2"], "answer": "B"},
+          {"number": 25, "question": "Evaluate (6.3×10⁵)/(8.1×10³) to 3 significant figures.", "options": ["77.80", "778.0", "7.870", "88.70"], "answer": "A"}
+        ],
+        "PHYSICS": [
+          {"number": 26, "question": "The vibration of an air column produces the sound in the", "options": ["piano", "guitar", "flute", "School hand bell"], "answer": "C"},
+          {"number": 27, "question": "If a source of sound is moving, a stationary listener hears sound of different frequency. This is called", "options": ["Doppler effect", "resonance", "ultrasound", "rarefaction"], "answer": "A"},
+          {"number": 28, "question": "Echo from bottom of ocean heard 2.5s later. Speed of sound in water 1400ms⁻¹. Depth?", "options": ["1,750m", "3,500m", "1,400cm", "2,800cm"], "answer": "A"},
+          {"number": 29, "question": "When length l of wire under constant tension varied, relationship of frequency f with l is", "options": ["f ∝ l", "f ∝ √l", "f ∝ 1/l", "f ∝ 1/√l"], "answer": "C"},
+          {"number": 30, "question": "Absolute refractive indices of glass 3/2, water 4/3. Refractive index at interface when ray travels from water to glass?", "options": ["1/2", "8/9", "9/8", "17/12"], "answer": "C"},
+          {"number": 31, "question": "Refractive index of liquid 1.5. Velocity of light in vacuum 3.0×10⁸ms⁻¹. Velocity in liquid?", "options": ["1.5×10⁸ms⁻¹", "2.0×10⁸ms⁻¹", "3.0×10⁸ms⁻¹", "4.5×10⁸ms⁻¹"], "answer": "B"},
+          {"number": 32, "question": "Beam of light incident from air to water at 30°. Angle of refraction if n=4/3?", "options": ["15°", "18°", "22°", "24°"], "answer": "C"},
+          {"number": 33, "question": "Driving mirror radius of curvature 1m. Vehicle behind 4m from mirror. Image distance behind mirror?", "options": ["8/7 m", "4/9 m", "9/2 m", "4/7 m"], "answer": "B"},
+          {"number": 34, "question": "Force acting on electron charge 1.6×10⁻¹⁹C in electric field 10⁸Vm⁻¹?", "options": ["1.6×10⁻¹¹N", "1.6×10⁻¹⁴N", "1.6×10⁻¹⁶N", "1.0×10⁻¹⁶N"], "answer": "A"},
+          {"number": 35, "question": "Cell has open circuit voltage V1, closed circuit V2 when current I flowing. Internal resistance?", "options": ["V2/I", "V1/I", "(V2+V1)/I", "(V1-V2)/I"], "answer": "D"},
+          {"number": 36, "question": "Expression for linear magnification produced by concave mirror of radius r, given u and v?", "options": ["v/r - 1", "2v/r - 1", "v/u - 1", "2u/r - 1"], "answer": "B"},
+          {"number": 37, "question": "When sound wave passes from air into water its", "options": ["speed and frequency increase", "speed and wavelength increase", "speed decreases", "speed same but frequency and wavelength change"], "answer": "B"}
+        ],
+        "CHEMISTRY": [
+          {"number": 38, "question": "Pressure of 100cm³ O₂ at 35°C is 750mmHg. Volume if pressure reduced to 100mmHg at constant temperature?", "options": ["850cm³", "750cm³", "650cm³", "580cm³"], "answer": "B"},
+          {"number": 39, "question": "Neutralization between NaOH and NO₂ produces water and", "options": ["NaNO₂ and NaNO₃", "NaNO₃ and HNO₃", "NaNO₂", "NaNO₃"], "answer": "A"},
+          {"number": 40, "question": "Which gives a precipitate when treated with NaOH solution?", "options": ["NH₄Cl", "Na₂CO₃", "AlCl₃", "CH₃COONa"], "answer": "C"},
+          {"number": 41, "question": "Which statement is true of the electrochemical series?", "options": ["electropositivity of metals increases down series", "electropositivity of non-metals decreases", "electronegativity of non-metals increases down series", "electropositivity of metals decreases down series"], "answer": "D"},
+          {"number": 42, "question": "Phenolphthalein in acidic solution is", "options": ["colourless", "yellow", "red", "orange"], "answer": "A"},
+          {"number": 43, "question": "Which acts as both reducing and oxidizing agent?", "options": ["H₂", "SO₂", "H₂S", "C"], "answer": "B"},
+          {"number": 44, "question": "Which compound is NOT formed by the action of chlorine on methane?", "options": ["CH₂Cl", "C₂H₅Cl", "CH₂Cl₂", "CHCl₃"], "answer": "B"},
+          {"number": 45, "question": "Duralumin consists of aluminium, copper and", "options": ["zinc and gold", "lead and manganese", "nickel and silver", "manganese and magnesium"], "answer": "D"},
+          {"number": 46, "question": "How many lone pair of electrons on the central atom of H₂O?", "options": ["1", "2", "3", "4"], "answer": "B"},
+          {"number": 47, "question": "Which can be used to show chlorophyll pigment is a mixture?", "options": ["crystallization", "hydrolysis", "sublimation", "chromatography"], "answer": "D"},
+          {"number": 48, "question": "MnO₄⁻ + 8H⁺ + ne⁻ → Mn²⁺ + 4H₂O. Value of n?", "options": ["2", "3", "4", "5"], "answer": "D"},
+          {"number": 49, "question": "Alkanal can be differentiated from alkenones by reaction with", "options": ["2,4-dinitrophenylhydrazine", "hydrogen cyanide", "sodium hydrogen sulphite", "Tollens reagent"], "answer": "D"},
+          {"number": 50, "question": "IUPAC names: CH₃COOH and CH₂=CH₂ respectively?", "options": ["acetic acid, ethane", "ethanoic acid, ethene", "methanoic acid, ethylene", "ethanol, ethane"], "answer": "B"}
+        ]
+      }
+    },
+    {
+      "session": "2007/2008",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "I have refused to give him my pen because I don't want him to … it again.", "options": ["loss", "loose", "lose", "lost"], "answer": "C"},
+          {"number": 2, "question": "I'm sorry I can't go to the theatre with you as I have … to do.", "options": ["many works", "a work", "Plenty work", "Much work"], "answer": "D"},
+          {"number": 3, "question": "The joke went over his head.", "options": ["was hilarious", "was not understood", "was too loud", "was insulting"], "answer": "B"},
+          {"number": 4, "question": "Her comments hit the nail on the head.", "options": ["were abusive", "were accurate", "were unrelated", "were funny"], "answer": "B"},
+          {"number": 5, "question": "The boss will give you the green light.", "options": ["scold you", "allow you to proceed", "promote you", "change the bulbs"], "answer": "B"},
+          {"number": 6, "question": "I am fed up with your excuses.", "options": ["excited about", "tired of", "confused by", "afraid of"], "answer": "B"},
+          {"number": 7, "question": "The students were suspended because they were …", "options": ["indisciplined", "undisciplined", "undisciplined", "disciplinary"], "answer": "C"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "Given x²+y²+z²=194, x=7, y=3, find z.", "options": ["√10", "8", "12.2", "13.4"], "answer": "B"},
+          {"number": 16, "question": "Write 2log₂x - xlog₂(1+y) = 3 in a form not involving logarithms.", "options": ["2x - x(1+y)=3", "2ˣ - x(1+y)=8", "x²=8(1+y)ˣ", "x² - x(1+y)=8"], "answer": "C"},
+          {"number": 17, "question": "log₁₀2=0.3010, log₁₀3=0.4771; evaluate log₁₀4.5.", "options": ["0.3010", "0.4771", "0.6532", "0.9542"], "answer": "C"},
+          {"number": 18, "question": "Length of notebook 15cm measured as 16.8cm. Percentage error?", "options": ["12.00%", "11.00%", "10.71%", "0.12%"], "answer": "A"},
+          {"number": 19, "question": "Time for ₦3,000 to earn ₦600 at 8% simple interest?", "options": ["1½ years", "2½ years", "3 years", "3½ years"], "answer": "B"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "250g lead at 170°C dropped into 100g water at 0°C, final 12°C. Specific heat of lead? (cwater=4200J/kg°C)", "options": ["39.5 J/kg°C", "50.4 J/kg°C", "127.6 J/kg°C", "154.6 J/kg°C"], "answer": "C"},
+          {"number": 28, "question": "Boy observes stone at bottom of river 6.0m deep. Apparent distance? (n=4/3)", "options": ["4.5m", "5.0m", "5.5m", "8.0m"], "answer": "A"},
+          {"number": 29, "question": "45° triangular glass prism can be used as reflector because", "options": ["Refraction never takes place", "Angle of reflection equals incidence", "Refractive index < 1", "Critical angle for glass < 45°"], "answer": "D"},
+          {"number": 30, "question": "When sound wave passes from air into water its", "options": ["Speed and frequency increase", "Speed and wavelength increase", "Speed decreases", "Speed same but frequency and wavelength change"], "answer": "B"},
+          {"number": 31, "question": "Which media allow transmission of sound? I. Air II. Liquids III. Solids", "options": ["I and II only", "I and III only", "II and III only", "I, II and III"], "answer": "D"},
+          {"number": 32, "question": "Silvered walls of vacuum flask prevent", "options": ["heat loss due to conduction", "vacuum loss", "heat entry due to convection", "heat loss due to radiation"], "answer": "D"},
+          {"number": 33, "question": "Vacuum in Thermos flask reduces heat transfer by", "options": ["Convection and radiation", "Convection and conduction", "Conduction and radiation", "Radiation only"], "answer": "B"},
+          {"number": 34, "question": "Residual source of heat loss in thermos flask takes place by", "options": ["Convection", "Radiation from surfaces", "Conduction through stopper and glass", "Conduction across walls"], "answer": "C"},
+          {"number": 35, "question": "If volume of fixed mass of gas kept constant, pressure is", "options": ["inversely proportional to centigrade temp", "inversely proportional to absolute temp", "directly proportional to centigrade temp", "directly proportional to absolute temp"], "answer": "D"},
+          {"number": 36, "question": "Spring length 25cm extended to 30cm by load 150N. Energy stored?", "options": ["3750J", "2500J", "3.75J", "2.50J"], "answer": "C"},
+          {"number": 37, "question": "Energy contained in wire extended by 0.02m by force 500N is", "options": ["5J", "10J", "10J", "10J"], "answer": "A"},
+          {"number": 38, "question": "Heavy object suspended from string, lowered into water. Appears lighter because", "options": ["density water < object", "pressure low below surface", "it experiences upthrust", "tension neutralizes part of weight"], "answer": "C"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "Furring of kettles caused by presence in water of", "options": ["calcium tetraoxosulphate(VI)", "calcium hydrogen trioxocarbonate(VI)", "calcium hydroxide", "calcium trioxocarbonate(IV)"], "answer": "D"},
+          {"number": 40, "question": "Products when ammonium trioxonitrate(V) crystals cautiously heated?", "options": ["N₂O and steam", "NO₂ and ammonia", "N₂O₄ and NO₂", "NO and NO₂"], "answer": "A"},
+          {"number": 41, "question": "Complete hydrogenation of ethyne yields", "options": ["benzene", "methane", "ethane", "propane"], "answer": "C"},
+          {"number": 42, "question": "Two cylinders each contain 30cm³ O₂ and N₂ at same T and P. 5.0g N₂ present, mass O₂?", "options": ["3.2g", "6.4g", "80.0g", "180.0g"], "answer": "B"},
+          {"number": 43, "question": "pH of W,X,Y,Z are 4,6,8,10 respectively; therefore", "options": ["none acidic", "pH of Y more acidic by adding water", "Z most acidic", "W most acidic"], "answer": "D"},
+          {"number": 44, "question": "Reaction between ethanoic acid and sodium hydroxide is", "options": ["esterification", "neutralization", "hydrolyzation", "hydrolysis"], "answer": "B"},
+          {"number": 45, "question": "When NaCl and metallic Na each dissolved in water", "options": ["both exothermic", "both endothermic", "dissolution of Na endothermic", "dissolution of Na exothermic"], "answer": "D"},
+          {"number": 46, "question": "An acid is said to be weak if", "options": ["completely dissociated", "not corrosive", "specific gravity low", "ions completely dissociated"], "answer": "B"},
+          {"number": 47, "question": "Deliquescent substances are used for", "options": ["drying", "melting", "welding", "cooling"], "answer": "A"},
+          {"number": 48, "question": "Elements P,Q,R,S atomic numbers 4,10,12,14. Which is noble gas?", "options": ["P", "Q", "R", "S"], "answer": "B"},
+          {"number": 49, "question": "Solubility of Na₃AsO₄·12H₂O 38.9g per 100g H₂O. % Na₃AsO₄ in saturated solution? (As=75, Na=23, O=16, H=1)", "options": ["87.2%", "38.9%", "48.8%", "13.7%"], "answer": "D"},
+          {"number": 50, "question": "Boiling of fat and aqueous caustic soda is referred to as", "options": ["acidification", "hydrolysis", "saponification", "esterification"], "answer": "C"}
+        ]
+      }
+    },
+    {
+      "session": "2006/2007",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "The child was all ears during the story.", "options": ["very attentive", "shouting", "sleepy", "confused"], "answer": "A"},
+          {"number": 2, "question": "That idea did not fly.", "options": ["was rejected", "was creative", "was exciting", "was dangerous"], "answer": "A"},
+          {"number": 3, "question": "She always blows things out of proportion.", "options": ["cooks them well", "exaggerates", "reduces problems", "forgets"], "answer": "B"},
+          {"number": 4, "question": "The student was in hot water.", "options": ["taking a bath", "in trouble", "feeling cold", "confused"], "answer": "B"},
+          {"number": 5, "question": "The man turned a blind eye to the theft.", "options": ["acted as if he didn't see", "watched carefully", "was partially blind", "called the police"], "answer": "A"},
+          {"number": 6, "question": "Fear (rhyme)", "options": ["Clear", "Dear", "Tear", "Peer"], "answer": "B"},
+          {"number": 7, "question": "Crop (rhyme)", "options": ["Drop", "Hop", "Shop", "Pop"], "answer": "A"},
+          {"number": 8, "question": "The students were suspended because they were …", "options": ["indisciplined", "undisciplined", "undisciplined", "disciplinary"], "answer": "C"},
+          {"number": 9, "question": "They were all behaving like a bunch of … children.", "options": ["querulous", "querulous", "querulous", "querulous"], "answer": "A"},
+          {"number": 10, "question": "The development is to be carried to the … level.", "options": ["grass root", "grass root", "grass roots", "grassroot"], "answer": "C"},
+          {"number": 11, "question": "The pen which you have just picked up is …", "options": ["Charle's", "Charles'", "Charless'", "Charles's"], "answer": "D"},
+          {"number": 12, "question": "They spent the last holiday with their …", "options": ["sister in law", "sisters-in-law", "sisters-in-laws", "sister inlaws"], "answer": "B"},
+          {"number": 13, "question": "The carpenter asked for ten packets of … nails.", "options": ["fifteen-centimetre", "fifteen centimetres", "fifteen-centimetres", "fifteen-centimetres"], "answer": "D"},
+          {"number": 14, "question": "The patient is suffering from …", "options": ["reumatism", "rheumatism", "rheumatism", "rheumatism"], "answer": "B"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "Median of 4,9,4,13,7,14,10,17?", "options": ["13", "7", "19/2", "10"], "answer": "C"},
+          {"number": 16, "question": "Regular polygon interior angle 150°. Number of sides?", "options": ["12", "10", "9", "8"], "answer": "A"},
+          {"number": 17, "question": "m*n=mn-n-1, m⊗n=mn+n-2. Find 3⊗(4*5).", "options": ["60", "57", "54", "42"], "answer": "B"},
+          {"number": 18, "question": "nth term 3^(1-n). Sum of first three terms?", "options": ["13/9", "1", "1/3", "1/9"], "answer": "A"},
+          {"number": 19, "question": "Father three times son's age; twelve years ago six times. Son and father ages?", "options": ["20 and 45", "100 and 150", "45 and 65", "20 and 60"], "answer": "D"},
+          {"number": 20, "question": "-8, m, n, 19 in AP. Find (m,n).", "options": ["1,10", "2,10", "3,13", "4,16"], "answer": "A"},
+          {"number": 21, "question": "Ages differ by 6, product 187. Ages (x,y)?", "options": ["(12,9)", "(23,17)", "(17,11)", "(18,12)"], "answer": "C"},
+          {"number": 22, "question": "x ∝ y³, x=2 when y=1; x when y=5?", "options": ["2", "8", "125", "250"], "answer": "D"},
+          {"number": 23, "question": "Sum of two numbers twice their difference, difference P. Larger number?", "options": ["P/2", "3P/2", "5P/2", "3P"], "answer": "B"},
+          {"number": 24, "question": "Solve (x-2)(x-3)=12.", "options": ["2,3", "3,6", "-1,6", "1,-6"], "answer": "C"},
+          {"number": 25, "question": "Inverse of f(x)=3x+4?", "options": ["(x-4)/3", "(x-5)/5", "(x+3)/4", "(x+4)/3"], "answer": "A"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "Effect of particle attaining terminal velocity is that", "options": ["buoyancy > weight of displaced fluid", "buoyancy = viscous retarding force", "acceleration maximum", "weight = retarding force"], "answer": "D"},
+          {"number": 28, "question": "Planet m1, r1; second planet m2=10m1, r2=2r1. Ratio of gravitational forces?", "options": ["1:5", "2:5", "3:5", "4:5"], "answer": "B"},
+          {"number": 29, "question": "If total force on particle zero, linear momentum will", "options": ["increase then decrease", "be constant", "increase", "decrease"], "answer": "B"},
+          {"number": 30, "question": "Body 80N in elevator moving up with acceleration 5ms⁻². Force floor on body?", "options": ["160N", "120N", "80N", "40N"], "answer": "A"},
+          {"number": 31, "question": "Shooter wants horizontal range = 3 × max height. Angle?", "options": ["53°", "68°", "30°", "45°"], "answer": "A"},
+          {"number": 32, "question": "Which is NOT a vector?", "options": ["Velocity", "Work", "Force", "Electric field intensity"], "answer": "B"},
+          {"number": 33, "question": "Which is a vector?", "options": ["Electric charge", "Electric field", "Electric potential difference", "Electric capacitance"], "answer": "B"},
+          {"number": 34, "question": "Least possible error using rule graduated in cm?", "options": ["0.1cm", "0.5cm", "1.0cm", "2.0cm"], "answer": "B"},
+          {"number": 35, "question": "Inner diameter of small test tube accurately measured using", "options": ["Micrometer screw gauge", "Pair of dividers", "Metre rule", "Vernier callipers"], "answer": "D"},
+          {"number": 36, "question": "Which is NOT a fundamental SI unit?", "options": ["Metre", "Ampere", "Kelvin", "Radian"], "answer": "D"},
+          {"number": 37, "question": "³₁X + ²₁Y → ⁴₂Z + ¹₀n + energy. Reaction type?", "options": ["Fusion reaction", "Fission reaction", "Chain reaction", "Radioactivity decay"], "answer": "A"},
+          {"number": 38, "question": "²⁷₁₃Al + ¹₀n → ²⁴₁₁Na + X. X is", "options": ["proton", "gamma ray", "helium particle", "alpha particle"], "answer": "D"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "2Cl⁻(aq) → Cl₂(g) + 2e⁻. This half-cell reaction at anode is", "options": ["ionization", "oxidation", "reduction", "recombination"], "answer": "B"},
+          {"number": 40, "question": "Current to deposit 2.7g Al in 2hrs? (Al=27, F=96500Cmol⁻¹)", "options": ["32A", "16A", "8A", "4A"], "answer": "D"},
+          {"number": 41, "question": "Number of atoms of Cl in 5.58g NaCl? (Na=23, Cl=35.5, Nₐ=6.02×10²³)", "options": ["6.02×10²²", "5.58×10²³", "6.02×10²³", "5.58×10²⁴"], "answer": "A"},
+          {"number": 42, "question": "30cm³ O₂ at 10atm placed in 20cm³ container, constant T. New pressure?", "options": ["6.7 atm", "15.0 atm", "6.0 atm", "66.0 atm"], "answer": "B"},
+          {"number": 43, "question": "Relative molecular mass = 2Y, Y is", "options": ["mass of gas", "vapour density", "volume of gas", "temperature of gas"], "answer": "B"},
+          {"number": 44, "question": "Potassium vapour burns with a … flame.", "options": ["blue", "brick-red", "lilac", "golden-yellow"], "answer": "C"},
+          {"number": 45, "question": "Basicity of tetraoxosulphate(V) acid is", "options": ["7", "5", "4", "3"], "answer": "D"},
+          {"number": 46, "question": "Carbon atoms in ethane are … hybridized.", "options": ["sp³", "sp", "sp²", "not"], "answer": "A"},
+          {"number": 47, "question": "Oil spillage in ponds cleaned up by", "options": ["burning off oil layer", "spraying with detergent", "dispersal with compressed air", "spraying with hot water"], "answer": "B"},
+          {"number": 48, "question": "Argon used in gas-filled lamps because it helps", "options": ["prevent reduction of filament", "prevent oxidation of filament", "make filament glow brightly", "keep atmosphere inert"], "answer": "B"},
+          {"number": 49, "question": "During electrolysis of CuSO₄ with Pt electrodes, solution gets progressively", "options": ["acidic", "basic", "neutral", "amphoteric"], "answer": "A"},
+          {"number": 50, "question": "Unsaturated organic compounds identified by decolourization of", "options": ["silver bromide and KMnO₄", "bromine water and acidified KMnO₄", "silver bromide and bromine water", "bromine water and alkaline KMnO₄"], "answer": "B"}
+        ]
+      }
+    },
+    {
+      "session": "2005/2006",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "My uncle is one of the … of the society.", "options": ["elitists", "elites", "elite", "elitist"], "answer": "C"},
+          {"number": 2, "question": "The soldiers were sufficiently equipped with …", "options": ["arms and ammunition", "arms and ammunition", "arm and ammunition", "arm and ammunition"], "answer": "B"},
+          {"number": 3, "question": "There is no point getting upset by problems; I take them …", "options": ["in my stride", "on the spur of the moment", "by leaps and bounds", "in a jiffy"], "answer": "A"},
+          {"number": 4, "question": "The … Affairs Officer is expecting all of us in the dining room.", "options": ["Student", "Student's", "Students", "Students'"], "answer": "D"},
+          {"number": 5, "question": "My boss is usually a charming man but he can be very irritable …", "options": ["atimes", "at times", "those times", "with times"], "answer": "B"},
+          {"number": 6, "question": "Bend (rhyme)", "options": ["Send", "Lend", "Mend", "Friend"], "answer": "D"},
+          {"number": 7, "question": "Main (rhyme)", "options": ["Brain", "Chain", "Plain", "Rain"], "answer": "A"},
+          {"number": 8, "question": "Tide (rhyme)", "options": ["Wide", "Slide", "Side", "Ride"], "answer": "D"},
+          {"number": 9, "question": "The task was no mean feat.", "options": ["very difficult", "very simple", "food-related", "illegal"], "answer": "A"},
+          {"number": 10, "question": "She likes to call the shots.", "options": ["shout in public", "make the decisions", "take pictures", "call names"], "answer": "B"},
+          {"number": 11, "question": "The issue is now water under the bridge.", "options": ["very important", "forgotten and forgiven", "about the river", "extremely painful"], "answer": "B"},
+          {"number": 12, "question": "The new law will open a can of worms.", "options": ["solve problems", "create new issues", "protect animals", "improve society"], "answer": "B"},
+          {"number": 13, "question": "The girl was walking on air after her results.", "options": ["floating", "extremely happy", "running", "disappointed"], "answer": "B"},
+          {"number": 14, "question": "The thief was on the run.", "options": ["taking a walk", "escaping", "jogging", "inside a car"], "answer": "B"}
+        ],
+        "MATHEMATICS": [
+          {"number": 15, "question": "Find p if line joining (p,4) and (6,-2) is perpendicular to line joining (2,p) and (-1,3).", "options": ["0", "3", "4", "6"], "answer": "C"},
+          {"number": 16, "question": "For what x is tangent to y=x²-4x+3 parallel to x-axis?", "options": ["3", "2", "1", "0"], "answer": "B"},
+          {"number": 17, "question": "Locus of midpoints of chords of length 6cm in circle radius 5cm?", "options": ["circle radius 4cm", "perpendicular bisector of chords", "straight line through centre", "circle radius 6cm"], "answer": "A"},
+          {"number": 18, "question": "Radius of sphere surface area 154cm²? (π=22/7)", "options": ["7.00cm", "3.50cm", "3.00cm", "1.75cm"], "answer": "B"},
+          {"number": 19, "question": "P,Q fixed; X moves so ∠PXQ=45°. Locus of X?", "options": ["pair of parallel lines", "perpendicular bisector of PQ", "arc of circle through P and Q", "circle with diameter PQ"], "answer": "C"},
+          {"number": 20, "question": "U,V fixed; W moves so ∠UWV=90°. Locus of W?", "options": ["perpendicular bisector UV", "circle with UV radius", "line parallel UV", "circle with UV as diameter"], "answer": "D"},
+          {"number": 21, "question": "In how many ways can the word MATHEMATICS be arranged?", "options": ["11!/2!", "11!/2!2!", "11!/2!2!2!", "11!/2!2!2!2!"], "answer": "C"},
+          {"number": 22, "question": "If ⁶Pᵣ=6, find ⁶Pᵣ₊₁.", "options": ["15", "30", "33", "35"], "answer": "B"},
+          {"number": 23, "question": "If two fair coins tossed, probability of at least one head?", "options": ["1/4", "1/2", "1", "3/4"], "answer": "D"},
+          {"number": 24, "question": "Two dice thrown, probability at least score of 10?", "options": ["1/6", "1/12", "5/12", "11/12"], "answer": "A"},
+          {"number": 25, "question": "Two perfect dice, probability total score 8?", "options": ["1/12", "5/36", "5/8", "7/36"], "answer": "B"},
+          {"number": 26, "question": "Median of 4,9,4,13,7,14,10,17?", "options": ["13", "7", "19/2", "10"], "answer": "C"}
+        ],
+        "PHYSICS": [
+          {"number": 27, "question": "Inner diameter of small test tube accurately measured using", "options": ["Micrometer screw gauge", "Pair of dividers", "Metre rule", "Vernier calipers"], "answer": "D"},
+          {"number": 28, "question": "Which is NOT a vector?", "options": ["Velocity", "Work", "Force", "Electric field intensity"], "answer": "B"},
+          {"number": 29, "question": "Two forces at right angles, resultant 100N, one makes 30° with resultant. Its magnitude?", "options": ["8.66N", "50.0N", "57.7N", "86.6N"], "answer": "D"},
+          {"number": 30, "question": "True of sliding friction? I. Independent of area II. Depends on nature of surfaces III. Depends on speed IV. Proportional to normal reaction.", "options": ["I,II,IV", "I,II,III", "I,III,IV", "II,III,IV"], "answer": "A"},
+          {"number": 31, "question": "Short chain attached behind petrol tanker to", "options": ["balance tanker", "conduct heat from engine to earth", "conduct charges generated by friction to earth", "make tanker move slowly"], "answer": "C"},
+          {"number": 32, "question": "Nuclear fusion loss of mass 1.0×10⁻⁶kg. Energy? (c=3.0×10⁸ms⁻¹)", "options": ["3.0×10⁻⁴J", "3.0×10¹J", "9.0×10¹J", "9.0×10¹⁰J"], "answer": "D"},
+          {"number": 33, "question": "Graphite rods in nuclear reactor used to", "options": ["absorb neutrons", "create neutrons", "slow down neutrons", "speed up neutrons"], "answer": "C"},
+          {"number": 34, "question": "Natural radioactivity consists of emission of", "options": ["α-particles and β-rays", "α-particles and X-rays", "γ-rays and X-rays", "α-particles, β-rays and γ-rays"], "answer": "D"},
+          {"number": 35, "question": "Steel more suitable for permanent magnet than iron because steel", "options": ["easily demagnetized", "alloy of many metals", "easily magnetized by AC", "retains magnetism more than iron"], "answer": "D"},
+          {"number": 36, "question": "Iron preferable to steel for electromagnets? I. Retains magnetism longer II. More easily magnetized III. More easily demagnetized IV. Produces stronger magnet.", "options": ["I and II only", "II and III only", "I,III and IV", "II,III and IV"], "answer": "D"},
+          {"number": 37, "question": "Resistance of a wire depends on", "options": ["length", "diameter", "temperature", "all of the above"], "answer": "D"},
+          {"number": 38, "question": "Wire P half diameter and half length of wire Q. Ratio of resistance P to Q?", "options": ["8:1", "4:1", "2:1", "1:1"], "answer": "C"}
+        ],
+        "CHEMISTRY": [
+          {"number": 39, "question": "Gas that turns orange potassium heptaoxodichromate(VI) solution green is", "options": ["sulphur(VI) oxide", "hydrogen sulphide", "sulphur(IV) oxide", "hydrogen chloride"], "answer": "C"},
+          {"number": 40, "question": "Millikan's contribution to atomic theory: determination of", "options": ["positive rays", "cathode rays", "charge to mass ratio", "charge on electron"], "answer": "D"},
+          {"number": 41, "question": "Production of naked seeds is distinctive feature of group called", "options": ["Grasses", "Conifers", "Legumes", "Palms"], "answer": "B"},
+          {"number": 42, "question": "Which is a trace element?", "options": ["Iron", "Copper", "Calcium", "Sulphur"], "answer": "B"},
+          {"number": 43, "question": "Transmission of impulses along nerve fibre characterized by", "options": ["Hormonal and temperature changes", "Electrical and ionic changes", "Hormonal changes", "Electrostatic change"], "answer": "B"},
+          {"number": 44, "question": "Iron ore contains 70% Fe₂O₃. Mass of iron obtainable from 80kg ore? (Fe=56,O=16)", "options": ["35.0kg", "39.2kg", "70.0kg", "78.4kg"], "answer": "B"},
+          {"number": 45, "question": "Which NOT formed by action of chlorine on methane?", "options": ["CH₂Cl", "C₂H₅Cl", "CH₂Cl₂", "CHCl₃"], "answer": "B"},
+          {"number": 46, "question": "NH₃ + H₃O⁺ → NH₄⁺ + H₂O. It may be deduced that", "options": ["redox reaction occurred", "H₃O⁺ acts as oxidizing agent", "H₃O⁺ acts as acid", "water is an acid"], "answer": "C"},
+          {"number": 47, "question": "Grammes of KOH in 250cm³ of 1M solution? (K=39,O=16,H=1)", "options": ["52g", "100g", "26g", "14g"], "answer": "D"},
+          {"number": 48, "question": "Which is not a homogenous mixture?", "options": ["filtered sea water", "soft drink", "flood water", "writing ink"], "answer": "C"},
+          {"number": 49, "question": "Ethane reacts with Cl₂ to form 1,2-dichloroethane; reaction is", "options": ["substitution", "addition", "polymerization", "hydrolysis"], "answer": "B"},
+          {"number": 50, "question": "Water is said to be HARD if it", "options": ["easily forms ice", "has to be warmed before NaCl dissolves", "forms insoluble scum with soap", "contains nitrates"], "answer": "C"}
+        ]
+      }
+    }
+  ]
+}

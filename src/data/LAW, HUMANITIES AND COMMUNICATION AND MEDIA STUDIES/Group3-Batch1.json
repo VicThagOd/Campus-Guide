@@ -1,0 +1,240 @@
+{
+  "book": "LAW, HUMANITIES AND COMMUNICATION AND MEDIA STUDIES",
+  "sessions": [
+    {
+      "session": "2024/2025",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Blood cholesterol used to be thought of as a problem only for adults.", "options": ["Blood cholesterol is no longer a problem for adults.", "Only children have a problem with blood cholesterol.", "Blood cholesterol affects both adults and children.", "cholesterol is more dangerous than cancer."], "answer": "C"},
+          {"number": 2, "question": "When apple growers talk about new varieties... they don't mean something developed last month...", "options": ["Apple growers haven't developed any new varieties in recent decades.", "Some varieties take a short time, others a long time.", "New varieties of apples take many years to develop.", "There are no New varieties of apples."], "answer": "C"},
+          {"number": 3, "question": "The man outran his wife when they heard the eerie sound.", "options": ["hissing", "harsh", "scary", "loud"], "answer": "C"},
+          {"number": 4, "question": "The warring tribes have been told to parley with each other.", "options": ["hold talks", "observe a truce", "suspend hostilities", "sign a treaty"], "answer": "A"},
+          {"number": 5, "question": "Adigun's jokes are always puerile.", "options": ["entertaining", "empty", "childish", "amusing"], "answer": "C"},
+          {"number": 6, "question": "He is __at__ Kaduna __for__ an official assignment.", "options": ["in/on", "at/in", "at/for", "for/in"], "answer": "A"},
+          {"number": 7, "question": "Didn't __anyone__ draw your attention to the entry requirement?", "options": ["anyone", "somebody", "someone", "everyone"], "answer": "C"},
+          {"number": 8, "question": "Which word **rhymes** with 'Chair'?", "options": ["there", "fear", "fiery", "cheer"], "answer": "A"},
+          {"number": 9, "question": "Which word **rhymes** with 'Fuel'?", "options": ["quail", "field", "duel", "freak"], "answer": "C"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "If (1P03)₄ = 115₁₀, find P.", "options": ["0", "1", "2", "3"], "answer": "D"},
+          {"number": 11, "question": "A ladder resting on a vertical wall makes an angle whose tangent is 2.4 with the ground. If the distance between the foot of the ladder and the wall is 50 cm, what is the length of the ladder?", "options": ["1m", "1.1m", "1.2m", "1.3m"], "answer": "D"},
+          {"number": 12, "question": "P is a point on one side of the straight-line UV and P moves in the same direction as UV. If the straight line ST is on the locus of P and ∠VUS = 50°, find ∠PST.", "options": ["310°", "130°", "80°", "50°"], "answer": "B"},
+          {"number": 13, "question": "Two distinct sectors in the same circle subtend 100° and 30° respectively at the centre. Their corresponding arcs are in the ratio", "options": ["1:100", "3:1", "5:2", "10:3"], "answer": "D"},
+          {"number": 14, "question": "Find the sum to infinity of the following series: 3 + 2 + 4/3 + 8/9 + 16/27 + ...", "options": ["1270", "190", "18", "9"], "answer": "D"},
+          {"number": 15, "question": "What is the nth term of the progression 27, 9, 3, ...?", "options": ["27×(1/3)ⁿ⁻¹", "3ⁿ⁺²", "27+18(n-1)", "27+6(n-1)"], "answer": "A"},
+          {"number": 16, "question": "The 3rd term of an AP is 4x-2y and the 9th term is 10x-8y. Find the common difference.", "options": ["19x-17y", "8x-4y", "x-y", "2x"], "answer": "C"},
+          {"number": 17, "question": "If -8, m, n, 19 are in arithmetic progression, find (m, n).", "options": ["1,10", "2,10", "3,13", "4,16"], "answer": "A"},
+          {"number": 18, "question": "If f(x) = 2x² + 5x + 3, find f(x+1).", "options": ["2x²-x", "2x²-x+10", "4x²+3x+2", "4x²+3x+12"], "answer": "B"}
+        ],
+        "GOVERNMENT": [
+          {"number": 19, "question": "The biased presentation of information in order to influence public opinion is referred to as", "options": ["mobilization", "propaganda", "indoctrination", "distortion"], "answer": "B"},
+          {"number": 20, "question": "The first Military coup in Nigeria toppled the government of", "options": ["General Yakubu Gowon", "Dr. Nnamdi Azikiwe", "Alhaji Abubakar Tafawa Balewa", "Major General Aguiyi-Ironsi"], "answer": "C"},
+          {"number": 21, "question": "Bicameral legislature exists", "options": ["where cameramen are allowed to cover proceedings", "to prevent concentration of power in one house", "to provide jobs for more politicians", "to ensure just laws are passed"], "answer": "B"},
+          {"number": 22, "question": "In Nigeria, the institution that preserves civil liberty is the", "options": ["Public Complaints Commission", "Federal Electoral Commission", "Law Courts", "Police Commission"], "answer": "C"},
+          {"number": 23, "question": "The structure of government implies that", "options": ["law making process of government", "law enforcing process", "organization of powers and functions", "method of revenue allocation"], "answer": "C"},
+          {"number": 24, "question": "One criticism of delegated legislation is that", "options": ["subjects citizens to executive decrees", "makes laws too flexible", "makes laws too technical", "is not useful in emergency"], "answer": "A"},
+          {"number": 25, "question": "Which ideology emphasizes the abolition of government and law?", "options": ["Totalitarianism", "Communism", "Anarchism", "Socialism"], "answer": "C"},
+          {"number": 26, "question": "An important aspect of an unwritten constitution is that it", "options": ["is easy to understand", "safeguards monarchy", "contains customary laws and conventions", "is not easily amended"], "answer": "C"},
+          {"number": 27, "question": "Individual rights are said to be inalienable if they", "options": ["apply to citizens and aliens alike", "cannot be denied", "can be withdrawn by the state", "are enshrined in the constitution"], "answer": "B"}
+        ],
+        "CHRISTIAN_RELIGIOUS_STUDIES": [
+          {"number": 34, "question": "How old was Joshua before he died?", "options": ["95 years", "98 years", "110 years", "111 years"], "answer": "C"},
+          {"number": 35, "question": "After the departure of the Israelites God made Pharaoh pursue them in order to", "options": ["Force Israel to return to Egypt", "Hasten Israel's journey", "Make Israel obey Moses", "Get glory over Pharaoh and his host"], "answer": "D"},
+          {"number": 36, "question": "'You shall be my own possession among all peoples' God made this promise on condition that they", "options": ["Drove Canaanites out", "Kept away from foreign women", "Obeyed God's voice and kept His covenant", "Taught their children to obey God"], "answer": "C"},
+          {"number": 37, "question": "The aftermath of Gehazi's actions led to Elisha", "options": ["Rebuking him for greed", "Commending him for cleverness", "Pronouncing a curse on him and his generation", "Stopping Gehazi from working with him"], "answer": "C"},
+          {"number": 38, "question": "When Samuel said to Saul, 'To obey is better than sacrifice', he meant that", "options": ["Sacrifices are acceptable only from an obedient man", "God prefers sacrifices to obedience", "God prefers offerings to sacrifice", "God has barred all sacrifices"], "answer": "A"},
+          {"number": 39, "question": "'But as to the times and the seasons, brethren, you have no need to have anything written to you' The times and seasons refer to", "options": ["Harvest time", "Wet and dry season", "The advent", "The coming of the Lord"], "answer": "D"},
+          {"number": 40, "question": "Which people destroyed Shiloh and captured the Ark?", "options": ["Ammonites", "Amalekites", "Palestinians", "Philistines"], "answer": "D"}
+        ],
+        "LITERATURE": [
+          {"number": 41, "question": "The extract presents the image of a", "options": ["bright day", "dark night", "calm weather", "rough time"], "answer": "C"},
+          {"number": 42, "question": "The dominant literary device used in the extract is", "options": ["apostrophe", "parallelism", "antithesis", "personification"], "answer": "D"},
+          {"number": 43, "question": "In 'Binsey Poplars' by G.M. Hopkins, what figure of speech does 'my aspens dear' point at?", "options": ["simile", "metaphor", "euphemism", "Personification"], "answer": "D"},
+          {"number": 44, "question": "Catharsis is experienced", "options": ["after one has written a play", "when a play is still being staged", "before watching a play", "after watching a play"], "answer": "D"},
+          {"number": 45, "question": "In 'Look Back in Anger' by John Osborne, how many rooms does the Porter's apartment have?", "options": ["Three", "Two", "Five", "One"], "answer": "D"},
+          {"number": 46, "question": "In 'LET ME DIE ALONE' by John K. Kargbo, the nice moment between Ghana and his wife Yoko is interrupted by?", "options": ["Messenger", "Guard", "Maid", "the in-laws"], "answer": "A"},
+          {"number": 47, "question": "In 'Binsey Poplars' by G.M. Hopkins, according to the poem", "options": ["One can connect to God through nature", "One can treat nature as it pleases", "One cannot meet God by destroying nature", "Nature belongs to God only"], "answer": "A"},
+          {"number": 48, "question": "A poem written in an elaborate style to address or celebrate an object or event is called", "options": ["a ballad", "an epic", "a dirge", "an ode"], "answer": "D"},
+          {"number": 49, "question": "In 'Binsey Poplars' by G.M. Hopkins, 'O if we but knew what we do' suggests", "options": ["Euphemism", "apostrophe", "Allusion", "irony"], "answer": "D"},
+          {"number": 50, "question": "In 'The Journey of the Magi' by T.S. Eliot, which is not used as a symbol?", "options": ["Horse", "Trees", "River", "Lily"], "answer": "D"}
+        ]
+      }
+    },
+    {
+      "session": "2023/2024",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Which word **rhymes** with 'Table'?", "options": ["status", "label", "tablet", "cater"], "answer": "B"},
+          {"number": 2, "question": "Which word **rhymes** with 'Mountain'?", "options": ["country", "fountain", "bounty", "contain"], "answer": "B"},
+          {"number": 3, "question": "Which word has the **/i:/** vowel sound?", "options": ["say", "seize", "kill", "ill"], "answer": "B"},
+          {"number": 4, "question": "Which word has the __D__ sound at the beginning as in 'Dent'?", "options": ["says", "mate", "pays", "may"], "answer": "C"},
+          {"number": 5, "question": "Which word has the __S__ sound as in 'Set'?", "options": ["mettle", "listen", "mete", "basket"], "answer": "A"},
+          {"number": 6, "question": "Which word has the __B__ sound as in 'Best'?", "options": ["regale", "vehicle", "many", "legal"], "answer": "C"},
+          {"number": 7, "question": "Which word has the __L__ sound as in 'Look'?", "options": ["tool", "pool", "dull", "full"], "answer": "D"},
+          {"number": 8, "question": "Which word has the **/u/** vowel sound?", "options": ["woo", "spoon", "flood", "book"], "answer": "D"},
+          {"number": 9, "question": "Which word has the __B__ sound as in 'Book'?", "options": ["full", "fool", "gull", "flood"], "answer": "A"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "Factorize m³ - 2m² - m + 2.", "options": ["(m²+1)(m-2)", "(m+1)(m+1)(m+2)", "(m-2)(m+1)(m-1)", "(m²+2)(m-1)"], "answer": "C"},
+          {"number": 11, "question": "Which is a factor of 15 + 7x - 2x²?", "options": ["x-3", "x+3", "x-5", "x+5"], "answer": "A"},
+          {"number": 12, "question": "If f(x+2) = 2x² + 7x - 5, find f(-1).", "options": ["-10", "-8", "4", "10"], "answer": "C"},
+          {"number": 13, "question": "Find a factor common to 4a²-9b², 8a³+27b³, (4a+6b)².", "options": ["4a+6b", "4a-6b", "2a+3b", "2a-3b"], "answer": "C"},
+          {"number": 14, "question": "If f(x+1) = 3x² - x + 4, find f(0).", "options": ["4", "6", "0", "8"], "answer": "A"},
+          {"number": 15, "question": "A survey of 100 students: 80 speak Hausa, 20 speak Igbo, 9 speak both. How many speak neither?", "options": ["0", "9", "11", "20"], "answer": "B"},
+          {"number": 16, "question": "In a class of 40, 32 offer Math, 24 Physics, 4 offer neither. How many offer both?", "options": ["16", "4", "20", "8"], "answer": "C"},
+          {"number": 17, "question": "If 5ˣ⁺¹ + 5ˣ = 150, find x.", "options": ["3", "4", "1", "2"], "answer": "D"},
+          {"number": 18, "question": "Evaluate 2⁻¹ + 100⁰.", "options": ["1", "½", "2", "1½"], "answer": "D"}
+        ],
+        "GOVERNMENT": [
+          {"number": 19, "question": "The legislative organ of the Federal Government in the First Republic was the", "options": ["Parliament", "judiciary", "Legislative council", "National Assembly"], "answer": "A"},
+          {"number": 20, "question": "The independence of the judiciary can be best safeguarded by", "options": ["the Public service commission", "a charismatic leadership", "a liberal government", "a system of checks and balances"], "answer": "D"},
+          {"number": 21, "question": "The foreign affairs minister who advocated the concept of medium powers was", "options": ["Prof Ibrahim Gambari", "Major-General Joe Garba", "Alhaji Rilwan Lukman", "Prof Bolaji Akinyemi"], "answer": "B"},
+          {"number": 22, "question": "Constitutionalism means", "options": ["the constitution is largely conventions", "the constitution is not easy to amend", "the provisions of the constitution are strictly adhered to", "there is parliamentary supremacy"], "answer": "C"},
+          {"number": 23, "question": "Shadow cabinet is associated with the", "options": ["communist system", "presidential system", "parliamentary system", "fascist system"], "answer": "C"},
+          {"number": 24, "question": "Nigeria's role in ECOMOG is essentially informed by her", "options": ["desire for peace and stability", "chairmanship of ECOWAS", "desire to establish democracy", "membership of ECOWAS"], "answer": "A"},
+          {"number": 25, "question": "The most important aspect of political participation in a democracy is", "options": ["registration with a political party", "observance of electoral process", "voting in elections", "attending political rallies"], "answer": "C"},
+          {"number": 26, "question": "The supreme policy-making organ in the OAU is", "options": ["the Council of Ministers", "The Assembly of Heads of State and Government", "the General Secretariat", "the specialized commissions"], "answer": "B"},
+          {"number": 27, "question": "The office of the prime minister of Nigeria was first created by the", "options": ["Ibadan constitutional conference 1950", "London constitutional conference 1953", "London constitutional conference 1957", "London constitutional conference 1958"], "answer": "C"}
+        ],
+        "CHRISTIAN_RELIGIOUS_STUDIES": [
+          {"number": 34, "question": "Moses called the place where water gushed from the rock 'Massah and Meribah' because the people", "options": ["Asked him to do so", "Found fault with God", "Wanted a new leader", "Decided to go back to Egypt"], "answer": "B"},
+          {"number": 35, "question": "When the Israelites received the minority report from the spies, they decided to", "options": ["Kill Moses", "Go back to Egypt", "Choose Caleb as leader", "Stone the two spies"], "answer": "B"},
+          {"number": 36, "question": "James recommends anointing oil of the elders because such anointing", "options": ["Prepares the sick for his last journey", "Makes the sick holy and righteous", "Promotes physical recovery", "Ensures forgiveness to the sick"], "answer": "C"},
+          {"number": 37, "question": "In 1 Corinthians, Paul says he is least of the Apostles because he", "options": ["Was not one of the twelve", "Persecuted the church", "Was the last to be called", "Was an apostle to the Gentiles"], "answer": "B"},
+          {"number": 38, "question": "Peter expected elders of the church to lead their flock", "options": ["Extraordinarily", "Timelessly", "Selflessly", "Bossily"], "answer": "C"},
+          {"number": 39, "question": "The prophet whose occupation was the dressing of sycamore trees was", "options": ["Ezekiel", "Hosea", "Jeremiah", "Amos"], "answer": "D"},
+          {"number": 40, "question": "Joshua gathered all the tribes of Israel for his farewell address at", "options": ["Sinai", "Bethel", "Jordan", "Shechem"], "answer": "D"}
+        ],
+        "LITERATURE": [
+          {"number": 41, "question": "In 'The Leader and the Led' by Niyi Osundare, the mood/tone is that of", "options": ["peace and promising", "calm and untroubled", "uncertainty and disappointment", "Rivalry and disagreement"], "answer": "C"},
+          {"number": 42, "question": "In 'A Midsummer Night's Dream' by Shakespeare, what worries many characters?", "options": ["Whether Puck's love potion will wear off", "Whether they are lovable enough", "Whether the woods are full of evil spirits", "Whether their lovers will be faithful"], "answer": "B"},
+          {"number": 43, "question": "In 'A Midsummer Night's Dream', on what mission does Oberon send Puck?", "options": ["To bring back the queen's maid", "To block impending war", "To find a flower with a love potion", "As an envoy"], "answer": "C"},
+          {"number": 44, "question": "In 'Look Back in Anger' by John Osborne, the setting is", "options": ["America", "India", "London", "Denmark"], "answer": "C"},
+          {"number": 45, "question": "In 'Do Not Go Gentle Into That Good Night' by Dylan Thomas, the tone is", "options": ["desperate pleading", "defiance", "contempt", "appalling"], "answer": "B"},
+          {"number": 46, "question": "In 'The Leader and the Led' by Niyi Osundare, the dominant poetic device is", "options": ["metaphor", "Simile", "Repetition", "paradox"], "answer": "A"},
+          {"number": 47, "question": "In 'Look Back in Anger', how many leather armchairs do the Porters have?", "options": ["Two", "Six", "Five", "Four"], "answer": "A"},
+          {"number": 48, "question": "A bard is a", "options": ["novelist", "playwright", "poet", "narrator"], "answer": "C"},
+          {"number": 49, "question": "In 'The Leader and the Led', the poem is a", "options": ["Satire", "epic", "narrative poem", "Elegy"], "answer": "A"},
+          {"number": 50, "question": "In 'Binsey Poplars' by G.M. Hopkins, the poem is published in which year?", "options": ["1789", "1870", "1719", "1879"], "answer": "D"}
+        ]
+      }
+    },
+    {
+      "session": "2022/2023",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Car (rhyme)", "options": ["cat", "chat", "chide", "father"], "answer": "D"},
+          {"number": 2, "question": "Birth (rhyme)", "options": ["colonel", "bath", "egg", "colour"], "answer": "B"},
+          {"number": 3, "question": "Only observers from the Ministry of Works ... allowed into the conference room.", "options": ["is", "are", "have", "has been"], "answer": "B"},
+          {"number": 4, "question": "One of the ladies who ... in the premises ... been asked to withdraw.", "options": ["sells/have", "sell/have", "sells/has", "sell/has"], "answer": "C"},
+          {"number": 5, "question": "His hair needs ...", "options": ["to cut", "to have cut", "being cut", "cutting"], "answer": "D"},
+          {"number": 6, "question": "In spite of constant financial support, Udenyi treats his studies with considerable levity.", "options": ["seriousness", "enthusiasm", "wastefulness", "lassitude"], "answer": "D"},
+          {"number": 7, "question": "Publishing as a business venture has become a hot potato in Nigeria.", "options": ["unpleasant", "profitable", "unacceptable", "expensive"], "answer": "A"},
+          {"number": 8, "question": "When the strike is over, there will probably be an increase in wages and a ... increase in prices.", "options": ["sporadic", "concordant", "concurrent", "chronic"], "answer": "C"},
+          {"number": 9, "question": "In all cultures, gestures are used as a form of communication, but the same gestures may have very different meanings in different cultures.", "options": ["No two cultures use the same gestures", "One gesture will never have the same meaning in two cultures", "A person from one culture may misunderstand the gestures used by a person from another culture", "Gesture is a good form of communication"], "answer": "C"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "Find x if log₉ x = 1.5.", "options": ["72.0", "27.0", "36.0", "3.5"], "answer": "B"},
+          {"number": 11, "question": "If log₁₀2 = 0.3010 and log₁₀3 = 0.4771, evaluate log₁₀4.5.", "options": ["0.3010", "0.4771", "0.6532", "0.9542"], "answer": "C"},
+          {"number": 12, "question": "Two sisters, Taiwo and Kehinde, own a store. The ratio of Taiwo's share to Kehinde's is 11:9. Later Kehinde sells 2/3 of her share to Taiwo for ₦720.00. Find the value of the store.", "options": ["N1,080.00", "N2,400.00", "N3,000.00", "N3,600.00"], "answer": "D"},
+          {"number": 13, "question": "Two brothers invested a total of N5,000.00 on a farm project. The farm yield was sold for N15,000.00. If the profit was shared in the ratio 2:3, what is the difference in the amount of profit received by the brothers?", "options": ["N2,000.00", "N4,000.00", "N6,000.00", "N10,000.00"], "answer": "A"},
+          {"number": 14, "question": "A man drove for 4 hours at a certain speed, then doubled his speed and drove for another 3 hours. Altogether he covered 600 kilometers. At what speed did he drive for the last 3 hours?", "options": ["120km/hr", "60km/hr", "600/7 km/hr", "50km/hr"], "answer": "A"},
+          {"number": 15, "question": "A sum of money was invested at 8% per annum simple interest. If after 4 years the money amounts to N330.00, find the amount originally invested.", "options": ["N180.00", "N165.00", "N150.00", "N250.00"], "answer": "C"},
+          {"number": 16, "question": "A man bought a wrist watch for N150 but sold it for N120. Find the loss per cent.", "options": ["25%", "11 1/9%", "20%", "80%"], "answer": "C"},
+          {"number": 17, "question": "The diameter of a metal rod is measured as 23.40 cm to four significant figures. What is the maximum error in the measurement?", "options": ["0.05cm", "0.5cm", "0.045cm", "0.005cm"], "answer": "D"},
+          {"number": 18, "question": "If 1011₂ + X₇ = 251₁₀, solve for X.", "options": ["14", "20", "24", "25"], "answer": "A"}
+        ],
+        "GOVERNMENT": [
+          {"number": 19, "question": "'The Queen can do no wrong' means", "options": ["the Queen is above the law", "the Queen acts on advice of ministers", "the Queen is the effective centre of power", "the Queen has the loyalty of the British population"], "answer": "A"},
+          {"number": 20, "question": "Bye-laws made by the Minister of Transport for running the Nigerian Railway Corporation is an exercise of", "options": ["delegated power", "parliamentary power", "statutory power", "residual power"], "answer": "A"},
+          {"number": 21, "question": "The major role of national legislature is to", "options": ["scrutinize and criticize the executive", "step into political vacuum", "make laws for the general welfare of citizens", "find ways to get money for governments"], "answer": "C"},
+          {"number": 22, "question": "Under the 1922 Clifford Constitution, franchise was granted in Calabar and Lagos to", "options": ["all adults", "male adults", "persons with annual income of at least £100", "male adults with annual income of at least £100"], "answer": "D"},
+          {"number": 23, "question": "The organs of government normally fused in a military regime are the", "options": ["Civil Service and parastatals", "Legislature and the Executive", "Executive and the Judiciary", "Judiciary and the Legislature"], "answer": "B"},
+          {"number": 24, "question": "The Richards Constitution in Nigeria provided for the", "options": ["total independence", "introduction of self-government", "unification of British West Africa", "division of Nigeria into three administrative units"], "answer": "D"},
+          {"number": 25, "question": "The members of the Nigerian Constituent assembly were elected by", "options": ["bye-election", "a general election", "electoral colleges", "indirect election"], "answer": "C"},
+          {"number": 26, "question": "Under the 1979 Nigerian Constitution, the Supreme Court judges were appointed by the", "options": ["Judicial Service Commission", "President", "Honourable Chief Justice", "Senate"], "answer": "B"},
+          {"number": 27, "question": "Bicameral legislatures are popular in", "options": ["unitary systems", "federal systems", "confederal systems", "rigid systems"], "answer": "B"}
+        ],
+        "CHRISTIAN_RELIGIOUS_STUDIES": [
+          {"number": 34, "question": "During his reign, Asa carried out all the following religious reforms except", "options": ["Putting away male cult prostitutes", "Removing all idols", "Removing his mother from being queen", "Stopping Israelites from sacrificing at high places"], "answer": "D"},
+          {"number": 35, "question": "During the second coming of Jesus, surviving Christians would", "options": ["Reign forever on earth with Him", "Join the happy throng to meet him in the clouds", "Occupy a minor position in heaven", "Join in fighting against the anti-Christ"], "answer": "B"},
+          {"number": 36, "question": "Which was the first directive given to man after He had created him?", "options": ["Be fruitful and multiply", "Go ye into the world and exercise authority", "Be kind to all creatures", "Behold I have given you every plant yielding seed"], "answer": "A"},
+          {"number": 37, "question": "For his unequalled humility, Christ received an invaluable reward for which", "options": ["Satan acknowledged him", "Men were convinced to work out salvation", "Every knee bows at his name", "Everything is under his command"], "answer": "C"},
+          {"number": 38, "question": "The wife of Moses was called", "options": ["Rebeca", "Rachel", "Zipporah", "Deborah"], "answer": "C"},
+          {"number": 39, "question": "Peter described Christians as a chosen race because They", "options": ["Declare God's wonderful deeds", "Have all been anointed", "Have become born again", "Will be honored in heaven"], "answer": "A"},
+          {"number": 40, "question": "Paul compares the manifestations of spiritual gifts in individual members of the Church to the", "options": ["Unity Human body", "Rights of individual members", "Rights of different parts of the body", "Unity of the Church"], "answer": "A"}
+        ],
+        "LITERATURE": [
+          {"number": 41, "question": "That quality in a literary work which evokes tenderness, pity or sorrow is", "options": ["pathos", "patois", "pataphysics", "pathopoeia"], "answer": "A"},
+          {"number": 42, "question": "A praise poem is", "options": ["a ballad", "a panegyric", "an allegory", "an epigram"], "answer": "B"},
+          {"number": 43, "question": "In 'The Good Morrow' by John Donne, 'seven sleepers' is", "options": ["allusion", "epigram", "personification", "metaphor"], "answer": "A"},
+          {"number": 44, "question": "In 'Fences' by August Wilson, what does Troy do that leads to Cory's first physical fight with Troy?", "options": ["He tells Cory he cannot have a television", "He makes Cory build a fence", "He grabs Rose's arm", "He prevents Cory from going to college"], "answer": "D"},
+          {"number": 45, "question": "In 'The Journey of the Magi' by T.S. Eliot, what do the silken girls bring?", "options": ["Gold", "Sherbet", "Camels", "Stars"], "answer": "B"},
+          {"number": 46, "question": "In 'The Lion and the Jewel' by Wole Soyinka, what is the main impediment to Lakunle marrying Sidi?", "options": ["her age", "the bride-price", "her religion", "his job"], "answer": "B"},
+          {"number": 47, "question": "In 'Look Back in Anger' by John Osborne, what is Cliff's surname?", "options": ["Lewis", "Jones", "Porter", "Rhys"], "answer": "A"},
+          {"number": 48, "question": "In 'Do Not Go Gentle Into That Good Night' by Dylan Thomas, what is the poem all about?", "options": ["love", "inevitability of death", "war", "After life"], "answer": "B"},
+          {"number": 49, "question": "In 'The Good Morrow' by John Donne, 'Weaned' as used in the second line denote?", "options": ["old age", "poverty", "childish", "tender age"], "answer": "D"},
+          {"number": 50, "question": "In 'Look Back in Anger' by John Osborne, the period the play reflects is", "options": ["Edwardism", "Elizabethan", "Shakespearean", "Post-war Britain"], "answer": "D"}
+        ]
+      }
+    },
+    {
+      "session": "2021/2022",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "How will the Committee's decision ... you?", "options": ["influence", "treat", "bore", "harass"], "answer": "A"},
+          {"number": 2, "question": "Either the chief of the village or the leader of the farmers ... to be held responsible.", "options": ["were", "are", "is", "have"], "answer": "C"},
+          {"number": 3, "question": "Darling, do send the children to bed. I can't ... their noise any longer.", "options": ["make do with", "make up", "deal with", "put up with"], "answer": "D"},
+          {"number": 4, "question": "Had he considered his public image carefully, he ... for his opponent.", "options": ["might have stood aside", "would have stepped aside", "should have stepped down", "would have stood down"], "answer": "B"},
+          {"number": 5, "question": "In order to carry out the necessary examination the dead body was ...", "options": ["extracted", "extradited", "exiled", "expelled"], "answer": "C"},
+          {"number": 6, "question": "The two sprinters were running neck and neck.", "options": ["exactly level", "very slowly", "very fast", "with their necks together"], "answer": "A"},
+          {"number": 7, "question": "Tension (rhyme)", "options": ["season", "prison", "equation", "mention"], "answer": "D"},
+          {"number": 8, "question": "Labour (rhyme)", "options": ["cater", "neighbour", "mirror", "terror"], "answer": "B"},
+          {"number": 9, "question": "Rear (rhyme)", "options": ["pear", "heir", "fear", "swear"], "answer": "C"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "The prime factors of 2,520 are", "options": ["2,9,5", "2,9,7", "2,3,5,7", "2,3,7,9"], "answer": "C"},
+          {"number": 11, "question": "A micrometre is one millionth of a millimetre. 12,000 micrometres =", "options": ["0.00012m", "0.0000012m", "0.000012m", "0.0000012m"], "answer": "C"},
+          {"number": 12, "question": "Divide the L.C.M. of 48, 64 and 80 by their H.C.F.", "options": ["20", "30", "48", "60"], "answer": "D"},
+          {"number": 13, "question": "Calculate the simple interest on N 7500 for 8 years at 5% per annum.", "options": ["N 3,000", "N 600", "N 300", "N 150"], "answer": "A"},
+          {"number": 14, "question": "Evaluate 3524/0.05 correct to 3 significant figures.", "options": ["705", "70000", "70480", "70500"], "answer": "D"},
+          {"number": 15, "question": "At what rate would ₦100 deposited for 5 years raise interest of ₦7.50?", "options": ["1½%", "2½%", "15%", "25%"], "answer": "A"},
+          {"number": 16, "question": "Audu bought article for ₦50,000, sold to Femi at loss of x%. Femi sold to Oche at 40% profit, made ₦10,000 profit. Find x.", "options": ["60", "50", "40", "20"], "answer": "D"},
+          {"number": 17, "question": "A bed costing N10,500 was sold at 20% gain. Amount paid?", "options": ["N126,000", "N12,100", "N12,600", "N8,400"], "answer": "C"},
+          {"number": 18, "question": "Simplify log₂96 - 2log₂6.", "options": ["2+log₂3", "3-log₂3", "log₂3-3", "log₂3-2"], "answer": "A"}
+        ],
+        "GOVERNMENT": [
+          {"number": 19, "question": "The idea of democracy as a system of government was inherited from", "options": ["The USA", "Italy", "England", "Greece"], "answer": "D"},
+          {"number": 20, "question": "The greatest criticism of the Security Council of the UNO is that it", "options": ["is not representative enough", "undermines the General Assembly", "has exclusive power", "has no standing army"], "answer": "A"},
+          {"number": 21, "question": "The following are members of the Commonwealth EXCEPT", "options": ["Lesotho", "Jamaica", "Kenya", "Gabon"], "answer": "D"},
+          {"number": 22, "question": "Before colonial rule, Yoruba traditional rulers were appointed by", "options": ["the people acting through representatives", "the Ogboni", "Ifa (oracle) priests", "Kingmakers"], "answer": "D"},
+          {"number": 23, "question": "A bill becomes an Act of Parliament after it has been", "options": ["passed by parliament", "signed by the head of state", "processed through committee", "debated in the house"], "answer": "B"},
+          {"number": 24, "question": "In the Oyo empire, the Alafin was", "options": ["an absolute monarch", "popularly elected", "a constitutional monarch", "worshipped as a deity"], "answer": "C"},
+          {"number": 25, "question": "Which did not take part in the early nationalist movement of Nigeria?", "options": ["The Lagos Weekly Record", "Macaulay's National Democratic Party", "The Nigerian Youth Movement", "The Democratic Party of Nigeria and the Cameroons"], "answer": "D"},
+          {"number": 26, "question": "The Public Complaints Commission is empowered to investigate complaints and", "options": ["prosecute false complainants", "report findings to appropriate authorities", "reprimand authorities", "refer complaints to traditional rulers"], "answer": "B"},
+          {"number": 27, "question": "The transfer of authority to local government councils is known as", "options": ["demarcation", "delegation", "fusion", "devolution"], "answer": "B"}
+        ],
+        "CHRISTIAN_RELIGIOUS_STUDIES": [
+          {"number": 34, "question": "Religion that is pure and undefiled before God demands", "options": ["Keeping the commandment of God", "Loving your neighbor as yourself", "Keeping one unstained from the world", "Accepting Jesus as lord and saviour"], "answer": "C"},
+          {"number": 35, "question": "The contest on Mount Carmel was to demonstrate that", "options": ["Baal was the God of Israel", "Baal controls nature", "Yahweh was supreme to other gods", "Israel had declared for Yahweh"], "answer": "C"},
+          {"number": 36, "question": "The parents of Moses belonged to the tribe of", "options": ["Judah", "Benjamin", "Levi", "Ephraim"], "answer": "C"},
+          {"number": 37, "question": "The covenant between God and Israel on Mount Sinai was sealed with the", "options": ["Blood of oxen", "Altar made of six stones", "People's acclamation", "circumcision of all males"], "answer": "A"},
+          {"number": 38, "question": "According to the creation story, man became a living being because God", "options": ["Formed him out of dust", "Gave him the tree of knowledge", "Gave him a woman", "Gave him the breath of life"], "answer": "D"},
+          {"number": 39, "question": "Which was not cited by Paul as proof of Jesus' resurrection? Jesus' appearance to", "options": ["Cephas", "The twelve", "Pilate", "James"], "answer": "C"},
+          {"number": 40, "question": "Man's responsibility to other creatures was to", "options": ["Provide them with food", "Have domination over them", "Preserve them", "Respect them"], "answer": "B"}
+        ],
+        "LITERATURE": [
+          {"number": 42, "question": "In 'Fences' by August Wilson, what made Troy sick enough to go to the hospital in 1941?", "options": ["Typhoid fever", "Pneumonia", "Small pox", "Yellow fever"], "answer": "B"},
+          {"number": 43, "question": "A novel which depicts the adventures of the main character who is usually something of a rogue is", "options": ["comedy", "fable", "prose", "picaresque"], "answer": "D"},
+          {"number": 44, "question": "In 'Fences', what does Rose want Troy and Cory to finish building?", "options": ["A roof", "A house", "A baseball park", "A fence"], "answer": "D"},
+          {"number": 45, "question": "Whereat: with blade, with bloody blameful blade... dominant figure of speech is", "options": ["simile", "alliteration", "assonance", "repetition"], "answer": "B"},
+          {"number": 46, "question": "It runs through the reeds... dominant device used is", "options": ["imagery", "symbolism", "rhyme", "pun"], "answer": "C"},
+          {"number": 47, "question": "In 'Second Class Citizen' by Buchi Emecheta, native mother and foreign mother", "options": ["Local and international mother", "The natal mother and social mother", "The nursing mother and biological mother"], "answer": "C"},
+          {"number": 48, "question": "In 'The Leader and the Led' by Niyi Osundare, the first animal that declares his leadership ambition is", "options": ["Antelope", "the hyena", "Zebra", "the Lion"], "answer": "D"},
+          {"number": 49, "question": "The large space above the proscenium in a theatre from which the scenes are controlled is called", "options": ["aside", "anachronism", "flies", "setting"], "answer": "C"},
+          {"number": 50, "question": "In 'The Leader and the Led', the tone of the persona is", "options": ["optimistic", "pessimistic", "satirical", "hopeful"], "answer": "C"}
+        ]
+      }
+    }
+  ]
+}

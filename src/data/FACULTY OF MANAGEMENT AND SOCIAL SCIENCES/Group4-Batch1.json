@@ -1,0 +1,382 @@
+{
+  "book": "FACULTY OF MANAGEMENT AND SOCIAL SCIENCES",
+  "sessions": [
+    {
+      "session": "2024/2025",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Blood cholesterol used to be thought of as a problem only for adults.", "options": ["Blood cholesterol is no longer a problem for adults.", "Only children have a problem with blood cholesterol.", "Blood cholesterol affects both adults and children.", "cholesterol is more dangerous than cancer."], "answer": "C"},
+          {"number": 2, "question": "When apple growers talk about new varieties of apples, they don't mean something developed last month, last year, or even in the last decade.", "options": ["Apple growers haven't developed any new varieties in recent decades.", "Some varieties of apples can be developed in a short time, but others take a long time.", "New varieties of apples take many years to develop.", "There are no New varieties of apples."], "answer": "C"},
+          {"number": 3, "question": "The man outran his wife when they heard the eerie sound.", "options": ["hissing", "harsh", "scary", "loud"], "answer": "C"},
+          {"number": 4, "question": "The warring tribes have been told to parley with each other.", "options": ["hold talks", "observe a truce", "suspend hostilities", "sign a treaty"], "answer": "A"},
+          {"number": 5, "question": "Adigun's jokes are always puerile.", "options": ["entertaining", "empty", "childish", "amusing"], "answer": "C"},
+          {"number": 6, "question": "He is __at__ Kaduna __on__ an official assignment.", "options": ["in/on", "at/in", "at/for", "for/in"], "answer": "A"},
+          {"number": 7, "question": "Didn't __anyone__ draw your attention to the entry requirement?", "options": ["anyone", "somebody", "someone", "everyone"], "answer": "C"},
+          {"number": 8, "question": "Which word **rhymes** with 'Chair'?", "options": ["there", "fear", "fiery", "cheer"], "answer": "A"},
+          {"number": 9, "question": "Which word **rhymes** with 'Fuel'?", "options": ["quail", "field", "duel", "freak"], "answer": "C"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "If (1P03)₄ = 115₁₀ find P.", "options": ["0", "1", "2", "3"], "answer": "D"},
+          {"number": 11, "question": "A ladder resting on a vertical wall makes an angle whose tangent is 2.4 with the ground. If the distance between the foot of the ladder and the wall is 50 cm what is the length of the ladder?", "options": ["1m", "1.1m", "1.2m", "1.3m"], "answer": "D"},
+          {"number": 12, "question": "P is a point on one side of the straight-line UV and P moves in the same direction as UV. If the straight-line ST is on the locus of P and ∠VUS = 50°, find ∠PST.", "options": ["310°", "130°", "80°", "50°"], "answer": "B"},
+          {"number": 13, "question": "Two distinct sectors in the same circle subtend 100° and 30° respectively at the centre of the circle. Their corresponding arcs are in the ratio", "options": ["1:100", "3:1", "5:2", "10:3"], "answer": "D"},
+          {"number": 14, "question": "Find the sum to infinity of the following series: 3 + 2 + 4/3 + 8/9 + 16/27 + ...", "options": ["1270", "190", "18", "9"], "answer": "D"},
+          {"number": 15, "question": "What is the nth term of the progression 27, 9, 3, ...?", "options": ["27×(1/3)ⁿ⁻¹", "3ⁿ⁺²", "27+18(n-1)", "27+6(n-1)"], "answer": "A"},
+          {"number": 16, "question": "The 3rd term of an AP is 4x-2y and the 9th term is 10x-8y. Find the common difference.", "options": ["19x-17y", "8x-4y", "x-y", "2x"], "answer": "C"},
+          {"number": 17, "question": "If -8, m, n, 19 are in arithmetic progression, find (m, n).", "options": ["1, 10", "2, 10", "3, 13", "4, 16"], "answer": "A"},
+          {"number": 18, "question": "If f(x) = 2x² + 5x + 3, find f(x+1).", "options": ["2x² - x", "2x² - x + 10", "4x² + 3x + 2", "4x² + 3x + 12"], "answer": "B"}
+        ],
+        "ECONOMICS": [
+          {"number": 19, "question": "Which of the following statements is true? If the price elasticity of demand for a commodity is less than unity,", "options": ["An increase in price raises total revenue.", "An increase in price leaves total revenue unchanged.", "A decrease in price raises total revenue.", "A decrease in price leaves total revenue constant."], "answer": "A"},
+          {"number": 20, "question": "If the quantity of rice bought decreases from 250 tonnes to 200 tonnes owing to a 2% rise in price, this shows a change in", "options": ["consumers' income", "demand", "consumers' tastes", "quantity demanded"], "answer": "D"},
+          {"number": 21, "question": "If the same basket of goods which cost N12.00 in 1985 cost N15.00 in 1987, the price index is", "options": ["25", "80", "100", "125"], "answer": "D"},
+          {"number": 22, "question": "If two commodities are good substitutes, e.g. butter and margarine, an increase in demand for one will reduce the demand for the other. This type of demand is called", "options": ["composite demand", "elastic demand", "derived demand", "competitive demand"], "answer": "D"},
+          {"number": 23, "question": "The budget of Nigeria will be in deficit if", "options": ["revenue expenditure exceeds revenue receipt", "capital expenditure exceeds capital receipts", "revenue and capital expenditure exceed revenue and capital receipts", "the government is spending more than its income"], "answer": "D"},
+          {"number": 24, "question": "The capital market is a market for trading of financial assets such as", "options": ["bankers' acceptances", "treasury bills", "long-term securities", "commercial papers"], "answer": "C"},
+          {"number": 25, "question": "The Central Bank controls the activities of other banks by all but one of the following. Which one?", "options": ["The use of bank rate", "Purchase or sale of government bonds", "Special deposit", "Taxation"], "answer": "D"},
+          {"number": 26, "question": "The U-shape of the long-run average cost curve can be explained by the", "options": ["Law of increasing returns", "Law of constant returns", "Law of diminishing returns", "Concepts of economies and diseconomies of scale"], "answer": "D"},
+          {"number": 27, "question": "Ufouma prefers shoes to wristwatch, wristwatch to trousers, trousers to shoes. This means Ufouma is", "options": ["Rational", "Consistent", "Inconsistent", "Transitive"], "answer": "C"},
+          {"number": 28, "question": "Unlimited liability means", "options": ["the government can tax a company without limit", "the debts of a company must be paid out of its assets", "a company ceases to exist at the death of one of its owners", "a firm must pay its debts from business as well as private funds"], "answer": "D"},
+          {"number": 29, "question": "What do we call a market where there is a large number of buyers and sellers, such that no one has an appreciable influence on prices?", "options": ["Free market", "Perfectly competitive market", "Controlled market", "Open market"], "answer": "B"},
+          {"number": 30, "question": "The money market is a financial market that specializes in the provision of", "options": ["Short-term loans and advances", "Medium-term loans", "Long-term loans", "Venture capital for development projects"], "answer": "A"},
+          {"number": 31, "question": "Which of the following is a term used to describe a payment representing a surplus in excess of transfer costs?", "options": ["Interest rates", "Opportunity costs", "Economic rent", "Indirect costs"], "answer": "C"},
+          {"number": 32, "question": "Monetary policy does NOT involve", "options": ["increasing the import duties", "buying or selling treasury bills by the Central Bank", "printing of more currency notes", "increasing or decreasing cash reserve ratio by the Central Bank"], "answer": "A"},
+          {"number": 33, "question": "Market is defined as", "options": ["One geographical location where people meet to buy and sell", "The demand and supply of goods and services", "A group of people whose sole interest is to make profit", "Any organizational framework which links the buyers and sellers of a good or service"], "answer": "D"},
+          {"number": 34, "question": "The most important factor determining the location of the cement industry in Nigeria today is", "options": ["The nature of the product", "infrastructure and government policy", "Nearness to the market and source of power", "Raw materials"], "answer": "D"},
+          {"number": 35, "question": "A major function of middlemen in Nigeria is the distribution of", "options": ["Commodities to all consumers regardless of income", "Commodities to consuming centres and collection of money income to producing centres", "Economic welfare to all", "Wealth to all"], "answer": "B"},
+          {"number": 36, "question": "An inverse relationship between price and quantity demanded implies that", "options": ["the two variables change in opposite directions", "the two variables change in the same direction", "only one variable changes", "the two variables remain unchanged"], "answer": "A"},
+          {"number": 37, "question": "The effect of changes in the condition of demand on a demand schedule with the price constant is a", "options": ["movement along the demand curve", "deflation of the demand curve", "hyperbola formation by the demand curve", "shift of the demand curve"], "answer": "D"}
+        ],
+        "GOVERNMENT": [
+          {"number": 38, "question": "The determination of issues before the courts in accordance with the body of rules backed by the organized force of the community, refers essentially to", "options": ["judicial revision", "Human rights", "the rule of law", "Certiorari"], "answer": "C"},
+          {"number": 39, "question": "The civil service cadre responsible for the general supervision and control of ministries is the", "options": ["administrative", "professional", "Executive", "clerical"], "answer": "A"},
+          {"number": 40, "question": "Which of the following functions is performed by both political parties and pressure groups?", "options": ["Contesting elections", "Interest articulation", "Formal opposition to government", "Working for the interests of their members"], "answer": "B"},
+          {"number": 41, "question": "The Nigerian Youth Movement collapsed as a result of", "options": ["its failure to win election", "shortage of funds to run its affairs", "the harassment of its leadership by government", "the breakup of its leadership"], "answer": "D"},
+          {"number": 42, "question": "Islam was introduced into Northern Nigeria", "options": ["before the 13th century", "in the 17th century", "after the Jihad of Uthman Dan Fodio", "by the British in the early 20th century"], "answer": "C"},
+          {"number": 43, "question": "A common means of influencing public opinion is", "options": ["public policy-making", "legislation", "propaganda", "lobbying"], "answer": "C"},
+          {"number": 44, "question": "Indirect Rule, as practiced by the British in their West African colonies", "options": ["did not attempt to reform existing traditional institutions", "satisfied neither the rulers nor the ruled", "had nothing in common with the reality of French rule in their colonies", "meant ruling through existing rulers and attempting to check excesses"], "answer": "D"},
+          {"number": 45, "question": "The 1979 Nigerian Constitution provides for presidential elections every", "options": ["four years", "Eight years", "time the military hands over the reins of government", "time the incumbent is impeached or dies"], "answer": "A"},
+          {"number": 46, "question": "With the adoption of the presidential system of government, Nigeria ceased to", "options": ["have representative government", "be a member of the Commonwealth", "have different persons as Head of State and Government", "operate a bicameral legislature"], "answer": "C"},
+          {"number": 47, "question": "A one-party system of government", "options": ["is found only in Africa", "allows no official opposition", "does not provide for a legislature", "is practiced only where the citizens share identical views about policy"], "answer": "B"},
+          {"number": 48, "question": "Which of the following is not a fundamental human right?", "options": ["Freedom of speech", "Freedom of religion", "Freedom of the press", "None of the above"], "answer": "D"},
+          {"number": 49, "question": "The basic unit of government in pre-colonial Yoruba land was the", "options": ["town", "empire", "palace", "ward"], "answer": "A"},
+          {"number": 50, "question": "The governor-general of Nigeria at the time of political independence was", "options": ["Lord Frederick Lugard", "Sir James Robertson", "Dr. Nnamdi Azikiwe", "Sir John Macpherson"], "answer": "B"}
+        ]
+      }
+    },
+    {
+      "session": "2023/2024",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Where is the **stress** in 'Photograph'?", "options": ["pho**TO**graph", "**PHO**tograph", "photo**GRAPH**", "photo**GRAPH**"], "answer": "B"},
+          {"number": 2, "question": "Where is the **stress** in 'Economic'?", "options": ["eco**NOM**ic", "**ECO**nomic", "**ECO**nomic", "e**CON**omic"], "answer": "A"},
+          {"number": 3, "question": "Where is the **stress** in 'Development'?", "options": ["**DE**velopment", "deve**LOP**ment", "develop**MENT**", "de**VEL**opment"], "answer": "B"},
+          {"number": 4, "question": "Where is the **stress** in 'Expostulate'?", "options": ["expo**STU**late", "**EX**postulate", "expost**U**late", "expos**tu**late"], "answer": "C"},
+          {"number": 5, "question": "The politician's inflammatory remarks were heavily criticized.", "options": ["rude remarks", "provocative remarks", "bombastic remarks", "tribalistic remarks"], "answer": "B"},
+          {"number": 6, "question": "Hundreds of used items will go under the hammer during the weekend.", "options": ["Unserviceable goods will be publicly destroyed", "Impounded household items will be sold to the public", "Damaged items will be sold next weekend", "Many old items will be auctioned this weekend"], "answer": "D"},
+          {"number": 7, "question": "The horizon may not be clear now, but the troubled spots have certainly been noted.", "options": ["The horizon is dependent on the troubled spots", "Clarity of the horizon is dependent on perception", "The troubled spots are more perceptible than the horizon", "Horizon, clarity of the troubled spots and certainty are remarkably noted"], "answer": "B"},
+          {"number": 8, "question": "Which word **rhymes** with 'Tension'?", "options": ["season", "prison", "equation", "mention"], "answer": "D"},
+          {"number": 9, "question": "Which word **rhymes** with 'Labour'?", "options": ["cater", "neighbour", "mirror", "terror"], "answer": "B"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "Solve the simultaneous linear equations: 2x + 5y = 11, 7x + 4y = 2.", "options": ["x=-8,y=1", "x=-2,y=3", "x=2,y=-3", "x=34/27,y=73/27"], "answer": "B"},
+          {"number": 11, "question": "If 3²ʸ - 6(3ʸ) = 27 find y.", "options": ["3", "-1", "2", "-3"], "answer": "C"},
+          {"number": 12, "question": "In a class of 40 students, 32 offer Mathematics, 24 offer Physics and 4 offer neither. How many offer both?", "options": ["16", "4", "20", "8"], "answer": "C"},
+          {"number": 13, "question": "Simplify 1/(√3 + 2) in the form a + b√3.", "options": ["-2-3√3", "-2+3√3", "2-√3", "2+√3"], "answer": "C"},
+          {"number": 14, "question": "If the scores of 3 students are 5, 6 and 7, find the standard deviation.", "options": ["2/3", "3/(2√3)", "√(2/3)", "√3/2"], "answer": "C"},
+          {"number": 15, "question": "Find the median of 89, 141, 130, 161, 120, 131, 131, 100, 108 and 119.", "options": ["131", "125", "123", "120"], "answer": "B"},
+          {"number": 16, "question": "In a family of 21 people, average age 14 years. Excluding grandfather, average is 12 years. What is his age?", "options": ["35 years", "40 years", "42 years", "54 years"], "answer": "D"},
+          {"number": 17, "question": "A student calculated mean of 5 numbers as 45.3. Total was short by 20.5. Correct mean?", "options": ["24.8", "41.2", "49.4", "65.8"], "answer": "C"},
+          {"number": 18, "question": "d/dx cos(3x² - 2x) is equal to", "options": ["sin(6x-2)", "sin(3x²-2x)", "-(6x-2)sin(3x²-2x)", "(6x-2)sin(3x²-2x)"], "answer": "C"},
+          {"number": 19, "question": "If y = x sin x, find dy/dx when x = π/2.", "options": ["π/2", "1", "-1", "-π/2"], "answer": "B"}
+        ],
+        "ECONOMICS": [
+          {"number": 20, "question": "The money market is a financial market that specializes in the provision of", "options": ["Short-term loans and advances", "Medium-term loans", "Long-term loans", "Venture capital for development projects"], "answer": "A"},
+          {"number": 21, "question": "Which of the following is a term used to describe a payment representing a surplus in excess of transfer costs?", "options": ["Interest rates", "Opportunity costs", "Economic rent", "Indirect costs"], "answer": "C"},
+          {"number": 22, "question": "Monetary policy does NOT involve", "options": ["increasing the import duties", "buying or selling treasury bills by the Central Bank", "printing of more currency notes", "increasing or decreasing cash reserve ratio by the Central Bank"], "answer": "A"},
+          {"number": 23, "question": "Market is defined as", "options": ["One geographical location where people meet to buy and sell", "The demand and supply of goods, and services", "A group of people whose sole interest is to make profit", "Any organizational framework which links the buyers and sellers of a good or service"], "answer": "D"},
+          {"number": 24, "question": "The most important factor determining the location of the cement industry in Nigeria today is", "options": ["The nature of the product", "infrastructure and government policy", "Nearness to the market and source of power", "Raw materials"], "answer": "D"},
+          {"number": 25, "question": "A major function of middlemen in Nigeria is the distribution of", "options": ["Commodities to all consumers regardless of income", "Commodities to consuming centres and the collection of money income to producing centres", "Economic welfare to all", "Wealth to all"], "answer": "B"},
+          {"number": 26, "question": "An inverse relationship between price and quantity demanded implies that", "options": ["the two variables change in opposite directions", "the two variables change in the same direction", "only one variable changes", "the two variables remain unchanged"], "answer": "A"},
+          {"number": 27, "question": "The effect of changes in the condition of demand on a demand schedule with the price constant is a", "options": ["movement along the demand curve", "deflation of the demand curve", "hyperbola formation by the demand curve", "shift of the demand curve"], "answer": "D"},
+          {"number": 28, "question": "For a purely competitive industry, a fundamental requirement of the demand curve faced by individual firms is that it should be", "options": ["Downward sloping and price inelastic", "Perfectly price elastic", "Downward sloping but price inelastic", "Perfectly price inelastic"], "answer": "B"},
+          {"number": 29, "question": "In a free-market economy, the rationing of scarce goods is done principally by", "options": ["the government", "business organizations", "the price mechanism", "consumers"], "answer": "C"},
+          {"number": 30, "question": "In equilibrium, injections are equal to", "options": ["Withdrawals", "Surplus of imports over exports", "Government spending", "Wages"], "answer": "A"},
+          {"number": 31, "question": "In a sole proprietorship the decisions are made by the", "options": ["Government", "Board of directors", "Shareholder's conference", "Owner"], "answer": "D"},
+          {"number": 32, "question": "A society which forgoes present consumption", "options": ["is forced to do so because of excessive consumption in the past", "is devoting new resources to new capital formation", "is merely devoting resources to replacement of capital", "expects to consume only that amount tomorrow which was forgone today"], "answer": "B"},
+          {"number": 33, "question": "The assumption of profit maximization implies that profit", "options": ["is the most important consideration of the firm", "is the sole consideration of the firm", "assumes an insatiable proportion in the instinct of management", "is made in order to break-even"], "answer": "B"},
+          {"number": 34, "question": "Import substitution industrialization refers to", "options": ["the concentration of industries for even development", "setting up of industries for regional development", "a situation in which local industries are setup to produce goods formerly imported", "the banning of imports which are substitutes for domestically produced goods"], "answer": "C"},
+          {"number": 35, "question": "The process by which West African countries attempt to reduce the import of manufactured goods by encouraging firms to produce these goods at home is known as", "options": ["industrialization", "export-promotion", "import-substitution", "export substitution"], "answer": "C"},
+          {"number": 36, "question": "When a business has unlimited liability", "options": ["All its profits can be taxed away by the government", "All its assets are owned by the members of its board of directors", "The business ceases to exist at the death of one of its owners", "The owners are responsible for all its financial debts"], "answer": "D"},
+          {"number": 37, "question": "The monetary system that requires double coincidence of wants is known as", "options": ["The gold standard", "Barter", "The commodity system", "The gold exchange standard"], "answer": "B"}
+        ],
+        "GOVERNMENT": [
+          {"number": 38, "question": "The Organization of African Unity was set up in", "options": ["1960", "1957", "1963", "1975"], "answer": "C"},
+          {"number": 39, "question": "The responsibility for admitting new members of OPEC rests with the", "options": ["Summit", "Secretariat", "Conference", "Board of Governors"], "answer": "C"},
+          {"number": 40, "question": "The highest court in Nigeria before 1963 was the", "options": ["Supreme Court", "High Court", "Judicial Committee of the Privy Council", "Court of Appeal"], "answer": "C"},
+          {"number": 41, "question": "The primary obligation of citizenship is", "options": ["Loyalty to one's ethnic group", "loyalty to the state and participation in the political process", "loyalty to one's school and church", "loyalty to one's local government council"], "answer": "B"},
+          {"number": 42, "question": "A major problem of military governments in Nigeria is the", "options": ["absence of proper accountability", "abolition of the post of ombudsman", "absence of the rule of law", "encouragement of foreign investors"], "answer": "A"},
+          {"number": 43, "question": "The privatization of public corporations is aimed at", "options": ["making their goods and services available", "making them reliable", "making them more efficient", "allowing the public to control them"], "answer": "C"},
+          {"number": 44, "question": "During the second republic, the branch of the legislature responsible for ratifying presidential nominees was the", "options": ["Senate", "Council of States", "House of Representatives", "Public Service Commission"], "answer": "A"},
+          {"number": 45, "question": "Power is understood to mean the", "options": ["right to compel obedience", "capacity to compel obedience", "relationship between government and people", "desire to seize the state apparatus"], "answer": "B"},
+          {"number": 46, "question": "An important factor that brought about the introduction of federalism in Nigeria was the", "options": ["existence of three regions", "division of powers between federal and state governments", "diversity and complexity in social and cultural patterns", "existence of bicameral legislature"], "answer": "C"},
+          {"number": 47, "question": "Nigeria's influence in OPEC is determined by", "options": ["volume of her oil reserve", "size of her refineries", "accessibility of her oil fields", "low Sulphur content on her crude"], "answer": "A"},
+          {"number": 48, "question": "The motion by Anthony Enahoro demanding independence for Nigeria was moved in", "options": ["1951", "1953", "1956", "1957"], "answer": "B"},
+          {"number": 49, "question": "The process by which political beliefs and values are transmitted from one generation to another is best known as political", "options": ["socialization", "culture", "training", "decentralization"], "answer": "A"},
+          {"number": 50, "question": "The executive arm of government includes the", "options": ["police", "courts", "national assembly", "senate president"], "answer": "A"}
+        ]
+      }
+    },
+    {
+      "session": "2022/2023",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "Do not rub salt into the wound.", "options": ["You should not put salt in the wound", "You should not allow salt to touch the wound", "You should not make something more difficult for somebody", "You should not make something less difficult for somebody"], "answer": "C"},
+          {"number": 2, "question": "From the ways my friend talks, you can see he is such a bore.", "options": ["rude", "brilliant", "uninteresting", "overbearing"], "answer": "C"},
+          {"number": 3, "question": "He stared at her.", "options": ["glanced", "peeped", "looked", "gazed"], "answer": "D"},
+          {"number": 4, "question": "... any rate, he tackled his problem courageously.", "options": ["In", "At", "By", "For"], "answer": "B"},
+          {"number": 5, "question": "He is fond of ... more food.", "options": ["demanding", "demanding for", "demands", "demanding from"], "answer": "A"},
+          {"number": 6, "question": "... you come early to the new house, clean up my flat.", "options": ["While", "By chance", "Should", "Should in case"], "answer": "C"},
+          {"number": 7, "question": "A survey of opinions on how pupils feel about their teachers ... carried out.", "options": ["has been", "have been", "are being", "is been"], "answer": "A"},
+          {"number": 8, "question": "After Jerry had made the bed, he ... on it.", "options": ["layed", "laid", "lied", "lay"], "answer": "D"},
+          {"number": 9, "question": "Had he known in advance, he ...", "options": ["should prepare for the interview", "was going to prepare for the interview", "would have prepared for the interview", "will have been preparing for the interview"], "answer": "C"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "Find the value of p, if the line which passes through (-1, -p) and (-2p, 2) is parallel to the line 2y + 8x - 17 = 0.", "options": ["-2/7", "7/6", "-6/7", "6/7"], "answer": "C"},
+          {"number": 11, "question": "Find the equation of the line through (5,7) parallel to the line 7x + 5y = 12.", "options": ["5x+7y=120", "7x+5y=70", "x+y=7", "15x+17y=90"], "answer": "B"},
+          {"number": 12, "question": "The angle between the positive horizontal axis and a given line is 135°. Find the equation if it passes through (2,3).", "options": ["x-y=1", "x+y=1", "x+y=5", "x-y=5"], "answer": "C"},
+          {"number": 13, "question": "The range of the data k+2, k-3, k+4, k-2, k, k-5, k+3, k-1 and k+6 is.", "options": ["6", "8", "10", "11"], "answer": "D"},
+          {"number": 14, "question": "If n is the median and m is the mode of 2,4,2,1,1,6,2,6,2,6,3,7,2,1,2,6, then (n,m) is", "options": ["(2.6,2.6)", "(2.5,2.6)", "(2.6,2.5)", "(2.5,2.1)"], "answer": "B"},
+          {"number": 15, "question": "Five people arranged in a row; married couple insists on sitting next to each other. Number of arrangements?", "options": ["48", "24", "2", "10"], "answer": "A"},
+          {"number": 16, "question": "If cos x = √(a/b), find cosec x.", "options": ["b/√(b-a)", "b/√a", "√(b/(b-a))", "√(b-a)/√a"], "answer": "C"},
+          {"number": 17, "question": "Differentiate (6x³-5x²+1)/(3x²).", "options": ["2+2/(3x²)", "2+2/(6x²)", "2-2/(3x²)", "2-1/(6x)"], "answer": "C"},
+          {"number": 18, "question": "Find the number of ways of selecting 8 subjects from 12 subjects.", "options": ["498", "496", "495", "490"], "answer": "C"},
+          {"number": 19, "question": "Find the number of ways of choosing 2 white balls and 3 blue balls from 4 white balls and 5 blue balls.", "options": ["10", "20", "30", "40"], "answer": "D"}
+        ],
+        "ECONOMICS": [
+          {"number": 20, "question": "The inefficient distribution of scarce commodities in Nigeria is mostly due to the", "options": ["Inefficiency of the middleman", "Inefficiency in the production process", "Long chain of the distribution system", "Sovereignty of the consumers"], "answer": "C"},
+          {"number": 21, "question": "Which of the following statements must hold if price discrimination is to be possible?", "options": ["Elasticities in the various markets must not differ", "The seller must recognize the possibility of resale", "The markets must not be separated but integrated", "The markets should be separable but there should be no resale"], "answer": "D"},
+          {"number": 22, "question": "If the same basket of goods which cost N12.00 in 1985 cost N15.00 in 1987, the price index is", "options": ["25", "80", "100", "125"], "answer": "D"},
+          {"number": 23, "question": "The overall demand for crude oil for various uses is an example of", "options": ["derived demand", "competitive demand", "composite demand", "complementary demand"], "answer": "C"},
+          {"number": 24, "question": "If the demand curve facing a firm is sharply downward sloping, the firm is likely to be", "options": ["a monopolistic competitor as it can have a limited influence on price", "a monopolist as it can have influence on price", "an oligopolist as it can collude with other firms", "a perfect competitor as it cannot influence the market"], "answer": "B"},
+          {"number": 25, "question": "A demand curve slopes downwards because of", "options": ["An increase in the money income of the consumer", "A decrease in the money income of the consumer", "The substitution effect and the rise in real income of the consumer", "The increase in the demand for factors of production"], "answer": "C"},
+          {"number": 26, "question": "The main problem of the Organization of Petroleum Exporting Countries is how to", "options": ["prevent members from violating their quota", "enhance the quality of petroleum products", "compete with the North Sea Producers", "ensure viable crude reserves"], "answer": "A"},
+          {"number": 27, "question": "One of the unique features that distinguishes the perfect and imperfect market condition is", "options": ["profit motive principles", "absence of price control board", "price determines production and distribution", "number of sellers and buyers"], "answer": "D"},
+          {"number": 28, "question": "As a producers' association, the OPEC expects its members to maintain production where marginal cost is", "options": ["greater than price", "less than price", "equal to price", "equal to average cost"], "answer": "C"},
+          {"number": 29, "question": "Given the present state of the Nigerian economy, which of the following measures will promote a more rapid economic development?", "options": ["Complete diversification", "Development of infrastructure", "Encouragement of foreign investment", "All of the above"], "answer": "D"},
+          {"number": 30, "question": "An industry is a", "options": ["company producing unrelated commodities", "group of firms producing related commodities", "group of firms producing distinct commodities", "firm producing differentiated commodities"], "answer": "B"},
+          {"number": 31, "question": "In a public company, entrepreneurial functions are performed by the", "options": ["Workers", "Shareholders", "General manager", "Board of directors"], "answer": "D"},
+          {"number": 32, "question": "National debt is an expected outcome of a", "options": ["deficit budget", "consolidated budget", "balanced budget", "surplus budget"], "answer": "A"},
+          {"number": 33, "question": "Liquidation of a limited liability company implies that the", "options": ["Company may not pay its debt", "Debts of the company can only be paid from its own assets", "Debts of the company are paid from both business and private funds of the owners", "Debts of the company must be paid from public funds only"], "answer": "B"},
+          {"number": 34, "question": "The most important limitations on the partnership as a form of business enterprise is the", "options": ["Implication for partner's liability", "Legal limitation placed on the number of partners", "Difficulties arising from having two coordinate heads of a firm", "Fact that each partner regardless of the capital he contributes, must have the same voting rights"], "answer": "A"},
+          {"number": 35, "question": "Which of the following causes of inflation is related to demand-pull inflation?", "options": ["Low productivity on farms and in firms", "Poor storage facilities", "Poor distribution system", "Increase in government expenditure on construction"], "answer": "D"},
+          {"number": 36, "question": "A primary industry is concerned with", "options": ["extraction of resources in their raw state", "the operation of small-scale enterprises", "the economic activities of primary producers", "clearing and cultivation of land only"], "answer": "A"},
+          {"number": 37, "question": "Which of the following defines Economics most comprehensively?", "options": ["Buying and selling", "Organization of industries", "Study of human behaviour in the allocation of scarce resources", "National development planning and budgeting"], "answer": "C"}
+        ],
+        "GOVERNMENT": [
+          {"number": 38, "question": "The major distinguishing factor between a political party and a pressure group is that while the former", "options": ["is effectively organized, the latter is not", "engages in propaganda, the latter does not", "seeks power, the latter influences it", "does not form a government, the latter does"], "answer": "C"},
+          {"number": 39, "question": "The independence Constitution can be described as", "options": ["monarchical and presidential", "republican and parliamentary", "monarchical and parliamentary", "federal and republican"], "answer": "C"},
+          {"number": 40, "question": "The primary function of the Economic and Social Council of the UN is to", "options": ["improve social relationship between USA and Soviet Union", "maintain world peace and security", "assist in the development of member states", "lift customs barriers between petroleum producing countries"], "answer": "C"},
+          {"number": 41, "question": "The Yoruba traditional governmental system was", "options": ["egalitarian", "republican", "democratic", "monarchical"], "answer": "D"},
+          {"number": 42, "question": "The administration of the capital of the emirate under the pre-colonial Hausa-Fulani political system was entrusted to the", "options": ["galadima", "Waziri", "sarkin fada", "sarkin pawa"], "answer": "B"},
+          {"number": 43, "question": "Which branch of government is responsible for implementing laws? The", "options": ["Executive", "Legislature", "Judiciary", "Police"], "answer": "A"},
+          {"number": 44, "question": "Which of the following pairs of countries were trust territories of the United Nations?", "options": ["Tanganyika and Ghana", "Cameroon and Niger", "Togo and Namibia", "Botswana and Zaire"], "answer": "C"},
+          {"number": 45, "question": "Under the 1999 Constitution, the power to create local governments is vested in the", "options": ["Office of the Deputy Governor", "National Assembly", "Presidency", "State Assembly"], "answer": "D"},
+          {"number": 46, "question": "The type of government operated in Nigeria between October 1st 1979 and December 31st 1983 is called a", "options": ["collegial system", "presidential system", "unitary system", "parliamentary system"], "answer": "B"},
+          {"number": 47, "question": "Presidentialism in local government administration is understood to mean", "options": ["abolition of role of traditional rulers as Chairmen", "local government Chief Executives to be known as Presidents", "Chairmen of local governments to serve as accounting officers", "phasing out of the post of Councillor"], "answer": "C"},
+          {"number": 48, "question": "In 1879, four British companies were merged to form the United African Company by", "options": ["Frederick Lugard", "John Beecroft", "Tubman Goldie", "Macgregor Laird"], "answer": "C"},
+          {"number": 49, "question": "Under what constitution did the Supreme Court become the highest Court of Appeal in Nigeria?", "options": ["Macpherson Constitution", "Clifford Constitution", "Richard Constitution", "The 1963 Constitution"], "answer": "D"},
+          {"number": 50, "question": "Which of the following constitutes the political sovereign in a democracy?", "options": ["The Executive", "The Judiciary", "The Press", "The Electorate"], "answer": "D"}
+        ]
+      }
+    },
+    {
+      "session": "2021/2022",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "In his naivety, he believed all the stories his friend told him.", "options": ["artlessness", "friendliness", "incredulity", "stupidity"], "answer": "C"},
+          {"number": 2, "question": "There is much apathy towards reading among students nowadays.", "options": ["indecision", "enthusiasm", "indifference", "disinclination"], "answer": "B"},
+          {"number": 3, "question": "The hardline posture of the labour leader has not helped matters.", "options": ["imposing", "difficult", "compromising", "uncompromising"], "answer": "C"},
+          {"number": 4, "question": "The party supporters vilified the Chairman.", "options": ["elected", "challenged", "condemned", "impeached"], "answer": "C"},
+          {"number": 5, "question": "There was a glut of oil on the market.", "options": ["a variety of", "an accumulation of", "an abundance of", "an increase in"], "answer": "C"},
+          {"number": 6, "question": "The carpenter built a commodious wardrobe.", "options": ["gigantic", "small", "spacious", "wide"], "answer": "C"},
+          {"number": 7, "question": "/ɔː/ (vowel sound)", "options": ["supper", "exact", "berserk", "clerk"], "answer": "D"},
+          {"number": 8, "question": "/aː/ (vowel sound)", "options": ["can't", "brand", "act", "mat"], "answer": "A"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "How many committees of 3 can be chosen from 10 men and 5 women if it must contain 2 men and 1 woman?", "options": ["200", "225", "250", "275"], "answer": "B"},
+          {"number": 11, "question": "The numbers 3,2,8,5,7,12,9 and 14 are marks. If P is mean and Q is median, then P+Q is", "options": ["18", "17.5", "16", "15"], "answer": "B"},
+          {"number": 12, "question": "The mean of four numbers is 5 and mean deviation is 3. Find the fourth number if mean deviation of first three is 2.", "options": ["6", "10", "11", "17"], "answer": "C"},
+          {"number": 13, "question": "Find the variance of 2, 6, 8, 8, 6, 2 and 6.", "options": ["√5", "√6", "5", "6"], "answer": "D"},
+          {"number": 14, "question": "How many two-digit numbers can be formed from the digits 0, 1, 2, if a digit can be repeated and no number may begin with 0?", "options": ["4", "12", "16", "20"], "answer": "A"},
+          {"number": 15, "question": "Weights of 10 pupils: 15,16,17,18,16,17,17,17,18,16 kg. Range?", "options": ["1", "2", "3", "4"], "answer": "C"},
+          {"number": 16, "question": "Calculate the standard deviation of 7,8,9,10,11,12,13.", "options": ["2", "4", "10", "11"], "answer": "A"},
+          {"number": 17, "question": "Variance of 1,2,3,4,5?", "options": ["1.2", "1.4", "2.0", "3.0"], "answer": "C"},
+          {"number": 18, "question": "Variance of K, K+1, K+2?", "options": ["2/3", "1", "K+1", "(K+1)²"], "answer": "A"},
+          {"number": 19, "question": "A hunter 1.6m tall views a bird on top of a tree at angle of 45°. Distance to tree 10.4m. Height of tree?", "options": ["8.8m", "9.0m", "10.4m", "12.0m"], "answer": "D"}
+        ],
+        "ECONOMICS": [
+          {"number": 20, "question": "A characteristic common to partnership and sole proprietorship is", "options": ["limited liability", "Accessibility to loans", "transferability of shares", "unlimited liability"], "answer": "D"},
+          {"number": 21, "question": "Net national income is", "options": ["gross national income minus depreciation", "gross domestic product plus net income from abroad", "nominal national income deflated by price level", "gross national income divided by total population"], "answer": "A"},
+          {"number": 22, "question": "A perfect competitor will continue to expand output up to the point where", "options": ["MC < MR", "MC > MR", "TC > TR", "MR = AR"], "answer": "D"},
+          {"number": 23, "question": "When total revenue is at a maximum, marginal revenue is", "options": ["Constant", "Negative", "Zero", "Positive"], "answer": "C"},
+          {"number": 24, "question": "The chief sources of Federal Government revenue in Nigeria are", "options": ["import duties, petroleum profit tax, royalties and government dividends", "personal income tax, excise tax and vehicle licenses", "export duties, personal income tax and royalties", "property income, sales tax and excise tax"], "answer": "A"},
+          {"number": 25, "question": "In order to build up its capital stock, the typical less developed country should ideally", "options": ["increase total savings", "depend on handouts from foreigners", "nationalize all foreign concerns", "impose tariffs on imports"], "answer": "A"},
+          {"number": 26, "question": "The Petro-chemical industries are located in the Rivers State of Nigeria due to", "options": ["Favourable climate", "Favourable soil", "Oil deposits", "Palm oil products"], "answer": "C"},
+          {"number": 27, "question": "A major difference between a state-owned enterprise and private enterprise is that the former", "options": ["Is not expected to cover its costs while the latter is", "Is not always expected to maximize profits while the latter is", "Has shareholders while the latter does not", "Has a board of directors while the latter does not"], "answer": "B"},
+          {"number": 28, "question": "Which of the following is a disadvantage of regional concentration of industries?", "options": ["Development of congested urban areas", "Existence of regional unemployment", "High cost of labour", "Immobility of labour"], "answer": "A"},
+          {"number": 29, "question": "Which of the following is NOT an obstacle to economic development?", "options": ["Low level of investment", "Lack of modern technology", "High rate of population growth", "Dedicated leadership"], "answer": "D"},
+          {"number": 30, "question": "A major disadvantage of a socialist economy is that", "options": ["corruption is rampant", "consumer's sovereignty is lost", "income inequality is entrenched", "there is high level of unemployment"], "answer": "B"},
+          {"number": 31, "question": "One of the roles of the NNPC in the production and refining of crude oil is to", "options": ["secure maximum government revenue and regulate price", "protect the local operators in the petroleum industry", "prevent the smuggling of petroleum products", "satisfy the domestic consumption of petroleum products"], "answer": "A"},
+          {"number": 32, "question": "A change in demand for a normal good implies that there is a", "options": ["movement along a given demand curve", "change in the price elasticity of demand", "change in the quantity demanded as price changes", "shift in the demand curve"], "answer": "D"},
+          {"number": 33, "question": "Which of the following is a transfer payment?", "options": ["Dividend to a shareholder", "Gift to a motherless Babies' Home", "Salary to a worker", "Rent to a landlord"], "answer": "B"},
+          {"number": 34, "question": "Below equilibrium, the gap between aggregate demand and the full employment level of income is called the", "options": ["Inflationary gap", "Income gap", "Unemployment", "Deflationary gap"], "answer": "D"},
+          {"number": 35, "question": "Air is essential to life but commands no price! Diamond is not essential but commands a high price. This is the paradox of", "options": ["Thrift", "Value", "Abundance", "Scarcity"], "answer": "B"},
+          {"number": 36, "question": "Which of the following does NOT represent the behaviour of a monopolist?", "options": ["Manipulating the market price of his goods", "Manipulating both price and quantity at the same time", "Raising price at one market, lowering at another", "Manipulating only quantity, price being a given factor"], "answer": "D"},
+          {"number": 37, "question": "Which of the following is not a form of business organization?", "options": ["Sole proprietorship", "Cartel", "Partnership", "Joint stock"], "answer": "B"}
+        ],
+        "GOVERNMENT": [
+          {"number": 38, "question": "A major objective of the Public Complaints Commission is", "options": ["training and promotion of public servants", "settlement of disputes among individuals", "addressing the grievance of individuals and groups", "fighting corruption and indiscipline"], "answer": "C"},
+          {"number": 39, "question": "The highest decision-making body in Nigeria under the Buhari regime was the", "options": ["Armed Forces Ruling Council", "Supreme Military Council", "National Council of States", "Federal Executive Council"], "answer": "B"},
+          {"number": 40, "question": "Nigeria is the major shareholder in the", "options": ["OPEC Fund for Development", "African Development Bank", "World Bank", "International Monetary Fund"], "answer": "B"},
+          {"number": 41, "question": "The concept of Parliamentary Government in Britain is", "options": ["turning into Prime Ministerial and Whitehall government in practice", "in fact identical with the Presidential system in the USA", "supported by a tiny segment of the population", "now a complete myth"], "answer": "A"},
+          {"number": 42, "question": "A political right is", "options": ["Right to vote and be voted for", "Right to social security", "Right to life", "Right to own property"], "answer": "A"},
+          {"number": 43, "question": "Which of the following was an ad hoc Revenue Allocation Commission?", "options": ["Ashby Commission", "Adedeji Commission", "Udoji Commission", "Phillipson Commission"], "answer": "B"},
+          {"number": 44, "question": "South-South cooperation is a major policy plan on which Nigeria bases her relations with", "options": ["developed countries", "countries of the Southern Hemisphere", "developing countries", "member countries of the OAU"], "answer": "C"},
+          {"number": 45, "question": "The nationalist movements in Nigeria and Gold Coast (Ghana)", "options": ["were different in all respects", "produced the same results in both countries", "were dominated by traditional rulers", "influenced each other significantly"], "answer": "D"},
+          {"number": 46, "question": "A system in which no single person serves as the chief executive is known as", "options": ["Republican", "revolutionary", "Collegial", "Parliamentary"], "answer": "C"},
+          {"number": 47, "question": "The President of Nigeria is advised on sovereignty and territorial integrity by the", "options": ["National Security Council", "National Defence Council", "Council of State", "Federal Executive Council"], "answer": "B"},
+          {"number": 48, "question": "The political neutrality of civil servants is guaranteed by not allowing them to", "options": ["vote", "be members of any interest groups", "have dealings with politicians", "engage in partisan politics"], "answer": "D"},
+          {"number": 49, "question": "The agent through which the state undertakes political socialization is the", "options": ["pressure group", "peer group", "family", "School"], "answer": "D"},
+          {"number": 50, "question": "Local governments were created in Nigeria mainly to", "options": ["realize the objective of full employment", "bring government nearer to the people", "prevent the creation of more states", "encourage competition and rivalry amongst ethnic groups"], "answer": "B"}
+        ]
+      }
+    },
+    {
+      "session": "2020/2021",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "/æ/ (vowel sound)", "options": ["buy", "sack", "dark", "area"], "answer": "B"},
+          {"number": 2, "question": "/eə/ (vowel sound)", "options": ["fare", "bird", "wed", "dear"], "answer": "A"},
+          {"number": 3, "question": "/eɪ/ (vowel sound)", "options": ["aisle", "eat", "wait", "dirt"], "answer": "C"},
+          {"number": 4, "question": "Expostulate (stress pattern)", "options": ["exposTulate", "Expostulate", "expostLATE", "expostulate"], "answer": "C"},
+          {"number": 5, "question": "Controversy (stress pattern)", "options": ["CONtroversy", "conTROversy", "contROversy", "controversy"], "answer": "A"},
+          {"number": 6, "question": "Advertisement (stress pattern)", "options": ["advertiSEMent", "ADvertisement", "adVERTisement", "advertisement"], "answer": "C"},
+          {"number": 7, "question": "He was appointed specifically to put the recruits through.", "options": ["assign them to work", "train them", "discipline them", "assist them at work"], "answer": "B"},
+          {"number": 8, "question": "He was between the devil and the deep blue sea.", "options": ["He was in danger", "He was scared", "He stood between devil and sea", "He was in a dilemma"], "answer": "D"},
+          {"number": 9, "question": "His jail terms were to run concurrently.", "options": ["simultaneously", "uniformly", "laboriously", "consecutively"], "answer": "A"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "In a class of 120 students, 18 scored A in Mathematics. If the pie chart angle is Z°, what is Z°?", "options": ["15", "28", "50", "54"], "answer": "D"},
+          {"number": 11, "question": "In a class of 150 students, the sector in a pie chart representing students offering Physics has angle 12°. How many students offer Physics?", "options": ["18", "15", "10", "5"], "answer": "D"},
+          {"number": 12, "question": "Two distinct sectors in the same circle subtend 100° and 30° respectively at the centre. Their corresponding arcs are in the ratio", "options": ["1:100", "3:1", "5:2", "10:3"], "answer": "D"},
+          {"number": 13, "question": "P and Q are fixed points and X is a variable point which moves so that ∠PXQ = 45°. What is the locus of X?", "options": ["A pair of straight lines parallel to PQ", "The perpendicular bisector of PQ", "An arc of a circle passing through P and Q", "A circle with diameter PQ"], "answer": "C"},
+          {"number": 14, "question": "If 7 and 189 are the first and fourth terms of a GP respectively, find the sum of the first three terms.", "options": ["182", "91", "63", "28"], "answer": "B"},
+          {"number": 15, "question": "Find the sum of the infinity of the following series: 3 + 2 + 4/3 + 8/9 + 16/27 + …", "options": ["1270", "190", "18", "9"], "answer": "D"},
+          {"number": 16, "question": "The solution of the equation x²-2x=8 is?", "options": ["X=0 or 2", "X=-2 or 4", "X=2", "X=-4"], "answer": "B"},
+          {"number": 17, "question": "What will be the value of k so that the quadratic equation kx²-4x+1=0 has two equal roots?", "options": ["2", "3", "4", "8"], "answer": "C"},
+          {"number": 18, "question": "The mean of twelve positive numbers is 3. When another number is added the mean becomes 5. Find the thirteenth number.", "options": ["29", "26", "25", "24"], "answer": "A"},
+          {"number": 19, "question": "Four interior angles of a pentagon are 90°-x°, 90°+x°, 110°-2x°, 110°+2x°. Find the fifth interior angle.", "options": ["110°", "120°", "130°", "140°"], "answer": "D"}
+        ],
+        "ECONOMICS": [
+          {"number": 20, "question": "A cumulative frequency graph is", "options": ["a histogram", "an Ogive", "a bar chart", "a pie chart"], "answer": "B"},
+          {"number": 21, "question": "Inflation can be curbed by", "options": ["increasing aggregate demand", "paying higher wages", "increasing government expenditure", "reducing aggregate demand"], "answer": "D"},
+          {"number": 22, "question": "When the demand for a good increases owing to an increase in income, it means that", "options": ["there is an increase in quantity demanded", "inflation has taken place", "demand has exceeded supply", "there is an increase in demand"], "answer": "D"},
+          {"number": 23, "question": "A major disadvantage of partnership business is", "options": ["difficulty in the transfer of shares", "distrust among members", "limited liability", "large capital outlay"], "answer": "A"},
+          {"number": 24, "question": "A disadvantage of a joint-stock company is", "options": ["Unlimited liability", "Limited liability", "Continuity", "Loss of controlling interest"], "answer": "D"},
+          {"number": 25, "question": "A disadvantage of the corporate form of business is the", "options": ["risk of loss of personal effects if business fails", "ability to raise financial resources", "limited life span of the corporation", "problems presented by separation of ownership from control"], "answer": "D"},
+          {"number": 26, "question": "Which of the following is NOT illustrated by the production possibility curve?", "options": ["Risk", "Scarcity", "Opportunity cost", "Allocative efficiency"], "answer": "A"},
+          {"number": 27, "question": "Excess demand inflation can be controlled through", "options": ["contractionary trade policy", "expansionary monetary policy", "contractionary fiscal policy", "expansionary fiscal policy"], "answer": "C"},
+          {"number": 28, "question": "Public enterprises are supported on the grounds that they are undertaken for", "options": ["increasing profit of the private sector", "reducing the burden of the private sector", "improving the welfare of the people", "earning profit for the people"], "answer": "C"},
+          {"number": 29, "question": "A perfectly competitive firm does not influence demand by lowering price below market price because", "options": ["It is illegal price cutting", "Other competitors will be angry", "Total revenue will decline due to its inelastic demand curve", "It is able to sell all it wants at the market price"], "answer": "D"},
+          {"number": 30, "question": "If an economy grows at an annual rate of 5% of which 3% is due to improvement in productivity, the remaining 2% is attributed to", "options": ["The size of the population", "Technical progress", "The environment", "The number of natural resources"], "answer": "B"},
+          {"number": 31, "question": "Plywood industries are often located near the source of", "options": ["finance", "labour", "power", "raw materials"], "answer": "D"},
+          {"number": 32, "question": "A cumulative frequency graph is", "options": ["a histogram", "an Ogive", "a bar chart", "a pie chart"], "answer": "B"},
+          {"number": 33, "question": "Foreign exchange control in Nigeria is administered by the", "options": ["United Bank for Africa", "Union Bank of Nigeria", "First Bank of Nigeria", "Central Bank of Nigeria"], "answer": "D"},
+          {"number": 34, "question": "A sustained increase in the per capita income of a country over a period of time is called", "options": ["Economic growth", "Economic development", "Structural change", "Stagflation"], "answer": "B"},
+          {"number": 35, "question": "Cost-push inflation is caused by", "options": ["Growth of savings", "Increase in factor prices", "Increase in money supply", "Hoarding"], "answer": "B"},
+          {"number": 36, "question": "The economic policy of deregulation is aimed at encouraging", "options": ["a competitive market structure", "an oligopolistic market structure", "a duopolistic market structure", "a monopolistic market structure"], "answer": "A"},
+          {"number": 37, "question": "Which is NOT an argument for locating industries in rural areas?", "options": ["Rural areas supply agricultural raw material", "Pace of development quickened", "Employment for rural inhabitants", "Capital is easily available in rural areas"], "answer": "D"}
+        ],
+        "GOVERNMENT": [
+          {"number": 38, "question": "Which is NOT a statutory function of an embassy?", "options": ["issuance of visas", "Collection of information", "Espionage", "Welfare of her citizens"], "answer": "C"},
+          {"number": 39, "question": "The writ of habeas corpus is applied to secure the", "options": ["right to personal liberty", "independence of the judiciary", "Freedom of the press", "Right to own Private property"], "answer": "A"},
+          {"number": 40, "question": "To raise funds, local governments can levy", "options": ["import duties", "income taxes", "excise duties", "rates"], "answer": "D"},
+          {"number": 41, "question": "Laws made by the attorney-general and minister of Justice are called", "options": ["temporary laws", "bills of attainder", "case laws", "ex post facto laws"], "answer": "C"},
+          {"number": 42, "question": "Which is a function of the local government in Nigeria?", "options": ["Collection of radio and television licenses fees", "Collection of company tax", "Appointment of customary court judges", "Appointment of traditional rulers"], "answer": "A"},
+          {"number": 43, "question": "In which institution does the 1979 Constitution of Nigeria provide representation of traditional rulers?", "options": ["The Senate", "National House of Chiefs", "The Population Bureau", "Council of States"], "answer": "D"},
+          {"number": 44, "question": "When the electorate vote for representatives who in turn vote on their behalf, it is", "options": ["an indirect election", "an unfair election", "a rigged election", "a disputed election"], "answer": "A"},
+          {"number": 45, "question": "A characteristic of most pre-colonial governments in Nigeria is that they", "options": ["had no defined functions", "performed only executive functions", "had no clear separation of powers", "observed independence of the judiciary"], "answer": "C"},
+          {"number": 46, "question": "Which country is NOT a member of the Commonwealth of Nations?", "options": ["Papua New Guinea", "Sri Lanka", "Grenada", "Rwanda"], "answer": "D"},
+          {"number": 47, "question": "The headquarters of the Economic Commission for Africa is located in", "options": ["Ghana", "Kenya", "Nigeria", "Ethiopia"], "answer": "D"},
+          {"number": 48, "question": "The colonial administration in Nigeria was", "options": ["authoritarian", "democratic", "development-oriented", "none of the above"], "answer": "A"},
+          {"number": 49, "question": "The major strategy used by OPEC to influence oil price is by", "options": ["allocating production quotas to members", "influencing buyers to buy at high prices", "allowing members to produce at discretion", "increasing the supply of the commodity"], "answer": "A"},
+          {"number": 50, "question": "Capitalism often encourages", "options": ["public ownership of all forms of enterprise", "a centrally planned economy", "private ownership of the means of production", "de-concentration of political and economic powers"], "answer": "C"}
+        ]
+      }
+    },
+    {
+      "session": "2019/2020",
+      "questions": {
+        "ENGLISH": [
+          {"number": 1, "question": "One ... so if she had thought it necessary.", "options": ["would have said", "would say", "may have said", "could say"], "answer": "A"},
+          {"number": 2, "question": "One of the ladies who ... in the premises ... been asked to withdraw.", "options": ["sells/have", "sell/have", "sells/has", "sell/has"], "answer": "D"},
+          {"number": 3, "question": "Only observers from the Ministry of Works ... allowed into the conference room.", "options": ["is", "are", "have", "has been"], "answer": "B"},
+          {"number": 4, "question": "Sa'adatu as well as the maids ... plantain chips.", "options": ["like", "are liking", "is liking", "likes"], "answer": "D"},
+          {"number": 5, "question": "The man's story sounded plausible to his audience.", "options": ["fantastic", "credulous", "credible", "entertaining"], "answer": "C"},
+          {"number": 6, "question": "The school's badge is the insignia of office for all.", "options": ["power", "seal", "symbol", "recognition"], "answer": "C"},
+          {"number": 7, "question": "It is a misnomer to call three thousand naira a living wage.", "options": ["an incontrovertible assertion", "an appropriate term", "a wrong description", "a mishmash"], "answer": "C"},
+          {"number": 8, "question": "Everyone admired the manager's adroit handling of the crises.", "options": ["clever", "clumsy", "skillful", "tactless"], "answer": "B"},
+          {"number": 9, "question": "He is notorious for his drunkenness.", "options": ["known", "renowned", "popular", "well known"], "answer": "B"}
+        ],
+        "MATHEMATICS": [
+          {"number": 10, "question": "Four members of a first eleven cricket team are also members of the first fourteen rugby team. How many play for at least one of the two teams?", "options": ["25", "21", "16", "3"], "answer": "B"},
+          {"number": 11, "question": "A survey of 100 students shows 80 speak Hausa, 20 speak Igbo, 9 speak both. How many speak neither?", "options": ["0", "9", "11", "20"], "answer": "B"},
+          {"number": 12, "question": "Factorize abx²+8y-4bx-2axy.", "options": ["(ax-4)(bx-2y)", "(ax+b)(x-8y)", "(ax-2y)(bx-4)", "(abx-4)(x-2y)"], "answer": "C"},
+          {"number": 13, "question": "Find the least length of a rod which can be cut into exactly equal strips, each of either 40cm or 48cm in length.", "options": ["120cm", "240cm", "360cm", "480cm"], "answer": "D"},
+          {"number": 14, "question": "Two brothers invested N5,000 on a farm. Yield sold for N15,000. Profit shared 2:3. Difference in profit received?", "options": ["N2,000", "N4,000", "N6,000", "N10,000"], "answer": "A"},
+          {"number": 15, "question": "A sum of money invested at 8% p.a. simple interest amounts to N330 after 4 years. Find the amount originally invested.", "options": ["N180.00", "N165.00", "N150.00", "N250.00"], "answer": "C"},
+          {"number": 16, "question": "P varies directly as the square of q and inversely as r. p=36 when q=3, r=4. Find p when q=5, r=2.", "options": ["72", "100", "90", "200"], "answer": "D"},
+          {"number": 17, "question": "The sixth term of an AP is half of its twelfth term. The first term is equal to", "options": ["half of the common difference", "double of the common difference", "the common difference", "zero"], "answer": "D"},
+          {"number": 18, "question": "Solve without using tables log₅(62.5) - log₅(1/2).", "options": ["3", "4", "5", "8"], "answer": "B"},
+          {"number": 19, "question": "Let P={1,2,u,v,w,x}, Q={2,3,u,v,w,5,6,y}, R={2,3,4,v,x,y}. Determine (P - Q) ∩ R.", "options": ["{1,x}", "{x,y}", "{x}", "∅"], "answer": "C"}
+        ],
+        "ECONOMICS": [
+          {"number": 20, "question": "Inductive method of scientific reasoning involves", "options": ["drawing conclusions from specific to general", "making inferences based on theory", "using the past to explain the present", "drawing conclusions from general to specific"], "answer": "A"},
+          {"number": 21, "question": "By open market operations we mean the process by which", "options": ["the Central Bank buys or sells securities in the open market", "commercial banks buy or sell treasury bills", "market women buy and sell commodities", "the bank rate is determined in the open market"], "answer": "A"},
+          {"number": 22, "question": "Σf(x-x̄)² is a formula used to calculate", "options": ["variance", "the quartile", "standard deviation", "mean deviation"], "answer": "A"},
+          {"number": 23, "question": "Short-run period in production is a period for a firm to be able to change its", "options": ["variable inputs", "total outputs", "total revenue", "scale of operation"], "answer": "A"},
+          {"number": 24, "question": "In many developing countries, infrastructural problem is acute due to shortage of", "options": ["Industries and industrial equipment", "Savings, investment and consumption", "Natural resources for development", "Supporting services that encourage economic activities"], "answer": "D"},
+          {"number": 25, "question": "Mr. X whose salary does not exceed N200, finds price of a commodity he used to buy has risen to N230. He decides not to buy. He is affected by the", "options": ["Substitution effect of a price change", "Income effect of a price change", "Opportunity cost of a price change", "Inflation effect of a price change"], "answer": "B"},
+          {"number": 26, "question": "A perfect example of a public good is", "options": ["Air", "Education", "Defence", "transport"], "answer": "C"},
+          {"number": 27, "question": "Tax incidence is the analysis of", "options": ["How progressive a tax is", "How a tax is collected", "How distorting a tax is", "Who ultimately pays the tax"], "answer": "D"},
+          {"number": 28, "question": "One factor which influences the slope of a non-linear demand curve for a commodity is the", "options": ["Price of the commodity", "Quantity demanded", "Availability of substitutes", "Availability of complements"], "answer": "C"},
+          {"number": 29, "question": "Which of the following items is NOT included in measuring national income by the income approach?", "options": ["Wages and salaries of public servants", "Student grants and scholarships", "Profits of companies", "Rents on property"], "answer": "B"},
+          {"number": 30, "question": "The Nigerian Bank for Commerce and Industry is", "options": ["A commercial bank", "A development bank", "An industrial bank", "A merchant bank"], "answer": "B"},
+          {"number": 31, "question": "A company's expenditure on raw materials is regarded as", "options": ["Explicit cost", "Implicit cost", "Prime cost", "Average cost"], "answer": "A"},
+          {"number": 32, "question": "The major objective of economic growth is to", "options": ["Redistribute income and other benefits", "Equalize opportunities for education and employment", "Increase the aggregate expenditure", "Increase the real per capita income"], "answer": "D"},
+          {"number": 33, "question": "The National Electric Power Authority (NEPA) is a", "options": ["public limited company", "public liability company", "private authority", "public corporation"], "answer": "D"},
+          {"number": 34, "question": "The long run is a period during which a firm", "options": ["sells input to purchase fixed asset", "varies all its inputs", "sources all its inputs from within", "replaces all its inputs"], "answer": "B"},
+          {"number": 35, "question": "If the quantity of rice bought decreases from 250 tonnes to 200 tonnes owing to a 2% rise in price, this shows a change in", "options": ["consumers' income", "demand", "consumers' tastes", "quantity demanded"], "answer": "D"},
+          {"number": 36, "question": "Some major problems hindering economic development in West Africa are in areas of electricity, communications, education and health. These are known as", "options": ["development projects", "infrastructural facilities", "monoculture", "superstructure"], "answer": "B"},
+          {"number": 37, "question": "When a government owns enterprises, numbers of advantages arise. Which is NOT one of such advantages?", "options": ["More capital is provided", "Pricing policy may be in interest of consumers", "Government workers may be indifferent towards public", "Infrastructures are rapidly developed"], "answer": "C"}
+        ],
+        "GOVERNMENT": [
+          {"number": 38, "question": "One of the objectives of the OAU is to ensure", "options": ["mutual assistance in suppressing domestic uprising", "Non-interference in internal affairs of member states", "constant readjustment of territorial boundaries", "unification of liberation movements in Southern Africa"], "answer": "B"},
+          {"number": 39, "question": "The process of dividing a country into electoral districts is known as", "options": ["demarcation", "delineation", "delimitation", "distribution"], "answer": "C"},
+          {"number": 40, "question": "Colonialism was successfully imposed on West Africa because", "options": ["people thought it was divinely inspired", "people believed white man to be superior", "people could not withstand technological superiority of colonial power", "people believed they were being liberated from autocratic rule"], "answer": "C"},
+          {"number": 41, "question": "The foremost nationalist leaders in pre-independent Nigeria were", "options": ["Herbert Macaulay, Nnamdi Azikiwe, Obafemi Awolowo, Shehu Shagari", "Herbert Macaulay, Nnamdi Azikiwe, Obafemi Awolowo, Ahmadu Bello", "Herbert Macaulay, Nnamdi Azikiwe, Obafemi Awolowo, Muhammadu Ribadu", "Alvan Ikoku, Samuel Akintola, Herbert Macaulay, Ahmadu Bello"], "answer": "B"},
+          {"number": 42, "question": "The international organization formed after WWII to guarantee peace and security is", "options": ["The European Common Market", "The British Commonwealth of Nations", "The League of Nations", "The United Nations Organization"], "answer": "D"},
+          {"number": 43, "question": "The United Nations charter is an instrument that", "options": ["facilitates resolution of disputes", "sets out rights and obligation of member states", "determines admission of member states", "provides for funding of member states"], "answer": "B"},
+          {"number": 44, "question": "Pressure groups harmonize different individual concerns through interest", "options": ["mobilization", "aggregation", "manipulation", "articulation"], "answer": "D"},
+          {"number": 45, "question": "Privatization and commercialization of public enterprises in Nigeria will lead to further entrenchment of", "options": ["socialism", "capitalism", "welfarism", "fascism"], "answer": "B"},
+          {"number": 46, "question": "The OAU is founded on the principle of", "options": ["settlement of disputes by armed struggles", "justifiable interference in domestic affairs", "sovereign equality of member states", "equal contribution by member states"], "answer": "C"},
+          {"number": 47, "question": "According to Marx, the correct order of societal progression is", "options": ["Capitalism, feudalism, communism, socialism", "Feudalism, socialism, capitalism, communism", "Communism, socialism, capitalism, feudalism", "Feudalism, capitalism, socialism, communism"], "answer": "D"},
+          {"number": 48, "question": "The independent National Electoral Commission has the power to prepare and maintain the register of", "options": ["political parties", "constituencies", "voters", "electoral candidates"], "answer": "C"},
+          {"number": 49, "question": "The term comprador bourgeoisie has been used by scholars to describe", "options": ["foreign businessmen in Nigeria", "foreign diplomats working in Nigeria", "Nigerian businessmen who represent foreign interests", "Nigerian contractors to foreign government"], "answer": "C"},
+          {"number": 50, "question": "One significant aspect of the legislative council of 1922 was that", "options": ["Africans were in majority", "It made laws only for southern provinces", "The colony of Lagos and protectorate of southern Nigeria were merged", "Laws governing land ownership in the north were extended to the south"], "answer": "C"}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,2111 @@
+{
+  "book": "MEDICINE, PHARMACY, ANATOMY, PHYSIOLOGY, NURSING, DENTISTRY AND SSLT",
+  "sessions": [
+    {
+      "session": "2017/2018",
+      "questions": {
+        "ENGLISH": [
+          {
+            "number": 1,
+            "question": "Chilled (sound underlined)",
+            "options": [
+              "build",
+              "child",
+              "heel",
+              "lied"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 3,
+            "question": "/æ/ (vowel sound)",
+            "options": [
+              "cart",
+              "bail",
+              "hate",
+              "eat"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 4,
+            "question": "He spoke with his heart in his mouth",
+            "options": [
+              "courageously",
+              "with such unusual cowardice",
+              "with a lot of confusion in his speech",
+              "with fright and agitation"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 5,
+            "question": "This bill has to wait as we are now insolvent",
+            "options": [
+              "overworked",
+              "bankrupt",
+              "unsettled",
+              "insoluble"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 6,
+            "question": "At the sight of the ghastly accident, the poor woman's hair stood on end",
+            "options": [
+              "the woman's hair became straight",
+              "the wind blew her hair upwards",
+              "the woman was unmoved",
+              "the woman was frightened"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 7,
+            "question": "On such an important … all the guests were expected to be at their best",
+            "options": [
+              "occasion",
+              "occasion",
+              "occasion",
+              "occasion"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 8,
+            "question": "A nursery rhyme is used to teach pupils how to spell the word",
+            "options": [
+              "hippopotamus",
+              "hippopotamus",
+              "hippopotamus",
+              "hippopotamus"
+            ],
+            "answer": "D"
+          }
+        ],
+        "MATHEMATICS": [
+          {
+            "number": 9,
+            "question": "Find the range of values of x for which 1/x > 2 is true.",
+            "options": [
+              "x < 1/2",
+              "x < 0 or x > 1/2",
+              "0 < x < 1/2",
+              "1 < x < 2"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 10,
+            "question": "If -8, m, n, 19 are in arithmetic progression, find (m, n).",
+            "options": [
+              "1, 10",
+              "2, 10",
+              "3, 13",
+              "4, 16"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 11,
+            "question": "The ages of Tosan and Isa differ by 6 and the product of their ages is 187. Write their ages in the form (x, y).",
+            "options": [
+              "(12, 9)",
+              "(23, 17)",
+              "(17, 11)",
+              "(18, 12)"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 12,
+            "question": "Three consecutive terms of a geometric progression are given as n - 2, n and n + 3. Find the common ratio.",
+            "options": [
+              "2/3",
+              "3/2",
+              "1/2",
+              "1/4"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 13,
+            "question": "Given a regular hexagon, calculate each interior angle of the hexagon.",
+            "options": [
+              "60°",
+              "30°",
+              "120°",
+              "45°"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 14,
+            "question": "Each of the base angles of an isosceles triangle is 58° and all the vertices of the triangle lie on a circle. Determine the angle which the base of the triangle subtends at the centre of the circle.",
+            "options": [
+              "128°",
+              "116°",
+              "64°",
+              "58°"
+            ],
+            "answer": "C"
+          }
+        ],
+        "CHEMISTRY": [
+          {
+            "number": 15,
+            "question": "What is the length of an arc of a circle that subtends 2½ radians at the center when the radius of the circle is 8cm?",
+            "options": [
+              "8cm",
+              "10cm",
+              "40cm",
+              "20cm"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 16,
+            "question": "The principal constituent of natural gas is",
+            "options": [
+              "methane",
+              "ethane",
+              "propane",
+              "butane"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 17,
+            "question": "One mole of a hydrocarbon contains 48g of carbon. If its vapor density is 28, the hydrocarbon is",
+            "options": [
+              "an alkane",
+              "an alkene",
+              "an alkyne",
+              "aromatic"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 18,
+            "question": "A piece of burning sulphur will continue to burn in a gas jar of oxygen to give misty fumes which are readily dissolved in water. The resulting liquid is",
+            "options": [
+              "sulphur (IV) trioxide",
+              "tetraoxosulphate (IV) acid",
+              "trioxosulphate (IV) acid",
+              "dioxosulphate (II) acid"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 19,
+            "question": "Which of the following oxides of nitrogen is unstable in air?",
+            "options": [
+              "NO₂",
+              "NO",
+              "N₂O",
+              "N₂O₅"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 20,
+            "question": "If the molar mass of X is 36g, the number of mole of X dissolved at 333K is",
+            "options": [
+              "0.2 moles",
+              "1.5 moles",
+              "3.0 moles",
+              "2.0 moles"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 21,
+            "question": "By means of filtration, one component can be obtained pure from an aqueous mixture of sodium chloride and",
+            "options": [
+              "potassium nitrate",
+              "sand",
+              "lead nitrate",
+              "sugar (glucose)"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 22,
+            "question": "For iron to rust there should be present",
+            "options": [
+              "oxygen",
+              "moisture",
+              "carbon dioxide",
+              "oxygen and moisture"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 23,
+            "question": "Deliquescent substances are used for",
+            "options": [
+              "drying",
+              "melting",
+              "welding",
+              "cooling"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 24,
+            "question": "Four elements P, Q, R and S have atomic numbers of 4, 10, 12 and 14 respectively. Which of these elements is a noble gas?",
+            "options": [
+              "P",
+              "Q",
+              "R",
+              "S"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 25,
+            "question": "The solubility of Na₃AsO₄·12H₂O is 38.9g per 100g of H₂O. What is the percentage of Na₃AsO₄ in the saturated solution? [As=75, Na=23, O=16, H=1]",
+            "options": [
+              "87.2%",
+              "38.9%",
+              "48.8%",
+              "13.7%"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 26,
+            "question": "The boiling of fat and aqueous caustic soda is referred to as",
+            "options": [
+              "acidification",
+              "hydrolysis",
+              "saponification",
+              "esterification"
+            ],
+            "answer": "C"
+          }
+        ],
+        "BIOLOGY": [
+          {
+            "number": 27,
+            "question": "The breakdown of fats and oils into simpler absorbable compounds is catalysed by the group of enzymes called",
+            "options": [
+              "Lipases",
+              "Hydrolases",
+              "Amylases",
+              "Peptidases"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 28,
+            "question": "The procaryotic cell type is characterized by a",
+            "options": [
+              "complex cytoplasm in which different regions are poorly defined",
+              "localization of different regions of the cells into tissues",
+              "collection of organelles and macromolecular complexes",
+              "simple cytoplasm with well defined regions"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 29,
+            "question": "In which of the following groups of fruits is the pericarp inseparable from the seed coat?",
+            "options": [
+              "Nut",
+              "Follicle",
+              "Capsule",
+              "Caryopsis"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 30,
+            "question": "Human beings require vitamins in their diet because vitamins",
+            "options": [
+              "contain carbohydrates and fat",
+              "prevent kwashiorkor",
+              "stimulate the alimentary canal",
+              "influence many important chemical processes in the body"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 31,
+            "question": "Which of the following is likely to encourage inbreeding in plants?",
+            "options": [
+              "Dioecious",
+              "Protandrous",
+              "Monoecious",
+              "Hermaphrodite"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 32,
+            "question": "Long neck in giraffes is used to illustrate the theory of",
+            "options": [
+              "Use and disuse",
+              "Origin of species",
+              "Origin of life",
+              "Natural selection"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 33,
+            "question": "Which of the following diseases could be exclusively associated with a river basin?",
+            "options": [
+              "Malaria",
+              "Syphilis",
+              "Onchocerciasis",
+              "Cholera"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 34,
+            "question": "The following organisms are hermaphrodites EXCEPT",
+            "options": [
+              "Snail",
+              "Taenia",
+              "Schistosoma",
+              "Earthworm"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 35,
+            "question": "Growing yam tendrils climb for support. This growth response is",
+            "options": [
+              "Thigmotropism",
+              "Geotropism",
+              "Phototropism",
+              "Hydrotropism"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 36,
+            "question": "During binary fission in lower organisms, the nucleus is known to undergo",
+            "options": [
+              "Mitosis",
+              "Meiosis",
+              "Fragmentation",
+              "Mutation"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 37,
+            "question": "Pepsin is a digestive enzyme which breaks",
+            "options": [
+              "Cellulose into glucose molecules",
+              "Carbohydrates into simple sugars",
+              "Protein into peptones",
+              "Fats into glycerol and fatty acids"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 38,
+            "question": "The mass of an atom is determined by",
+            "options": [
+              "its ionization potential",
+              "its electrochemical potential",
+              "the number of protons",
+              "the number of neutrons and protons"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 39,
+            "question": "0.499g of CuSO₄·xH₂O when heated to a constant weight gives a residue of 0.346g. The value of x is [Cu=63.5, S=32, O=16, H=1]",
+            "options": [
+              "0.5",
+              "2.0",
+              "5.0",
+              "4.0"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 40,
+            "question": "0.07g of a hydride of carbon occupies 56.0cm³ at STP when vaporized and contained 14.29% by mass of hydrogen. The formula of the hydrocarbon is (C=12, H=1)",
+            "options": [
+              "CH₄",
+              "C₂H₂",
+              "C₂H₄",
+              "C₃H₈"
+            ],
+            "answer": "A"
+          }
+        ],
+        "PHYSICS": [
+          {
+            "number": 41,
+            "question": "Which of the following statements is correct? Silvered walls of a vacuum flask are used to prevent.",
+            "options": [
+              "heat loss due to conduction",
+              "vacuum loss",
+              "heat entry into the inner flask due to convection",
+              "heat loss due to radiation"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 42,
+            "question": "The vacuum in the Thermos flask helps to reduce heat transfer by.",
+            "options": [
+              "Convection and radiation",
+              "Convection and conduction",
+              "Conduction and radiation",
+              "Radiation only"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 43,
+            "question": "The space between the double glass walls of a thermos flask is evacuated and the two surfaces facing the evacuated space are silvered. The residual source of heat loss takes place by",
+            "options": [
+              "Convection",
+              "Radiation from the surfaces",
+              "Conduction through the stopper and the glass",
+              "Conduction across the walls"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 44,
+            "question": "The melting point of a solid is given at 80°C. If 10⁵ J of heat energy is required at this temperature to melt 10g of the solid, the specific latent heat of fusion of the solid is",
+            "options": [
+              "1.00×10³ Jkg⁻¹",
+              "1.25×10⁵ Jkg⁻¹",
+              "1.00×10⁴ Jkg⁻¹",
+              "8.00×10⁸ Jkg⁻¹"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 45,
+            "question": "Heat is supplied to a test tube containing 100g of ice at its melting point. The ice melts completely in 1 min. What is the power rating of the source of heat? (Latent heat of fusion of ice = 336 Jg⁻¹)",
+            "options": [
+              "336 W",
+              "450 W",
+              "560 W",
+              "600 W"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 46,
+            "question": "A thin wire with heavy weights attached to both ends is hung over a block of ice resting on two supports. If the wire cuts through the ice block while the block remains solid behind the wire, the process is called",
+            "options": [
+              "Fusion",
+              "Sublimation",
+              "Condensation",
+              "Regelation"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 47,
+            "question": "When the volume of a given mass of gas is halved and its temperature doubled, the pressure",
+            "options": [
+              "Remains constant",
+              "Increases by a factor of 4",
+              "Increases by a factor of 3",
+              "Decreases by a factor of 4"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 48,
+            "question": "If the volume of a fixed mass of a gas is kept constant, the pressure of the gas",
+            "options": [
+              "is inversely proportional to its centigrade temperature",
+              "is inversely proportional to its absolute temperature",
+              "is directly proportional to its centigrade temperature",
+              "directly proportional to absolute temperature"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 49,
+            "question": "The tyre pressure of a car was found to be 150 cmHg in the morning at a temperature of 27°C. Hard driving in the afternoon raised the temperature of the tyres to 57°C. The tyre pressure had by the afternoon.",
+            "options": [
+              "increased by 9.38 cmHg",
+              "decreased by 15.0 cmHg",
+              "Increased by 22.50 cmHg",
+              "decreased by 22.50 cmHg"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 50,
+            "question": "The pressure of a gas when cooled at constant volume will decrease because the molecules",
+            "options": [
+              "Collide less frequently with the walls of the container",
+              "Have the same average kinetic energy",
+              "Break up into smaller molecules",
+              "Decrease in number"
+            ],
+            "answer": "A"
+          }
+        ]
+      }
+    },
+    {
+      "session": "2016/2017",
+      "questions": {
+        "ENGLISH": [
+          {
+            "number": 1,
+            "question": "Students will always blame their teachers when examination results are unfavourable …?",
+            "options": [
+              "won't they",
+              "wouldn't they",
+              "isn't it",
+              "can't they"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 2,
+            "question": "We ought to have visited the Governor …?",
+            "options": [
+              "isn't it",
+              "oughtn't we",
+              "shouldn't we",
+              "haven't we"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 3,
+            "question": "I don't think he can, …?",
+            "options": [
+              "can't he",
+              "isn't it",
+              "can he",
+              "don't I"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 4,
+            "question": "A number of teachers in secondary schools are not so well disposed to … these days, … they?",
+            "options": [
+              "teach/aren't",
+              "teaching/are",
+              "teach/do",
+              "teach/are"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 5,
+            "question": "The tourist bought",
+            "options": [
+              "a brown small Nigerian earthen pot",
+              "a small brown Nigerian earthen pot",
+              "an earthen brown small Nigerian pot",
+              "a Nigerian small brown earthen pot"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 6,
+            "question": "On his way back the boy ran into a long procession of men, women and children in",
+            "options": [
+              "white beautiful exceedingly flowing gowns",
+              "exceedingly flowing white beautiful gowns",
+              "exceedingly beautiful white flowing gowns",
+              "white flowing exceedingly beautiful gowns"
+            ],
+            "answer": "C"
+          }
+        ],
+        "MATHEMATICS": [
+          {
+            "number": 9,
+            "question": "The perimeter of a rectangular lawn is 24m. If the area of the lawn is 35m², how wide is the lawn?",
+            "options": [
+              "5m",
+              "7m",
+              "12m",
+              "14m"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 10,
+            "question": "Find the area of a regular hexagon inscribed in a circle of radius 8cm.",
+            "options": [
+              "16√3 cm²",
+              "96√3 cm²",
+              "192.3 cm²",
+              "16 cm²"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 11,
+            "question": "What is the locus of the mid-points of all chords of length 6cm within a circle of radius 5cm and with centre O?",
+            "options": [
+              "A circle of radius 4cm and with centre O",
+              "The perpendicular bisector of the chords",
+              "A straight line passing through center O",
+              "A circle of radius 6cm and with centre O"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 12,
+            "question": "Find the point (x, y) on the Euclidean plane where the curve y = 2x² - 2x + 3 has 2 as gradient.",
+            "options": [
+              "(1,3)",
+              "(2,7)",
+              "(0,3)",
+              "(3,15)"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 13,
+            "question": "Find the equation of the set of points which are equidistant from the parallel lines x = 1 and x = 7.",
+            "options": [
+              "y = 4",
+              "y = 3",
+              "x = 3",
+              "x = 4"
+            ],
+            "answer": "D"
+          }
+        ],
+        "BIOLOGY": [
+          {
+            "number": 14,
+            "question": "The blood vessel which carries blood from the alimentary canal to the liver is the",
+            "options": [
+              "Hepatic artery",
+              "Hepatic vein",
+              "Hepatic portal vein",
+              "Mesenteric artery"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 15,
+            "question": "The type of reproduction that is common to both Hydra and yeast is",
+            "options": [
+              "Grafting",
+              "Budding",
+              "Conjugation",
+              "Binary fission"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 16,
+            "question": "The functional unit of a mammalian kidney is the",
+            "options": [
+              "urethra",
+              "Malpighian capsule",
+              "glomerulus",
+              "nephron"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 17,
+            "question": "A food web is more stable than a food chain because",
+            "options": [
+              "It contains more organisms",
+              "It has greater energy source",
+              "It is not easy to destroy",
+              "Every organism has an alternative food source"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 18,
+            "question": "Oozing out of water from the leaves of plants in a humid environment is known as",
+            "options": [
+              "transpiration",
+              "osmosis",
+              "pinocytosis",
+              "guttation"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 19,
+            "question": "Which of the following pairs are the products of sucrose hydrolysis?",
+            "options": [
+              "Glucose + glucose",
+              "Fructose + fructose",
+              "Glucose + fructose",
+              "Galactose + glucose"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 20,
+            "question": "The growth of a coleoptile towards unilateral light source is due to",
+            "options": [
+              "Rapid rate of photosynthesis",
+              "Unequal distribution of auxin",
+              "The effect of geotropism",
+              "The effect of photolysis"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 21,
+            "question": "Which of these is not an enzyme?",
+            "options": [
+              "Pepsin",
+              "Gastrin",
+              "Amylase",
+              "Chymotrypsin"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 22,
+            "question": "The process by which a red blood cell placed in distilled water absorbs until it bursts and releases its contents into the surrounding is known as",
+            "options": [
+              "Osmosis",
+              "Plasmolysis",
+              "Turgidity",
+              "Haemolysis"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 23,
+            "question": "Which of the following is an example of discontinuous variation observed in man?",
+            "options": [
+              "Skin colours",
+              "Tongue rolling",
+              "Body weight",
+              "Height"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 24,
+            "question": "In the absence of oxygen, the pyruvic acid produced during glycolysis is converted to CO₂ and",
+            "options": [
+              "Water",
+              "Glycerol",
+              "Ethanol",
+              "Citric acid"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 25,
+            "question": "In the mammalian skin, melanin and keratin are contained in the",
+            "options": [
+              "Sebaceous gland",
+              "Sweat gland",
+              "Subcutaneous layer",
+              "Malpighian layer"
+            ],
+            "answer": "D"
+          }
+        ],
+        "CHEMISTRY": [
+          {
+            "number": 26,
+            "question": "50cm³ of hydrogen are sparked with 20cm³ of oxygen at 100°C and 1 atmosphere. The total volume of the residual gases is",
+            "options": [
+              "50cm³",
+              "40cm³",
+              "30cm³",
+              "70cm³"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 27,
+            "question": "What weight of sodium hydroxide is required to make 500cm³ of 0.2M solution? [Na=23, O=16, H=1]",
+            "options": [
+              "40g",
+              "20g",
+              "10g",
+              "4g"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 28,
+            "question": "Which of the following salt when dissolved in water will not give the corresponding pH value?",
+            "options": [
+              "NaHSO₄ pH<5",
+              "Na₂CO₃ pH>8",
+              "NaCl pH=7",
+              "NaHCO₃ pH<6"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 29,
+            "question": "Which of the following is used as an anti-knock in automobile engine?",
+            "options": [
+              "tetramethyl saline",
+              "lead tetraethyl",
+              "glycerol",
+              "N-heptane"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 30,
+            "question": "An element is electronegative if",
+            "options": [
+              "it has tendency to exist in gaseous form",
+              "its ions dissolve readily in water",
+              "it has tendency to lose electrons",
+              "it has tendency to gain electrons"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 31,
+            "question": "The minimum volume of oxygen required for the complete combustion of mixture of 10cm³ of CO and 15cm³ of H₂ is",
+            "options": [
+              "25.0cm³",
+              "1.25cm³",
+              "10.0cm³",
+              "5.0cm³"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 32,
+            "question": "A gas that turns a filter paper previously soaked in lead ethanoate solution black is",
+            "options": [
+              "hydrogen chloride",
+              "hydrogen sulphide",
+              "sulphur (IV) oxide",
+              "sulphur (II) oxide"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 33,
+            "question": "Which of the following ion will give white precipitate with aqueous NaOH and soluble in excess of the base?",
+            "options": [
+              "Ca²⁺",
+              "Mg²⁺",
+              "Zn²⁺",
+              "Cu²⁺"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 34,
+            "question": "In which of the following reaction does reduction take place?",
+            "options": [
+              "2O²⁻ → O₂ + 4e⁻",
+              "Fe²⁺ → Fe³⁺ + e⁻",
+              "2H⁺ + 2e⁻ → H₂",
+              "Cr → Cr²⁺ + 2e⁻"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 35,
+            "question": "Which of the following dilute solution has the lowest pH value?",
+            "options": [
+              "Calcium trioxocarbonate (IV)",
+              "Calcium trioxocarbonate (IV)",
+              "hydrochloric acid",
+              "ethanoic acid"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 36,
+            "question": "How many electrons are transferred in reducing one atom of Mn in the reaction MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂?",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "answer": "A"
+          }
+        ],
+        "PHYSICS": [
+          {
+            "number": 41,
+            "question": "The thermometric property of the thermocouple is that its",
+            "options": [
+              "e.m.f. changes with temperature",
+              "Resistance changes with temperature",
+              "Volume changes with temperature",
+              "Pressure changes with resistance"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 42,
+            "question": "The thermometric substance of an absolute thermometer is",
+            "options": [
+              "Alcohol",
+              "Mercury",
+              "Helium",
+              "Platinum"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 43,
+            "question": "The ice and steam points of a mercury-in-glass thermometer of centigrade scale and of uniform bore correspond respectively to 3cm and 19cm lengths of the mercury thread. When the length is 12cm the temperature is",
+            "options": [
+              "32°C",
+              "48°C",
+              "56°C",
+              "65°C"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 44,
+            "question": "The accurate measurement of the relative density of substance in powder or granular form can be done using a beam balance and a",
+            "options": [
+              "pipette",
+              "burette",
+              "Measuring cylinder",
+              "density bottle"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 45,
+            "question": "A heavy object is suspended from a string and lowered into water so that it is completely submerged. The object appears lighter because",
+            "options": [
+              "The density of water is less than that of the object",
+              "The pressure is low just below the water surface",
+              "It experiences an upthrust",
+              "The tension in the string neutralizes part of the weight"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 46,
+            "question": "A copper cube weighs 0.25N in air, 0.17N when completely immersed in paraffin oil and 0.15N when completely immersed in water. The ratio of upthrust in oil to upthrust in water is",
+            "options": [
+              "4:5",
+              "3:5",
+              "13:10",
+              "7:10"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 47,
+            "question": "An object of mass m and volume v is totally immersed in a liquid of density ρ. The tension of a string holding it is",
+            "options": [
+              "mg",
+              "(m + ρv)g",
+              "(m - ρv)g",
+              "ρvg"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 48,
+            "question": "If a force of 50N stretches a wire from 20m to 20.01m, what is the amount of force required to stretch the same material from 20m to 20.05m?",
+            "options": [
+              "100N",
+              "50N",
+              "250N",
+              "200N"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 49,
+            "question": "A spring of length 25cm is extended to 30cm by a load of 150N attached to one of its ends. What is the energy stored in the spring?",
+            "options": [
+              "3750J",
+              "2500J",
+              "3.75J",
+              "2.50J"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 50,
+            "question": "The energy contained in a wire when it is extended by 0.02m by a force of 500N is",
+            "options": [
+              "5J",
+              "10J",
+              "10J",
+              "10J"
+            ],
+            "answer": "A"
+          }
+        ]
+      }
+    },
+    {
+      "session": "2015/2016",
+      "questions": {
+        "ENGLISH": [
+          {
+            "number": 1,
+            "question": "The crowd in the hall is intimidating",
+            "options": [
+              "The crowd is frightening",
+              "The crowd is angry",
+              "The crowd is overwhelming",
+              "The crowd is riotous"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 3,
+            "question": "Ikorodu is not far from here, it is only an",
+            "options": [
+              "hour of driving",
+              "hour's drive",
+              "hour by driving",
+              "hour in driving"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 4,
+            "question": "Most of the time, their presence is a menace",
+            "options": [
+              "Their presence is always meaningful",
+              "Their presence is seldom a bother",
+              "Their presence is usually of great concern",
+              "their presence is frequently a threat"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 5,
+            "question": "My uncle told me, I have a large house and you are welcome to the protection it offers. My uncle told me that",
+            "options": [
+              "he had a large house, and you are welcome to the protection it offers",
+              "he have a large house, and I was welcome to the protection it offered",
+              "had a large house and he was welcomed to the protection it offers",
+              "he had a large house, and I was welcome to the protection it offered"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 6,
+            "question": "Updating the Board's brochure is an arduous task",
+            "options": [
+              "a regular",
+              "an annual",
+              "a difficult",
+              "an easy"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 7,
+            "question": "The high cost of living these days calls for a lot of frugality",
+            "options": [
+              "economy",
+              "recklessness",
+              "prudence",
+              "extravagance"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 8,
+            "question": "The party gathering was thrown into a state of euphoria after the election result was announced",
+            "options": [
+              "pleasure",
+              "confusion",
+              "sadness",
+              "excitement"
+            ],
+            "answer": "D"
+          }
+        ],
+        "MATHEMATICS": [
+          {
+            "number": 9,
+            "question": "P is a point on one side of the straight-line UV and P moves in the same direction as UV. If the straight-line ST is on the locus of P and ∠VUS = 50°, find ∠UST.",
+            "options": [
+              "310°",
+              "130°",
+              "80°",
+              "50°"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 10,
+            "question": "The bearing of bird on a tree from a hunter on the ground is N72°E. What is the bearing of the hunter from the bird?",
+            "options": [
+              "S18°W",
+              "S72°W",
+              "S72°E",
+              "S27°E"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 11,
+            "question": "Alero starts a 3km walk from P on a bearing 023°. She then walks 4km on a bearing 113° to Q. What is the bearing of Q from P?",
+            "options": [
+              "26°52'",
+              "52°8'",
+              "76°8'",
+              "90°"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 12,
+            "question": "In a class of 120 students, 18 of them scored an A grade in Mathematics. If the section representing the A grade students on a pie chart has angle Z° at the center of the circle, what is Z°?",
+            "options": [
+              "15",
+              "28",
+              "50",
+              "54"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 13,
+            "question": "Differentiate (2x + 5)² (x - 4) with respect to x.",
+            "options": [
+              "(2x+5)(6x-11)",
+              "(2x+5)(2x-13)",
+              "4(2x+5)(x-4)",
+              "4(2x+5)(4x-3)"
+            ],
+            "answer": "A"
+          }
+        ],
+        "BIOLOGY": [
+          {
+            "number": 14,
+            "question": "A sugar solution was boiled with Fehling's solution A and B and the colour remain blue. The sugar tested was",
+            "options": [
+              "glucose",
+              "maltose",
+              "fructose",
+              "sucrose"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 15,
+            "question": "A physiological adaptation of plants to the problem of excessive water loss is",
+            "options": [
+              "Reduction in the number of stomata",
+              "Reversal of the normal stomata rhythm",
+              "Possession of shallow roots",
+              "Possession of waxy cuticle"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 16,
+            "question": "A sex-linked character cannot be passed on directly from",
+            "options": [
+              "father to son",
+              "mother to daughter",
+              "mother to son",
+              "father to daughter"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 17,
+            "question": "Which of the following instruments is used to measure relative humidity?",
+            "options": [
+              "Hygrometer",
+              "Anemometer",
+              "Hydrometer",
+              "Thermometer"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 18,
+            "question": "If a farmer left his land uncultivated for five years before returning to it, he must be practicing",
+            "options": [
+              "Modern agriculture",
+              "Strip cropping",
+              "Contour ridging",
+              "The bush fallow system"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 19,
+            "question": "Which of the following is INCORRECT, the prothallus of a fern",
+            "options": [
+              "is a flattened heart shaped structure",
+              "is green because its cells contain chloroplast",
+              "is the dominant plant",
+              "bear the sexual organ"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 20,
+            "question": "The appendicular skeleton is made up of the",
+            "options": [
+              "Limbs",
+              "Skull and limbs",
+              "Phalanges",
+              "Girdles and limbs"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 21,
+            "question": "The maize grain is regarded as a fruit and not a seed because",
+            "options": [
+              "It is covered by a sheath of leaves",
+              "The Testa and fruit wall fuse after fertilization",
+              "It has both endosperm and cotyledon",
+              "It has coelorhiza and coleoptile"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 22,
+            "question": "During excretion of urea there is also a corresponding re-absorption of water into the blood stream. This reabsorption takes place in",
+            "options": [
+              "uriniferous tubules",
+              "bowman's capsule",
+              "glomerulus",
+              "Malpighian corpuscle"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 24,
+            "question": "The function of endoplasmic reticulum is",
+            "options": [
+              "protein synthesis",
+              "intercellular transport of materials",
+              "digestion and destruction of foreign bodies",
+              "production of energy from glucose"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 25,
+            "question": "Which of the following hormones is produced during fright or when agitated?",
+            "options": [
+              "Insulin",
+              "Adrenalin",
+              "Thyroxine",
+              "Pituitrin"
+            ],
+            "answer": "B"
+          }
+        ],
+        "CHEMISTRY": [
+          {
+            "number": 26,
+            "question": "The number of the valence shell on an element of atomic number 14 is",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 27,
+            "question": "In which of the following are water molecules in the most disorderly arrangement?",
+            "options": [
+              "ice at 10°C",
+              "ice at 0°C",
+              "water at 100°C",
+              "steam at 100°C"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 28,
+            "question": "A phenomenon where an element exists in different form in the same physical state is known as",
+            "options": [
+              "isomerism",
+              "amorphism",
+              "allotropy",
+              "isotopy"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 29,
+            "question": "Aluminium hydroxide is used in the dyeing industry as a",
+            "options": [
+              "dye",
+              "dispersant",
+              "salt",
+              "mordant"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 30,
+            "question": "A particle that contains 8 protons, 9 neutrons, and 7 electrons could be written as",
+            "options": [
+              "¹⁶₈O",
+              "¹⁷₈O⁺",
+              "¹⁷₉O⁺",
+              "¹⁷₈O⁺"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 31,
+            "question": "Which of the following statement is not true of carbon monoxide?",
+            "options": [
+              "it is poisonous",
+              "it readily oxidized at room temperature by air to form CO₂",
+              "it may be prepared by reducing CO₂ mixed coke heated to about 1000°C",
+              "it may be prepared by heating charcoal with a limited amount of O₂"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 32,
+            "question": "Fats and oils are",
+            "options": [
+              "addition products of long-chain fatty acids and alkali",
+              "addition products of long-chain fatty acids and glycerol",
+              "condensation products of long-chain fatty acids and glycerol",
+              "Condensation product of formaldehyde and glycerol"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 33,
+            "question": "A given quantity of gas occupies a volume of 228cm³ at a pressure of 750mmHg. What will be its volume at atmospheric pressure?",
+            "options": [
+              "200cm³",
+              "225cm³",
+              "230cm³",
+              "235cm³"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 34,
+            "question": "Fe₂O₃ + 2Al(s) → Al₂O₃ + 2Fe(s). If the heat of formation of Al₂O₃ and Fe₂O₃ are -1670kJmol⁻¹ and -822kJmol⁻¹ respectively, the enthalpy change in kJ for the reaction is",
+            "options": [
+              "+2492",
+              "+848",
+              "-848",
+              "-2492"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 35,
+            "question": "Which of the following is a neutralization reaction? Addition of",
+            "options": [
+              "nitric acid to hydrochloric acid",
+              "nitric acid to sulphuric acid",
+              "nitric acid to distilled water",
+              "nitric acid to sodium hydroxide"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 36,
+            "question": "Which of the following statement is true about carbon (IV) oxide?",
+            "options": [
+              "it supports combustion",
+              "it is strong acidic in water",
+              "it is very soluble in water",
+              "it supports the burning of magnesium to produce magnesium oxide"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 37,
+            "question": "A quantity of air was passed through a weighed amount of alkaline pyrogallol. An increase in the weight of the pyrogallol would result from the absorption of",
+            "options": [
+              "nitrogen",
+              "neon",
+              "argon",
+              "oxygen"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 38,
+            "question": "A mixture of iodine and sulphur crystal can be separated by treatment with",
+            "options": [
+              "water to filter off sulphur",
+              "carbon(IV) sulphide to filter off iodine",
+              "ethanoic acid to filter off sulphur",
+              "methanol filter off iodine"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 39,
+            "question": "A liquid that will dissolve fat is",
+            "options": [
+              "hydrochloric acid",
+              "calcium hydroxide",
+              "kerosene",
+              "water"
+            ],
+            "answer": "C"
+          }
+        ],
+        "PHYSICS": [
+          {
+            "number": 40,
+            "question": "A machine requires 1000J of work to raise a load of 500N through a vertical distance of 1.5m. Calculate the efficiency of the machine.",
+            "options": [
+              "80%",
+              "75%",
+              "50%",
+              "33%"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 41,
+            "question": "A hydraulic press has a large circular piston of radius 0.8m and a circular plunger of radius 0.2m. A force of 500N is exerted by the plunger. Find the force exerted on the piston.",
+            "options": [
+              "8000N",
+              "4000N",
+              "2000N",
+              "31N"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 42,
+            "question": "An electric water pump rated 1.5kW, lifts 200kg of water through a vertical height of 6 meters in 10 seconds. What is the efficiency of the pump? [g = 10ms⁻²; neglect air resistance]",
+            "options": [
+              "90.0%",
+              "85.0%",
+              "80.0%",
+              "65.0%"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 43,
+            "question": "A parachute attains a terminal velocity when",
+            "options": [
+              "Its density is equal to the density of air",
+              "The viscous force of the air and the thrust completely counteract its weight",
+              "It expands as a result of reduced external pressure",
+              "The viscous force of the air is equal to the sum of the weight and thrust"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 44,
+            "question": "The effect of a particle in a fluid attaining its terminal velocity is that the",
+            "options": [
+              "Buoyancy force is more than the weight of the fluid displaced",
+              "Buoyancy force is equal to the viscous retarding force",
+              "Acceleration is maximum",
+              "Weight is equal to the retarding force"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 45,
+            "question": "A planet has mass m1 and is at a distance r1 from the sun. A second planet has mass m2 = 10m1 and is at a distance of r2 = 2r1 from the sun. Determine the ratio of the gravitational force experienced by the planets.",
+            "options": [
+              "1:5",
+              "2:5",
+              "3:5",
+              "4:5"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 46,
+            "question": "The force with which an object is attracted to the earth is called its",
+            "options": [
+              "Acceleration",
+              "Mass",
+              "Gravity",
+              "Weight"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 47,
+            "question": "The earth is four times the size of the moon and the acceleration due to gravity on the earth is 80 times that on the moon. The ratio of the mass of the moon to that of the earth is",
+            "options": [
+              "1:320",
+              "1:1280",
+              "1:80",
+              "1:4"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 48,
+            "question": "A 20-toothed gear wheel drives a 60-toothed one. If the angular speed of the smaller wheel is 120 revs⁻¹, the angular speed of the larger wheel is",
+            "options": [
+              "3 revs⁻¹",
+              "40 revs⁻¹",
+              "360 revs⁻¹",
+              "2400 revs⁻¹"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 49,
+            "question": "The force required to make an object of mass m, travelling with velocity v, turn in a circle of radius r is",
+            "options": [
+              "mv²/r",
+              "mv²/v",
+              "mv/r",
+              "mv/r²"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 50,
+            "question": "A particle in circular motion performs 30 oscillations in 6 seconds. Its angular velocity is",
+            "options": [
+              "10π rad s⁻¹",
+              "5π rad s⁻¹",
+              "6 rad s⁻¹",
+              "5 rad s⁻¹"
+            ],
+            "answer": "A"
+          }
+        ]
+      }
+    },
+    {
+      "session": "2014/2015",
+      "questions": {
+        "ENGLISH": [
+          {
+            "number": 1,
+            "question": "Despite the pressure of work during the week I shall endeavor to … at your wedding",
+            "options": [
+              "put up an appearance",
+              "put up appearance",
+              "put in an appearance",
+              "put on an appearance"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 2,
+            "question": "… we can now start meaningful development",
+            "options": [
+              "Since the cold war is over",
+              "With the cold war over",
+              "The cold war over",
+              "That the cold war is over"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 3,
+            "question": "The girl that my brother introduced to us last week is pretty ill-mannered",
+            "options": [
+              "and",
+              "but also",
+              "as well as",
+              "respectable"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 4,
+            "question": "I know, nobody has seen any leopards in this area",
+            "options": [
+              "so far as",
+              "in as much as",
+              "provided",
+              "even as"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 5,
+            "question": "The boy who stole the mango was given … by an eye witness",
+            "options": [
+              "out",
+              "in",
+              "away",
+              "up"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 6,
+            "question": "The poor little kid has been down … fever these few days",
+            "options": [
+              "with",
+              "from",
+              "in",
+              "for"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 7,
+            "question": "Do not take my books out of this office unless you … my permission to do so",
+            "options": [
+              "get",
+              "have",
+              "had got",
+              "are having"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 8,
+            "question": "The train was too slow so I decided to … at the next stop",
+            "options": [
+              "get by",
+              "get bye",
+              "get off",
+              "get off"
+            ],
+            "answer": "C"
+          }
+        ],
+        "MATHEMATICS": [
+          {
+            "number": 9,
+            "question": "If dy/dx = 2x - 3 and y = 3 when x = 0, find y in terms of x.",
+            "options": [
+              "x² - 3x",
+              "x² - 3x + 3",
+              "2x² - 3x",
+              "x² - 3x - 3"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 10,
+            "question": "On a pie chart, there are four sectors of which three angles are 45°, 90° and 135°. If the smallest sector represents N28.00, how much is the largest sector?",
+            "options": [
+              "N96.00",
+              "N84.00",
+              "N48.00",
+              "N42.00"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 11,
+            "question": "A world congress of mathematicians was held in Nice in 1970 with 800 people participating. There were 300 from Europe, 200 from America, 150 from Asia, 45 from Africa and 105 from Australia. Representing the above on a Pie Chart, the angle of the sector representing the participants from Asia is.",
+            "options": [
+              "150°",
+              "67½°",
+              "67°",
+              "135°"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 12,
+            "question": "A student calculated the mean of 5 numbers as 45.3. While rechecking his working, he discovered that his total was short by 20.5. What is the correct mean of the 5 numbers?",
+            "options": [
+              "24.8",
+              "41.2",
+              "49.4",
+              "65.8"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 13,
+            "question": "7 pupils of average age 12 years leave a class of 25 pupils of average age 14 years. If 6 new pupils of average age 11 years join the class, what is the average age of the pupils now in the class?",
+            "options": [
+              "13 years",
+              "12 years 7½ months",
+              "13 years 5 months",
+              "13 years 10 months"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 14,
+            "question": "The weights of 30 new-born babies are given as follows: 6, 9, 5, 7, 6, 7, 5, 8, 9, 5, 7, 5, 8, 7, 5, 6, 5, 7, 6, 9, 9, 7, 8, 8, 7, 8, 9, 8. The mode is",
+            "options": [
+              "6",
+              "5",
+              "8",
+              "7"
+            ],
+            "answer": "D"
+          }
+        ],
+        "CHEMISTRY": [
+          {
+            "number": 15,
+            "question": "Oxygen that remains unchanged when heated in hydrogen is",
+            "options": [
+              "CuO",
+              "Fe₂O₃",
+              "PbO₂",
+              "ZnO"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 16,
+            "question": "A brand of ink containing cobalt (II), copper (III) and iron (II) ions can best be separated into its various components by",
+            "options": [
+              "fractional crystallization",
+              "fractional distillation",
+              "sublimation",
+              "chromatography"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 17,
+            "question": "Which of the following gasses dissolve in water vapour to produce acid rain during rainfall?",
+            "options": [
+              "oxygen",
+              "carbon (II)oxide",
+              "nitrogen",
+              "sulphur (IV)oxide"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 18,
+            "question": "In which of the following is the entropy change positive?",
+            "options": [
+              "H₂O(l) → H₂O(g)",
+              "Cu²⁺(aq) + Fe(s) → Fe²⁺(aq) + Cu(s)",
+              "N₂(g) + 3H₂(g) → 2NH₃(g)",
+              "2HCl(s) → H₂(g) + Cl₂(g)"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 19,
+            "question": "A molar solution of caustic soda is prepared by dissolving",
+            "options": [
+              "40g of NaOH in 100g of water",
+              "40g of NaOH in 1000g of water",
+              "20g of NaOH in 500g of water",
+              "20g of NaOH in 1000g of water"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 20,
+            "question": "The stability of ionic solid is generally due to the",
+            "options": [
+              "negative electron affinity of most atoms",
+              "crystal lattice forces",
+              "electron pair sharing",
+              "positive ionization potentials"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 21,
+            "question": "The gas responsible for the most fatal explosions in coal mines is",
+            "options": [
+              "butane",
+              "ethane",
+              "ethene",
+              "methane"
+            ],
+            "answer": "D"
+          }
+        ],
+        "PHYSICS": [
+          {
+            "number": 27,
+            "question": "A piece of stone attached to one end of a string is whirled round in a horizontal circle and the string suddenly cuts. The stone will fly off in a direction",
+            "options": [
+              "perpendicular to the circular path",
+              "parallel to the circular path",
+              "Tangential to the circular path",
+              "towards the centre of the circle"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 28,
+            "question": "If the total force acting on a particle is zero, the linear momentum will",
+            "options": [
+              "increase then decrease",
+              "be constant",
+              "increase",
+              "decrease"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 29,
+            "question": "A body weighing 80N stands in an elevator that is about to move. The force exerted by the floor on the body as the elevator moves upwards with an acceleration of 5ms⁻² is",
+            "options": [
+              "160N",
+              "120N",
+              "80N",
+              "40N"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 30,
+            "question": "A shooter wants to fire a bullet in such a way that its horizontal range is equal to three times its maximum height. At what angle should he fire the bullet to achieve this?",
+            "options": [
+              "53°",
+              "68°",
+              "30°",
+              "45°"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 31,
+            "question": "A rocket burns 0.01kg of fuel each second and ejects it as a gas with a velocity of 5000m/s. What force does the gas exert on the rocket?",
+            "options": [
+              "500,000N",
+              "500N",
+              "50N",
+              "5,000N"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 32,
+            "question": "A body of mass 4 kg resting on a smooth horizontal plane is simultaneously acted upon by two perpendicular forces 6 N and 8 N. Calculate the acceleration of the motion.",
+            "options": [
+              "2.5 ms⁻²",
+              "3.0 ms⁻²",
+              "4.0 ms⁻²",
+              "4.5 ms⁻²"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 33,
+            "question": "A man walks 8km north and then 5km in a direction 60° east of north. Find the distance from his starting point.",
+            "options": [
+              "11.36km",
+              "12.36km",
+              "13.00km",
+              "14.36km"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 34,
+            "question": "A stream is flowing at 0.75ms⁻¹ and a boat heading perpendicular for the stream landed at the opposite bank at an angle 30°. Calculate the velocity of the boat.",
+            "options": [
+              "0.65ms⁻¹",
+              "0.86ms⁻¹",
+              "1.00ms⁻¹",
+              "1.50ms⁻¹"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 35,
+            "question": "To determine the weight of an object you could",
+            "options": [
+              "use a beam balance",
+              "use a spring balance",
+              "find the force necessary to give it a certain acceleration",
+              "use any of these methods"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 36,
+            "question": "One of the following readings represents the measurement of the length of a metal rod using vernier callipers. Taking the reading accuracy into consideration, the most likely one is",
+            "options": [
+              "5.16cm",
+              "5.165cm",
+              "5.0cm",
+              "5.160cm"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 37,
+            "question": "Which of the following physical quantities is NOT a vector?",
+            "options": [
+              "Velocity",
+              "Work",
+              "Force",
+              "Electric field intensity"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 38,
+            "question": "Which of the following is a vector?",
+            "options": [
+              "Electric charge",
+              "Electric field",
+              "Electric potential difference",
+              "Electric capacitance"
+            ],
+            "answer": "B"
+          }
+        ],
+        "BIOLOGY": [
+          {
+            "number": 39,
+            "question": "The first four children of a couple were all girls. The probability that the fifth will also be a girl is",
+            "options": [
+              "1/5",
+              "1/4",
+              "1/3",
+              "1/2"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 40,
+            "question": "In the tapeworm, the suckers on the scolex are used for",
+            "options": [
+              "Sucking the blood of the host",
+              "Holding fast to the host",
+              "Reproduction",
+              "Locomotion"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 41,
+            "question": "Which of the following constitutes pollution?",
+            "options": [
+              "Droppings from birds",
+              "Loud disco music",
+              "A pack of cigarettes",
+              "Refuse in an incinerator"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 42,
+            "question": "Organisms in an ecosystem are usually grouped according to their tropic level as",
+            "options": [
+              "Carnivores and epiphytes",
+              "Consumers and parasites",
+              "Producers and consumers",
+              "Producers and saprophytes"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 43,
+            "question": "A dry dehiscent fruit which breaks up into one seeded part is a",
+            "options": [
+              "Schizocarp",
+              "Capsule",
+              "Follicle",
+              "Legume"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 44,
+            "question": "In Spirogyra, the pyrenoid",
+            "options": [
+              "Excrete waste products",
+              "Is suspended by cytoplasmic strands",
+              "Is mainly used for respiration",
+              "Usually contains starch"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 45,
+            "question": "The mineral nutrient that is most bound to the soil is",
+            "options": [
+              "Phosphorus",
+              "Calcium",
+              "Iron",
+              "Potassium"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 46,
+            "question": "In which of the following does external fertilization take place?",
+            "options": [
+              "Toad",
+              "lizard",
+              "Bird",
+              "Cockroach"
+            ],
+            "answer": "A"
+          },
+          {
+            "number": 47,
+            "question": "The region that controls most of the unconscious processes of a mammalian body is the",
+            "options": [
+              "Cerebellum",
+              "Cerebrum",
+              "Spinal cord",
+              "Medulla oblongata"
+            ],
+            "answer": "D"
+          },
+          {
+            "number": 48,
+            "question": "Which of the following is not a function of liver",
+            "options": [
+              "regulation of blood sugar",
+              "excretion of urea",
+              "formation of bile",
+              "breakdown of excess amino acids"
+            ],
+            "answer": "B"
+          },
+          {
+            "number": 49,
+            "question": "The joint between the atlas and axis vertebrae allows for",
+            "options": [
+              "Rotatory movements only",
+              "Up and down or nodding movements only",
+              "Rotatory and nodding movements",
+              "Slight movement"
+            ],
+            "answer": "C"
+          },
+          {
+            "number": 50,
+            "question": "Which vitamin plays an important role in blood clotting?",
+            "options": [
+              "vitamin A",
+              "Vitamin K",
+              "vitamin B12",
+              "vitamin C"
+            ],
+            "answer": "B"
+          }
+        ]
+      }
+    }
+  ]
+}
