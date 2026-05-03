@@ -9,6 +9,7 @@ import { Results } from "./components/Results";
 import { Contact } from "./components/Contact";
 import { TestWarning } from "./components/TestWarning";
 import { ExamReview } from "./components/ExamReview";
+import { ResetPassword } from "./components/ResetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     Component: Login,
+  },
+  {
+    path: "/reset-password",
+    Component: ResetPassword,
   },
   {
     path: "/dashboard",
