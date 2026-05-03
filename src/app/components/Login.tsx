@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-type Mode = 'login' | 'signup' | 'forgot';
+type Mode = 'login' | 'signup';
 
 export function Login() {
   const location = useLocation();
