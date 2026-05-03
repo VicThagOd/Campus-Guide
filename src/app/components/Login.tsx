@@ -8,7 +8,7 @@ type Mode = 'login' | 'signup';
 export function Login() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { login, signup, resetPasswordForEmail } = useAuth();
+  const { login, signup } = useAuth();
 
   const [mode, setMode] = useState<Mode>(location.state?.isSignup ? 'signup' : 'login');
   const [email, setEmail] = useState('');
@@ -50,14 +50,6 @@ export function Login() {
     const normalizedEmail = email.trim().toLowerCase();
 
     try {
-      if (mode === 'forgot') {
-        await resetPasswordForEmail(normalizedEmail);
-        setInfo(`Password reset link sent to ${normalizedEmail}. Check your inbox and follow the link to reset your password.`);
-        setEmail('');
-        setIsLoading(false);
-        return;
-      }
-
       if (mode === 'signup') {
         const passwordError = validateSignupPassword(password);
         if (passwordError) {
@@ -136,29 +128,17 @@ export function Login() {
     setPassword('');
   };
 
-  const headingText = {
-    login: 'Welcome back',
-    signup: 'Create your account',
-    forgot: 'Reset your password',
-  }[mode];
-
-  const submitLabel = {
-    login: 'Log In',
-    signup: 'Sign Up',
-    forgot: 'Send Reset Link',
-  }[mode];
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
       <div className="w-full max-w-md">
         <div className="mb-6">
           <button
-            onClick={() => mode === 'forgot' ? switchMode('login') : navigate('/')}
+            onClick={() => navigate('/')}
             className="flex items-center gap-2 rounded-lg px-4 py-2 transition-all hover:opacity-90"
             style={{ backgroundColor: '#6b7280', color: '#FFFFFF', fontWeight: 500 }}
           >
             <ArrowLeft size={16} />
-            {mode === 'forgot' ? 'Back to Login' : 'Back to Home'}
+            Back to Home
           </button>
         </div>
 
@@ -166,25 +146,15 @@ export function Login() {
           <h1 style={{ fontSize: '1.75rem', fontWeight: 600, color: '#2F4EA2', marginBottom: '0.5rem' }}>
             Campus Guide - Post UTME
           </h1>
-          <p style={{ color: '#000000', opacity: 0.6 }}>{headingText}</p>
+          <p style={{ color: '#000000', opacity: 0.6 }}>
+            {mode === 'signup' ? 'Create your account' : 'Welcome back'}
+          </p>
         </div>
 
         <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-lg">
           {error && (
             <div className="mb-4 rounded bg-red-100 p-3 text-red-700 text-sm">
               {error}
-              {error.toLowerCase().includes('invalid login credentials') && (
-                <p className="mt-2 text-xs text-red-700/80">
-                  Verify your email/password spelling. If you forgot your password,{' '}
-                  <button
-                    type="button"
-                    onClick={() => switchMode('forgot')}
-                    className="underline font-medium"
-                  >
-                    reset it here.
-                  </button>
-                </p>
-              )}
             </div>
           )}
 
@@ -212,27 +182,6 @@ export function Login() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-
-            {/* FORGOT PASSWORD — just email */}
-            {mode === 'forgot' && (
-              <div>
-                <p className="mb-4 text-sm" style={{ color: '#000000', opacity: 0.7 }}>
-                  Enter the email address linked to your account and we'll send you a password reset link.
-                </p>
-                <label htmlFor="email" className="mb-2 block text-black">Email Address</label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-            )}
-
-            {/* SIGNUP FIELDS */}
             {mode === 'signup' && (
               <>
                 <div>
@@ -291,59 +240,42 @@ export function Login() {
               </>
             )}
 
-            {/* EMAIL + PASSWORD for login/signup */}
-            {mode !== 'forgot' && (
-              <>
-                <div>
-                  <label htmlFor="email" className="mb-2 block text-black">Email Address</label>
-                  <input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter your email"
-                    autoComplete="email"
-                    required
-                  />
-                </div>
+            <div>
+              <label htmlFor="email" className="mb-2 block text-black">Email Address</label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your email"
+                autoComplete="email"
+                required
+              />
+            </div>
 
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <label htmlFor="password" className="text-black">Password</label>
-                    {mode === 'login' && (
-                      <button
-                        type="button"
-                        onClick={() => switchMode('forgot')}
-                        className="text-sm hover:underline"
-                        style={{ color: '#2F4EA2' }}
-                      >
-                        Forgot password?
-                      </button>
-                    )}
-                  </div>
-                  <div className="relative">
-                    <input
-                      id="password"
-                      type={showPassword ? 'text' : 'password'}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-12 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter your password"
-                      autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((prev) => !prev)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-600"
-                    >
-                      {showPassword ? 'Hide' : 'Show'}
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
+            <div>
+              <label htmlFor="password" className="mb-2 block text-black">Password</label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-12 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your password"
+                  autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-600"
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+              </div>
+            </div>
 
             {mode === 'signup' && (
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-700">
@@ -364,7 +296,7 @@ export function Login() {
               className="w-full rounded-lg py-3 font-medium text-white transition-all hover:opacity-90 disabled:opacity-50"
               style={{ backgroundColor: '#2F4EA2' }}
             >
-              {isLoading ? 'Please wait...' : submitLabel}
+              {isLoading ? 'Please wait...' : mode === 'signup' ? 'Sign Up' : 'Log In'}
             </button>
 
             {mode === 'signup' && !signupPasswordValid && (
@@ -374,9 +306,8 @@ export function Login() {
             )}
           </form>
 
-          {/* BOTTOM LINKS */}
-          <div className="mt-6 flex flex-col items-center gap-2 text-center">
-            {mode === 'login' && (
+          <div className="mt-6 text-center">
+            {mode === 'login' ? (
               <button
                 onClick={() => switchMode('signup')}
                 className="font-medium hover:underline"
@@ -384,23 +315,13 @@ export function Login() {
               >
                 Don't have an account? Sign up
               </button>
-            )}
-            {mode === 'signup' && (
+            ) : (
               <button
                 onClick={() => switchMode('login')}
                 className="font-medium hover:underline"
                 style={{ color: '#2F4EA2' }}
               >
                 Already have an account? Log in
-              </button>
-            )}
-            {mode === 'forgot' && (
-              <button
-                onClick={() => switchMode('login')}
-                className="font-medium hover:underline"
-                style={{ color: '#2F4EA2' }}
-              >
-                Remembered it? Log in
               </button>
             )}
           </div>
