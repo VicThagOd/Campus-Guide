@@ -19,9 +19,9 @@ import { createPastQuestionsDownloadUrl, triggerBrowserDownload } from "../lib/p
 type PaymentType = "pdf" | "cbt" | null;
 
 const BANK_DETAILS = {
-  bankName: "Zenith Bank",
-  accountNumber: "22712349330",
-  accountName: "Utonro Owaji Eric Igbifa",
+  bankName: "Wema Bank",
+  accountNumber: "7824198583",
+  accountName: "Campus Guide",
 };
 
 export function Dashboard() {
