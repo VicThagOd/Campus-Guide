@@ -1,4 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ResetPassword } from './components/ResetPassword';
+
+// inside your routes:
+<Route path="/reset-password" element={<ResetPassword />} />import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { Login } from './app/components/Login';
 import { Dashboard } from './components/Dashboard';
