@@ -236,6 +236,16 @@ export function Login() {
                     <option value="Social Sciences">Social Sciences</option>
                     <option value="Management Sciences">Management Sciences</option>
                   </select>
+
+                  {course && (
+                    <div className="mt-2 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2">
+                      <span className="mt-0.5 text-amber-500">⚠️</span>
+                      <p className="text-sm text-amber-700">
+                        Choose carefully — your course/faculty determines the CBT questions and PDF study materials you'll receive.{' '}
+                        <span className="font-semibold">This cannot be changed after signup.</span>
+                      </p>
+                    </div>
+                  )}
                 </div>
               </>
             )}
