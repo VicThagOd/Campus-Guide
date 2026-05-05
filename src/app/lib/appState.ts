@@ -1,7 +1,8 @@
 import type { SubjectName } from "../data/mockQuestions";
+import { supabase } from "../../lib/supabase"; // <-- Added missing import
 
 export interface SubjectPerformance {
-  subject: SubjectName | string; // Allow any subject string, not just predefined ones
+  subject: SubjectName | string;
   correct: number;
   total: number;
   score: number;
@@ -22,12 +23,12 @@ export interface ExamReviewQuestion {
   subject: string;
   question: string;
   options: string[];
-  correctAnswer: string; // A/B/C/D
+  correctAnswer: string;
 }
 
 export interface ExamReviewPayload {
   questions: ExamReviewQuestion[];
-  selectedAnswers: string[]; // A/B/C/D or ""
+  selectedAnswers: string[];
 }
 
 export interface TestResultRecord {
@@ -77,17 +78,11 @@ function questionHistoryKey(userId?: string) {
 }
 
 export function getQuestionHistory(userId?: string): string[] {
-  if (typeof window === "undefined") {
-    return [];
-  }
-
+  if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(questionHistoryKey(userId));
     const parsed = raw ? JSON.parse(raw) : [];
-    if (!Array.isArray(parsed)) {
-      return [];
-    }
-
+    if (!Array.isArray(parsed)) return [];
     return parsed.filter((id) => typeof id === "string");
   } catch {
     return [];
@@ -95,12 +90,11 @@ export function getQuestionHistory(userId?: string): string[] {
 }
 
 export function addQuestionHistory(questionIds: string[], userId?: string) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
+  if (typeof window === "undefined") return;
   const previous = getQuestionHistory(userId);
-  const merged = [...questionIds, ...previous].filter((id, index, self) => self.indexOf(id) === index);
+  const merged = [...questionIds, ...previous].filter(
+    (id, index, self) => self.indexOf(id) === index
+  );
   const nextHistory = merged.slice(0, MAX_QUESTION_HISTORY);
   window.localStorage.setItem(questionHistoryKey(userId), JSON.stringify(nextHistory));
 }
@@ -111,7 +105,8 @@ const defaultReviews: PublishedReview[] = [
     name: "Chioma Okafor",
     course: "Engineering",
     rating: 5,
-    review: "This platform helped me prepare effectively for my UNIPORT Post UTME. The past questions were accurate and the mock tests were just like the real exam!",
+    review:
+      "This platform helped me prepare effectively for my UNIPORT Post UTME. The past questions were accurate and the mock tests were just like the real exam!",
     createdAt: "2026-04-20T10:00:00.000Z",
   },
   {
@@ -119,7 +114,8 @@ const defaultReviews: PublishedReview[] = [
     name: "Emmanuel Akinlade",
     course: "Medicine",
     rating: 5,
-    review: "Excellent resource! The practice tests boosted my confidence and I scored 85% in my Post UTME. Highly recommended for serious students.",
+    review:
+      "Excellent resource! The practice tests boosted my confidence and I scored 85% in my Post UTME. Highly recommended for serious students.",
     createdAt: "2026-04-19T10:00:00.000Z",
   },
   {
@@ -127,7 +123,8 @@ const defaultReviews: PublishedReview[] = [
     name: "Blessing Chukwu",
     course: "Law",
     rating: 4,
-    review: "Very helpful platform. The PDF materials are comprehensive and the test interface is user-friendly. Worth every naira!",
+    review:
+      "Very helpful platform. The PDF materials are comprehensive and the test interface is user-friendly. Worth every naira!",
     createdAt: "2026-04-18T10:00:00.000Z",
   },
   {
@@ -135,7 +132,8 @@ const defaultReviews: PublishedReview[] = [
     name: "David Okoro",
     course: "Business Admin",
     rating: 5,
-    review: "I passed my RSU Post UTME with flying colors thanks to Campus Guide. The subject analysis helped me focus on my weak areas.",
+    review:
+      "I passed my RSU Post UTME with flying colors thanks to Campus Guide. The subject analysis helped me focus on my weak areas.",
     createdAt: "2026-04-17T10:00:00.000Z",
   },
 ];
@@ -150,36 +148,35 @@ const initialState: AppState = {
 };
 
 export function getAppState(userId?: string): AppState {
-  if (typeof window === "undefined") {
-    return initialState;
-  }
-
+  if (typeof window === "undefined") return initialState;
   const raw = window.localStorage.getItem(storageKey(userId));
-  if (!raw) {
-    return initialState;
-  }
-
+  if (!raw) return initialState;
   try {
     const parsed = JSON.parse(raw) as Partial<AppState>;
     return {
       ...initialState,
       ...parsed,
-      reviews: Array.isArray(parsed.reviews) && parsed.reviews.length > 0 ? parsed.reviews : defaultReviews,
+      reviews:
+        Array.isArray(parsed.reviews) && parsed.reviews.length > 0
+          ? parsed.reviews
+          : defaultReviews,
       results: Array.isArray(parsed.results) ? parsed.results : [],
-      cbtExpiresAt: typeof parsed.cbtExpiresAt === "string" ? parsed.cbtExpiresAt : null,
+      cbtExpiresAt:
+        typeof parsed.cbtExpiresAt === "string" ? parsed.cbtExpiresAt : null,
     };
   } catch {
     return initialState;
   }
 }
 
-export function setAppState(updater: (state: AppState) => AppState, userId?: string): AppState {
+export function setAppState(
+  updater: (state: AppState) => AppState,
+  userId?: string
+): AppState {
   const nextState = updater(getAppState(userId));
-
   if (typeof window !== "undefined") {
     window.localStorage.setItem(storageKey(userId), JSON.stringify(nextState));
   }
-
   return nextState;
 }
 
@@ -188,16 +185,16 @@ export function getFreeTrialsRemaining(state: AppState) {
 }
 
 export function isCbtExpired(state: AppState) {
-  if (!state.cbtExpiresAt) {
-    return false;
-  }
-
+  if (!state.cbtExpiresAt) return false;
   const expiresAt = new Date(state.cbtExpiresAt).getTime();
   return Date.now() > expiresAt;
 }
 
 export function canStartFreeLiveTest(state: AppState) {
-  return (state.liveTestAccess && !isCbtExpired(state)) || getFreeTrialsRemaining(state) > 0;
+  return (
+    (state.liveTestAccess && !isCbtExpired(state)) ||
+    getFreeTrialsRemaining(state) > 0
+  );
 }
 
 export function startLiveTestSession(userId?: string) {
@@ -206,13 +203,12 @@ export function startLiveTestSession(userId?: string) {
       if (state.liveTestAccess || state.freeTrialsUsed >= FREE_TRIAL_LIMIT) {
         return state;
       }
-
       return {
         ...state,
         freeTrialsUsed: state.freeTrialsUsed + 1,
       };
     },
-    userId,
+    userId
   );
 }
 
@@ -222,20 +218,24 @@ export function unlockPdfAccess(userId?: string) {
       ...state,
       pdfAccess: true,
     }),
-    userId,
+    userId
   );
 }
 
-export function unlockLiveTestAccess(userId?: string, expiresAt: string | null = null) {
+export function unlockLiveTestAccess(
+  userId?: string,
+  expiresAt: string | null = null
+) {
   return setAppState(
     (state) => ({
       ...state,
       liveTestAccess: true,
       cbtExpiresAt: expiresAt,
     }),
-    userId,
+    userId
   );
 }
+
 export async function saveReviewToSupabase(review: {
   name: string;
   course: string;
@@ -246,38 +246,41 @@ export async function saveReviewToSupabase(review: {
   if (error) throw new Error(error.message);
 }
 
-
 export function saveResult(result: TestResultRecord, userId?: string) {
   return setAppState(
     (state) => ({
       ...state,
       results: [result, ...state.results].slice(0, 12),
     }),
-    userId,
+    userId
   );
 }
 
 export function getWeakSubjects(results: TestResultRecord[]) {
-  if (results.length === 0) {
-    return [];
-  }
-
-  const aggregate = new Map<SubjectName, { correct: number; total: number }>();
-
+  if (results.length === 0) return [];
+  const aggregate = new Map<
+    SubjectName,
+    { correct: number; total: number }
+  >();
   for (const result of results) {
     for (const subject of result.subjectBreakdown) {
-      const current = aggregate.get(subject.subject) ?? { correct: 0, total: 0 };
+      const current = aggregate.get(subject.subject) ?? {
+        correct: 0,
+        total: 0,
+      };
       aggregate.set(subject.subject, {
         correct: current.correct + subject.correct,
         total: current.total + subject.total,
       });
     }
   }
-
   return Array.from(aggregate.entries())
     .map(([subject, values]) => ({
       subject,
-      score: values.total === 0 ? 0 : Math.round((values.correct / values.total) * 100),
+      score:
+        values.total === 0
+          ? 0
+          : Math.round((values.correct / values.total) * 100),
     }))
     .sort((a, b) => a.score - b.score)
     .filter((item) => item.score < 70);
