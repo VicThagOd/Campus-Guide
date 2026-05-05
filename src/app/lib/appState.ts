@@ -236,23 +236,16 @@ export function unlockLiveTestAccess(userId?: string, expiresAt: string | null =
     userId,
   );
 }
-
-export function saveReview(review: Omit<PublishedReview, "id" | "createdAt">, userId?: string) {
-  return setAppState(
-    (state) => ({
-      ...state,
-      reviews: [
-        {
-          ...review,
-          id: `review-${Date.now()}`,
-          createdAt: new Date().toISOString(),
-        },
-        ...state.reviews,
-      ],
-    }),
-    userId,
-  );
+export async function saveReviewToSupabase(review: {
+  name: string;
+  course: string;
+  rating: number;
+  review: string;
+}) {
+  const { error } = await supabase.from("reviews").insert([review]);
+  if (error) throw new Error(error.message);
 }
+
 
 export function saveResult(result: TestResultRecord, userId?: string) {
   return setAppState(
