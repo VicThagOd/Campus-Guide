@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BarChart3, CheckCircle2, FileText, Menu, Star, Target, X } from "lucide-react";
-import { PublishedReview, getAppState, testConfig } from "../lib/appState";
 import { SEO } from "./SEO";
 import { supabase } from "../lib/supabase";
 
