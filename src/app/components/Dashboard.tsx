@@ -340,6 +340,26 @@ function DashboardCard({
   );
 }
 
+const handleDownloadPDF = async () => {
+  if (!pdfAccess) {
+    setActivePayment("pdf");
+    return;
+  }
+
+  try {
+    setPdfDownloading(true);
+    const { url, filename } = await createPastQuestionsDownloadUrl({ course });
+    console.log("Download URL:", url); // <-- add this
+    console.log("Filename:", filename); // <-- and this
+    triggerBrowserDownload(url, filename);
+  } catch (err: any) {
+    const message = err?.message || "Could not download your PDF. Please try again.";
+    alert(message);
+  } finally {
+    setPdfDownloading(false);
+  }
+};
+
 function ActivityItem({ subject, score, date, meta }: { subject: string; score: number; date: string; meta: string }) {
   return (
     <div className="flex items-center justify-between border-b border-gray-200 py-3 last:border-0">
