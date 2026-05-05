@@ -106,7 +106,24 @@ export function Dashboard() {
   };
 
   const handleReviewSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefaulconst handleReviewSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  if (!userId) return;
+
+  try {
+    await saveReviewToSupabase({
+      name: username,
+      course,
+      rating: reviewRating,
+      review: reviewText,
+    });
+    setReviewText("");
+    setReviewRating(5);
+    alert("Thank you. Your review has been published on the landing page.");
+  } catch (err: any) {
+    alert("Could not publish review. Please try again.");
+  }
+};t();
     if (!userId) return;
 
     const nextState = saveReview({ name: username, course, rating: reviewRating, review: reviewText }, userId);
