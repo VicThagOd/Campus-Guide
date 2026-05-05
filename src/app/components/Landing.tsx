@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BarChart3, CheckCircle2, FileText, Menu, Star, Target, X } from "lucide-react";
 import { PublishedReview, getAppState, testConfig } from "../lib/appState";
 import { SEO } from "./SEO";
+import { supabase } from "../lib/supabase";
 
 function CampusGuideLogo({ size = 40, className = "" }: { size?: number; className?: string }) {
   return (
@@ -21,10 +22,15 @@ export function Landing() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [reviews, setReviews] = useState<PublishedReview[]>([]);
 
-  useEffect(() => {
-    setReviews(getAppState().reviews);
-  }, []);
-
+useEffect(() => {
+  supabase
+    .from("reviews")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .then(({ data }) => {
+      if (data) setReviews(data);
+    });
+}, []);
   return (
      <div className="min-h-screen bg-white">
     <SEO
