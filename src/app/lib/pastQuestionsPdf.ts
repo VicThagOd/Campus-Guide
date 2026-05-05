@@ -59,19 +59,22 @@ export async function createPastQuestionsDownloadUrl(params: {
 }
 
 export function triggerBrowserDownload(url: string, filename: string): void {
-  // Mobile Safari/Chrome often ignore the `download` attribute for cross-origin URLs.
-  // We try the download flow first, then fall back to opening the file.
-  try {
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  } catch {
-    window.open(url, "_blank", "noopener,noreferrer");
-  }
+  // Fetch the file as a blob first, then trigger download
+  // This works for cross-origin URLs (like Supabase signed URLs)
+  fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const blobUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(blobUrl);
+    })
+    .catch(() => {
+      // Fallback: just open in new tab
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
 }
-
