@@ -105,32 +105,19 @@ export function Dashboard() {
     }
   };
 
-  const handleReviewSubmit = async (event: FormEvent<HTMLFormElement>) => {
+ const handleReviewSubmit = async (event: FormEvent<HTMLFormElement>) => {
   event.preventDefault();
   if (!userId) return;
-  // ... rest of the function
-  try {
-    await saveReviewToSupabase({
-      name: username,
-      course,
-      rating: reviewRating,
-      review: reviewText,
-    });
-    setReviewText("");
-    setReviewRating(5);
-    alert("Thank you. Your review has been published on the landing page.");
-  } catch (err: any) {
-    alert("Could not publish review. Please try again.");
-  }
-};t();
-    if (!userId) return;
 
-    const nextState = saveReview({ name: username, course, rating: reviewRating, review: reviewText }, userId);
-    setAppState(nextState);
-    setReviewText("");
-    setReviewRating(5);
-    alert("Thank you. Your review has been published on the landing page.");
-  };
+  const nextState = saveReview(
+    { name: username, course, rating: reviewRating, review: reviewText },
+    userId
+  );
+  setAppState(nextState);
+  setReviewText("");
+  setReviewRating(5);
+  alert("Thank you. Your review has been published on the landing page.");
+};
 
   const lastScoreDescription = lastResult
     ? `${lastResult.score}% (${lastResult.pointsEarned}/${lastResult.pointsPossible} points)`
