@@ -105,11 +105,10 @@ export function Dashboard() {
     }
   };
 
-  const handleReviewSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefaulconst handleReviewSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleReviewSubmit = async (event: FormEvent<HTMLFormElement>) => {
   event.preventDefault();
   if (!userId) return;
-
+  // ... rest of the function
   try {
     await saveReviewToSupabase({
       name: username,
