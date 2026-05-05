@@ -9,7 +9,7 @@ import {
   getAppState,
   getFreeTrialsRemaining,
   getWeakSubjects,
-  saveReview,
+  saveReviewToSupabase, // corrected import
   setAppState as setStoredAppState,
   testConfig,
 } from "../lib/appState";
@@ -44,7 +44,6 @@ export function Dashboard() {
   const [reviewRating, setReviewRating] = useState(5);
   const [pdfDownloading, setPdfDownloading] = useState(false);
 
-  // Load access flags from Supabase on mount
   useEffect(() => {
     if (!userId) return;
     setAppState(getAppState(userId));
@@ -69,7 +68,6 @@ export function Dashboard() {
       setActivePayment("pdf");
       return;
     }
-
     try {
       setPdfDownloading(true);
       const { url, filename } = await createPastQuestionsDownloadUrl({ course });
@@ -85,18 +83,14 @@ export function Dashboard() {
   const handleStartLiveTest = () => {
     if (!userId) return;
     const currentState = getAppState(userId);
-
     if (!cbtActive && !canStartFreeLiveTest(currentState)) {
       setActivePayment("cbt");
       return;
     }
-
     setAppState(currentState);
     navigate("/test-warning");
   };
 
-  // Called when admin approves and access is granted via Supabase
-  // Re-fetch access from Supabase to reflect latest state
   const handleAccessGranted = async (_expiresAt: string | null) => {
     setActivePayment(null);
     if (userId) {
@@ -105,19 +99,23 @@ export function Dashboard() {
     }
   };
 
- const handleReviewSubmit = async (event: FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  if (!userId) return;
-
-  const nextState = saveReview(
-    { name: username, course, rating: reviewRating, review: reviewText },
-    userId
-  );
-  setAppState(nextState);
-  setReviewText("");
-  setReviewRating(5);
-  alert("Thank you. Your review has been published on the landing page.");
-};
+  const handleReviewSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!userId) return;
+    try {
+      await saveReviewToSupabase({
+        name: username,
+        course,
+        rating: reviewRating,
+        review: reviewText,
+      });
+      setReviewText("");
+      setReviewRating(5);
+      alert("Thank you. Your review has been published on the landing page.");
+    } catch (err: any) {
+      alert(err?.message || "Could not publish review. Please try again.");
+    }
+  };
 
   const lastScoreDescription = lastResult
     ? `${lastResult.score}% (${lastResult.pointsEarned}/${lastResult.pointsPossible} points)`
@@ -342,26 +340,6 @@ function DashboardCard({
     </div>
   );
 }
-
-const handleDownloadPDF = async () => {
-  if (!pdfAccess) {
-    setActivePayment("pdf");
-    return;
-  }
-
-  try {
-    setPdfDownloading(true);
-    const { url, filename } = await createPastQuestionsDownloadUrl({ course });
-    console.log("Download URL:", url); // <-- add this
-    console.log("Filename:", filename); // <-- and this
-    triggerBrowserDownload(url, filename);
-  } catch (err: any) {
-    const message = err?.message || "Could not download your PDF. Please try again.";
-    alert(message);
-  } finally {
-    setPdfDownloading(false);
-  }
-};
 
 function ActivityItem({ subject, score, date, meta }: { subject: string; score: number; date: string; meta: string }) {
   return (
