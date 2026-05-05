@@ -1,11 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Mail, Phone, MapPin, MessageCircle, Facebook, Music, ArrowLeft } from "lucide-react";
 import { SiFacebook, SiTiktok, SiWhatsapp } from "react-icons/si";
+import { SEO } from "./SEO";
+
 
 export function Contact() {
   const navigate = useNavigate();
-  return (
-    <div className="min-h-screen bg-white">
+ return (
+  <div className="min-h-screen bg-white">
+    <SEO
+      title="Contact Us"
+      description="Reach the Campus Guide team via email, phone, WhatsApp, Facebook or TikTok. We're here to help you prepare for your UNIPORT Post UTME."
+      canonical="https://campusguide.ng/contact"
+    />
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-6">
           <button
