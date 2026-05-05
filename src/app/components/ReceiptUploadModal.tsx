@@ -88,7 +88,7 @@ export function ReceiptUploadModal({
     setRedeeming(true);
     setRedeemError(null);
 
-    const result = await redeemCode(trimmed, email, paymentType);
+    const result = await redeemCode(trimmed, email, paymentType, userId);
     setRedeeming(false);
 
     if (!result.success) {
