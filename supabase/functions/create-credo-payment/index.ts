@@ -18,9 +18,8 @@ interface CreatePaymentPayload {
   course: string;
 }
 
-function buildReference(paymentType: "pdf" | "cbt", userId: string): string {
-  const sanitizedUserId = userId.replace(/[^a-zA-Z0-9-]/g, "");
-  return `cg_${paymentType}_${sanitizedUserId}_${Date.now()}`;
+function buildReference(paymentType: "pdf" | "cbt", _userId: string): string {
+  return `cg_${paymentType}_${Date.now()}`;
 }
 
 function normalizeAmount(amount: number): number {
