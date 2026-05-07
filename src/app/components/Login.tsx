@@ -20,15 +20,13 @@ export function Login() {
   const [info, setInfo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [lastSignupEmail, setLastSignupEmail] = useState('');
-  const [resendCooldown, setResendCooldown] = useState(0);
 
   const passwordChecks = {
     minLength: password.length >= 8,
     lowercase: /[a-z]/.test(password),
     uppercase: /[A-Z]/.test(password),
     number: /\d/.test(password),
-    special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+    special: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password),
   };
   const signupPasswordValid = Object.values(passwordChecks).every(Boolean);
 
@@ -37,7 +35,7 @@ export function Login() {
     if (!/[a-z]/.test(password)) return 'Password must contain at least one lowercase letter';
     if (!/[A-Z]/.test(password)) return 'Password must contain at least one uppercase letter';
     if (!/\d/.test(password)) return 'Password must contain at least one number';
-    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) return 'Password must contain at least one special character';
+    if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) return 'Password must contain at least one special character';
     return null;
   };
 
@@ -69,25 +67,23 @@ export function Login() {
           course: derivedCourse,
         });
 
-        setLastSignupEmail(normalizedEmail);
-        setResendCooldown(120);
+        // Success – show message and switch to login
+        setInfo('Account created successfully! Please log in with your credentials.');
         setMode('login');
-        setInfo('Sign-up successful! A confirmation email has been sent. Check your inbox and click the link to activate your account, then log in.');
+        setEmail('');
+        setPassword('');
       } else {
         await login(normalizedEmail, password);
         navigate('/dashboard');
       }
     } catch (err: any) {
       const message = err?.message || 'Something went wrong';
-      if (message.toLowerCase().includes('email not confirmed') || message.toLowerCase().includes('confirm')) {
-        setError('Your email is not confirmed. Please check your inbox and click the confirmation link before logging in.');
-      } else if (message.toLowerCase().includes('rate') && message.toLowerCase().includes('email')) {
-        setError('Email request rate exceeded. Wait 2 minutes before trying again.');
-        setResendCooldown(120);
-      } else if (message.toLowerCase().includes('duplicate') || message.toLowerCase().includes('already registered')) {
+      if (message.toLowerCase().includes('duplicate') || message.toLowerCase().includes('already registered')) {
         setError('An account already exists with this email. Switch to login or reset your password.');
-      } else if (message.toLowerCase().includes('invalid login credentials') || message.toLowerCase().includes('invalid password') || message.toLowerCase().includes('wrong password')) {
-        setError('Invalid login credentials. Make sure your email and password are correct and your email has been confirmed.');
+      } else if (message.toLowerCase().includes('invalid login credentials') ||
+                 message.toLowerCase().includes('invalid password') ||
+                 message.toLowerCase().includes('wrong password')) {
+        setError('Invalid login credentials. Please check your email and password.');
       } else if (message.toLowerCase().includes('user not found') || message.toLowerCase().includes('no user')) {
         setError('No account found with that email address.');
       } else {
@@ -96,28 +92,6 @@ export function Login() {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  useEffect(() => {
-    if (resendCooldown <= 0) return;
-    const timer = window.setInterval(() => {
-      setResendCooldown((value) => Math.max(0, value - 1));
-    }, 1000);
-    return () => window.clearInterval(timer);
-  }, [resendCooldown]);
-
-  const formatCooldown = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-  };
-
-  const canResendConfirmation = lastSignupEmail !== '' && resendCooldown === 0;
-
-  const handleResendReminder = () => {
-    if (!canResendConfirmation) return;
-    setInfo('A confirmation email was already sent. Please check your inbox and spam folder before requesting another one.');
-    setResendCooldown(120);
   };
 
   const switchMode = (next: Mode) => {
@@ -161,23 +135,6 @@ export function Login() {
           {info && (
             <div className="mb-4 rounded bg-green-100 p-3 text-green-700 text-sm">
               {info}
-            </div>
-          )}
-
-          {lastSignupEmail && mode === 'login' && (
-            <div className="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-slate-800">
-              <p className="font-medium">Confirmation email sent to {lastSignupEmail}</p>
-              <p className="mt-1 text-sm text-slate-600">
-                Wait {formatCooldown(resendCooldown)} before requesting another confirmation email.
-              </p>
-              <button
-                type="button"
-                onClick={handleResendReminder}
-                disabled={!canResendConfirmation}
-                className="mt-3 w-full rounded-lg bg-slate-800 py-2 text-sm font-medium text-white transition-all disabled:opacity-50"
-              >
-                {canResendConfirmation ? 'Remind me to check email' : `Wait ${formatCooldown(resendCooldown)}`}
-              </button>
             </div>
           )}
 
