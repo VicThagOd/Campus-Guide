@@ -18,12 +18,8 @@ interface CreatePaymentPayload {
   course: string;
 }
 
-function buildReference(paymentType: "pdf" | "cbt", _userId: string): string {
+function buildReference(paymentType: "pdf" | "cbt"): string {
   return `cg_${paymentType}_${Date.now()}`;
-}
-
-function normalizeAmount(amount: number): number {
-  return Math.round(amount * 100);
 }
 
 Deno.serve(async (req) => {
@@ -36,12 +32,12 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const publicKey = Deno.env.get("CREDO_PUBLIC_KEY");
+    const publicKey = Deno.env.get("KORAPAY_PUBLIC_KEY");
+    const secretKey = Deno.env.get("KORAPAY_SECRET_KEY");
     const publicBaseUrl = Deno.env.get("PUBLIC_SITE_URL");
-    const credoBaseUrl = Deno.env.get("CREDO_BASE_URL") ?? "https://api.credocentral.com";
 
-    if (!publicKey || !publicBaseUrl) {
-      return new Response("Credo payment environment is not configured.", {
+    if (!publicKey || !secretKey || !publicBaseUrl) {
+      return new Response("Korapay payment environment is not configured.", {
         status: 500,
         headers: CORS_HEADERS,
       });
@@ -55,32 +51,31 @@ Deno.serve(async (req) => {
     }
 
     const expectedAmount = PRODUCT_AMOUNTS[paymentType];
-
-    if (normalizeAmount(amount) !== normalizeAmount(expectedAmount)) {
+    if (Math.round(amount * 100) !== Math.round(expectedAmount * 100)) {
       return new Response("Payment amount does not match the selected product.", {
         status: 400,
         headers: CORS_HEADERS,
       });
     }
 
-    const reference = buildReference(paymentType, userId);
+    const reference = buildReference(paymentType);
     const redirectUrl = `${publicBaseUrl.replace(/\/$/, "")}/payment/confirm?product=${paymentType}&reference=${reference}`;
 
-    const initializeRes = await fetch(`${credoBaseUrl}/transaction/initialize`, {
+    const initializeRes = await fetch("https://api.korapay.com/merchant/api/v1/charges/initialize", {
       method: "POST",
       headers: {
-        Authorization: publicKey,
+        Authorization: `Bearer ${secretKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        amount: normalizeAmount(amount),
+        amount,
         currency: "NGN",
         reference,
-        callbackUrl: redirectUrl,
-        email,
-        customerFirstName: name,
-        bearer: 0,
-        initializeAccount: 0,
+        redirect_url: redirectUrl,
+        customer: {
+          email,
+          name,
+        },
         metadata: {
           productType: paymentType,
           userId,
@@ -90,26 +85,17 @@ Deno.serve(async (req) => {
     });
 
     const initializeJson = await initializeRes.json();
-    const checkoutUrl =
-      initializeJson?.data?.authorizationUrl ??
-      initializeJson?.data?.checkoutUrl ??
-      initializeJson?.data?.authorization_url;
+    const checkoutUrl = initializeJson?.data?.checkout_url;
 
     if (!initializeRes.ok || !checkoutUrl) {
-      console.error("Credo initialize error", initializeJson);
-      return new Response("Could not initialize Credo payment.", {
+      console.error("Korapay initialize error", initializeJson);
+      return new Response("Could not initialize Korapay payment.", {
         status: 502,
         headers: CORS_HEADERS,
       });
     }
 
-    return Response.json(
-      {
-        checkoutUrl,
-        reference,
-      },
-      { headers: CORS_HEADERS },
-    );
+    return Response.json({ checkoutUrl, reference }, { headers: CORS_HEADERS });
   } catch (error) {
     console.error(error);
     return new Response("Payment initialization failed.", { status: 500, headers: CORS_HEADERS });

@@ -1,6 +1,6 @@
 import { supabase } from "./supabaseClient";
 
-export interface InitializeCredoPaymentParams {
+export interface InitializeKorapayPaymentParams {
   amount: number;
   paymentType: "pdf" | "cbt";
   userId: string;
@@ -9,10 +9,10 @@ export interface InitializeCredoPaymentParams {
   course: string;
 }
 
-export async function initializeCredoPayment(
-  params: InitializeCredoPaymentParams,
+export async function initializeKorapayPayment(
+  params: InitializeKorapayPaymentParams,
 ): Promise<string> {
-  const { data, error } = await supabase.functions.invoke("create-credo-payment", {
+  const { data, error } = await supabase.functions.invoke("create-korapay-payment", {
     body: params,
   });
 

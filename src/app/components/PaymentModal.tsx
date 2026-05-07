@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, KeyRound, LoaderCircle, ShieldCheck, X } from "lucide-react";
-import { initializeCredoPayment } from "../lib/credoPayment";
+import { initializeKorapayPayment } from "../lib/korapayPayment";
 import { redeemCode } from "../lib/redeemCode";
 
 interface PaymentModalProps {
@@ -44,7 +44,7 @@ export function PaymentModal({
     setStartingPayment(true);
 
     try {
-      const checkoutUrl = await initializeCredoPayment({
+      const checkoutUrl = await initializeKorapayPayment({
         amount,
         paymentType,
         userId,
@@ -112,7 +112,7 @@ export function PaymentModal({
           style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
         >
           {startingPayment ? <LoaderCircle size={18} className="animate-spin" /> : <ShieldCheck size={18} />}
-          {startingPayment ? "Opening Credo..." : "Pay with Credo"}
+          {startingPayment ? "Opening Korapay..." : "Pay with Korapay"}
         </button>
 
         {paymentError ? <p className="mt-4 text-sm text-red-600">{paymentError}</p> : null}
