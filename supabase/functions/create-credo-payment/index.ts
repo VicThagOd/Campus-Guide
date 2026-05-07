@@ -79,7 +79,6 @@ Deno.serve(async (req) => {
         callbackUrl: redirectUrl,
         email,
         customerFirstName: name,
-        channels: ["CARD", "BANK", "USSD", "TRANSFER"],
         bearer: 0,
         initializeAccount: 0,
         metadata: {
