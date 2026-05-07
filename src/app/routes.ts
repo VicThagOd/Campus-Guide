@@ -9,6 +9,7 @@ import { Results } from "./components/Results";
 import { Contact } from "./components/Contact";
 import { TestWarning } from "./components/TestWarning";
 import { ExamReview } from "./components/ExamReview";
+import { PaymentConfirmation } from "./components/PaymentConfirmation";
 
 export const router = createBrowserRouter([
   {
@@ -19,10 +20,13 @@ export const router = createBrowserRouter([
     path: "/login",
     Component: Login,
   },
-,
   {
     path: "/dashboard",
     Component: () => React.createElement(ProtectedRoute, null, React.createElement(Dashboard)),
+  },
+  {
+    path: "/payment/confirm",
+    Component: () => React.createElement(ProtectedRoute, null, React.createElement(PaymentConfirmation)),
   },
   {
     path: "/contact",

@@ -1,5 +1,6 @@
 import type { SubjectName } from "../data/mockQuestions";
 import { supabase } from "../../lib/supabase"; // <-- Added missing import
+import { hasSupabaseEnv } from "../../lib/env";
 
 export interface SubjectPerformance {
   subject: SubjectName | string;
@@ -242,6 +243,9 @@ export async function saveReviewToSupabase(review: {
   rating: number;
   review: string;
 }) {
+  if (!hasSupabaseEnv) {
+    throw new Error("Supabase environment variables are missing.");
+  }
   const { error } = await supabase.from("reviews").insert([review]);
   if (error) throw new Error(error.message);
 }

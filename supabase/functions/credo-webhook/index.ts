@@ -2,145 +2,201 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { crypto } from "https://deno.land/std@0.177.0/crypto/mod.ts";
 import { encode } from "https://deno.land/std@0.177.0/encoding/hex.ts";
 
+const PRODUCT_AMOUNTS = {
+  pdf: 2010.75,
+  cbt: 2010.75,
+} as const;
+
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
-async function sha512(str: string): Promise<string> {
-  const data = new TextEncoder().encode(str);
+async function sha512(value: string): Promise<string> {
+  const data = new TextEncoder().encode(value);
   const hash = await crypto.subtle.digest("SHA-512", data);
   return new TextDecoder().decode(encode(new Uint8Array(hash)));
 }
 
+function parseReference(reference: string): { paymentType: "pdf" | "cbt"; userId: string } | null {
+  const match = /^cg_(pdf|cbt)_([a-zA-Z0-9-]+)_\d+$/.exec(reference);
+  if (!match) return null;
+
+  return {
+    paymentType: match[1] as "pdf" | "cbt",
+    userId: match[2],
+  };
+}
+
+function amountMatches(paymentType: "pdf" | "cbt", rawAmount: unknown): boolean {
+  const amount = Number(rawAmount);
+
+  if (!Number.isFinite(amount)) return false;
+
+  const expectedMinor = Math.round(PRODUCT_AMOUNTS[paymentType] * 100);
+  const roundedAmount = Math.round(amount);
+
+  if (roundedAmount === expectedMinor) return true;
+
+  return Math.abs(amount - PRODUCT_AMOUNTS[paymentType]) < 0.001;
+}
+
+async function grantUserAccess(params: {
+  userId: string;
+  email: string;
+  paymentType: "pdf" | "cbt";
+}) {
+  const now = new Date();
+  const expiresAt =
+    params.paymentType === "cbt"
+      ? new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString()
+      : null;
+
+  const { data: existing } = await supabase
+    .from("user_access")
+    .select("pdf_access, cbt_access, cbt_expires_at")
+    .eq("user_id", params.userId)
+    .maybeSingle();
+
+  const payload = {
+    user_id: params.userId,
+    email: params.email,
+    pdf_access: params.paymentType === "pdf" ? true : existing?.pdf_access ?? false,
+    cbt_access: params.paymentType === "cbt" ? true : existing?.cbt_access ?? false,
+    cbt_expires_at: params.paymentType === "cbt" ? expiresAt : existing?.cbt_expires_at ?? null,
+    updated_at: now.toISOString(),
+  };
+
+  const { error } = await supabase.from("user_access").upsert([payload], { onConflict: "user_id" });
+
+  if (error) {
+    throw error;
+  }
+
+  return expiresAt;
+}
+
 Deno.serve(async (req) => {
   try {
-    const body = await req.json();
+    const credoBaseUrl = Deno.env.get("CREDO_BASE_URL") ?? "https://api.credocentral.com";
+    const rawBody = await req.text();
+    const body = JSON.parse(rawBody);
     const { event, data } = body;
 
-    // 1. Verify signature
     const signature = req.headers.get("x-credo-signature") ?? "";
-    const secretKey = Deno.env.get("CREDO_WEBHOOK_TOKEN")!;
+    const secretKey = Deno.env.get("CREDO_WEBHOOK_TOKEN") ?? "";
     const businessCode = data?.businessCode ?? "";
     const expected = await sha512(secretKey + businessCode);
-    if (signature !== expected) {
+
+    if (!signature || signature !== expected) {
       return new Response("Invalid signature", { status: 401 });
     }
 
-    // 2. Only handle successful transactions
-    if (event !== "transaction.successful" || data.status !== 0) {
+    if (event !== "transaction.successful" || data?.status !== 0) {
       return new Response("OK", { status: 200 });
     }
 
-    // 3. Idempotency check
+    const transRef = data?.transRef;
+
+    if (!transRef) {
+      return new Response("Missing reference", { status: 400 });
+    }
+
     const { data: existing } = await supabase
       .from("processed_webhooks")
       .select("trans_ref")
-      .eq("trans_ref", data.transRef)
-      .single();
-    if (existing) return new Response("OK", { status: 200 });
+      .eq("trans_ref", transRef)
+      .maybeSingle();
 
-    // 4. Verify transaction with Credo
-    const verifyRes = await fetch(
-      `https://api.credocentral.com/transaction/${data.transRef}/verify`,
-      { headers: { Authorization: secretKey } },
-    );
+    if (existing) {
+      return new Response("OK", { status: 200 });
+    }
+
+    const verifyRes = await fetch(`${credoBaseUrl}/transaction/${transRef}/verify`, {
+      headers: { Authorization: Deno.env.get("CREDO_SECRET_KEY") ?? "" },
+    });
     const verifyJson = await verifyRes.json();
-    const txn = verifyJson.data;
-    if (!txn || txn.status !== 0) {
+    const txn = verifyJson?.data;
+
+    if (!verifyRes.ok || !txn || txn.status !== 0) {
+      console.error("Credo verify failed", verifyJson);
       return new Response("Unverified", { status: 200 });
     }
 
-    // 5. Determine type from amount
-    // Both PDF and CBT now cost 2010.75, use 201075 for PDF and 201076 for CBT to distinguish
-    const amount = txn.transAmount;
-    const type = amount === 201075 ? "pdf" : amount === 201076 ? "cbt" : null;
-    if (!type) return new Response("Unknown amount", { status: 200 });
+    const parsed = parseReference(transRef);
 
-    // 6. Grab unused code
-    const { data: codeRow } = await supabase
-      .from("unlock_codes")
-      .select("*")
-      .eq("type", type)
-      .eq("used", false)
-      .limit(1)
-      .single();
+    if (!parsed) {
+      return new Response("Unknown reference", { status: 200 });
+    }
 
-    if (!codeRow) {
-      // Notify admin — codes running low
+    if (!amountMatches(parsed.paymentType, txn.transAmount)) {
+      console.error("Credo amount mismatch", { expectedType: parsed.paymentType, amount: txn.transAmount });
+      return new Response("Amount mismatch", { status: 200 });
+    }
+
+    const customerEmail =
+      txn.customer?.customerEmail ??
+      data?.customer?.customerEmail ??
+      txn.email ??
+      data?.customerId;
+
+    if (!customerEmail) {
+      return new Response("Missing customer email", { status: 200 });
+    }
+
+    const expiresAt = await grantUserAccess({
+      userId: parsed.userId,
+      email: customerEmail,
+      paymentType: parsed.paymentType,
+    });
+
+    const { error: webhookInsertError } = await supabase
+      .from("processed_webhooks")
+      .insert({ trans_ref: transRef, product_type: parsed.paymentType, user_id: parsed.userId });
+
+    if (webhookInsertError) {
+      throw webhookInsertError;
+    }
+
+    const resendKey = Deno.env.get("RESEND_API_KEY");
+
+    if (resendKey) {
+      const emailHtml = `
+        <div style="font-family:sans-serif;max-width:480px;margin:auto;padding:24px">
+          <h2 style="color:#2F4EA2">Campus Guide Payment Confirmed</h2>
+          <p>Your payment has been confirmed and your access is now active.</p>
+          <div style="background:#f4f4f4;padding:16px;border-radius:8px;margin:24px 0">
+            <p style="font-weight:700;color:#2F4EA2;margin:0 0 8px 0;">
+              ${parsed.paymentType === "pdf" ? "Past Questions PDF" : "Live CBT Access"}
+            </p>
+            ${
+              parsed.paymentType === "cbt" && expiresAt
+                ? `<p style="margin:0;color:#555;">Access expires on ${new Date(expiresAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}.</p>`
+                : `<p style="margin:0;color:#555;">You can return to your dashboard and use your access immediately.</p>`
+            }
+          </div>
+          <p style="color:#888;font-size:0.875rem">Need help? WhatsApp: ${Deno.env.get("WHATSAPP_NUMBER") ?? ""}</p>
+        </div>
+      `;
+
       await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${Deno.env.get("RESEND_API_KEY")}`,
+          Authorization: `Bearer ${resendKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           from: "Campus Guide <onboarding@resend.dev>",
-          to: Deno.env.get("ADMIN_EMAIL"),
-          subject: "⚠️ Campus Guide: Codes Running Low",
-          html: `<p>No unused ${type.toUpperCase()} codes left. Add more immediately.</p>`,
+          to: customerEmail,
+          subject: "Your Campus Guide Access Is Active",
+          html: emailHtml,
         }),
       });
-      return new Response("OK", { status: 200 });
     }
 
-    // 7. Mark code as used
-    const expiresAt = type === "cbt"
-      ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
-      : null;
-    const customerEmail = data.customer?.customerEmail ?? data.customerId;
-
-    await supabase
-      .from("unlock_codes")
-      .update({
-        used: true,
-        used_by_email: customerEmail,
-        used_at: new Date().toISOString(),
-        expires_at: expiresAt,
-      })
-      .eq("code", codeRow.code);
-
-    // 8. Record processed webhook
-    await supabase
-      .from("processed_webhooks")
-      .insert({ trans_ref: data.transRef });
-
-    // 9. Send email with code
-    const emailHtml = `
-      <div style="font-family:sans-serif;max-width:480px;margin:auto;padding:24px">
-        <h2 style="color:#2F4EA2">Campus Guide — Your Unlock Code</h2>
-        <p>Thank you for your purchase! Here is your unique unlock code:</p>
-        <div style="font-size:2rem;font-weight:700;letter-spacing:4px;
-          background:#f4f4f4;padding:16px;border-radius:8px;text-align:center;
-          color:#2F4EA2;margin:24px 0">
-          ${codeRow.code}
-        </div>
-        ${type === "cbt"
-          ? `<p>This code expires <strong>30 days from first use</strong>. You will need to purchase a new code to renew your subscription.</p>`
-          : `<p>This is a <strong>one-time permanent unlock</strong>. It never expires.</p>`
-        }
-        <p><strong>How to use:</strong> Visit Campus Guide → click your product → enter this code to unlock access.</p>
-        <p style="color:#888;font-size:0.875rem">Need help? WhatsApp: ${Deno.env.get("WHATSAPP_NUMBER")}</p>
-      </div>
-    `;
-
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${Deno.env.get("RESEND_API_KEY")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "Campus Guide <onboarding@resend.dev>",
-        to: customerEmail,
-        subject: "Your Campus Guide Unlock Code",
-        html: emailHtml,
-      }),
-    });
-
     return new Response("OK", { status: 200 });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     return new Response("Error", { status: 500 });
   }
 });

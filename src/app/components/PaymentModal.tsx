@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { X, CheckCircle2, ExternalLink } from "lucide-react";
+import { ChevronDown, KeyRound, LoaderCircle, ShieldCheck, X } from "lucide-react";
+import { initializeCredoPayment } from "../lib/credoPayment";
 import { redeemCode } from "../lib/redeemCode";
 
 interface PaymentModalProps {
@@ -7,11 +8,13 @@ interface PaymentModalProps {
   title: string;
   description: string;
   benefitText: string;
-  paymentLink: string;
-  codeType: "pdf" | "cbt";
+  paymentType: "pdf" | "cbt";
+  userId: string;
   userEmail: string;
+  userName: string;
+  course: string;
   onClose: () => void;
-  onPaymentVerified: (expiresAt: string | null) => void;
+  onAccessGranted: (expiresAt: string | null) => Promise<void> | void;
 }
 
 export function PaymentModal({
@@ -19,47 +22,55 @@ export function PaymentModal({
   title,
   description,
   benefitText,
-  paymentLink,
-  codeType,
+  paymentType,
+  userId,
   userEmail,
+  userName,
+  course,
   onClose,
-  onPaymentVerified,
+  onAccessGranted,
 }: PaymentModalProps) {
-  const [paymentMade, setPaymentMade] = useState(false);
+  const [startingPayment, setStartingPayment] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [showCodeInput, setShowCodeInput] = useState(false);
   const [unlockCode, setUnlockCode] = useState("");
   const [redeeming, setRedeeming] = useState(false);
   const [redeemError, setRedeemError] = useState<string | null>(null);
 
-  const isValidUnlockCode = (code: string) => {
-    const trimmed = code.trim().toUpperCase();
-    const pattern = codeType === "pdf" ? /^CGP-[A-Z0-9]{4}-[A-Z0-9]{4}$/ : /^CGC-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-    return pattern.test(trimmed);
-  };
+  const unlockCodePlaceholder = paymentType === "pdf" ? "e.g. CGP-X7K2-M9QA" : "e.g. CGC-B3F1-N8WZ";
 
-  const handlePaymentStart = () => {
-    window.open(paymentLink, "_blank", "noopener,noreferrer");
-    setPaymentMade(true);
+  const handlePaymentStart = async () => {
+    setPaymentError(null);
+    setStartingPayment(true);
+
+    try {
+      const checkoutUrl = await initializeCredoPayment({
+        amount,
+        paymentType,
+        userId,
+        email: userEmail,
+        name: userName,
+        course,
+      });
+      window.location.assign(checkoutUrl);
+    } catch (error: any) {
+      setPaymentError(error?.message || "Could not start payment. Please try again.");
+      setStartingPayment(false);
+    }
   };
 
   const handleRedeemCode = async () => {
     const trimmedCode = unlockCode.trim().toUpperCase();
 
     if (!trimmedCode) {
-      setRedeemError("Please enter your unlock code from your receipt email.");
-      return;
-    }
-
-    if (!isValidUnlockCode(trimmedCode)) {
-      setRedeemError(
-        `Enter a valid ${codeType === "pdf" ? "PDF" : "CBT"} unlock code in the format ${codeType === "pdf" ? "CGP" : "CGC"}-XXXX-XXXX.`,
-      );
+      setRedeemError("Please enter your unlock code.");
       return;
     }
 
     setRedeemError(null);
     setRedeeming(true);
 
-    const result = await redeemCode(trimmedCode, userEmail, codeType);
+    const result = await redeemCode(trimmedCode, userEmail, paymentType, userId);
     setRedeeming(false);
 
     if (!result.success) {
@@ -67,7 +78,7 @@ export function PaymentModal({
       return;
     }
 
-    onPaymentVerified(result.expiresAt);
+    await onAccessGranted(result.expiresAt ?? null);
   };
 
   return (
@@ -94,46 +105,63 @@ export function PaymentModal({
           <p style={{ color: "#000000", opacity: 0.6, fontSize: "0.875rem", marginTop: "0.5rem" }}>{benefitText}</p>
         </div>
 
-        <div className="space-y-4">
+        <button
+          onClick={handlePaymentStart}
+          disabled={startingPayment}
+          className="flex w-full items-center justify-center gap-2 rounded-lg py-3 transition-all hover:opacity-90 disabled:opacity-50"
+          style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
+        >
+          {startingPayment ? <LoaderCircle size={18} className="animate-spin" /> : <ShieldCheck size={18} />}
+          {startingPayment ? "Opening Credo..." : "Pay with Credo"}
+        </button>
+
+        {paymentError ? <p className="mt-4 text-sm text-red-600">{paymentError}</p> : null}
+
+        <p className="mt-4 text-sm" style={{ color: "#000000", opacity: 0.65 }}>
+          After payment, we will confirm it automatically and unlock only the item you paid for.
+        </p>
+
+        <div className="mt-5 rounded-lg border border-gray-200 p-4">
           <button
-            onClick={handlePaymentStart}
-            className="flex w-full items-center justify-center gap-2 rounded-lg py-3 transition-all hover:opacity-90"
-            style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
+            onClick={() => setShowCodeInput((current) => !current)}
+            className="flex w-full items-center justify-between text-left"
+            type="button"
           >
-            Pay with Credo
-            <ExternalLink size={18} />
+            <span className="flex items-center gap-2" style={{ color: "#2F4EA2", fontWeight: 600 }}>
+              <KeyRound size={16} />
+              Have an unlock code instead?
+            </span>
+            <ChevronDown
+              size={16}
+              color="#2F4EA2"
+              className={`transition-transform ${showCodeInput ? "rotate-180" : ""}`}
+            />
           </button>
 
-          {paymentMade && (
-            <div className="rounded-lg border border-green-200 bg-green-50 p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <CheckCircle2 size={20} color="#16a34a" />
-                <p style={{ color: "#16a34a", fontWeight: 500 }}>Payment window opened</p>
-              </div>
-              <p className="mb-4" style={{ fontSize: "0.875rem", color: "#000000", opacity: 0.7 }}>
-                After payment, enter the code from your receipt email below to unlock access.
-              </p>
+          {showCodeInput ? (
+            <div className="mt-4 space-y-3">
               <input
                 value={unlockCode}
                 onChange={(event) => setUnlockCode(event.target.value)}
-                placeholder="e.g. CGP-X7K2-M9QA"
-                className="mb-3 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 focus:outline-none focus:ring-2"
+                placeholder={unlockCodePlaceholder}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2"
                 style={{ color: "#000000" }}
               />
-              <p className="mb-3 text-sm text-slate-500">
-                Code must use uppercase letters, digits, dashes, and match the receipt format.
+              <p className="text-sm" style={{ color: "#000000", opacity: 0.6 }}>
+                Enter your {paymentType === "pdf" ? "PDF" : "CBT"} code to unlock access immediately.
               </p>
-              {redeemError && <p className="mb-3 text-sm text-red-600">{redeemError}</p>}
+              {redeemError ? <p className="text-sm text-red-600">{redeemError}</p> : null}
               <button
                 onClick={handleRedeemCode}
                 disabled={redeeming}
                 className="w-full rounded-lg py-3 transition-all hover:opacity-90 disabled:opacity-50"
                 style={{ backgroundColor: "#16a34a", color: "#FFFFFF", fontWeight: 500 }}
+                type="button"
               >
-                {redeeming ? "Unlocking..." : "Unlock Access"}
+                {redeeming ? "Unlocking..." : "Unlock with Code"}
               </button>
             </div>
-          )}
+          ) : null}
         </div>
 
         <p className="mt-6 text-center" style={{ fontSize: "0.75rem", color: "#000000", opacity: 0.5 }}>

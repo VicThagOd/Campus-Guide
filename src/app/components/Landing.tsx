@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BarChart3, CheckCircle2, FileText, Menu, Star, Target, X } from "lucide-react";
 import { SEO } from "./SEO";
 import { supabase } from "../../lib/supabase";
+import { hasSupabaseEnv } from "../../lib/env";
 
 function CampusGuideLogo({ size = 40, className = "" }: { size?: number; className?: string }) {
   return (
@@ -22,6 +23,7 @@ export function Landing() {
   const [reviews, setReviews] = useState<PublishedReview[]>([]);
 
 useEffect(() => {
+  if (!hasSupabaseEnv) return;
   supabase
     .from("reviews")
     .select("*")

@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AlertCircle, ArrowLeft, FileDown, PlayCircle, Star, TrendingUp } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-import { ReceiptUploadModal } from "./ReceiptUploadModal";
+import { PaymentModal } from "./PaymentModal";
 import {
   AppState,
   canStartFreeLiveTest,
@@ -17,12 +17,6 @@ import { fetchUserAccess, isCbtAccessExpired, UserAccess } from "../lib/userAcce
 import { createPastQuestionsDownloadUrl, triggerBrowserDownload } from "../lib/pastQuestionsPdf";
 
 type PaymentType = "pdf" | "cbt" | null;
-
-const BANK_DETAILS = {
-  bankName: "Wema Bank",
-  accountNumber: "7824198583",
-  accountName: "Campus Guide",
-};
 
 export function Dashboard() {
   const { user, profile, logout } = useAuth();
@@ -91,7 +85,7 @@ export function Dashboard() {
     navigate("/test-warning");
   };
 
-  const handleAccessGranted = async (_expiresAt: string | null) => {
+  const handleAccessGranted = async () => {
     setActivePayment(null);
     if (userId) {
       const access = await fetchUserAccess(userId);
@@ -300,16 +294,26 @@ export function Dashboard() {
       </div>
 
       {activePayment && (
-        <ReceiptUploadModal
+        <PaymentModal
           paymentType={activePayment}
           userId={userId}
-          email={email}
-          name={username}
+          userEmail={email}
+          userName={username}
           course={course}
           amount={activePayment === "pdf" ? testConfig.pdfPrice : testConfig.liveTestPrice}
-          bankDetails={BANK_DETAILS}
-          onClose={() => setActivePayment(null)}
+          title={activePayment === "pdf" ? "Unlock Past Questions" : "Unlock Live Tests"}
+          description={
+            activePayment === "pdf"
+              ? "One-time payment for permanent PDF access"
+              : "30-day access to unlimited CBT mock tests"
+          }
+          benefitText={
+            activePayment === "pdf"
+              ? "Instant access to your course PDF after confirmed payment"
+              : "Instant 30-day CBT access after confirmed payment"
+          }
           onAccessGranted={handleAccessGranted}
+          onClose={() => setActivePayment(null)}
         />
       )}
     </div>

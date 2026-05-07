@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { User } from '@supabase/supabase-js';
+import { hasSupabaseEnv } from '../lib/env';
 
 interface Profile {
   id: string;
@@ -50,6 +51,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    if (!hasSupabaseEnv) {
+      setUser(null);
+      setProfile(null);
+      setLoading(false);
+      return;
+    }
+
     supabase.auth.getSession().then((result: any) => {
       const { data: { session } } = result;
       setUser(session?.user ?? null);
@@ -72,11 +80,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
+    if (!hasSupabaseEnv) throw new Error("Supabase environment variables are missing.");
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw new Error(error.message);
   };
 
   const signup = async (data: SignupData) => {
+    if (!hasSupabaseEnv) throw new Error("Supabase environment variables are missing.");
     const { error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
@@ -92,12 +102,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = async () => {
+    if (!hasSupabaseEnv) {
+      setProfile(null);
+      return;
+    }
     const { error } = await supabase.auth.signOut();
     if (error) throw new Error(error.message);
     setProfile(null);
   };
 
   const resetPasswordForEmail = async (email: string) => {
+    if (!hasSupabaseEnv) throw new Error("Supabase environment variables are missing.");
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
