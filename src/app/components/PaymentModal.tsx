@@ -44,7 +44,7 @@ export function PaymentModal({
     setStartingPayment(true);
 
     try {
-      const checkoutUrl = await initializeKorapayPayment({
+      const checkoutUrl = await initializeCredoPayment({
         amount,
         paymentType,
         userId,
