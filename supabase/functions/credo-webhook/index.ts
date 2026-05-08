@@ -1,5 +1,7 @@
 // supabase/functions/credo-webhook/index.ts
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { crypto } from "https://deno.land/std@0.177.0/crypto/mod.ts";
+import { encode as hexEncode } from "https://deno.land/std@0.177.0/encoding/hex.ts";
 
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
@@ -8,6 +10,19 @@ const supabase = createClient(
 
 const PRODUCT_AMOUNTS = { pdf: 2010.75, cbt: 2010.75 } as const;
 type PaymentType = "pdf" | "cbt";
+
+async function verifySignature(rawBody: string, signatureHeader: string, secret: string): Promise<boolean> {
+  const cryptoKey = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const signed = await crypto.subtle.sign("HMAC", cryptoKey, new TextEncoder().encode(rawBody));
+  const computedSignature = hexEncode(new Uint8Array(signed));
+  return computedSignature === signatureHeader;
+}
 
 async function grantUserAccess(userId: string, email: string, paymentType: PaymentType) {
   const expiresAt = paymentType === "cbt"
@@ -35,24 +50,36 @@ async function grantUserAccess(userId: string, email: string, paymentType: Payme
 
 Deno.serve(async (req) => {
   try {
-    // Credo may send raw body; we'll parse JSON
     const rawBody = await req.text();
     const body = JSON.parse(rawBody);
 
-    // --- Optional signature verification ---
-    // If Credo provides a signature header, add it here.
-    // For now, we rely on the verification call below.
-    const secretKey = Deno.env.get("CREDO_SECRET_KEY")!;
+    // 1. Verify signature using the webhook token (CG-WH-200)
+    const webhookSecret = Deno.env.get("CREDO_WEBHOOK_SECRET");
+    if (!webhookSecret) {
+      console.error("CREDO_WEBHOOK_SECRET not set");
+      return new Response("Webhook secret not configured", { status: 500 });
+    }
 
-    // --- Identify event ---
-    // Credo's webhook payload structure unknown. Common pattern:
-    // { event: "charge.success", data: { transRef, status, amount, ... } }
-    // Adjust this based on actual webhook from Credo.
+    // Credo likely sends signature in header: "x-credo-signature" or "x-signature"
+    // Adjust header name if needed (check Credo docs)
+    const signatureHeader = req.headers.get("x-credo-signature") ?? req.headers.get("x-signature") ?? "";
+    if (!signatureHeader) {
+      console.error("Missing signature header");
+      return new Response("Missing signature", { status: 401 });
+    }
+
+    const isValid = await verifySignature(rawBody, signatureHeader, webhookSecret);
+    if (!isValid) {
+      console.error("Invalid webhook signature");
+      return new Response("Invalid signature", { status: 401 });
+    }
+
+    // 2. Identify event – adjust fields based on Credo's actual webhook payload
     const event = body.event;
     const data = body.data;
 
+    // Only process successful charge events
     if (event !== "charge.success" || data?.status !== "success") {
-      // Not a successful payment event – ignore
       return new Response("OK", { status: 200 });
     }
 
@@ -61,7 +88,7 @@ Deno.serve(async (req) => {
       return new Response("Missing transRef", { status: 400 });
     }
 
-    // Idempotency check using our own reference
+    // Idempotency check
     const { data: processed } = await supabase
       .from("processed_webhooks")
       .select("trans_ref")
@@ -69,10 +96,11 @@ Deno.serve(async (req) => {
       .maybeSingle();
     if (processed) return new Response("OK", { status: 200 });
 
-    // --- Verify with Credo API (critical) ---
+    // 3. Verify transaction via Credo API (critical)
+    const secretKey = Deno.env.get("CREDO_SECRET_KEY")!;
     const verifyUrl = `https://api.credocentral.com/transaction/${credoTransRef}/verify`;
     const verifyRes = await fetch(verifyUrl, {
-      headers: { Authorization: secretKey }, // SECRET KEY for verification
+      headers: { Authorization: secretKey },
     });
     const verifyJson = await verifyRes.json();
     const txn = verifyJson?.data;
@@ -82,14 +110,13 @@ Deno.serve(async (req) => {
       return new Response("OK", { status: 200 });
     }
 
-    // Extract our business reference from metadata or from pending_payments table
-    const businessRef = txn.businessRef; // This is the reference we sent
+    const businessRef = txn.businessRef; // Our reference sent during init
     if (!businessRef) {
-      console.error("No businessRef in transaction");
+      console.error("No businessRef found");
       return new Response("OK", { status: 200 });
     }
 
-    // Look up pending payment by our reference
+    // Look up pending payment
     const { data: pending } = await supabase
       .from("pending_payments")
       .select("user_id, email, payment_type")
@@ -97,7 +124,7 @@ Deno.serve(async (req) => {
       .maybeSingle();
 
     if (!pending) {
-      console.error("No pending payment found for reference", businessRef);
+      console.error("No pending payment for reference", businessRef);
       return new Response("OK", { status: 200 });
     }
 
@@ -105,7 +132,7 @@ Deno.serve(async (req) => {
     const customerEmail = pending.email;
     const paymentType = pending.payment_type as PaymentType;
 
-    // Verify amount (txn.transAmount is in kobo, we convert to Naira)
+    // Amount check (txn.transAmount is in kobo)
     const paidAmountNaira = txn.transAmount / 100;
     if (Math.abs(paidAmountNaira - PRODUCT_AMOUNTS[paymentType]) > 0.01) {
       console.error("Amount mismatch", { expected: PRODUCT_AMOUNTS[paymentType], got: paidAmountNaira });
@@ -113,7 +140,7 @@ Deno.serve(async (req) => {
     }
 
     // Grant access
-    const expiresAt = await grantUserAccess(userId, customerEmail, paymentType);
+    await grantUserAccess(userId, customerEmail, paymentType);
 
     // Record processed webhook
     await supabase.from("processed_webhooks").insert({
