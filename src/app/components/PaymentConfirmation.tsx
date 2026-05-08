@@ -27,9 +27,9 @@ export function PaymentConfirmation() {
       return;
     }
 
-    if (gatewayStatus && gatewayStatus.toLowerCase() === "failed") {
+    if (gatewayStatus?.toLowerCase() === "failed") {
       setStatus("failed");
-      setMessage("Credo reported that this payment was not completed.");
+      setMessage("Your payment was not completed. Please try again.");
       return;
     }
 
@@ -51,9 +51,13 @@ export function PaymentConfirmation() {
           setStatus("success");
           setMessage(
             paymentType === "pdf"
-              ? "Your PDF access is active. You can download your course material now."
-              : "Your CBT access is active. You can start your live test now.",
+              ? "Your PDF access is active. Redirecting to your dashboard..."
+              : "Your CBT access is active. Redirecting to your dashboard...",
           );
+          // Auto-redirect to dashboard after 2 seconds
+          window.setTimeout(() => {
+            if (!cancelled) navigate("/dashboard");
+          }, 2000);
           return;
         }
 
@@ -61,7 +65,7 @@ export function PaymentConfirmation() {
 
         if (attempts >= maxAttempts) {
           setStatus("failed");
-          setMessage("Payment confirmation is taking longer than expected. Give it a minute, then check your dashboard again.");
+          setMessage("Payment confirmation is taking longer than expected. Give it a minute, then check your dashboard.");
           return;
         }
 
@@ -84,7 +88,7 @@ export function PaymentConfirmation() {
     return () => {
       cancelled = true;
     };
-  }, [gatewayStatus, paymentType, user?.id]);
+  }, [gatewayStatus, paymentType, user?.id, navigate]);
 
   return (
     <div className="min-h-screen px-4 py-12" style={{ backgroundColor: "#BFC3C6" }}>
@@ -98,14 +102,22 @@ export function PaymentConfirmation() {
         </button>
 
         <div className="text-center">
-          {status === "checking" ? (
+          {status === "checking" && (
             <LoaderCircle size={52} color="#2F4EA2" className="mx-auto mb-4 animate-spin" />
-          ) : null}
-          {status === "success" ? <CheckCircle2 size={52} color="#16a34a" className="mx-auto mb-4" /> : null}
-          {status === "failed" ? <XCircle size={52} color="#dc2626" className="mx-auto mb-4" /> : null}
+          )}
+          {status === "success" && (
+            <CheckCircle2 size={52} color="#16a34a" className="mx-auto mb-4" />
+          )}
+          {status === "failed" && (
+            <XCircle size={52} color="#dc2626" className="mx-auto mb-4" />
+          )}
 
           <h1 className="mb-3" style={{ fontSize: "1.75rem", fontWeight: 700, color: "#000000" }}>
-            {status === "checking" ? "Confirming Payment" : status === "success" ? "Access Ready" : "Confirmation Pending"}
+            {status === "checking"
+              ? "Confirming Payment"
+              : status === "success"
+                ? "Access Ready"
+                : "Confirmation Pending"}
           </h1>
 
           <p className="mb-6" style={{ color: "#000000", opacity: 0.72 }}>
@@ -117,7 +129,11 @@ export function PaymentConfirmation() {
               Product
             </p>
             <p style={{ color: "#000000", opacity: 0.72 }}>
-              {paymentType === "pdf" ? "Past Questions PDF" : paymentType === "cbt" ? "Live CBT Access" : "Unknown"}
+              {paymentType === "pdf"
+                ? "Past Questions PDF"
+                : paymentType === "cbt"
+                  ? "Live CBT Access"
+                  : "Unknown"}
             </p>
           </div>
 
@@ -127,7 +143,7 @@ export function PaymentConfirmation() {
               className="rounded-lg px-5 py-3 text-center transition-all hover:opacity-90"
               style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
             >
-              Return to Dashboard
+              Go to Dashboard
             </Link>
             <Link
               to="/contact"
