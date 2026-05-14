@@ -65,10 +65,7 @@ export function TestWarning() {
                 <span style={{ color: "#2F4EA2", fontWeight: 600 }}>-</span>
                 <span style={{ color: "#000000", opacity: 0.8 }}>You can move between questions before final submission.</span>
               </li>
-              <li className="flex items-start gap-2">
-                <span style={{ color: "#2F4EA2", fontWeight: 600 }}>-</span>
-                <span style={{ color: "#000000", opacity: 0.8 }}>Retain the current question format until new questions are added.</span>
-              </li>
+              
             </ul>
           </div>
 
