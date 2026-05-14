@@ -9,13 +9,13 @@ export function TestWarning() {
       <div className="mx-auto max-w-3xl px-4 py-12">
         <div className="mb-6">
           <button
-            onClick={() => navigate('/dashboard')}
-            className="flex items-center gap-2 rounded-lg px-4 py-2 transition-all hover:opacity-90"
-            style={{ backgroundColor: "#6b7280", color: "#FFFFFF", fontWeight: 500 }}
-          >
-            <ArrowLeft size={16} />
-            Back to Dashboard
-          </button>
+             onClick={() => navigate('/')}
+              className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
+                style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
+                    >
+                    <ArrowLeft size={16} />
+                      Back to Home
+            </button>
         </div>
         <div className="rounded-lg bg-white p-8 shadow-lg">
           <div className="mb-8 text-center">

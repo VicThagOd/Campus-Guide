@@ -23,6 +23,14 @@ export function Contact() {
             <ArrowLeft size={16} />
             Back to Home
           </button>
+            <button
+                      onClick={() => navigate('/')}
+                      className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
+                      style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
+                    >
+                      <ArrowLeft size={16} />
+                      Back to Home
+              </button>
         </div>
         <div className="text-center mb-12">
           <h1 className="mb-4" style={{ fontSize: '2rem', fontWeight: 600, color: '#2F4EA2' }}>

@@ -40,11 +40,31 @@ export function Dashboard() {
 
   useEffect(() => {
     if (!userId) return;
-    setAppState(getAppState(userId));
-    fetchUserAccess(userId).then((access) => {
+    
+    async function loadUserData() {
+      setAccessLoading(true);
+      
+      // Fetch user access (PDF, CBT)
+      const access = await fetchUserAccess(userId);
       setUserAccess(access);
+      
+      // Fetch free trials from database and update localStorage
+      const { fetchFreeTrialsUsed } = await import("../lib/appState");
+      const dbTrialsUsed = await fetchFreeTrialsUsed(userId);
+      
+      // Update localStorage with database value
+      const currentState = getAppState(userId);
+      const updatedState = {
+        ...currentState,
+        freeTrialsUsed: dbTrialsUsed,
+      };
+      setStoredAppState(() => updatedState, userId);
+      setAppState(updatedState);
+      
       setAccessLoading(false);
-    });
+    }
+    
+    loadUserData();
   }, [userId]);
 
   const results = appState.results;
@@ -74,14 +94,19 @@ export function Dashboard() {
     }
   };
 
-  const handleStartLiveTest = () => {
+  const handleStartLiveTest = async () => {
     if (!userId) return;
     const currentState = getAppState(userId);
     if (!cbtActive && !canStartFreeLiveTest(currentState)) {
       setActivePayment("cbt");
       return;
     }
-    setAppState(currentState);
+    
+    // Update both database and localStorage
+    const { startLiveTestSession } = await import("../lib/appState");
+    await startLiveTestSession(userId);
+    
+    setAppState(getAppState(userId));
     navigate("/test-warning");
   };
 
@@ -177,6 +202,17 @@ export function Dashboard() {
         ) : null}
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <button onClick={handleStartLiveTest} className="block w-full text-left">
+            <DashboardCard
+              icon={<PlayCircle size={32} color="#2F4EA2" />}
+              title="Start Post UTME"
+              description={liveTestDescription}
+              linkText={liveTestLinkText}
+              badge={cbtBadge}
+              isClickable
+            />
+          </button>
+
           <button onClick={handleDownloadPDF} className="block w-full text-left">
             <DashboardCard
               icon={<FileDown size={32} color="#2F4EA2" />}
@@ -185,19 +221,8 @@ export function Dashboard() {
               linkText={
                 pdfAccess
                   ? (pdfDownloading ? "Preparing download..." : "Download your course PDF")
-                  : `Pay ₦${testConfig.pdfPrice.toLocaleString()} Once`
+                  : `Pay ₦2,000 Once`
               }
-              isClickable
-            />
-          </button>
-
-          <button onClick={handleStartLiveTest} className="block w-full text-left">
-            <DashboardCard
-              icon={<PlayCircle size={32} color="#2F4EA2" />}
-              title="Start Live Test"
-              description={liveTestDescription}
-              linkText={liveTestLinkText}
-              badge={cbtBadge}
               isClickable
             />
           </button>
@@ -215,6 +240,12 @@ export function Dashboard() {
             description={weakSubjectDescription}
             badge={weakSubjects.length > 0 ? "Based on your lowest subject averages" : "Complete a live test for insights"}
           />
+        </div>
+
+        <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
+          <p className="text-sm text-amber-800">
+            <span className="font-semibold">Important:</span> PDF and CBT access are separate purchases. Payment for one does not unlock the other.
+          </p>
         </div>
 
         <div className="mt-8 rounded-lg bg-white p-6 shadow-md">
@@ -319,6 +350,9 @@ export function Dashboard() {
     </div>
   );
 }
+
+// Default export in case routes.ts expects it
+export default Dashboard;
 
 function DashboardCard({
   icon, title, description, linkText, badge, isClickable = false,

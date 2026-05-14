@@ -37,10 +37,7 @@ useEffect(() => {
     <SEO
       title="UNIPORT Post UTME Past Questions & CBT Practice"
       description="Prepare for your UNIPORT Post UTME with confidence. Access past questions, take realistic CBT mock tests, and track your performance. Start with 2 free trials today."
-      canonical="https://campusguide.ng"
-      canonical="Campusguide.ng"
-      canonical="www.campusguide.ng"
-    />
+      canonical="https://campusguide.ng"    />
       
       <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-6xl px-4">

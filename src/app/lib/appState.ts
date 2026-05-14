@@ -181,6 +181,72 @@ export function setAppState(
   return nextState;
 }
 
+/**
+ * NEW: Fetch free trials used from the database
+ * This ensures trials are synced across all devices
+ */
+export async function fetchFreeTrialsUsed(userId: string): Promise<number> {
+  if (!hasSupabaseEnv || !userId) return 0;
+  
+  try {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("free_trials_used")
+      .eq("id", userId)
+      .single();
+    
+    if (error) {
+      console.error("Error fetching free trials:", error);
+      return 0;
+    }
+    
+    return data?.free_trials_used ?? 0;
+  } catch (err) {
+    console.error("Error fetching free trials:", err);
+    return 0;
+  }
+}
+
+/**
+ * NEW: Update free trials used in the database
+ */
+export async function incrementFreeTrialsUsed(userId: string): Promise<boolean> {
+  if (!hasSupabaseEnv || !userId) return false;
+  
+  try {
+    // First, get the current value
+    const { data: currentData, error: fetchError } = await supabase
+      .from("profiles")
+      .select("free_trials_used")
+      .eq("id", userId)
+      .single();
+    
+    if (fetchError) {
+      console.error("Error fetching current trials:", fetchError);
+      return false;
+    }
+    
+    const currentTrials = currentData?.free_trials_used ?? 0;
+    const newTrials = currentTrials + 1;
+    
+    // Update the database
+    const { error: updateError } = await supabase
+      .from("profiles")
+      .update({ free_trials_used: newTrials })
+      .eq("id", userId);
+    
+    if (updateError) {
+      console.error("Error updating trials:", updateError);
+      return false;
+    }
+    
+    return true;
+  } catch (err) {
+    console.error("Error incrementing free trials:", err);
+    return false;
+  }
+}
+
 export function getFreeTrialsRemaining(state: AppState) {
   return Math.max(0, FREE_TRIAL_LIMIT - state.freeTrialsUsed);
 }
@@ -198,7 +264,19 @@ export function canStartFreeLiveTest(state: AppState) {
   );
 }
 
-export function startLiveTestSession(userId?: string) {
+/**
+ * UPDATED: Now updates both localStorage AND database
+ */
+export async function startLiveTestSession(userId?: string): Promise<AppState> {
+  // Update database first if userId is provided
+  if (userId && hasSupabaseEnv) {
+    const success = await incrementFreeTrialsUsed(userId);
+    if (!success) {
+      console.error("Failed to increment trials in database");
+    }
+  }
+  
+  // Then update localStorage
   return setAppState(
     (state) => {
       if (state.liveTestAccess || state.freeTrialsUsed >= FREE_TRIAL_LIMIT) {

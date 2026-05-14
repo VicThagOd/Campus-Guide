@@ -78,8 +78,19 @@ export function Login() {
       }
     } catch (err: any) {
       const message = err?.message || 'Something went wrong';
-      if (message.toLowerCase().includes('duplicate') || message.toLowerCase().includes('already registered')) {
-        setError('An account already exists with this email. Switch to login or reset your password.');
+      
+      // Check for duplicate/constraint errors and specify which field
+      if (message.toLowerCase().includes('duplicate') || message.toLowerCase().includes('already')) {
+        if (message.toLowerCase().includes('username')) {
+          setError('This username is already taken. Please choose a different username.');
+        } else if (message.toLowerCase().includes('name') && !message.toLowerCase().includes('username')) {
+          setError('An account with this full name already exists. Please use a different name or contact support.');
+        } else if (message.toLowerCase().includes('email')) {
+          setError('An account already exists with this email. Switch to login or reset your password.');
+        } else {
+          // Generic duplicate error if field isn't specified
+          setError('An account with these details already exists. Please change your username, email, or full name.');
+        }
       } else if (message.toLowerCase().includes('invalid login credentials') ||
                  message.toLowerCase().includes('invalid password') ||
                  message.toLowerCase().includes('wrong password')) {
@@ -108,8 +119,8 @@ export function Login() {
         <div className="mb-6">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 rounded-lg px-4 py-2 transition-all hover:opacity-90"
-            style={{ backgroundColor: '#6b7280', color: '#FFFFFF', fontWeight: 500 }}
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
+            style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
           >
             <ArrowLeft size={16} />
             Back to Home

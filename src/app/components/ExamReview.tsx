@@ -142,12 +142,12 @@ export function ExamReview() {
       <div className="mx-auto max-w-5xl px-4 py-8">
         <div className="mb-5 flex items-center justify-between gap-4">
           <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 rounded-lg px-4 py-2 transition-all hover:opacity-90"
-            style={{ backgroundColor: "#6b7280", color: "#FFFFFF", fontWeight: 500 }}
-          >
-            <ArrowLeft size={16} />
-            Back
+             onClick={() => navigate('/')}
+                      className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
+                      style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
+                    >
+                      <ArrowLeft size={16} />
+                      Back to Home
           </button>
 
           <div className="flex flex-wrap items-center justify-end gap-3 text-sm">
