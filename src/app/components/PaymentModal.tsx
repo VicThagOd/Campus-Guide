@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, KeyRound, LoaderCircle, ShieldCheck, X } from "lucide-react";
-import { initializeCredoPayment } from "../lib/credoPayment";
+import { initializeFlutterwavePayment } from "../lib/flutterwavePayment";
 import { redeemCode } from "../lib/redeemCode";
 
 interface PaymentModalProps {
@@ -44,7 +44,7 @@ export function PaymentModal({
     setStartingPayment(true);
 
     try {
-      const checkoutUrl = await initializeCredoPayment({
+      const checkoutUrl = await initializeFlutterwavePayment({
         amount,
         paymentType,
         userId,
@@ -109,10 +109,10 @@ export function PaymentModal({
           onClick={handlePaymentStart}
           disabled={startingPayment}
           className="flex w-full items-center justify-center gap-2 rounded-lg py-3 transition-all hover:opacity-90 disabled:opacity-50"
-          style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
+          style={{ backgroundColor: "#F5A623", color: "#FFFFFF", fontWeight: 500 }}
         >
           {startingPayment ? <LoaderCircle size={18} className="animate-spin" /> : <ShieldCheck size={18} />}
-          {startingPayment ? "Opening Credo..." : "Pay with Credo"}
+          {startingPayment ? "Opening Flutterwave..." : "Pay with Flutterwave"}
         </button>
 
         {paymentError ? <p className="mt-4 text-sm text-red-600">{paymentError}</p> : null}
@@ -165,7 +165,7 @@ export function PaymentModal({
         </div>
 
         <p className="mt-6 text-center" style={{ fontSize: "0.75rem", color: "#000000", opacity: 0.5 }}>
-          Secure payment powered by Credo
+          Secure payment powered by Flutterwave
         </p>
       </div>
     </div>

@@ -94,10 +94,10 @@ export function PaymentConfirmation() {
     <div className="min-h-screen px-4 py-12" style={{ backgroundColor: "#BFC3C6" }}>
       <div className="mx-auto max-w-xl rounded-lg bg-white p-8 shadow-md">
         <button
-          onClick={() => navigate("/dashboard")}
-          className="mb-6 rounded-lg px-4 py-2 text-sm transition-all hover:opacity-90"
-          style={{ backgroundColor: "#6b7280", color: "#FFFFFF", fontWeight: 500 }}
-        >
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
+            style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
+          >
           Back to Dashboard
         </button>
 

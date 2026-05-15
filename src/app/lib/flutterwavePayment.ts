@@ -1,7 +1,7 @@
-// lib/credoPayment.ts
+// lib/flutterwavePayment.ts
 import { supabase } from "./supabaseClient";
 
-export interface InitializeCredoPaymentParams {
+export interface InitializeFlutterwavePaymentParams {
   amount: number;
   paymentType: "pdf" | "cbt";
   userId: string;
@@ -10,10 +10,10 @@ export interface InitializeCredoPaymentParams {
   course: string;
 }
 
-export async function initializeCredoPayment(
-  params: InitializeCredoPaymentParams,
+export async function initializeFlutterwavePayment(
+  params: InitializeFlutterwavePaymentParams,
 ): Promise<string> {
-  const { data, error } = await supabase.functions.invoke("create-credo-payment", {
+  const { data, error } = await supabase.functions.invoke("create-flutterwave-payment", {
     body: params,
   });
 
