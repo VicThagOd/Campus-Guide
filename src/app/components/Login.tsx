@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { supabase } from '../../lib/supabase';
 
 type Mode = 'login' | 'signup';
+type AvailabilityStatus = 'idle' | 'checking' | 'available' | 'taken' | 'error';
 
 export function Login() {
   const location = useLocation();
@@ -20,24 +22,48 @@ export function Login() {
   const [info, setInfo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [usernameStatus, setUsernameStatus] = useState<AvailabilityStatus>('idle');
 
-  const passwordChecks = {
-    minLength: password.length >= 8,
-    lowercase: /[a-z]/.test(password),
-    uppercase: /[A-Z]/.test(password),
-    number: /\d/.test(password),
-    special: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password),
-  };
-  const signupPasswordValid = Object.values(passwordChecks).every(Boolean);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const validateSignupPassword = (password: string) => {
-    if (password.length < 8) return 'Password must be at least 8 characters long';
-    if (!/[a-z]/.test(password)) return 'Password must contain at least one lowercase letter';
-    if (!/[A-Z]/.test(password)) return 'Password must contain at least one uppercase letter';
-    if (!/\d/.test(password)) return 'Password must contain at least one number';
-    if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) return 'Password must contain at least one special character';
-    return null;
-  };
+  // Real-time username availability check
+  useEffect(() => {
+    if (mode !== 'signup') return;
+
+    const trimmed = username.trim().toLowerCase();
+
+    if (!trimmed || trimmed.length < 3) {
+      setUsernameStatus('idle');
+      return;
+    }
+
+    setUsernameStatus('checking');
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('username')
+          .eq('username', trimmed)
+          .maybeSingle();
+
+        if (error) {
+          setUsernameStatus('error');
+          return;
+        }
+
+        setUsernameStatus(data ? 'taken' : 'available');
+      } catch {
+        setUsernameStatus('error');
+      }
+    }, 500);
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [username, mode]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -49,14 +75,25 @@ export function Login() {
 
     try {
       if (mode === 'signup') {
-        const passwordError = validateSignupPassword(password);
-        if (passwordError) {
-          setError(passwordError);
+        if (password.length < 8) {
+          setError('Password must be at least 8 characters.');
           setIsLoading(false);
           return;
         }
 
-        const derivedUsername = username || name.split(' ')[0] || normalizedEmail.split('@')[0] || 'Student';
+        if (usernameStatus === 'taken') {
+          setError('That username is already taken. Please choose another.');
+          setIsLoading(false);
+          return;
+        }
+
+        if (usernameStatus === 'checking') {
+          setError('Please wait while we check your username.');
+          setIsLoading(false);
+          return;
+        }
+
+        const derivedUsername = username.trim().toLowerCase() || name.split(' ')[0].toLowerCase() || normalizedEmail.split('@')[0];
         const derivedCourse = course || 'Post UTME Candidate';
 
         await signup({
@@ -67,7 +104,6 @@ export function Login() {
           course: derivedCourse,
         });
 
-        // Success – show message and switch to login
         setInfo('Account created successfully! Please log in with your credentials.');
         setMode('login');
         setEmail('');
@@ -78,22 +114,20 @@ export function Login() {
       }
     } catch (err: any) {
       const message = err?.message || 'Something went wrong';
-      
-      // Check for duplicate/constraint errors and specify which field
+
       if (message.toLowerCase().includes('duplicate') || message.toLowerCase().includes('already')) {
         if (message.toLowerCase().includes('username')) {
           setError('This username is already taken. Please choose a different username.');
-        } else if (message.toLowerCase().includes('name') && !message.toLowerCase().includes('username')) {
-          setError('An account with this full name already exists. Please use a different name or contact support.');
         } else if (message.toLowerCase().includes('email')) {
-          setError('An account already exists with this email. Switch to login or reset your password.');
+          setError('An account already exists with this email. Switch to login.');
         } else {
-          // Generic duplicate error if field isn't specified
-          setError('An account with these details already exists. Please change your username, email, or full name.');
+          setError('An account with these details already exists. Please try a different username or email.');
         }
-      } else if (message.toLowerCase().includes('invalid login credentials') ||
-                 message.toLowerCase().includes('invalid password') ||
-                 message.toLowerCase().includes('wrong password')) {
+      } else if (
+        message.toLowerCase().includes('invalid login credentials') ||
+        message.toLowerCase().includes('invalid password') ||
+        message.toLowerCase().includes('wrong password')
+      ) {
         setError('Invalid login credentials. Please check your email and password.');
       } else if (message.toLowerCase().includes('user not found') || message.toLowerCase().includes('no user')) {
         setError('No account found with that email address.');
@@ -111,6 +145,34 @@ export function Login() {
     setInfo('');
     setEmail('');
     setPassword('');
+    setUsername('');
+    setUsernameStatus('idle');
+  };
+
+  const UsernameIndicator = () => {
+    if (usernameStatus === 'idle') return null;
+    if (usernameStatus === 'checking') {
+      return (
+        <span className="flex items-center gap-1 mt-1 text-sm text-slate-500">
+          <Loader2 size={14} className="animate-spin" /> Checking...
+        </span>
+      );
+    }
+    if (usernameStatus === 'available') {
+      return (
+        <span className="flex items-center gap-1 mt-1 text-sm text-green-600">
+          <CheckCircle2 size={14} /> Available
+        </span>
+      );
+    }
+    if (usernameStatus === 'taken') {
+      return (
+        <span className="flex items-center gap-1 mt-1 text-sm text-red-600">
+          <XCircle size={14} /> Already taken
+        </span>
+      );
+    }
+    return null;
   };
 
   return (
@@ -138,15 +200,10 @@ export function Login() {
 
         <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-lg">
           {error && (
-            <div className="mb-4 rounded bg-red-100 p-3 text-red-700 text-sm">
-              {error}
-            </div>
+            <div className="mb-4 rounded bg-red-100 p-3 text-red-700 text-sm">{error}</div>
           )}
-
           {info && (
-            <div className="mb-4 rounded bg-green-100 p-3 text-green-700 text-sm">
-              {info}
-            </div>
+            <div className="mb-4 rounded bg-green-100 p-3 text-green-700 text-sm">{info}</div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -172,9 +229,16 @@ export function Login() {
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full rounded-lg border px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      usernameStatus === 'taken'
+                        ? 'border-red-400'
+                        : usernameStatus === 'available'
+                        ? 'border-green-400'
+                        : 'border-gray-300'
+                    }`}
                     placeholder="Choose a username"
                   />
+                  <UsernameIndicator />
                 </div>
 
                 <div>
@@ -209,7 +273,7 @@ export function Login() {
                     <div className="mt-2 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2">
                       <span className="mt-0.5 text-amber-500">⚠️</span>
                       <p className="text-sm text-amber-700">
-                        Choose carefully — your course/faculty determines the CBT questions and PDF study materials you'll receive.{' '}
+                        Choose carefully — your course determines the CBT questions and PDF materials you'll receive.{' '}
                         <span className="font-semibold">This cannot be changed after signup.</span>
                       </p>
                     </div>
@@ -241,7 +305,7 @@ export function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-12 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter your password"
+                  placeholder={mode === 'signup' ? 'Min. 8 characters' : 'Enter your password'}
                   autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
                   required
                 />
@@ -253,35 +317,19 @@ export function Login() {
                   {showPassword ? 'Hide' : 'Show'}
                 </button>
               </div>
+              {mode === 'signup' && password.length > 0 && password.length < 8 && (
+                <p className="mt-1 text-sm text-red-600">Password must be at least 8 characters.</p>
+              )}
             </div>
-
-            {mode === 'signup' && (
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-700">
-                <p className="mb-2 font-medium text-slate-800">Password requirements</p>
-                <ul className="space-y-1">
-                  <li className={passwordChecks.minLength ? 'text-green-700' : 'text-red-600'}>• At least 8 characters</li>
-                  <li className={passwordChecks.lowercase ? 'text-green-700' : 'text-red-600'}>• At least one lowercase letter</li>
-                  <li className={passwordChecks.uppercase ? 'text-green-700' : 'text-red-600'}>• At least one uppercase letter</li>
-                  <li className={passwordChecks.number ? 'text-green-700' : 'text-red-600'}>• At least one number</li>
-                  <li className={passwordChecks.special ? 'text-green-700' : 'text-red-600'}>• At least one special character</li>
-                </ul>
-              </div>
-            )}
 
             <button
               type="submit"
-              disabled={isLoading || (mode === 'signup' && !signupPasswordValid)}
+              disabled={isLoading || (mode === 'signup' && (password.length < 8 || usernameStatus === 'taken' || usernameStatus === 'checking'))}
               className="w-full rounded-lg py-3 font-medium text-white transition-all hover:opacity-90 disabled:opacity-50"
               style={{ backgroundColor: '#2F4EA2' }}
             >
               {isLoading ? 'Please wait...' : mode === 'signup' ? 'Sign Up' : 'Log In'}
             </button>
-
-            {mode === 'signup' && !signupPasswordValid && (
-              <p className="mt-3 text-sm text-slate-600">
-                Complete all password requirements before signing up.
-              </p>
-            )}
           </form>
 
           <div className="mt-6 text-center">
