@@ -121,7 +121,7 @@ export function Login() {
         } else if (message.toLowerCase().includes('email')) {
           setError('An account already exists with this email. Switch to login.');
         } else {
-          setError('An account with these details already exists. Please try a different username or email.');
+          setError('An account with this email already exists. Please try a different email.');
         }
       } else if (
         message.toLowerCase().includes('invalid login credentials') ||
