@@ -121,7 +121,7 @@ export function Login() {
         } else if (message.toLowerCase().includes('email')) {
           setError('An account already exists with this email. Switch to login.');
         } else {
-          setError('An account with this email already exists. Please try a different email.');
+          setError('An account with these details already exists. Please try a different username or email.');
         }
       } else if (
         message.toLowerCase().includes('invalid login credentials') ||
@@ -267,6 +267,7 @@ export function Login() {
                     <option value="Nursing">Nursing</option>
                     <option value="Social Sciences">Social Sciences</option>
                     <option value="Management Sciences">Management Sciences</option>
+                    <option value="Allied Health Sciences">Allied Health Sciences</option>
                   </select>
 
                   {course && (
