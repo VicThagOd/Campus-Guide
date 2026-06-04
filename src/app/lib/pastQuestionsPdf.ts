@@ -3,6 +3,11 @@ import { supabase } from "./supabaseClient";
 const DEFAULT_BUCKET = "past-questions";
 const DEFAULT_FOLDER = "pdf";
 
+// Courses that share the same PDF as another course
+const COURSE_ALIASES: Record<string, string> = {
+  "allied health sciences": "nursing",
+};
+
 function slugifyCourse(value: string): string {
   return value
     .trim()
@@ -12,18 +17,22 @@ function slugifyCourse(value: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+function resolveCourseAlias(course: string): string {
+  const normalized = course.trim().toLowerCase();
+  return COURSE_ALIASES[normalized] ?? course;
+}
+
 export function getPastQuestionsObjectPath(course: string): string {
   const safeCourse = course && course.trim() ? course : "post-utme-candidate";
-  const slug = slugifyCourse(safeCourse);
+  const resolved = resolveCourseAlias(safeCourse);
+  const slug = slugifyCourse(resolved);
   return `${DEFAULT_FOLDER}/${slug}.pdf`;
 }
 
 async function resolveObjectPathFromDb(course: string): Promise<string | null> {
-  const normalized = course?.trim();
+  const normalized = resolveCourseAlias(course?.trim());
   if (!normalized) return null;
 
-  // Uses the table you created: public.pdf_files(title, file_path, ...)
-  // RLS must allow authenticated SELECT on this table.
   const { data, error } = await supabase
     .from("pdf_files")
     .select("file_path")
@@ -59,8 +68,6 @@ export async function createPastQuestionsDownloadUrl(params: {
 }
 
 export function triggerBrowserDownload(url: string, filename: string): void {
-  // Fetch the file as a blob first, then trigger download
-  // This works for cross-origin URLs (like Supabase signed URLs)
   fetch(url)
     .then((response) => response.blob())
     .then((blob) => {
@@ -74,7 +81,6 @@ export function triggerBrowserDownload(url: string, filename: string): void {
       window.URL.revokeObjectURL(blobUrl);
     })
     .catch(() => {
-      // Fallback: just open in new tab
       window.open(url, "_blank", "noopener,noreferrer");
     });
 }
