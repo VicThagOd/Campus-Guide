@@ -46,7 +46,7 @@ export function Login() {
         const { data, error } = await supabase
           .from('profiles')
           .select('username')
-          .eq('username', trimmed)
+          .ilike('username', trimmed)
           .maybeSingle();
 
         if (error) {
