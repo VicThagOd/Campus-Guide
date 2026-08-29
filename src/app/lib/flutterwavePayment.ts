@@ -3,11 +3,16 @@ import { supabase } from "./supabaseClient";
 
 export interface InitializeFlutterwavePaymentParams {
   amount: number;
-  paymentType: "pdf" | "cbt";
+  paymentType: "pdf" | "cbt" | "ticket" | "inspection";
   userId: string;
   email: string;
   name: string;
   course: string;
+  eventId?: string;
+  tierName?: string;
+  ticketPrice?: number;
+  accommodationId?: string;
+  whatsappNumber?: string;
 }
 
 export async function initializeFlutterwavePayment(

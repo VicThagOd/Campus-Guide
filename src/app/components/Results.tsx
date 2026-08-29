@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, RotateCcw, Trophy, TrendingUp } from "lucide-react";
+import { AnalyticsUpIcon, Award01Icon, Home01Icon, RefreshIcon } from "hugeicons-react";
 import { useAuth } from "../../context/AuthContext";
 import { SubjectPerformance, IncorrectQuestion, getAppState, testConfig } from "../lib/appState";
 
@@ -21,11 +21,11 @@ export function Results() {
   const incorrectQuestions: IncorrectQuestion[] = result?.incorrectQuestions ?? [];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#BFC3C6" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#F7F8FA" }}>
       <div className="mx-auto max-w-3xl px-4 py-8">
-        <div className="mb-6 rounded-lg bg-white p-8 text-center shadow-lg">
+        <div className="mb-6 rounded-xl border bg-white p-8 text-center" style={{ borderColor: "#BFC3C6" }}>
           <div className="mb-6">
-            <Trophy size={64} color="#2F4EA2" className="mx-auto mb-4" />
+            <Award01Icon size={64} color="#2F4EA2" className="mx-auto mb-4" />
             <h1 style={{ fontSize: "2rem", fontWeight: 600, color: "#000000", marginBottom: "0.5rem" }}>Test Completed!</h1>
             <p style={{ color: "#000000", opacity: 0.7 }}>Here&apos;s how you performed in the test.</p>
           </div>
@@ -53,26 +53,26 @@ export function Results() {
           <div className="flex justify-center gap-4">
             <Link
               to="/test-warning"
-              className="flex items-center gap-2 rounded-lg px-6 py-3 transition-all"
+              className="flex items-center gap-2 rounded-lg px-6 py-3 transition-opacity duration-150 hover:opacity-90"
               style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
             >
-              <RotateCcw size={20} />
+              <RefreshIcon size={20} />
               Retry Test
             </Link>
             <Link
-              to="/dashboard"
-              className="flex items-center gap-2 rounded-lg border-2 px-6 py-3 transition-all"
+              to="/post-utme"
+              className="flex items-center gap-2 rounded-lg border-2 px-6 py-3 transition-colors duration-150 hover:bg-gray-50"
               style={{ borderColor: "#2F4EA2", color: "#2F4EA2", fontWeight: 500 }}
             >
-              <Home size={20} />
-              Dashboard
+              <Home01Icon size={20} />
+              Back to Practice
             </Link>
           </div>
         </div>
 
-        <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
-          <h3 className="mb-4 flex items-center gap-2" style={{ fontSize: "1.25rem", fontWeight: 600, color: "#000000" }}>
-            <TrendingUp size={24} color="#2F4EA2" />
+        <div className="mb-6 rounded-xl border bg-white p-6" style={{ borderColor: "#BFC3C6" }}>
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-bold tracking-tight" style={{ color: "#000000" }}>
+            <AnalyticsUpIcon size={24} color="#2F4EA2" />
             Performance Breakdown
           </h3>
           <div className="space-y-4">
@@ -103,7 +103,7 @@ export function Results() {
             <Link
               to={`/review/${result.id}`}
               state={{ exam: result.exam }}
-              className="flex items-center justify-center gap-2 rounded-lg px-8 py-3 transition-all hover:opacity-90"
+              className="flex items-center justify-center gap-2 rounded-lg px-8 py-3 transition-opacity duration-150 hover:opacity-90"
               style={{ backgroundColor: "#16a34a", color: "#FFFFFF", fontWeight: 500 }}
             >
               Review Full Exam

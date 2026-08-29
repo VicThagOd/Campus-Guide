@@ -1,26 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
-import { AlertTriangle, Clock, FileText, Shield, ArrowLeft } from "lucide-react";
+import { Alert01Icon, ArrowLeft01Icon, Clock01Icon, DocumentValidationIcon, Shield01Icon } from "hugeicons-react";
 import { testConfig } from "../lib/appState";
 
 export function TestWarning() {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#BFC3C6" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#F7F8FA" }}>
       <div className="mx-auto max-w-3xl px-4 py-12">
         <div className="mb-6">
           <button
              onClick={() => navigate('/')}
-              className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
-                style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
+              className="flex items-center gap-1.5 rounded-lg border px-4 py-1.5 text-sm font-semibold transition-colors duration-150 hover:bg-white"
+                style={{ color: '#2F4EA2', border: '1px solid #BFC3C6' }}
                     >
-                    <ArrowLeft size={16} />
+                    <ArrowLeft01Icon size={14} />
                       Back to Home
             </button>
         </div>
-        <div className="rounded-lg bg-white p-8 shadow-lg">
+        <div className="rounded-xl border bg-white p-8" style={{ borderColor: "#BFC3C6" }}>
           <div className="mb-8 text-center">
             <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full" style={{ backgroundColor: "#2F4EA2" }}>
-              <AlertTriangle size={48} color="#FFFFFF" />
+              <Alert01Icon size={48} color="#FFFFFF" />
             </div>
             <h1 className="mb-2" style={{ fontSize: "2rem", fontWeight: 600, color: "#2F4EA2" }}>
               Test Instructions
@@ -30,19 +30,19 @@ export function TestWarning() {
 
           <div className="mb-8 space-y-6">
             <InstructionCard
-              icon={<Clock size={32} color="#2F4EA2" />}
+              icon={<Clock01Icon size={32} color="#2F4EA2" />}
               title="Timed Test"
               description={`You have 30 minutes to complete ${testConfig.totalQuestions} questions. The test will auto-submit when the timer runs out.`}
             />
 
             <InstructionCard
-              icon={<Shield size={32} color="#2F4EA2" />}
+              icon={<Shield01Icon size={32} color="#2F4EA2" />}
               title="No Cheating"
               description="Academic integrity is crucial. Do not use external resources, calculators, or assistance during the test."
             />
 
             <InstructionCard
-              icon={<FileText size={32} color="#2F4EA2" />}
+              icon={<DocumentValidationIcon size={32} color="#2F4EA2" />}
               title="Scoring Format"
               description={`This mock exam is scored over ${testConfig.totalPoints} points. Your results will show answered, correct, incorrect, unanswered, and subject-by-subject performance.`}
             />
@@ -71,15 +71,15 @@ export function TestWarning() {
 
           <div className="flex items-center justify-center gap-4">
             <Link
-              to="/dashboard"
-              className="rounded-lg border-2 px-8 py-3 transition-all hover:bg-gray-50"
+              to="/post-utme"
+              className="rounded-lg border-2 px-8 py-3 transition-colors duration-150 hover:bg-gray-50"
               style={{ borderColor: "#2F4EA2", color: "#2F4EA2", fontWeight: 500 }}
             >
               Cancel
             </Link>
             <Link
               to="/test"
-              className="rounded-lg px-8 py-3 transition-all hover:opacity-90"
+              className="rounded-lg px-8 py-3 transition-opacity duration-150 hover:opacity-90"
               style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
             >
               Start Test

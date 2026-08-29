@@ -9,6 +9,9 @@ interface Profile {
   name: string;
   course: string;
   email: string;
+  email_opt_in: boolean;
+  user_type: string;
+  last_login_at: string | null;
 }
 
 interface AuthContextType {
@@ -16,7 +19,7 @@ interface AuthContextType {
   profile: Profile | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signup: (data: SignupData) => Promise<void>;
+  signup: (data: SignupData) => Promise<{ requiresEmailConfirmation: boolean }>;
   logout: () => Promise<void>;
   resetPasswordForEmail: (email: string) => Promise<void>;
 }
@@ -27,6 +30,8 @@ interface SignupData {
   email: string;
   password: string;
   course: string;
+  email_opt_in: boolean;
+  user_type: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -87,7 +92,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signup = async (data: SignupData) => {
     if (!hasSupabaseEnv) throw new Error("Supabase environment variables are missing.");
-    const { error } = await supabase.auth.signUp({
+    const { data: authData, error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
       options: {
@@ -95,10 +100,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           name: data.name,
           username: data.username,
           course: data.course,
+          email_opt_in: data.email_opt_in,
+          user_type: data.user_type,
         },
       },
     });
     if (error) throw new Error(error.message);
+    return { requiresEmailConfirmation: !authData.session };
   };
 
   const logout = async () => {

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Mail, Phone, MapPin, MessageCircle, Facebook, Music, ArrowLeft } from "lucide-react";
+import { ArrowLeft01Icon, CallIcon, Location01Icon, Mail01Icon } from "hugeicons-react";
 import { SiFacebook, SiTiktok, SiWhatsapp } from "react-icons/si";
 import { SEO } from "./SEO";
 
@@ -18,10 +18,10 @@ export function Contact() {
           
           <button
                       onClick={() => navigate('/')}
-                      className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
-                      style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
+                      className="flex items-center gap-1.5 rounded-lg border px-4 py-1.5 text-sm font-semibold transition-colors duration-150 hover:bg-white"
+                      style={{ color: '#2F4EA2', border: '1px solid #BFC3C6' }}
                     >
-                      <ArrowLeft size={16} />
+                      <ArrowLeft01Icon size={14} />
                       Back to Home
            </button>
         </div>
@@ -35,10 +35,10 @@ export function Contact() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+          <div className="bg-white rounded-lg  p-6 border">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#2F4EA2' }}>
-                <Mail size={24} color="#FFFFFF" />
+                <Mail01Icon size={24} color="#FFFFFF" />
               </div>
               <div>
                 <h3 className="mb-2" style={{ fontSize: '1.125rem', fontWeight: 600, color: '#000000' }}>
@@ -55,10 +55,10 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+          <div className="bg-white rounded-lg  p-6 border">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#2F4EA2' }}>
-                <Phone size={24} color="#FFFFFF" />
+                <CallIcon size={24} color="#FFFFFF" />
               </div>
               <div>
                 <h3 className="mb-2" style={{ fontSize: '1.125rem', fontWeight: 600, color: '#000000' }}>
@@ -92,10 +92,10 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+          <div className="bg-white rounded-lg  p-6 border">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#2F4EA2' }}>
-                <MapPin size={24} color="#FFFFFF" />
+                <Location01Icon size={24} color="#FFFFFF" />
               </div>
               <div>
                 <h3 className="mb-2" style={{ fontSize: '1.125rem', fontWeight: 600, color: '#000000' }}>
@@ -108,7 +108,7 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+          <div className="bg-white rounded-lg  p-6 border">
   <div className="flex items-start gap-4">
     {/* Updated background to the official WhatsApp Brand Green #25D366 */}
     <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#25D366' }}>
@@ -132,7 +132,7 @@ export function Contact() {
 </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-8 border border-gray-100 mb-12">
+        <div className="bg-white rounded-lg  p-8 border mb-12">
           <h2 className="mb-6 text-center" style={{ fontSize: '1.5rem', fontWeight: 600, color: '#000000' }}>
             Follow Us on Social Media
           </h2>

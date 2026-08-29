@@ -1,402 +1,226 @@
-import { FormEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AlertCircle, ArrowLeft, FileDown, PlayCircle, Star, TrendingUp } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
-import { PaymentModal } from "./PaymentModal";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  AppState,
-  canStartFreeLiveTest,
-  getAppState,
-  getFreeTrialsRemaining,
-  getWeakSubjects,
-  saveReviewToSupabase, // corrected import
-  setAppState as setStoredAppState,
-  testConfig,
-} from "../lib/appState";
-import { fetchUserAccess, isCbtAccessExpired, UserAccess } from "../lib/userAccess";
-import { createPastQuestionsDownloadUrl, triggerBrowserDownload } from "../lib/pastQuestionsPdf";
+  Calendar03Icon,
+  DocumentValidationIcon,
+  GraduationScrollIcon,
+  House01Icon,
+  Logout01Icon,
+  Notification03Icon,
+  QuestionIcon,
+  Target01Icon,
+  UserGroupIcon,
+} from "hugeicons-react";
+import { useAuth } from "../../context/AuthContext";
+import { hasSupabaseEnv } from "../../lib/env";
+import { supabase } from "../../lib/supabase";
+import { SEO } from "./SEO";
 
-type PaymentType = "pdf" | "cbt" | null;
+const PRIMARY = "#2F4EA2";
+const INK = "#111827";
+const MUTED = "#6B7280";
+const BORDER = "#BFC3C6";
+
+const aspirantTiles = [
+  {
+    label: "Post-UTME Practice",
+    description: "Past questions, CBT mock tests and your performance",
+    to: "/post-utme",
+    icon: <DocumentValidationIcon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "JAMB Prep Hub",
+    description: "UTME mock exams, syllabus guides and practice sets",
+    to: "/jamb",
+    icon: <GraduationScrollIcon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "Aspirant Hub",
+    description: "Cut-off marks, subject combinations and admission guides",
+    to: "/aspirant-services",
+    icon: <Target01Icon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "UNIPORT Updates",
+    description: "Verified news, deadlines and what to do next",
+    to: "/updates",
+    icon: <Notification03Icon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "Important Dates",
+    description: "JAMB, post-UTME, admission and registration dates",
+    to: "/dates",
+    icon: <Calendar03Icon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "Events",
+    description: "Seminars, workshops and campus gatherings",
+    to: "/events",
+    icon: <UserGroupIcon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "Ask Campus Guide",
+    description: "Ask anything about UNIPORT, get a straight answer",
+    to: "/ask",
+    icon: <QuestionIcon size={40} color={PRIMARY} />,
+  },
+];
+
+const studentTiles = [
+  {
+    label: "Freshers Hub",
+    description: "Acceptance, clearance, fees and orientation, step by step",
+    to: "/freshers",
+    icon: <GraduationScrollIcon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "Accommodation",
+    description: "Student housing around UNIPORT with prices and distance",
+    to: "/accommodation",
+    icon: <House01Icon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "UNIPORT Updates",
+    description: "Verified news, deadlines and what to do next",
+    to: "/updates",
+    icon: <Notification03Icon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "Important Dates",
+    description: "JAMB, post-UTME, admission and registration dates",
+    to: "/dates",
+    icon: <Calendar03Icon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "Events",
+    description: "Seminars, workshops and campus gatherings",
+    to: "/events",
+    icon: <UserGroupIcon size={40} color={PRIMARY} />,
+  },
+  {
+    label: "Ask Campus Guide",
+    description: "Ask anything about UNIPORT, get a straight answer",
+    to: "/ask",
+    icon: <QuestionIcon size={40} color={PRIMARY} />,
+  },
+];
 
 export function Dashboard() {
-  const { user, profile, logout } = useAuth();
+  const { profile, logout } = useAuth();
   const navigate = useNavigate();
-  const username = profile?.username || profile?.name || "Student";
-  const course = profile?.course || "Post UTME Candidate";
-  const userId = user?.id ?? "";
-  const email = user?.email ?? "";
-
-  const [appState, setAppState] = useState<AppState>(getAppState(userId));
-  const [userAccess, setUserAccess] = useState<UserAccess>({
-    pdf_access: false,
-    cbt_access: false,
-    cbt_expires_at: null,
-  });
-  const [accessLoading, setAccessLoading] = useState(true);
-  const [activePayment, setActivePayment] = useState<PaymentType>(null);
-  const [reviewText, setReviewText] = useState("");
-  const [reviewRating, setReviewRating] = useState(5);
-  const [pdfDownloading, setPdfDownloading] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const bellRef = useRef<HTMLDivElement>(null);
+  const [isFirstLogin, setIsFirstLogin] = useState<boolean | null>(null);
 
   useEffect(() => {
-    if (!userId) return;
-    
-    async function loadUserData() {
-      setAccessLoading(true);
-      
-      // Fetch user access (PDF, CBT)
-      const access = await fetchUserAccess(userId);
-      setUserAccess(access);
-      
-      // Fetch free trials from database and update localStorage
-      const { fetchFreeTrialsUsed } = await import("../lib/appState");
-      const dbTrialsUsed = await fetchFreeTrialsUsed(userId);
-      
-      // Update localStorage with database value
-      const currentState = getAppState(userId);
-      const updatedState = {
-        ...currentState,
-        freeTrialsUsed: dbTrialsUsed,
-      };
-      setStoredAppState(() => updatedState, userId);
-      setAppState(updatedState);
-      
-      setAccessLoading(false);
+    function handleClickOutside(event: MouseEvent) {
+      if (bellRef.current && !bellRef.current.contains(event.target as Node)) {
+        setNotificationsOpen(false);
+      }
     }
-    
-    loadUserData();
-  }, [userId]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const results = appState.results;
-  const lastResult = results[0];
-  const weakSubjects = getWeakSubjects(results);
-  const freeTrialsRemaining = getFreeTrialsRemaining(appState);
-
-  const pdfAccess = userAccess.pdf_access;
-  const cbtAccess = userAccess.cbt_access;
-  const cbtExpired = isCbtAccessExpired(userAccess.cbt_expires_at);
-  const cbtActive = cbtAccess && !cbtExpired;
-
-  const handleDownloadPDF = async () => {
-    if (!pdfAccess) {
-      setActivePayment("pdf");
+  useEffect(() => {
+    if (!profile || !hasSupabaseEnv) {
+      if (profile) setIsFirstLogin(false);
       return;
     }
-    try {
-      setPdfDownloading(true);
-      const { url, filename } = await createPastQuestionsDownloadUrl({ course });
-      triggerBrowserDownload(url, filename);
-    } catch (err: any) {
-      const message = err?.message || "Could not download your PDF. Please try again.";
-      alert(message);
-    } finally {
-      setPdfDownloading(false);
+    const first = !profile.last_login_at;
+    setIsFirstLogin(first);
+    if (first) {
+      supabase
+        .from("profiles")
+        .update({ last_login_at: new Date().toISOString() })
+        .eq("id", profile.id);
     }
+  }, [profile?.id]);
+
+  if (!profile || isFirstLogin === null) return null;
+
+  const username = profile.username || profile.name || "Student";
+  const isAspirant = profile.user_type !== 'student';
+  const hubTiles = isAspirant ? aspirantTiles : studentTiles;
+  const roleLabel = isAspirant ? 'Aspirant' : 'Student';
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
   };
-
-  const handleStartLiveTest = async () => {
-    if (!userId) return;
-    const currentState = getAppState(userId);
-    if (!cbtActive && !canStartFreeLiveTest(currentState)) {
-      setActivePayment("cbt");
-      return;
-    }
-    
-    // Update both database and localStorage
-    const { startLiveTestSession } = await import("../lib/appState");
-    await startLiveTestSession(userId);
-    
-    setAppState(getAppState(userId));
-    navigate("/test-warning");
-  };
-
-  const handleAccessGranted = async () => {
-    setActivePayment(null);
-    if (userId) {
-      const access = await fetchUserAccess(userId);
-      setUserAccess(access);
-    }
-  };
-
-  const handleReviewSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!userId) return;
-    try {
-      await saveReviewToSupabase({
-        name: username,
-        course,
-        rating: reviewRating,
-        review: reviewText,
-      });
-      setReviewText("");
-      setReviewRating(5);
-      alert("Thank you. Your review has been published on the landing page.");
-    } catch (err: any) {
-      alert(err?.message || "Could not publish review. Please try again.");
-    }
-  };
-
-  const lastScoreDescription = lastResult
-    ? `${lastResult.score}% (${lastResult.pointsEarned}/${lastResult.pointsPossible} points)`
-    : "No live test taken yet";
-  const lastScoreBadge = lastResult
-    ? `${lastResult.correct} correct, ${lastResult.unanswered} unanswered`
-    : "Take your first test";
-  const weakSubjectDescription =
-    weakSubjects.length > 0
-      ? weakSubjects.slice(0, 3).map((item) => item.subject).join(", ")
-      : "No weak subjects recorded yet";
-
-  const liveTestLinkText = cbtActive
-    ? "Begin Test"
-    : freeTrialsRemaining > 0
-      ? `${freeTrialsRemaining} free trial${freeTrialsRemaining === 1 ? "" : "s"} left`
-      : "Pay ₦2,010.75 to unlock";
-
-  const liveTestDescription = cbtActive
-    ? `Take your full UNIPORT-style CBT mock examination`
-    : cbtExpired
-      ? `Your access expired on ${new Date(userAccess.cbt_expires_at!).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`
-      : `UNIPORT format: ${testConfig.totalQuestions} questions in 30 minutes, scored over ${testConfig.totalPoints}`;
-
-  const cbtBadge = cbtActive && userAccess.cbt_expires_at
-    ? `Expires: ${new Date(userAccess.cbt_expires_at).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`
-    : cbtExpired
-      ? "Subscription expired"
-      : undefined;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#BFC3C6" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#F7F8FA" }}>
+      <SEO
+        title="Dashboard"
+        description="Your Campus Guide hub: practice, aspirant services, accommodation and events."
+      />
       <div className="mx-auto max-w-4xl px-4 py-8">
-        <div className="mb-6">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
-            style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
-          >
-            <ArrowLeft size={16} />
-            Back to Home
-          </button>
-        </div>
-
-        <header className="mb-8 flex items-center justify-between">
+        <header className="mb-12 flex items-center justify-between">
           <div>
-            <h1 style={{ fontSize: "1.75rem", fontWeight: 600, color: "#000000", marginBottom: "0.5rem" }}>
-              Welcome, {username}
-            </h1>
-            <p style={{ color: "#000000", opacity: 0.7 }}>Ready to continue your preparation?</p>
+            <p className="text-lg font-medium tracking-tight" style={{ color: INK }}>
+              {isFirstLogin ? "Welcome" : "Welcome back"}, <span className="font-semibold">{username}</span>
+            </p>
+            <p className="text-sm" style={{ color: MUTED }}>
+              {roleLabel} Dashboard
+            </p>
           </div>
-          <button
-            onClick={logout}
-            className="rounded-lg px-4 py-2 text-sm transition-all hover:opacity-90"
-            style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
-          >
-            Log Out
-          </button>
-        </header>
-
-        {accessLoading ? (
-          <div className="mb-6 rounded-lg bg-white p-4 text-center shadow-md">
-            <p style={{ color: "#000000", opacity: 0.5 }}>Loading your access status...</p>
-          </div>
-        ) : null}
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <button onClick={handleStartLiveTest} className="block w-full text-left">
-            <DashboardCard
-              icon={<PlayCircle size={32} color="#2F4EA2" />}
-              title="Start Post UTME"
-              description={liveTestDescription}
-              linkText={liveTestLinkText}
-              badge={cbtBadge}
-              isClickable
-            />
-          </button>
-
-          <button onClick={handleDownloadPDF} className="block w-full text-left">
-            <DashboardCard
-              icon={<FileDown size={32} color="#2F4EA2" />}
-              title="Access Past Questions (PDF)"
-              description="One-time unlock for all available PDF past questions and study packs"
-              linkText={
-                pdfAccess
-                  ? (pdfDownloading ? "Preparing download..." : "Download your course PDF")
-                  : `Pay ₦2,000 Once`
-              }
-              isClickable
-            />
-          </button>
-
-          <DashboardCard
-            icon={<TrendingUp size={32} color="#2F4EA2" />}
-            title="Last Score"
-            description={lastScoreDescription}
-            badge={lastScoreBadge}
-          />
-
-          <DashboardCard
-            icon={<AlertCircle size={32} color="#2F4EA2" />}
-            title="Weak Subjects"
-            description={weakSubjectDescription}
-            badge={weakSubjects.length > 0 ? "Based on your lowest subject averages" : "Complete a live test for insights"}
-          />
-        </div>
-
-        <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-          <p className="text-sm text-amber-800">
-            <span className="font-semibold">Important:</span> PDF and CBT access are separate purchases. Payment for one does not unlock the other.
-          </p>
-        </div>
-
-        <div className="mt-8 rounded-lg bg-white p-6 shadow-md">
-          <h3 className="mb-4" style={{ fontSize: "1.25rem", fontWeight: 600, color: "#000000" }}>
-            Recent Activity
-          </h3>
-          <div className="space-y-3">
-            {results.length > 0 ? (
-              results.slice(0, 3).map((result) => (
-                <ActivityItem
-                  key={result.id}
-                  subject="Live Test"
-                  score={result.score}
-                  date={new Date(result.createdAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                  meta={`${result.correct}/${result.total} correct | ${result.pointsEarned}/${result.pointsPossible} points`}
-                />
-              ))
-            ) : (
-              <p style={{ color: "#000000", opacity: 0.6 }}>No test history yet. Start a live test to track your progress.</p>
-            )}
-          </div>
-        </div>
-
-        <div className="mt-8 rounded-lg bg-white p-6 shadow-md">
-          <h3 className="mb-4" style={{ fontSize: "1.25rem", fontWeight: 600, color: "#000000" }}>
-            Write a Review
-          </h3>
-          <form className="space-y-4" onSubmit={handleReviewSubmit}>
-            <div>
-              <p className="mb-2" style={{ color: "#000000", fontWeight: 500 }}>Your rating</p>
-              <div className="flex items-center gap-2">
-                {[1, 2, 3, 4, 5].map((value) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setReviewRating(value)}
-                    className="transition-transform hover:scale-105"
-                    aria-label={`Rate ${value} star${value === 1 ? "" : "s"}`}
-                  >
-                    <Star
-                      size={24}
-                      fill={value <= reviewRating ? "#2F4EA2" : "none"}
-                      color={value <= reviewRating ? "#2F4EA2" : "#BFC3C6"}
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label htmlFor="review-text" className="mb-2 block" style={{ color: "#000000", fontWeight: 500 }}>
-                Share your experience
-              </label>
-              <textarea
-                id="review-text"
-                rows={4}
-                value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2"
-                style={{ backgroundColor: "#FFFFFF", color: "#000000", borderColor: "#BFC3C6" }}
-                placeholder="How has Campus Guide helped you prepare for your Post UTME?"
-                required
-              />
+          <div className="flex items-center gap-2">
+            <div className="relative" ref={bellRef}>
+              <button
+                onClick={() => setNotificationsOpen((open) => !open)}
+                aria-label="Notifications"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border bg-white transition-colors duration-150 hover:border-[#2F4EA2]"
+                style={{ borderColor: BORDER }}
+              >
+                <Notification03Icon size={18} color={INK} />
+              </button>
+              {notificationsOpen && (
+                <div
+                  className="absolute right-0 top-11 z-20 w-64 rounded-xl border bg-white p-4 shadow-md"
+                  style={{ borderColor: BORDER }}
+                >
+                  <p className="mb-1 text-sm font-semibold" style={{ color: INK }}>Notifications</p>
+                  <p className="text-sm" style={{ color: MUTED }}>No new notifications.</p>
+                </div>
+              )}
             </div>
             <button
-              type="submit"
-              className="rounded-lg px-6 py-3 transition-all hover:opacity-90"
-              style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
+              onClick={handleLogout}
+              className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-opacity duration-150 hover:opacity-70"
+              style={{ color: MUTED }}
             >
-              Publish Review
+              <Logout01Icon size={16} />
+              Log Out
             </button>
-          </form>
+          </div>
+        </header>
+
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {hubTiles.map((tile) => (
+            <Link
+              key={tile.to}
+              to={tile.to}
+              className="flex flex-col items-start gap-3 rounded-xl border bg-white p-6 transition-colors duration-150 hover:border-[#2F4EA2]"
+              style={{ borderColor: BORDER }}
+            >
+              <span className="flex h-16 w-16 items-center justify-center rounded-xl lg:h-20 lg:w-20" style={{ backgroundColor: "#EEF2FC" }}>
+                {tile.icon}
+              </span>
+              <span>
+                <span className="block text-base font-semibold tracking-tight" style={{ color: INK }}>
+                  {tile.label}
+                </span>
+                <span className="mt-1 block text-sm leading-relaxed" style={{ color: MUTED }}>
+                  {tile.description}
+                </span>
+              </span>
+            </Link>
+          ))}
         </div>
       </div>
-
-      {activePayment && (
-        <PaymentModal
-          paymentType={activePayment}
-          userId={userId}
-          userEmail={email}
-          userName={username}
-          course={course}
-          amount={activePayment === "pdf" ? testConfig.pdfPrice : testConfig.liveTestPrice}
-          title={activePayment === "pdf" ? "Unlock Past Questions" : "Unlock Live Tests"}
-          description={
-            activePayment === "pdf"
-              ? "One-time payment for permanent PDF access"
-              : "30-day access to unlimited CBT mock tests"
-          }
-          benefitText={
-            activePayment === "pdf"
-              ? "Instant access to your course PDF after confirmed payment"
-              : "Instant 30-day CBT access after confirmed payment"
-          }
-          onAccessGranted={handleAccessGranted}
-          onClose={() => setActivePayment(null)}
-        />
-      )}
     </div>
   );
 }
 
-// Default export in case routes.ts expects it
 export default Dashboard;
-
-function DashboardCard({
-  icon, title, description, linkText, badge, isClickable = false,
-}: {
-  icon: React.ReactNode; title: string; description: string;
-  linkText?: string; badge?: string; isClickable?: boolean;
-}) {
-  return (
-    <div className={`rounded-lg bg-white p-6 shadow-md ${isClickable ? "cursor-pointer transition-shadow hover:shadow-lg" : ""}`}>
-      <div className="mb-4">{icon}</div>
-      <h3 className="mb-2" style={{ fontSize: "1.25rem", fontWeight: 600, color: "#000000" }}>{title}</h3>
-      <p className="mb-4" style={{ color: "#000000", opacity: 0.7 }}>{description}</p>
-      {badge && (
-        <span className="mb-3 inline-block rounded-full px-3 py-1" style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontSize: "0.875rem" }}>
-          {badge}
-        </span>
-      )}
-      {linkText && (
-        <div className="mt-2 inline-block rounded-lg px-4 py-2" style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}>
-          {linkText}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ActivityItem({ subject, score, date, meta }: { subject: string; score: number; date: string; meta: string }) {
-  return (
-    <div className="flex items-center justify-between border-b border-gray-200 py-3 last:border-0">
-      <div>
-        <p style={{ fontWeight: 500, color: "#000000" }}>{subject}</p>
-        <p style={{ fontSize: "0.875rem", color: "#000000", opacity: 0.6 }}>{date}</p>
-        <p style={{ fontSize: "0.875rem", color: "#000000", opacity: 0.6 }}>{meta}</p>
-      </div>
-      <div
-        className="rounded-lg px-4 py-2"
-        style={{
-          backgroundColor: score >= 70 ? "#2F4EA2" : score >= 50 ? "#BFC3C6" : "#ffebee",
-          color: score >= 50 ? "#FFFFFF" : "#000000",
-          fontWeight: 600,
-        }}
-      >
-        {score}%
-      </div>
-    </div>
-  );
-}
