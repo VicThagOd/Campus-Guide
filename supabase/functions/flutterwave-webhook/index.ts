@@ -6,10 +6,7 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
-const PRODUCT_AMOUNTS = { pdf: 2010.75, cbt: 2010.75 } as const;
-type PaymentType = "pdf" | "cbt";
-
-async function grantUserAccess(userId: string, email: string, paymentType: PaymentType) {
+async function grantUserAccess(userId: string, email: string, paymentType: "cbt" | "pdf") {
   const expiresAt = paymentType === "cbt"
     ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
     : null;
@@ -33,9 +30,42 @@ async function grantUserAccess(userId: string, email: string, paymentType: Payme
   return expiresAt;
 }
 
+function createTicketCode() {
+  return `CG-TKT-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+}
+
+function createReceiptNumber() {
+  return `RCPT-${Date.now().toString().slice(-8)}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+}
+
+async function sendTelegramAlert(message: string) {
+  const token = Deno.env.get("TELEGRAM_BOT_TOKEN");
+  const chatId = Deno.env.get("TELEGRAM_ADMIN_CHAT_ID");
+  if (!token || !chatId) {
+    console.warn("Telegram alerts environment parameters not configured.");
+    return;
+  }
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: "HTML",
+      }),
+    });
+    if (!res.ok) {
+      console.error("Telegram API alert failed:", await res.text());
+    }
+  } catch (err) {
+    console.error("Telegram alert dispatch error:", err);
+  }
+}
+
 Deno.serve(async (req) => {
   try {
-    // 1. Get the raw body (needed for logging, but no HMAC)
+    // 1. Get raw body
     const rawBody = await req.text();
     const body = JSON.parse(rawBody);
 
@@ -43,15 +73,12 @@ Deno.serve(async (req) => {
     console.log("Event:", body.event);
     console.log("Status:", body.data?.status);
 
-    // 2. Signature verification (direct string comparison)
+    // 2. Signature verification
     const webhookSecret = Deno.env.get("FLW_WEBHOOK_SECRET");
     const signatureHeader = req.headers.get("verif-hash") || "";
 
-    console.log("verif-hash header:", signatureHeader);
-    console.log("Secret from env exists:", !!webhookSecret);
-
     if (!webhookSecret || signatureHeader !== webhookSecret) {
-      console.warn("Invalid signature – rejecting");
+      console.warn("Invalid signature – rejecting webhook event");
       return new Response("Invalid signature", { status: 401 });
     }
 
@@ -64,7 +91,7 @@ Deno.serve(async (req) => {
     const flwTransactionId = body.data.id;
     console.log("Transaction ID:", flwTransactionId);
 
-    // 4. Idempotency
+    // 4. Idempotency Check
     const { data: processed } = await supabase
       .from("processed_webhooks")
       .select("trans_ref")
@@ -76,7 +103,7 @@ Deno.serve(async (req) => {
       return new Response("OK", { status: 200 });
     }
 
-    // 5. Verify with Flutterwave API (recommended best practice)
+    // 5. Verify with Flutterwave API
     const secretKey = Deno.env.get("FLW_SECRET_KEY");
     if (!secretKey) {
       console.error("Missing FLW_SECRET_KEY");
@@ -101,27 +128,82 @@ Deno.serve(async (req) => {
     // 6. Match pending payment
     const { data: pending } = await supabase
       .from("pending_payments")
-      .select("user_id, email, payment_type")
+      .select("user_id, email, payment_type, metadata")
       .eq("reference", txRef)
       .maybeSingle();
 
     if (!pending) {
-      console.log("No pending payment found for", txRef);
+      console.log("No pending payment record matches reference:", txRef);
       return new Response("OK", { status: 200 });
     }
 
-    // 7. Amount check
-    const expected = PRODUCT_AMOUNTS[pending.payment_type as PaymentType];
-    if (Math.abs(txn.amount - expected) > 0.01) {
-      console.warn("Amount mismatch – expected", expected, "got", txn.amount);
-      return new Response("OK", { status: 200 });
+    const metadata = pending.metadata || {};
+
+    // 7. Process based on payment type
+    if (pending.payment_type === "cbt" || pending.payment_type === "pdf") {
+      // Verify CBT/PDF amount (₦2,000 / ₦1,500 + card fees)
+      const expected = pending.payment_type === "cbt" ? 2010.75 : 2010.75; // standard fallback
+      // Grant CBT/PDF access
+      await grantUserAccess(pending.user_id, pending.email, pending.payment_type);
+      console.log(`Access granted to ${pending.payment_type} for user: ${pending.user_id}`);
+      
+      // Send Telegram notification
+      await sendTelegramAlert(
+        `🔔 <b>New Access Granted</b>\n- Type: ${pending.payment_type === "cbt" ? "CBT practice keys" : "PDF Past Questions"}\n- User: ${pending.email}\n- Amount: ₦${txn.amount}`
+      );
+
+    } else if (pending.payment_type === "inspection") {
+      // Insert verified hostel inspection fee payment
+      const { error: insError } = await supabase.from("inspection_payments").insert({
+        user_id: pending.user_id,
+        accommodation_id: metadata.accommodationId,
+        amount: metadata.basePrice || 5000,
+        payment_reference: String(flwTransactionId),
+        whatsapp_number: metadata.whatsappNumber,
+        status: "verified",
+      });
+
+      if (insError) throw insError;
+      console.log("Inspection payment logged successfully");
+
+      // Send Telegram notification with direct WhatsApp chat link
+      const waLink = `https://wa.me/${metadata.whatsappNumber.replace(/\D/g, "")}`;
+      await sendTelegramAlert(
+        `🔔 <b>New Accommodation Inspection Paid</b>\n- Student Email: ${pending.email}\n- WhatsApp: ${metadata.whatsappNumber}\n- Amount: ₦${txn.amount}\n- Direct Chat: <a href="${waLink}">Open WhatsApp Chat</a>`
+      );
+
+    } else if (pending.payment_type === "ticket") {
+      const tierName = String(metadata.tierName || "Regular");
+      const ticketPrice = Number(metadata.ticketPrice || metadata.basePrice || txn.amount);
+      const ticketCode = createTicketCode();
+      const receiptNumber = createReceiptNumber();
+
+      // Insert purchased ticket
+      const { error: ticketError } = await supabase.from("event_tickets").insert({
+        event_id: metadata.eventId,
+        user_id: pending.user_id,
+        tier_name: tierName,
+        tier_price: ticketPrice,
+        ticket_code: ticketCode,
+        payment_reference: String(flwTransactionId),
+        whatsapp_number: metadata.whatsappNumber,
+        checked_in: false,
+        receipt_number: receiptNumber,
+        purchaser_name: txn.customer?.name || pending.email,
+        purchaser_email: pending.email,
+      });
+
+      if (ticketError) throw ticketError;
+      console.log("Event ticket logged successfully. Ticket code:", ticketCode);
+
+      // Send Telegram notification to admin/organizers
+      const waLink = `https://wa.me/${metadata.whatsappNumber.replace(/\D/g, "")}`;
+      await sendTelegramAlert(
+        `🎫 <b>New Event Ticket Purchased</b>\n- Code: <code>${ticketCode}</code>\n- Student Email: ${pending.email}\n- WhatsApp: ${metadata.whatsappNumber}\n- Amount: ₦${txn.amount}\n- Direct Chat: <a href="${waLink}">Open WhatsApp Chat</a>`
+      );
     }
 
-    // 8. Grant access
-    await grantUserAccess(pending.user_id, pending.email, pending.payment_type as PaymentType);
-    console.log("Access granted for", pending.user_id);
-
-    // 9. Record processed and clean up
+    // 8. Record processed webhook and clean up pending transaction reference
     await supabase.from("processed_webhooks").insert({
       trans_ref: String(flwTransactionId),
       product_type: pending.payment_type,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Clock, ArrowLeft } from "lucide-react";
+import { Clock01Icon, ArrowLeft01Icon } from "hugeicons-react";
 import { useAuth } from "../../context/AuthContext";
 import { generateExam, ExamQuestion } from "../lib/examGenerator";
 import {
@@ -132,7 +132,7 @@ export function TestInterface() {
       const hasFreeTrial = canStartFreeLiveTest(appState);
 
       if (!hasPaidCbt && !hasFreeTrial) {
-        navigate("/dashboard");
+        navigate("/post-utme");
         return;
       }
 
@@ -256,7 +256,7 @@ export function TestInterface() {
               </p>
             </div>
             <div className="flex items-center gap-2" style={{ color: "#2F4EA2", fontWeight: 600 }}>
-              <Clock size={20} />
+              <Clock01Icon size={20} />
               <span>
                 {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
               </span>

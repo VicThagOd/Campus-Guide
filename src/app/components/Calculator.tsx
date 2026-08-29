@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Cancel01Icon } from "hugeicons-react";
 
 interface CalculatorProps {
   onClose: () => void;
@@ -99,7 +99,7 @@ export function Calculator({ onClose }: CalculatorProps) {
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors"
           >
-            <X size={18} />
+            <Cancel01Icon size={18} />
           </button>
         </div>
 

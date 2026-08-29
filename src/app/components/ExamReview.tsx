@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
+import { ArrowLeft01Icon, Cancel01Icon, CheckmarkCircle02Icon } from "hugeicons-react";
 import { useAuth } from "../../context/AuthContext";
 import { ExamReviewPayload, ExamReviewQuestion, getAppState } from "../lib/appState";
 
@@ -116,18 +116,18 @@ export function ExamReview() {
 
   if (!payload) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#BFC3C6" }}>
-        <div className="rounded-lg bg-white p-8 shadow-lg text-center max-w-md">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#F7F8FA" }}>
+        <div className="rounded-xl border bg-white p-8 text-center max-w-md" style={{ borderColor: "#BFC3C6" }}>
           <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#000000" }}>No review data found</h2>
           <p className="mt-2 text-sm text-slate-600">
             Take a test first, then open the review immediately from the results page.
           </p>
           <button
-            onClick={() => navigate("/dashboard")}
-            className="mt-5 rounded-lg px-6 py-3 transition-all hover:opacity-90"
+            onClick={() => navigate("/post-utme")}
+            className="mt-5 rounded-lg px-6 py-3 transition-opacity duration-150 hover:opacity-90"
             style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
           >
-            Back to Dashboard
+            Back to Practice
           </button>
         </div>
       </div>
@@ -138,35 +138,35 @@ export function ExamReview() {
   const selected = answers[currentQuestion] || "";
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#BFC3C6" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#F7F8FA" }}>
       <div className="mx-auto max-w-5xl px-4 py-8">
         <div className="mb-5 flex items-center justify-between gap-4">
           <button
              onClick={() => navigate('/')}
-                      className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
-                      style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
+                      className="flex items-center gap-1.5 rounded-lg border px-4 py-1.5 text-sm font-semibold transition-colors duration-150 hover:bg-white"
+                      style={{ color: '#2F4EA2', border: '1px solid #BFC3C6' }}
                     >
-                      <ArrowLeft size={16} />
+                      <ArrowLeft01Icon size={14} />
                       Back to Home
           </button>
 
           <div className="flex flex-wrap items-center justify-end gap-3 text-sm">
-            <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 shadow-sm">
-              <CheckCircle2 size={16} color="#16A34A" />
+            <span className="inline-flex items-center gap-1 rounded-full border bg-white px-3 py-1" style={{ borderColor: "#BFC3C6" }}>
+              <CheckmarkCircle02Icon size={16} color="#16A34A" />
               {counts.correct} correct
             </span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 shadow-sm">
-              <XCircle size={16} color="#DC2626" />
+            <span className="inline-flex items-center gap-1 rounded-full border bg-white px-3 py-1" style={{ borderColor: "#BFC3C6" }}>
+              <Cancel01Icon size={16} color="#DC2626" />
               {counts.wrong} wrong
             </span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 shadow-sm">
+            <span className="inline-flex items-center gap-1 rounded-full border bg-white px-3 py-1" style={{ borderColor: "#BFC3C6" }}>
               {counts.unanswered} unanswered
             </span>
           </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.9fr_1fr]">
-          <div className="rounded-lg bg-white p-6 shadow-lg">
+          <div className="rounded-xl border bg-white p-6" style={{ borderColor: "#BFC3C6" }}>
             <div className="mb-4">
               <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#2F4EA2" }}>Exam Review</h2>
               <p className="text-sm text-slate-600">
@@ -230,7 +230,7 @@ export function ExamReview() {
             </div>
           </div>
 
-          <div className="rounded-lg bg-white p-4 shadow-md lg:sticky lg:top-8">
+          <div className="rounded-xl border bg-white p-4 lg:sticky lg:top-8" style={{ borderColor: "#BFC3C6" }}>
             <p className="text-center" style={{ fontSize: "0.875rem", color: "#000000", opacity: 0.6 }}>
               Question Navigator
             </p>

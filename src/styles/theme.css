@@ -78,6 +78,10 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+@theme {
+  --font-sans: "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -126,6 +130,7 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
   }
 
   /**

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { CheckCircle2, LoaderCircle, XCircle } from "lucide-react";
+import { Alert02Icon, CheckmarkCircle02Icon, Loading01Icon } from "hugeicons-react";
 import { useAuth } from "../../context/AuthContext";
 import { fetchUserAccess, isCbtAccessExpired } from "../lib/userAccess";
 
@@ -51,12 +51,12 @@ export function PaymentConfirmation() {
           setStatus("success");
           setMessage(
             paymentType === "pdf"
-              ? "Your PDF access is active. Redirecting to your dashboard..."
-              : "Your CBT access is active. Redirecting to your dashboard...",
+              ? "Your PDF access is active. Redirecting to practice..."
+              : "Your CBT access is active. Redirecting to practice...",
           );
-          // Auto-redirect to dashboard after 2 seconds
+          // Auto-redirect to practice hub after 2 seconds
           window.setTimeout(() => {
-            if (!cancelled) navigate("/dashboard");
+            if (!cancelled) navigate("/post-utme");
           }, 2000);
           return;
         }
@@ -64,8 +64,8 @@ export function PaymentConfirmation() {
         attempts += 1;
 
         if (attempts >= maxAttempts) {
-          setStatus("failed");
-          setMessage("Payment confirmation is taking longer than expected. Give it a minute, then check your dashboard.");
+setStatus("failed");
+      setMessage("Payment confirmation is taking longer than expected. Give it a minute, then check your practice page.");
           return;
         }
 
@@ -75,7 +75,7 @@ export function PaymentConfirmation() {
           attempts += 1;
           if (attempts >= maxAttempts) {
             setStatus("failed");
-            setMessage("We could not confirm your payment right now. Please check your dashboard shortly.");
+            setMessage("We could not confirm your payment right now. Please check your practice page shortly.");
             return;
           }
           window.setTimeout(pollAccess, 3000);
@@ -91,25 +91,25 @@ export function PaymentConfirmation() {
   }, [gatewayStatus, paymentType, user?.id, navigate]);
 
   return (
-    <div className="min-h-screen px-4 py-12" style={{ backgroundColor: "#BFC3C6" }}>
-      <div className="mx-auto max-w-xl rounded-lg bg-white p-8 shadow-md">
+    <div className="min-h-screen px-4 py-12" style={{ backgroundColor: "#F7F8FA" }}>
+      <div className="mx-auto max-w-xl rounded-xl border bg-white p-8" style={{ borderColor: "#BFC3C6" }}>
         <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:bg-gray-100"
-            style={{ color: '#2F4EA2', border: '1px solid #2F4EA2' }}
+            className="flex items-center gap-1.5 rounded-lg border px-4 py-1.5 text-sm font-semibold transition-colors duration-150 hover:bg-white"
+            style={{ color: '#2F4EA2', border: '1px solid #BFC3C6' }}
           >
-          Back to Dashboard
+          Back to Home
         </button>
 
         <div className="text-center">
           {status === "checking" && (
-            <LoaderCircle size={52} color="#2F4EA2" className="mx-auto mb-4 animate-spin" />
+            <Loading01Icon size={52} color="#2F4EA2" className="mx-auto mb-4 animate-spin" />
           )}
           {status === "success" && (
-            <CheckCircle2 size={52} color="#16a34a" className="mx-auto mb-4" />
+            <CheckmarkCircle02Icon size={52} color="#16a34a" className="mx-auto mb-4" />
           )}
           {status === "failed" && (
-            <XCircle size={52} color="#dc2626" className="mx-auto mb-4" />
+            <Alert02Icon size={52} color="#dc2626" className="mx-auto mb-4" />
           )}
 
           <h1 className="mb-3" style={{ fontSize: "1.75rem", fontWeight: 700, color: "#000000" }}>
@@ -139,11 +139,11 @@ export function PaymentConfirmation() {
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
-              to="/dashboard"
-              className="rounded-lg px-5 py-3 text-center transition-all hover:opacity-90"
+              to="/post-utme"
+              className="rounded-lg px-5 py-3 text-center transition-opacity duration-150 hover:opacity-90"
               style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
             >
-              Go to Dashboard
+              Go to Practice
             </Link>
             <Link
               to="/contact"
