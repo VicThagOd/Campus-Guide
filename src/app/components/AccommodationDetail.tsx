@@ -243,28 +243,6 @@ export function AccommodationDetail() {
                     Pay Inspection Fee ({`\u20A65,000`})
                   </button>
                 )}
-                <a
-                  href="https://wa.link/wx16gs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-semibold text-white transition-opacity duration-150 hover:opacity-90"
-                  style={{ backgroundColor: "#25D366" }}
-                >
-                  <SiWhatsapp size={18} />
-                  Contact Campus Guide
-                </a>
-                {listing.contact_info && (
-                  <a
-                    href={listing.contact_info.startsWith("http") ? listing.contact_info : `tel:${listing.contact_info}`}
-                    target={listing.contact_info.startsWith("http") ? "_blank" : undefined}
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg border px-6 py-3 font-semibold transition-colors duration-150 hover:bg-gray-50"
-                    style={{ borderColor: PRIMARY, color: PRIMARY }}
-                  >
-                    <CallIcon size={18} />
-                    Contact host directly
-                  </a>
-                )}
               </div>
             </div>
           </div>

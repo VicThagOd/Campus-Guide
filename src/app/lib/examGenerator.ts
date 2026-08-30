@@ -29,7 +29,7 @@ interface JSONFile {
 let questionsCache: Record<string, ExamQuestion[]> = {};
 
 // Import all JSON files using Vite's glob
-const jsonModules = import.meta.glob<JSONFile>("../../data/**/*.json", { eager: true });
+const jsonModules = import.meta.glob<{ default: JSONFile }>("../../data/**/*.json", { eager: true });
 
 // Parse all JSON files on initialization
 function initializeQuestions(): void {

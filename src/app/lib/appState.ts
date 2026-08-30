@@ -341,7 +341,7 @@ export function saveResult(result: TestResultRecord, userId?: string) {
 export function getWeakSubjects(results: TestResultRecord[]) {
   if (results.length === 0) return [];
   const aggregate = new Map<
-    SubjectName,
+    SubjectName | string,
     { correct: number; total: number }
   >();
   for (const result of results) {

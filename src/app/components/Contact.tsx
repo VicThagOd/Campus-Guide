@@ -139,7 +139,7 @@ export function Contact() {
           <div className="flex items-center justify-center gap-6">
   {/* WhatsApp */}
   <a
-    href="https://chat.whatsapp.com/Esl8N9ciZoVJW4SCFpXGGu?mode=gi_t"
+    href="https://whatsapp.com/channel/0029Vb8O43vJ93webh9WiA2t"
     target="_blank"
     rel="noopener noreferrer"
     className="flex flex-col items-center gap-2 hover:opacity-70 transition-opacity"
