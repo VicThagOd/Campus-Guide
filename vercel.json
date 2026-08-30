@@ -2,7 +2,15 @@
   "framework": "vite",
   "buildCommand": "npm install && npm run build",
   "outputDirectory": "dist",
+
+  "git": {
+    "deploymentEnabled": true
+  },
+
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
