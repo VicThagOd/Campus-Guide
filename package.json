@@ -7,11 +7,11 @@
     "node": ">=18"
   },
   "scripts": {
-    "predev": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/fix-esbuild.ps1",
+    "predev": "node scripts/fix-esbuild.js",
     "dev": "vite",
-    "prebuild": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/fix-esbuild.ps1",
+    "prebuild": "node scripts/fix-esbuild.js",
     "build": "vite build",
-    "postinstall": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/fix-esbuild.ps1",
+    "postinstall": "node scripts/fix-esbuild.js",
     "start": "vite preview"
   },
   "dependencies": {
