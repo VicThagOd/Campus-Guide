@@ -177,7 +177,7 @@ export function Events() {
     setQuantities({});
     setGuestName(profile?.name || "");
     setGuestEmail(user?.email || "");
-    setGuestPhone(profile?.phone || "");
+    setGuestPhone((profile as any)?.phone || "");
     setLoadingTiers(true);
 
     const { data } = await supabase

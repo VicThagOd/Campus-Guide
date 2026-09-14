@@ -113,52 +113,6 @@ export function Landing() {
               Campus Guide
             </span>
           </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden items-center gap-3 sm:flex">
-            <div className="hidden items-center gap-5 sm:flex">
-              <Link to="/about" className="text-sm font-medium transition-colors duration-150 hover:opacity-70" style={{ color: INK }}>
-                About
-              </Link>
-              <Link to="/contact" className="text-sm font-medium transition-colors duration-150 hover:opacity-70" style={{ color: INK }}>
-                Contact
-              </Link>
-            </div>
-            <Link
-              to={signedInTarget}
-              className="rounded-lg border px-5 py-2 text-sm font-semibold transition-colors duration-150 hover:bg-white"
-              style={{ borderColor: BORDER, color: PRIMARY }}
-            >
-              Log In
-            </Link>
-            <Link
-              to={signedInTarget}
-              state={signupState}
-              className="rounded-lg px-5 py-2 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90"
-              style={{ backgroundColor: PRIMARY }}
-            >
-              Get Started
-            </Link>
-          </div>
-
-          {/* Mobile Quick Action Buttons */}
-          <div className="flex items-center gap-2 sm:hidden shrink-0">
-            <Link
-              to={signedInTarget}
-              className="rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition-colors duration-150"
-              style={{ borderColor: BORDER, color: PRIMARY }}
-            >
-              Log In
-            </Link>
-            <Link
-              to={signedInTarget}
-              state={signupState}
-              className="rounded-lg px-3 py-1.5 text-xs font-semibold text-white transition-opacity duration-150"
-              style={{ backgroundColor: PRIMARY }}
-            >
-              Get Started
-            </Link>
-          </div>
         </div>
       </header>
 

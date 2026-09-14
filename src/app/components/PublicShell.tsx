@@ -36,19 +36,6 @@ export function PublicShell({
               Campus Guide
             </span>
           </Link>
-          <Link
-            to={effectiveBackTo}
-            className="flex items-center gap-1.5 rounded-lg border px-2.5 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold transition-colors duration-150 hover:bg-gray-50 shrink-0"
-            style={{ borderColor: BORDER, color: PRIMARY }}
-          >
-            <ArrowLeft01Icon size={14} />
-            <span className="hidden sm:inline">
-              {effectiveBackLabel.startsWith("Back to ") ? "Back to " : ""}
-            </span>
-            <span>
-              {effectiveBackLabel.startsWith("Back to ") ? effectiveBackLabel.replace("Back to ", "") : effectiveBackLabel}
-            </span>
-          </Link>
         </div>
       </header>
       <main className="flex-1">{children}</main>
