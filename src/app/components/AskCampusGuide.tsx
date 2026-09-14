@@ -1,259 +1,366 @@
-import { FormEvent, useState } from "react";
-import { ArrowDown01Icon, CheckmarkCircle02Icon, HelpCircleIcon, QuestionIcon } from "hugeicons-react";
-import { SiWhatsapp } from "react-icons/si";
-import { SEO } from "./SEO";
-import { PublicShell } from "./PublicShell";
-import { supabase } from "../../lib/supabase";
-import { hasSupabaseEnv } from "../../lib/env";
-import { useAuth } from "../../context/AuthContext";
+import { useEffect, useState } from 'react';
+import { supabase } from '../../lib/supabase';
+import { useAuth } from '../../context/AuthContext';
+import { RiQuestionAnswerLine, RiSendPlane2Line } from 'react-icons/ri';
+import { PiCheckCircleFill } from 'react-icons/pi';
+import { TbLoader2, TbRefresh, TbChevronDown, TbChevronUp } from 'react-icons/tb';
+import { SiWhatsapp } from 'react-icons/si';
+import { SEO } from './SEO';
+import { PublicShell } from './PublicShell';
+import { whatsappLink, whatsappMessages } from '../../lib/whatsapp';
 
-const PRIMARY = "#2F4EA2";
-const INK = "#111827";
-const MUTED = "#6B7280";
-const BORDER = "#BFC3C6";
-const SECTION_BG = "#F7F8FA";
+const PRIMARY = '#2F4EA2';
+const INK = '#111827';
+const MUTED = '#6B7280';
+const BORDER = '#BFC3C6';
 
-const WHATSAPP_URL = "https://wa.link/wx16gs";
+const CATEGORIES = [
+  'Admission',
+  'JAMB',
+  'Post-UTME',
+  'Clearance & Freshers',
+  'Accommodation',
+  'Face of Campus Guide',
+  'Fees & Payments',
+  'Other',
+];
 
-const categories = ["admission", "clearance", "course", "registration", "accommodation", "other"];
+interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+}
 
-const faqs = [
+const FAQ_LIST: FAQItem[] = [
   {
-    question: "What is UNIPORT's post-UTME cut-off mark?",
+    id: 'post-utme-format',
+    question: 'How is the UNIPORT Post-UTME structured and conducted?',
     answer:
-      "UNIPORT sets its own departmental cut-off marks each year, usually announced after the post-UTME screening. Check the Aspirant Hub for the latest cut-off information per faculty.",
+      'UNIPORT Post-UTME is conducted as a Computer-Based Test (CBT). The exam typically consists of 50 multiple-choice questions to be answered in 30 minutes, covering English Language, General Paper, and subjects related to your course choice.',
   },
   {
-    question: "How does the post-UTME scoring work?",
+    id: 'cbt-practice-access',
+    question: 'How can I practice with Campus Guide UNIPORT CBT tests?',
     answer:
-      "The post-UTME score is combined with your JAMB score to produce your aggregate. Your aggregate determines whether you meet your department's cut-off. Use the aggregate calculator in the Aspirant Hub.",
+      'You can practice with official UNIPORT past questions directly in the Post-UTME section on Campus Guide. We provide free trials, timed CBT mock sessions with real-time scoring, instant explanations, and downloadable PDF past questions.',
   },
   {
-    question: "When is the admission list released?",
+    id: 'physical-clearance-docs',
+    question: 'What documents are required for UNIPORT physical clearance?',
     answer:
-      "Admission lists are usually released in batches after screening. Watch the UNIPORT Updates section, and check JAMB CAPS to accept your admission once it appears.",
+      "Admitted freshers need their original JAMB Admission Letter, O'Level result(s) printout, Birth Certificate or Age Declaration, Local Government Area (LGA) Identification Letter, UNIPORT Acceptance Fee receipt, and recent passport photographs.",
   },
   {
-    question: "How do I accept my UNIPORT admission?",
+    id: 'off-campus-inspection',
+    question: 'Can Campus Guide help me find and inspect off-campus accommodation?',
     answer:
-      "Log in to JAMB CAPS, find your admission status, accept the offer and print your admission letter. This is the first step in the Freshers Hub.",
+      'Yes. Campus Guide features verified off-campus student apartments, self-cons, and flatshares around Choba, Alakahia, and Delta park areas. You can view listings and book in-person verified inspections before making rent commitments.',
   },
   {
-    question: "What documents do I need for clearance?",
+    id: 'focg-pageantry-eligibility',
+    question: 'Who can contest in Face of Campus Guide (F.O.C.G)?',
     answer:
-      "O'Level results, JAMB result slip, admission letter, birth certificate and payment receipts. The Freshers Hub lists everything you need before clearance starts.",
+      'Any registered student or aspirant of UNIPORT can register for Face of Campus Guide (F.O.C.G) in either the Mr Campus Guide or Miss Campus Guide category. Registration is flat ₦1,000 and voting is open to all university students.',
   },
 ];
 
+interface Question {
+  id: string;
+  category: string;
+  question: string;
+  status: string;
+  answer: string | null;
+  created_at: string;
+}
+
 export function AskCampusGuide() {
   const { profile } = useAuth();
-  const [category, setCategory] = useState("admission");
-  const [question, setQuestion] = useState("");
-  const [state, setState] = useState<"idle" | "submitting" | "done" | "error">("idle");
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [questionText, setQuestionText] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [expandedFaqId, setExpandedFaqId] = useState<string | null>(null);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!question.trim() || state === "submitting") return;
-    setState("submitting");
+  const fetchQuestions = async () => {
+    if (!profile?.id) return;
+    setLoading(true);
+    const { data } = await supabase
+      .from('ask_questions')
+      .select('id, category, question, status, answer, created_at')
+      .eq('user_id', profile.id)
+      .order('created_at', { ascending: false });
+    setQuestions(data || []);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (profile?.id) {
+      fetchQuestions();
+    }
+  }, [profile?.id]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!questionText.trim()) return;
+
+    setSubmitting(true);
     try {
-      const { error } = await supabase.from("ask_questions").insert({
-        user_id: profile?.id ?? null,
-        name: profile?.name ?? null,
-        email: profile?.email ?? null,
-        category,
-        question: question.trim(),
-      });
-      if (error) throw error;
-      setQuestion("");
-      setState("done");
-    } catch {
-      setState("error");
+      if (profile?.id) {
+        const { error } = await supabase.from('ask_questions').insert({
+          user_id: profile.id,
+          name: profile.username || profile.name || 'Student',
+          email: profile.email,
+          category,
+          question: questionText.trim(),
+          status: 'open',
+        });
+        if (!error) {
+          setQuestionText('');
+          setSuccess(true);
+          setTimeout(() => setSuccess(false), 4000);
+          fetchQuestions();
+        }
+      } else {
+        window.open(whatsappLink(whatsappMessages.askQuestionSupport(questionText.trim())), '_blank');
+        setQuestionText('');
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 4000);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
-    <PublicShell backTo="/dashboard" backLabel="Back to dashboard">
+    <PublicShell>
       <SEO
         title="Ask Campus Guide"
-        description="Ask anything about UNIPORT admission, clearance, courses and registration. Get a straight answer."
+        description="Ask anything about UNIPORT and get a straight answer."
       />
+      <div className="min-h-screen" style={{ backgroundColor: '#F7F8FA' }}>
+        <div className="mx-auto max-w-3xl px-4 py-8 space-y-8">
+          {/* Header */}
+          <div>
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ backgroundColor: '#EEF2FC' }}>
+              <RiQuestionAnswerLine size={24} color={PRIMARY} />
+            </span>
+            <h1 className="mt-4 text-2xl font-bold tracking-tight" style={{ color: INK }}>
+              Ask Campus Guide
+            </h1>
+            <p className="mt-1 text-sm" style={{ color: MUTED }}>
+              Got a question about UNIPORT? Ask here and we will get back to you.
+            </p>
+          </div>
 
-      <div className="border-b" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
-        <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
-          <p className="mb-3 text-xs font-semibold tracking-[0.18em]" style={{ color: PRIMARY }}>
-            ASK CAMPUS GUIDE
-          </p>
-          <h1 className="text-3xl font-bold tracking-tight md:text-4xl" style={{ color: INK }}>
-            Stuck on anything UNIPORT? Ask.
-          </h1>
-          <p className="mt-4 max-w-2xl leading-relaxed" style={{ color: MUTED }}>
-            Admission questions, clearance questions, courses, registration, accommodation. Ask us and get a
-            straight answer.
-          </p>
-        </div>
-      </div>
+          {/* Submit Question Form */}
+          <form onSubmit={handleSubmit} className="rounded-xl border bg-white p-6" style={{ borderColor: BORDER }}>
+            <h2 className="mb-4 text-sm font-semibold" style={{ color: INK }}>
+              Ask a new question
+            </h2>
 
-      <div className="mx-auto grid max-w-5xl gap-12 px-4 py-12 lg:grid-cols-2">
-        <section>
-          {state === "done" ? (
-            <div className="rounded-xl border bg-white p-10 text-center" style={{ borderColor: BORDER }}>
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full" style={{ backgroundColor: "#E7F6EC" }}>
-                <CheckmarkCircle02Icon size={28} color="#16A34A" />
-              </div>
-              <h2 className="text-xl font-bold tracking-tight" style={{ color: INK }}>
-                Question received
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>
-                We will answer your question and keep you posted. If it is urgent, chat with us on WhatsApp.
-              </p>
-              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90"
-                  style={{ backgroundColor: "#25D366" }}
-                >
-                  <SiWhatsapp size={16} />
-                  Chat on WhatsApp
-                </a>
-                <button
-                  onClick={() => setState("idle")}
-                  className="rounded-lg border px-6 py-3 text-sm font-semibold transition-colors duration-150 hover:bg-gray-50"
-                  style={{ borderColor: BORDER, color: PRIMARY }}
-                >
-                  Ask another question
-                </button>
-              </div>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="rounded-xl border bg-white p-6 md:p-8" style={{ borderColor: BORDER }}>
-              <h2 className="text-lg font-bold tracking-tight" style={{ color: INK }}>
-                Ask your question
-              </h2>
-              <p className="mt-1 text-sm" style={{ color: MUTED }}>
-                {profile?.name ? `Hi ${profile.name}, ` : ""}we answer every question.
-              </p>
-
-              <label className="mt-6 block text-sm font-medium" style={{ color: INK }}>
+            <div className="mb-4">
+              <label className="mb-1 block text-xs font-semibold" style={{ color: MUTED }}>
                 Category
               </label>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {categories.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setCategory(item)}
-                    className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
-                      category === item ? "text-white" : "border bg-white"
-                    }`}
-                    style={
-                      category === item
-                        ? { backgroundColor: PRIMARY }
-                        : { borderColor: BORDER, color: INK }
-                    }
-                  >
-                    {item}
-                  </button>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full rounded-lg border px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                style={{ borderColor: BORDER, color: INK }}
+              >
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
                 ))}
-              </div>
+              </select>
+            </div>
 
-              <label className="mt-6 block text-sm font-medium" style={{ color: INK }}>
+            <div className="mb-4">
+              <label className="mb-1 block text-xs font-semibold" style={{ color: MUTED }}>
                 Your question
               </label>
               <textarea
-                value={question}
-                onChange={(e) => {
-                  setQuestion(e.target.value);
-                  if (state === "error") setState("idle");
-                }}
-                rows={5}
+                rows={4}
+                value={questionText}
+                onChange={(e) => setQuestionText(e.target.value)}
+                placeholder="Type your question here..."
                 required
-                placeholder="Type your UNIPORT question here..."
-                className="mt-2 w-full rounded-lg border bg-white p-3 text-sm transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-[#DCE4FA]"
+                className="w-full rounded-lg border px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 style={{ borderColor: BORDER, color: INK }}
               />
+            </div>
 
-              {state === "error" && (
-                <p className="mt-3 text-sm font-medium" style={{ color: "#DC2626" }}>
-                  Could not send your question right now. Please try again.
-                </p>
-              )}
-
-              <button
-                type="submit"
-                disabled={state === "submitting"}
-                className="mt-6 w-full rounded-lg px-6 py-3 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90 disabled:opacity-60"
-                style={{ backgroundColor: PRIMARY }}
-              >
-                {state === "submitting" ? "Sending..." : "Send Question"}
-              </button>
-            </form>
-          )}
-        </section>
-
-        <section>
-          <h2 className="mb-5 flex items-center gap-2 text-lg font-bold tracking-tight" style={{ color: INK }}>
-            <HelpCircleIcon size={20} color={PRIMARY} />
-            Common questions
-          </h2>
-          <div className="grid gap-3">
-            {faqs.map((faq, index) => (
-              <div key={faq.question} className="overflow-hidden rounded-xl border bg-white" style={{ borderColor: BORDER }}>
-                <button
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                >
-                  <span className="text-sm font-semibold" style={{ color: INK }}>
-                    {faq.question}
-                  </span>
-                  <ArrowDown01Icon
-                    size={16}
-                    color={PRIMARY}
-                    className="shrink-0 transition-transform duration-150"
-                    style={{ transform: openFaq === index ? "rotate(180deg)" : "none" }}
-                  />
-                </button>
-                <div
-                  className="grid transition-all duration-150"
-                  style={{ gridTemplateRows: openFaq === index ? "1fr" : "0fr" }}
-                >
-                  <div className="overflow-hidden">
-                    <p className="border-t px-5 py-4 text-sm leading-relaxed" style={{ borderColor: BORDER, color: MUTED }}>
-                      {faq.answer}
-                    </p>
-                  </div>
-                </div>
+            {success && (
+              <div className="mb-4 flex items-center gap-2 rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">
+                <PiCheckCircleFill size={16} />
+                Question submitted successfully!
               </div>
-            ))}
+            )}
+
+            <button
+              type="submit"
+              disabled={submitting || !questionText.trim()}
+              className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+              style={{ backgroundColor: PRIMARY }}
+            >
+              {submitting ? (
+                <>
+                  <TbLoader2 size={16} className="animate-spin" /> Submitting...
+                </>
+              ) : (
+                <>
+                  <RiSendPlane2Line size={16} /> Submit Question
+                </>
+              )}
+            </button>
+          </form>
+
+          {/* User's Previous Questions (If Logged In) */}
+          {profile?.id && (
+            <div>
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-sm font-semibold" style={{ color: INK }}>
+                  My Questions ({questions.length})
+                </h2>
+                <button
+                  onClick={fetchQuestions}
+                  disabled={loading}
+                  className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-1.5 text-xs font-medium transition-colors hover:bg-slate-50"
+                  style={{ borderColor: BORDER, color: INK }}
+                >
+                  <TbRefresh size={12} className={loading ? 'animate-spin' : ''} />
+                  Refresh
+                </button>
+              </div>
+
+              {loading ? (
+                <div className="py-8 text-center text-sm" style={{ color: MUTED }}>
+                  Loading...
+                </div>
+              ) : questions.length === 0 ? (
+                <div className="rounded-xl border bg-white p-8 text-center" style={{ borderColor: BORDER }}>
+                  <p className="text-sm" style={{ color: MUTED }}>
+                    You haven't asked any questions yet.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {questions.map((q) => (
+                    <div key={q.id} className="rounded-xl border bg-white p-5" style={{ borderColor: BORDER }}>
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold"
+                          style={{
+                            backgroundColor: q.status === 'open' ? '#FEF6E4' : '#DCFCE7',
+                            color: q.status === 'open' ? '#B7791F' : '#16A34A',
+                          }}
+                        >
+                          {q.status === 'open' ? 'Pending' : 'Answered'}
+                        </span>
+                        <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: MUTED }}>
+                          {q.category}
+                        </span>
+                        <span className="ml-auto text-[11px]" style={{ color: MUTED }}>
+                          {new Date(q.created_at).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <p className="mt-2 text-sm font-medium" style={{ color: INK }}>
+                        {q.question}
+                      </p>
+                      {q.answer && (
+                        <div className="mt-3 rounded-lg border p-3" style={{ borderColor: '#D1D9F0', backgroundColor: '#F9FAFB' }}>
+                          <p className="text-[11px] font-semibold" style={{ color: PRIMARY }}>
+                            ANSWER
+                          </p>
+                          <p className="mt-1 text-sm leading-relaxed" style={{ color: INK }}>
+                            {q.answer}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Frequently Asked Questions (LAST) */}
+          <div className="space-y-4 pt-2">
+            <h2 className="text-base font-bold tracking-tight" style={{ color: INK }}>
+              Frequently Asked Questions
+            </h2>
+
+            <div className="space-y-3">
+              {FAQ_LIST.map((faq) => {
+                const isExpanded = expandedFaqId === faq.id;
+
+                return (
+                  <div
+                    key={faq.id}
+                    className="rounded-xl border bg-white transition-all overflow-hidden"
+                    style={{ borderColor: BORDER }}
+                  >
+                    <button
+                      onClick={() => setExpandedFaqId(isExpanded ? null : faq.id)}
+                      className="w-full flex items-center justify-between p-4 text-left transition-colors hover:bg-gray-50"
+                    >
+                      <span className="text-sm font-semibold pr-4" style={{ color: INK }}>
+                        {faq.question}
+                      </span>
+                      <span className="shrink-0 text-gray-400">
+                        {isExpanded ? <TbChevronUp size={18} /> : <TbChevronDown size={18} />}
+                      </span>
+                    </button>
+
+                    {isExpanded && (
+                      <div className="px-4 pb-4 pt-1 text-sm leading-relaxed border-t border-gray-100" style={{ color: MUTED }}>
+                        <p>{faq.answer}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="mt-8 flex items-start gap-4 rounded-xl border p-6" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
-              <QuestionIcon size={22} color={PRIMARY} />
+          {/* WhatsApp Action Strip (Identical to rest of site) */}
+          <div
+            className="flex flex-col items-center justify-between gap-4 rounded-2xl border p-6 md:flex-row"
+            style={{ borderColor: '#D1D9F0', backgroundColor: '#EEF2FC' }}
+          >
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: '#FFFFFF' }}>
+                <SiWhatsapp size={20} color="#25D366" />
+              </span>
+              <div>
+                <p className="text-sm font-semibold" style={{ color: INK }}>
+                  Need quick help on WhatsApp?
+                </p>
+                <p className="text-sm" style={{ color: MUTED }}>
+                  Chat with the Campus Guide team for fast answers.
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-semibold" style={{ color: INK }}>
-                Need an answer right now?
-              </p>
-              <p className="mt-1 text-sm leading-relaxed" style={{ color: MUTED }}>
-                Chat with Campus Guide directly on WhatsApp for urgent questions.
-              </p>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity duration-150 hover:opacity-70"
-                style={{ color: "#25D366" }}
-              >
-                <SiWhatsapp size={15} />
-                Open WhatsApp chat
-              </a>
-            </div>
+            <a
+              href={whatsappLink(whatsappMessages.generalInquiry())}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90 shrink-0"
+              style={{ backgroundColor: '#25D366' }}
+            >
+              <SiWhatsapp size={16} />
+              Chat on WhatsApp
+            </a>
           </div>
-        </section>
+        </div>
       </div>
     </PublicShell>
   );
 }
+
+

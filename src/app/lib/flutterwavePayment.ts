@@ -1,18 +1,28 @@
 // lib/flutterwavePayment.ts
 import { supabase } from "./supabaseClient";
 
+export interface TicketOrderItem {
+  tierName: string;
+  tierPrice: number;
+  quantity: number;
+  tierId?: string;
+}
+
 export interface InitializeFlutterwavePaymentParams {
   amount: number;
-  paymentType: "pdf" | "cbt" | "ticket" | "inspection";
+  paymentType: "pdf" | "cbt" | "ticket" | "inspection" | "tier" | "pageant";
   userId: string;
   email: string;
   name: string;
   course: string;
   eventId?: string;
+  tierId?: string;
   tierName?: string;
   ticketPrice?: number;
+  items?: TicketOrderItem[];
   accommodationId?: string;
   whatsappNumber?: string;
+  contestantId?: string;
 }
 
 export async function initializeFlutterwavePayment(

@@ -244,31 +244,31 @@ export function TestInterface() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#BFC3C6" }}>
-      <div className="mx-auto max-w-5xl px-4 py-8">
+    <div className="min-h-screen" style={{ backgroundColor: "#F7F8FA" }}>
+      <div className="mx-auto max-w-5xl px-3 sm:px-4 py-4 sm:py-8">
         <div className="grid gap-6 lg:grid-cols-[1.9fr_1fr]">
-          <div className="rounded-lg bg-white p-6 shadow-lg">
-          <div className="mb-6 flex items-center justify-between">
+          <div className="rounded-xl border bg-white p-4 sm:p-6 shadow-sm" style={{ borderColor: "#BFC3C6" }}>
+          <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-gray-100">
             <div>
-              <h2 style={{ fontSize: "1.25rem", fontWeight: 600, color: "#2F4EA2" }}>Post UTME Practice Test</h2>
-              <p style={{ color: "#000000", opacity: 0.65, fontSize: "0.875rem" }}>
-                UNIPORT format: {testConfig.totalQuestions} questions, 30 minutes, scored over {testConfig.totalPoints}
+              <h2 className="text-lg sm:text-xl font-bold" style={{ color: "#2F4EA2" }}>Post UTME Practice Test</h2>
+              <p className="text-xs sm:text-sm text-gray-500">
+                UNIPORT format: {testConfig.totalQuestions} questions, 30 mins, scored over {testConfig.totalPoints}
               </p>
             </div>
-            <div className="flex items-center gap-2" style={{ color: "#2F4EA2", fontWeight: 600 }}>
-              <Clock01Icon size={20} />
-              <span>
+            <div className="flex items-center gap-2 bg-blue-50 px-3 py-1.5 rounded-lg shrink-0" style={{ color: "#2F4EA2", fontWeight: 700 }}>
+              <Clock01Icon size={18} />
+              <span className="font-mono text-sm sm:text-base">
                 {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
               </span>
             </div>
           </div>
 
           <div className="mb-4">
-            <div className="mb-2 flex items-center justify-between">
-              <span style={{ color: "#000000", opacity: 0.7, fontSize: "0.875rem" }}>
+            <div className="mb-2 flex items-center justify-between text-xs sm:text-sm">
+              <span style={{ color: "#000000", opacity: 0.7 }}>
                 Question {currentQuestion + 1} of {testQuestions.length}
               </span>
-              <span style={{ color: "#2F4EA2", fontWeight: 500, fontSize: "0.875rem" }}>
+              <span style={{ color: "#2F4EA2", fontWeight: 600 }}>
                 {answeredCount} answered, {unansweredCount} left
               </span>
             </div>
@@ -284,47 +284,47 @@ export function TestInterface() {
           </div>
 
           <div className="mb-6">
-            <p className="mb-2" style={{ fontSize: "0.875rem", color: "#2F4EA2", fontWeight: 600 }}>
+            <p className="mb-2 text-xs sm:text-sm uppercase tracking-wide" style={{ color: "#2F4EA2", fontWeight: 700 }}>
               {current.subject}
             </p>
-            <h3 className="mb-6" style={{ fontSize: "1.125rem", fontWeight: 500, color: "#000000", lineHeight: 1.6 }}>
+            <h3 className="mb-5 text-sm sm:text-base md:text-lg font-medium leading-relaxed" style={{ color: "#000000" }}>
               {renderFormattedQuestion(current.question)}
             </h3>
             {isCalculationQuestion(current.subject) && (
               <div className="mb-4 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
                 <p style={{ fontSize: "0.75rem", color: "#2F4EA2", fontWeight: 500 }}>
-                  💡 Calculator available - Use the calculator in the bottom-right corner
+                  💡 Calculator available - Tap Calculator below
                 </p>
               </div>
             )}
 
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               {current.options.map((option, index) => (
                 <button
                   key={index}
                   onClick={() => handleSelectAnswer(index)}
-                  className="w-full rounded-lg border-2 px-6 py-4 text-left transition-all"
+                  className="w-full rounded-xl border-2 px-4 sm:px-6 py-3 sm:py-3.5 text-left transition-all text-xs sm:text-sm flex items-start gap-2.5"
                   style={{
                     backgroundColor: selectedAnswers[currentQuestion] === String.fromCharCode(65 + index) ? "#2F4EA2" : "#FFFFFF",
                     color: selectedAnswers[currentQuestion] === String.fromCharCode(65 + index) ? "#FFFFFF" : "#000000",
                     borderColor: selectedAnswers[currentQuestion] === String.fromCharCode(65 + index) ? "#2F4EA2" : "#BFC3C6",
                   }}
                 >
-                  <span className="mr-3" style={{ fontWeight: 600 }}>
+                  <span className="font-bold shrink-0">
                     {String.fromCharCode(65 + index)}.
                   </span>
-                  {option}
+                  <span>{option}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 sm:gap-4 pt-2 border-t border-gray-100">
             {isCalculationQuestion(current.subject) && (
               <button
                 onClick={() => setShowCalculator(true)}
-                className="rounded-lg px-4 py-3 transition-all"
-                style={{ backgroundColor: "#7c3aed", color: "#FFFFFF", fontWeight: 500, fontSize: "0.875rem" }}
+                className="rounded-lg px-3.5 sm:px-4 py-2 sm:py-2.5 transition-all text-xs sm:text-sm font-medium"
+                style={{ backgroundColor: "#7c3aed", color: "#FFFFFF" }}
               >
                 🧮 Calculator
               </button>
@@ -332,8 +332,8 @@ export function TestInterface() {
             <button
               onClick={() => setCurrentQuestion((value) => Math.max(0, value - 1))}
               disabled={currentQuestion === 0}
-              className="rounded-lg border-2 px-6 py-3 transition-all disabled:opacity-40"
-              style={{ borderColor: "#2F4EA2", color: "#2F4EA2", fontWeight: 500 }}
+              className="rounded-lg border-2 px-4 sm:px-6 py-2 sm:py-2.5 transition-all disabled:opacity-40 text-xs sm:text-sm font-semibold"
+              style={{ borderColor: "#2F4EA2", color: "#2F4EA2" }}
             >
               Previous
             </button>
@@ -341,16 +341,16 @@ export function TestInterface() {
             {currentQuestion < testQuestions.length - 1 ? (
               <button
                 onClick={() => setCurrentQuestion((value) => Math.min(testQuestions.length - 1, value + 1))}
-                className="rounded-lg px-6 py-3 transition-all"
-                style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
+                className="rounded-lg px-5 sm:px-6 py-2 sm:py-2.5 transition-all text-xs sm:text-sm font-semibold"
+                style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF" }}
               >
                 Next
               </button>
             ) : (
               <button
                 onClick={handleSubmitClick}
-                className="rounded-lg px-6 py-3 transition-all"
-                style={{ backgroundColor: "#ce0404", color: "#FFFFFF", fontWeight: 500 }}
+                className="rounded-lg px-5 sm:px-6 py-2 sm:py-2.5 transition-all text-xs sm:text-sm font-semibold"
+                style={{ backgroundColor: "#ce0404", color: "#FFFFFF" }}
               >
                 Submit Test
               </button>
@@ -358,21 +358,20 @@ export function TestInterface() {
           </div>
         </div>
 
-        <div className="rounded-lg bg-white p-4 shadow-md lg:sticky lg:top-8">
-          <p className="text-center" style={{ fontSize: "0.875rem", color: "#000000", opacity: 0.6 }}>
+        <div className="rounded-xl border bg-white p-4 shadow-sm lg:sticky lg:top-8" style={{ borderColor: "#BFC3C6" }}>
+          <p className="text-center text-xs sm:text-sm font-semibold" style={{ color: "#111827" }}>
             Question Navigator
           </p>
-          <div className="mt-3 flex flex-wrap justify-center gap-2">
+          <div className="mt-3 flex flex-wrap justify-center gap-1.5 sm:gap-2">
             {testQuestions.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentQuestion(index)}
-                className="h-10 w-10 rounded-lg transition-all"
+                className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg transition-all text-xs font-semibold"
                 style={{
                   backgroundColor: selectedAnswers[index] !== "" ? "#2F4EA2" : currentQuestion === index ? "#BFC3C6" : "#FFFFFF",
                   color: selectedAnswers[index] !== "" || currentQuestion === index ? "#FFFFFF" : "#000000",
                   border: "1px solid #BFC3C6",
-                  fontWeight: 500,
                 }}
               >
                 {index + 1}
@@ -382,18 +381,18 @@ export function TestInterface() {
           <div className="mt-4 flex justify-center">
             <button
               onClick={handleSubmitClick}
-              className="rounded-lg px-6 py-3 transition-all"
-              style={{ backgroundColor: "#ce0404", color: "#FFFFFF", fontWeight: 500 }}
+              className="w-full sm:w-auto rounded-lg px-6 py-2.5 transition-all text-xs sm:text-sm font-semibold"
+              style={{ backgroundColor: "#ce0404", color: "#FFFFFF" }}
             >
               Submit Test
             </button>
           </div>
         </div>
       </div>
+      </div>
       {showCalculator && isCalculationQuestion(current.subject) && (
         <Calculator onClose={() => setShowCalculator(false)} />
       )}
-    </div>
 
       <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
         <AlertDialogContent>

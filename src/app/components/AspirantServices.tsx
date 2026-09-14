@@ -1,43 +1,165 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import {
-  ArrowDown01Icon,
-  CheckListIcon,
-  ClipboardIcon,
-  HelpCircleIcon,
-  Route01Icon,
-  Target01Icon,
-} from "hugeicons-react";
+  RiFileList3Line,
+  RiPrinterLine,
+  RiExchangeLine,
+  RiUploadCloud2Line,
+  RiUserSearchLine,
+  RiMailSendLine,
+  RiBookOpenLine,
+  RiBuilding4Line,
+  RiCompassDiscoverLine,
+} from "react-icons/ri";
+import {
+  PiCertificateDuotone,
+  PiScanDuotone,
+  PiListChecksDuotone,
+  PiCompassDuotone,
+} from "react-icons/pi";
+import {
+  TbClipboardText,
+  TbArrowsExchange,
+  TbCloudUpload,
+  TbTargetArrow,
+  TbAward,
+  TbFileCheck,
+  TbEdit,
+  TbHelpCircle,
+  TbChevronDown,
+} from "react-icons/tb";
 import { SiWhatsapp } from "react-icons/si";
 import { SEO } from "./SEO";
 import { PublicShell } from "./PublicShell";
+import { whatsappLink, whatsappMessages } from "../../lib/whatsapp";
 
 const PRIMARY = "#2F4EA2";
 const INK = "#111827";
 const MUTED = "#6B7280";
 const BORDER = "#BFC3C6";
 const SECTION_BG = "#F7F8FA";
-const WHATSAPP_LINK = "https://wa.link/wx16gs";
+
+const jambServices = [
+  {
+    title: "JAMB Registration",
+    description: "Complete guidance through the JAMB UTME registration process, from creating your profile to final submission.",
+    icon: <TbClipboardText size={22} color={PRIMARY} />,
+  },
+  {
+    title: "JAMB Reprinting",
+    description: "Assistance with reprinting your JAMB registration slip when you need a physical copy.",
+    icon: <RiPrinterLine size={22} color={PRIMARY} />,
+  },
+  {
+    title: "JAMB Original Result",
+    description: "Help checking and obtaining your official JAMB UTME result slip.",
+    icon: <PiCertificateDuotone size={22} color={PRIMARY} />,
+  },
+  {
+    title: "JAMB Admission Letter",
+    description: "Support for downloading and printing your JAMB admission letter.",
+    icon: <RiMailSendLine size={22} color={PRIMARY} />,
+  },
+  {
+    title: "Change of Course / Institution",
+    description: "Assistance with changing your course or institution on the JAMB portal.",
+    icon: <TbArrowsExchange size={22} color={PRIMARY} />,
+  },
+  {
+    title: "O'Level Result Upload",
+    description: "Help uploading your O'Level results to the JAMB portal.",
+    icon: <TbCloudUpload size={22} color={PRIMARY} />,
+  },
+  {
+    title: "Admission Status Check",
+    description: "Check your JAMB admission status on CAPS and track your admission progress.",
+    icon: <PiScanDuotone size={22} color={PRIMARY} />,
+  },
+];
+
+const postUtmeServices = [
+  {
+    title: "Post-UTME Registration",
+    description: "Guidance through the UNIPORT Post-UTME registration process.",
+    icon: <TbEdit size={22} color={PRIMARY} />,
+  },
+  {
+    title: "Post-UTME Result",
+    description: "Help checking your UNIPORT Post-UTME result.",
+    icon: <TbAward size={22} color={PRIMARY} />,
+  },
+  {
+    title: "Post-UTME / Application Assistance",
+    description: "Support with your Post-UTME application, document preparation and submission.",
+    icon: <TbFileCheck size={22} color={PRIMARY} />,
+  },
+  {
+    title: "Admission / Screening Assistance",
+    description: "Help navigating the admission screening process and clearance requirements.",
+    icon: <PiCompassDuotone size={22} color={PRIMARY} />,
+  },
+];
+
+const guideCards = [
+  {
+    icon: <RiBookOpenLine size={24} color={PRIMARY} />,
+    title: "Admission Requirements",
+    items: [
+      "A valid JAMB UTME result for the current admission cycle",
+      "Credit passes in core subjects for your faculty (not more than two sittings)",
+      "Registration for the UNIPORT Post-UTME within the announced window",
+      "Standard documents such as birth certificate and identification",
+    ],
+  },
+  {
+    icon: <TbTargetArrow size={24} color={PRIMARY} />,
+    title: "Cut-off Information",
+    items: [
+      "Your JAMB score and Post-UTME score are combined into an aggregate",
+      "Cut-off scores differ by faculty, and competitive courses sit higher",
+      "Figures are verified before publication, no rumour mill",
+    ],
+  },
+  {
+    icon: <PiListChecksDuotone size={24} color={PRIMARY} />,
+    title: "Subject Combinations",
+    items: [
+      "Each faculty has its own combination rules",
+      "JAMB and Post-UTME subject combinations can differ",
+      "Wrong combination is a common reason applications stall",
+    ],
+  },
+  {
+    icon: <RiCompassDiscoverLine size={24} color={PRIMARY} />,
+    title: "Application Process",
+    items: [
+      "Prepare JAMB result, O'Level results, and identification documents",
+      "Register for Post-UTME on the official portal within the window",
+      "Practice using Campus Guide CBT format before the exam",
+      "Track your aggregate and follow the clearance process step by step",
+    ],
+  },
+];
 
 const faqs = [
   {
-    question: "When will the full admission guides be published?",
+    question: "How do I access these services?",
     answer:
-      "The Campus Guide team is preparing detailed, verified guides per faculty. This section is structural for now, and the real content will replace it before the next admission cycle.",
+      "The Campus Guide team handles each service for you. Use the WhatsApp button at the bottom of this page to reach us, describe the service you need, and we will guide you through the process.",
   },
   {
-    question: "Are these cut-off figures official UNIPORT figures?",
+    question: "Are these services free?",
     answer:
-      "Not yet. We will only publish figures we can verify with the school or JAMB. Until then, treat anything shown here as placeholder material.",
+      "Some services are free, others involve official fees from JAMB or UNIPORT. We will always tell you the cost before proceeding.",
   },
   {
-    question: "How do I know which subject combination applies to my course?",
+    question: "How long does each service take?",
     answer:
-      "Combinations are grouped by faculty for now. When the full guides land, each course will list its exact JAMB and O'Level requirements.",
+      "Most services are completed within 24 to 48 hours. Complex ones like change of course or admission letter may take longer depending on portal availability.",
   },
   {
-    question: "Can I ask questions directly?",
+    question: "Can I track my service request?",
     answer:
-      "Yes. Use the WhatsApp button below and the team will answer you personally.",
+      "Yes. Once you contact us on WhatsApp, you will receive updates on the status of your request until it is completed.",
   },
 ];
 
@@ -47,119 +169,134 @@ export function AspirantServices() {
   return (
     <PublicShell backTo="/dashboard" backLabel="Back to dashboard">
       <SEO
-        title="Aspirant Services"
-        description="Admission requirements, cut-off information, subject combinations and the application process for UNIPORT aspirants."
+        title="Aspirant Services - JAMB and Post-UTME Support"
+        description="JAMB and Post-UTME services for UNIPORT aspirants: registration, results, admission letters, subject combinations and more."
         canonical="https://campusguide.ng/aspirant-services"
       />
 
       <div className="border-b" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
         <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
-          <p className="mb-3 text-xs font-semibold tracking-[0.18em]" style={{ color: PRIMARY }}>
-            ASPIRANT SERVICES
-          </p>
           <h1 className="max-w-2xl text-4xl font-bold tracking-tight md:text-5xl" style={{ color: INK }}>
-            Know what UNIPORT needs before the day you apply.
+            JAMB and Post-UTME support, handled for you.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed" style={{ color: MUTED }}>
-            Requirements, cut-offs, subject combinations and the application process, gathered in one place
-            so you are not chasing rumours on WhatsApp groups.
+            From registration to admission, the Campus Guide team handles the process so you can focus on preparing for your exams.
           </p>
         </div>
       </div>
 
       <div className="mx-auto max-w-5xl space-y-16 px-4 py-16">
-        <InfoSection
-          icon={<ClipboardIcon size={24} color={PRIMARY} />}
-          title="Admission Requirements"
-          note="Placeholder content. Verified requirements are being prepared by the Campus Guide team."
-          items={[
-            {
-              heading: "JAMB result",
-              body: "A valid JAMB UTME result for the current admission cycle, with the right subject combination for your course.",
-            },
-            {
-              heading: "O'Level results",
-              body: "Credit passes in the core subjects for your faculty, in not more than two sittings. The exact subject list goes here soon.",
-            },
-            {
-              heading: "Post UTME registration",
-              body: "Every aspirant must register for the UNIPORT Post UTME within the announced window. Dates go here when they are published.",
-            },
-            {
-              heading: "Age and other documents",
-              body: "Standard documents such as birth certificate and identification. Full checklist to come.",
-            },
-          ]}
-        />
-
-        <InfoSection
-          icon={<Target01Icon size={24} color={PRIMARY} />}
-          title="Cut-off Information"
-          note="Placeholder content. Verified cut-off figures are being prepared."
-          items={[
-            {
-              heading: "How the aggregate works",
-              body: "Your JAMB score and Post UTME score are combined into an aggregate, and admission is ranked on it. The exact weighting goes here once verified.",
-            },
-            {
-              heading: "Faculty cut-offs",
-              body: "Cut-off scores differ by faculty, and competitive courses sit higher. Figures will be listed here, per faculty and per course, when confirmed.",
-            },
-            {
-              heading: "Why you should not trust rumours",
-              body: "Cut-off talk spreads fast before results. We will only publish numbers we can trace to an official source.",
-            },
-          ]}
-        />
-
-        <InfoSection
-          icon={<CheckListIcon size={24} color={PRIMARY} />}
-          title="Subject Combinations"
-          note="Placeholder content. Per-course combinations are being prepared."
-          items={[
-            {
-              heading: "By faculty",
-              body: "Medicine, Engineering, Law, Management and the other faculties each have their own combination rules. The full breakdown goes here soon.",
-            },
-            {
-              heading: "JAMB versus Post UTME",
-              body: "Your JAMB combination and your Post UTME subjects can differ. Both lists will be shown side by side for every course.",
-            },
-            {
-              heading: "Wrong combination, rejected application",
-              body: "A mismatch in subjects is one of the most common reasons applications stall. The guide will flag this early.",
-            },
-          ]}
-        />
-
-        <InfoSection
-          icon={<Route01Icon size={24} color={PRIMARY} />}
-          title="Application Process"
-          note="Placeholder content. Step-by-step instructions are being prepared."
-          items={[
-            {
-              heading: "Step 1: Prepare your documents",
-              body: "JAMB result, O'Level results, and identification. Everything scanned and named before you start.",
-            },
-            {
-              heading: "Step 2: Register for Post UTME",
-              body: "Create your account on the official portal within the announced window and pay the registration fee.",
-            },
-            {
-              heading: "Step 3: Practice and sit the exam",
-              body: "The exam follows a CBT format. Campus Guide's practice hub is built to match that format exactly.",
-            },
-            {
-              heading: "Step 4: Track your admission",
-              body: "Check your aggregate, watch for cut-off announcements, and follow the clearance process step by step.",
-            },
-          ]}
-        />
+        <section>
+          <div className="mb-8 flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
+              <TbTargetArrow size={24} color={PRIMARY} />
+            </span>
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight" style={{ color: INK }}>
+                JAMB Services
+              </h2>
+              <p className="text-sm" style={{ color: MUTED }}>
+                Full support for your JAMB UTME.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {jambServices.map((service) => (
+              <div
+                key={service.title}
+                className="flex items-start gap-4 rounded-xl border bg-white p-5 transition-colors duration-150 hover:border-[#2F4EA2]"
+                style={{ borderColor: BORDER }}
+              >
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
+                  {service.icon}
+                </span>
+                <div>
+                  <h3 className="text-base font-semibold" style={{ color: INK }}>
+                    {service.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed" style={{ color: MUTED }}>
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section>
           <div className="mb-8 flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
-              <HelpCircleIcon size={24} color={PRIMARY} />
+              <TbFileCheck size={24} color={PRIMARY} />
+            </span>
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight" style={{ color: INK }}>
+                Post-UTME Services
+              </h2>
+              <p className="text-sm" style={{ color: MUTED }}>
+                Support for your UNIPORT Post-UTME and admission process.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {postUtmeServices.map((service) => (
+              <div
+                key={service.title}
+                className="flex items-start gap-4 rounded-xl border bg-white p-5 transition-colors duration-150 hover:border-[#2F4EA2]"
+                style={{ borderColor: BORDER }}
+              >
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
+                  {service.icon}
+                </span>
+                <div>
+                  <h3 className="text-base font-semibold" style={{ color: INK }}>
+                    {service.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed" style={{ color: MUTED }}>
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <div className="mb-8 flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
+              <TbHelpCircle size={24} color={PRIMARY} />
+            </span>
+            <h2 className="text-2xl font-bold tracking-tight" style={{ color: INK }}>
+              Aspirant Guide
+            </h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {guideCards.map((card) => (
+              <div key={card.title} className="rounded-xl border bg-white p-6" style={{ borderColor: BORDER }}>
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
+                    {card.icon}
+                  </span>
+                  <h3 className="text-lg font-bold tracking-tight" style={{ color: INK }}>
+                    {card.title}
+                  </h3>
+                </div>
+                <ul className="space-y-2">
+                  {card.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: MUTED }}>
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: PRIMARY }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <div className="mb-8 flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: "#EEF2FC" }}>
+              <TbHelpCircle size={24} color={PRIMARY} />
             </span>
             <h2 className="text-2xl font-bold tracking-tight" style={{ color: INK }}>
               Frequently asked questions
@@ -178,8 +315,8 @@ export function AspirantServices() {
                   >
                     <span className="text-sm font-semibold" style={{ color: INK }}>{faq.question}</span>
                     <span className="shrink-0">
-                      <ArrowDown01Icon
-                        size={16}
+                      <TbChevronDown
+                        size={18}
                         color={PRIMARY}
                         style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 150ms" }}
                       />
@@ -211,12 +348,11 @@ export function AspirantServices() {
                 Still stuck? Talk to a human.
               </h2>
               <p className="mt-2 max-w-md leading-relaxed" style={{ color: MUTED }}>
-                Ask about requirements, cut-offs or anything else about the application. The Campus Guide
-                team replies on WhatsApp.
+                Ask about any service, requirements, or anything else about JAMB and Post-UTME. The Campus Guide team replies on WhatsApp.
               </p>
             </div>
             <a
-              href={WHATSAPP_LINK}
+              href={whatsappLink(whatsappMessages.generalInquiry())}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold text-white transition-opacity duration-150 hover:opacity-90"
@@ -229,45 +365,5 @@ export function AspirantServices() {
         </section>
       </div>
     </PublicShell>
-  );
-}
-
-function InfoSection({
-  icon,
-  title,
-  note,
-  items,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  note: string;
-  items: { heading: string; body: string }[];
-}) {
-  return (
-    <section>
-      <div className="mb-6 flex flex-wrap items-center gap-3">
-        <span className="flex h-11 w-11 items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
-          {icon}
-        </span>
-        <h2 className="text-2xl font-bold tracking-tight" style={{ color: INK }}>
-          {title}
-        </h2>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        {items.map((item) => (
-          <div key={item.heading} className="rounded-xl border bg-white p-6" style={{ borderColor: BORDER }}>
-            <h3 className="mb-2 text-base font-semibold tracking-tight" style={{ color: INK }}>
-              {item.heading}
-            </h3>
-            <p className="text-sm leading-relaxed" style={{ color: MUTED }}>
-              {item.body}
-            </p>
-          </div>
-        ))}
-      </div>
-      <p className="mt-4 text-xs" style={{ color: "#9CA3AF" }}>
-        {note}
-      </p>
-    </section>
   );
 }

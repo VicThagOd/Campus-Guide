@@ -12,18 +12,28 @@ const PRODUCT_AMOUNTS = {
   cbt: 2010.75,
 } as const;
 
+interface TicketItem {
+  tierName: string;
+  tierPrice: number;
+  quantity: number;
+  tierId?: string;
+}
+
 interface CreatePaymentPayload {
   amount: number;
-  paymentType: "pdf" | "cbt" | "ticket" | "inspection";
-  userId: string;
+  paymentType: "pdf" | "cbt" | "ticket" | "inspection" | "tier" | "pageant";
+  userId?: string;
   email: string;
   name: string;
-  course: string;
+  course?: string;
   eventId?: string;
+  tierId?: string;
   tierName?: string;
   ticketPrice?: number;
+  items?: TicketItem[];
   accommodationId?: string;
   whatsappNumber?: string;
+  contestantId?: string;
 }
 
 // Build a unique tx_ref for Flutterwave
@@ -56,10 +66,26 @@ Deno.serve(async (req) => {
     }
 
     const payload = (await req.json()) as CreatePaymentPayload;
-    const { amount, paymentType, userId, email, name, course, eventId, tierName, ticketPrice, accommodationId, whatsappNumber } = payload;
+    const {
+      amount,
+      paymentType,
+      email,
+      name,
+      eventId,
+      tierId,
+      tierName,
+      ticketPrice,
+      items,
+      accommodationId,
+      whatsappNumber,
+      contestantId,
+    } = payload;
 
-    if (!userId || !email || !name || !course) {
-      return new Response("Missing required payment fields.", { status: 400, headers: CORS_HEADERS });
+    const userId = payload.userId || "anonymous_user";
+    const course = payload.course || "General";
+
+    if (!email || !name) {
+      return new Response("Missing required payment fields (email, name).", { status: 400, headers: CORS_HEADERS });
     }
 
     // Verify amount based on product type
@@ -71,57 +97,102 @@ Deno.serve(async (req) => {
       if (!accommodationId || !whatsappNumber) {
         return new Response("Missing accommodation inspection details.", { status: 400, headers: CORS_HEADERS });
       }
+    } else if (paymentType === "pageant") {
+      basePrice = 1000;
     } else if (paymentType === "ticket") {
-      if (!eventId || !whatsappNumber) {
+      if (!eventId) {
         return new Response("Missing event ticket details.", { status: 400, headers: CORS_HEADERS });
       }
-      // Fetch ticket price from the database
-      const { data: event, error: eventError } = await supabase
-        .from("events")
-        .select("ticket_price")
-        .eq("id", eventId)
+      
+      if (items && Array.isArray(items) && items.length > 0) {
+        basePrice = items.reduce((sum, it) => sum + ((Number(it.tierPrice) || 0) * (Number(it.quantity) || 1)), 0);
+      } else if (tierName) {
+        // Fetch tier price from the database
+        const { data: tier, error: tierError } = await supabase
+          .from("event_tiers")
+          .select("tier_price")
+          .eq("event_id", eventId)
+          .eq("tier_name", tierName)
+          .single();
+
+        if (tierError || !tier) {
+          return new Response("Event tier details not found.", { status: 400, headers: CORS_HEADERS });
+        }
+        basePrice = Number(tier.tier_price) || 0;
+      } else {
+        // Fetch standard ticket price from the events table
+        const { data: event, error: eventError } = await supabase
+          .from("events")
+          .select("ticket_price")
+          .eq("id", eventId)
+          .single();
+
+        if (eventError || !event) {
+          return new Response("Event details not found.", { status: 400, headers: CORS_HEADERS });
+        }
+        basePrice = Number(event.ticket_price) || 0;
+      }
+    } else if (paymentType === "tier") {
+      if (!eventId || !tierName || !whatsappNumber) {
+        return new Response("Missing event tier ticket details.", { status: 400, headers: CORS_HEADERS });
+      }
+      // Fetch tier price from the database
+      const { data: tier, error: tierError } = await supabase
+        .from("event_tiers")
+        .select("tier_price")
+        .eq("event_id", eventId)
+        .eq("tier_name", tierName)
         .single();
 
-      if (eventError || !event) {
-        return new Response("Event details not found.", { status: 400, headers: CORS_HEADERS });
+      if (tierError || !tier) {
+        return new Response("Event tier details not found.", { status: 400, headers: CORS_HEADERS });
       }
-      basePrice = Number(event.ticket_price) || 0;
-      if (ticketPrice && Number(ticketPrice) > 0) {
-        basePrice = Number(ticketPrice);
-      }
+      basePrice = Number(tier.tier_price) || 0;
     } else {
       return new Response("Invalid payment type.", { status: 400, headers: CORS_HEADERS });
     }
 
     // Calculate Flutterwave processing fee (1.4% for local transactions)
     const flwFee = basePrice * 0.014;
-    const expectedAmount = basePrice + flwFee;
+    const expectedAmount = paymentType === "pageant" ? 1000 : (basePrice + flwFee);
 
-    // Verify amount is within a reasonable difference (allowing minor rounding differences)
-    if (Math.abs(amount - expectedAmount) > 5.0) {
-      return new Response(`Payment amount does not match the product cost (expected: ₦${expectedAmount.toFixed(2)}).`, {
-        status: 400,
-        headers: CORS_HEADERS,
-      });
+    // Verify amount is within a reasonable difference (allowing minor rounding differences or flat price)
+    if (paymentType === "pageant") {
+      if (Math.abs(amount - 1000) > 20.0 && Math.abs(amount - 1014) > 20.0) {
+        return new Response(`Pageant payment amount mismatch. Expected ₦1,000.`, {
+          status: 400,
+          headers: CORS_HEADERS,
+        });
+      }
+    } else {
+      if (Math.abs(amount - expectedAmount) > 10.0 && Math.abs(amount - basePrice) > 10.0) {
+        return new Response(`Payment amount does not match the product cost (expected: ₦${expectedAmount.toFixed(2)}).`, {
+          status: 400,
+          headers: CORS_HEADERS,
+        });
+      }
     }
 
     const txRef = buildTxRef(paymentType);
     const redirectUrl = `${publicBaseUrl.replace(/\/$/, "")}/payment/confirm?product=${paymentType}`;
 
-    // Save pending payment record (with metadata JSONB for ticket/inspection parameter pass)
+    // Save pending payment record (with metadata JSONB for ticket/inspection/pageant parameter pass)
     const { error: pendingError } = await supabase.from("pending_payments").insert({
       reference: txRef,
       user_id: userId,
       email,
       payment_type: paymentType,
-        metadata: {
-          eventId,
-          tierName,
-          ticketPrice,
-          accommodationId,
-          whatsappNumber,
-          basePrice,
-        },
+      metadata: {
+        eventId,
+        tierId,
+        tierName,
+        ticketPrice: basePrice,
+        items,
+        accommodationId,
+        whatsappNumber,
+        contestantId,
+        basePrice,
+      },
     });
 
     if (pendingError) {
@@ -153,6 +224,8 @@ Deno.serve(async (req) => {
               ? "CBT Access"
               : paymentType === "inspection"
               ? "Hostel Inspection"
+              : paymentType === "pageant"
+              ? "Pageant Registration"
               : "Event Ticket Purchase",
           description:
             paymentType === "pdf"
@@ -161,6 +234,8 @@ Deno.serve(async (req) => {
               ? "30-day live CBT access"
               : paymentType === "inspection"
               ? "Hostel Inspection fee payment"
+              : paymentType === "pageant"
+              ? "Mr & Mrs Campus Guide Contestant Fee"
               : "Event gate pass ticket",
         },
         meta: {
@@ -171,6 +246,7 @@ Deno.serve(async (req) => {
           tierName,
           ticketPrice,
           accommodationId,
+          contestantId,
         },
       }),
     });

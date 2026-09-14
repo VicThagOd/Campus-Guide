@@ -28,9 +28,6 @@ export function About() {
 
       <div className="border-b" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
         <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
-          <p className="mb-3 text-xs font-semibold tracking-[0.18em]" style={{ color: PRIMARY }}>
-            ABOUT
-          </p>
           <h1 className="max-w-2xl text-4xl font-bold tracking-tight md:text-5xl" style={{ color: INK }}>
             Built for students, by people who have been through it.
           </h1>

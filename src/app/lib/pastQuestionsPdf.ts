@@ -3,9 +3,24 @@ import { supabase } from "./supabaseClient";
 const DEFAULT_BUCKET = "past-questions";
 const DEFAULT_FOLDER = "pdf";
 
-// Courses that share the same PDF as another course
-const COURSE_ALIASES: Record<string, string> = {
-  "allied health sciences": "nursing",
+// Direct mapping from the 16 faculties to the exact PDF files available on Supabase
+const FACULTY_PDF_MAP: Record<string, string[]> = {
+  "agriculture": ["pdf/Medicine_and_Surgery.pdf", "pdf/Sciences.pdf"],
+  "allied health sciences": ["pdf/Nursing.pdf", "pdf/Anatomy.pdf", "pdf/Physiology.pdf"],
+  "basic medical sciences": ["pdf/Anatomy.pdf", "pdf/Physiology.pdf", "pdf/Medicine_and_Surgery.pdf"],
+  "clinical sciences": ["pdf/Medicine_and_Surgery.pdf"],
+  "communication and media studies": ["pdf/humanities-communication-and-media-studies.pdf", "pdf/humanities-communication-media-studies.pdf"],
+  "computing": ["pdf/Computing.pdf"],
+  "dentistry": ["pdf/Dentistry.pdf"],
+  "education": ["pdf/humanities-communication-and-media-studies.pdf", "pdf/Social_Sciences.pdf"],
+  "engineering": ["pdf/Engineering.pdf"],
+  "humanities": ["pdf/humanities-communication-and-media-studies.pdf"],
+  "law": ["pdf/Law.pdf"],
+  "management sciences": ["pdf/Management_Sciences.pdf"],
+  "pharmaceutical sciences": ["pdf/Pharmacy.pdf"],
+  "school of science laboratory technology": ["pdf/SSLT.pdf"],
+  "science": ["pdf/Sciences.pdf"],
+  "social sciences": ["pdf/Social_Sciences.pdf"],
 };
 
 function slugifyCourse(value: string): string {
@@ -17,26 +32,23 @@ function slugifyCourse(value: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-function resolveCourseAlias(course: string): string {
-  const normalized = course.trim().toLowerCase();
-  return COURSE_ALIASES[normalized] ?? course;
-}
-
 export function getPastQuestionsObjectPath(course: string): string {
-  const safeCourse = course && course.trim() ? course : "post-utme-candidate";
-  const resolved = resolveCourseAlias(safeCourse);
-  const slug = slugifyCourse(resolved);
+  const safeCourse = course && course.trim() ? course.trim().toLowerCase() : "post-utme-candidate";
+  const mapped = FACULTY_PDF_MAP[safeCourse];
+  if (mapped && mapped.length > 0) {
+    return mapped[0];
+  }
+  const slug = slugifyCourse(safeCourse);
   return `${DEFAULT_FOLDER}/${slug}.pdf`;
 }
 
 async function resolveObjectPathFromDb(course: string): Promise<string | null> {
-  const normalized = resolveCourseAlias(course?.trim());
-  if (!normalized) return null;
+  if (!course?.trim()) return null;
 
   const { data, error } = await supabase
     .from("pdf_files")
     .select("file_path")
-    .ilike("title", normalized)
+    .ilike("title", course.trim())
     .limit(1)
     .maybeSingle();
 
@@ -54,17 +66,49 @@ export async function createPastQuestionsDownloadUrl(params: {
 }): Promise<{ url: string; filename: string }> {
   const bucket = params.bucket || DEFAULT_BUCKET;
   const expiresIn = params.expiresInSeconds ?? 60 * 10;
-  const objectPath = (await resolveObjectPathFromDb(params.course)) ?? getPastQuestionsObjectPath(params.course);
+  const normalizedCourse = (params.course || "").trim().toLowerCase();
 
-  const { data, error } = await supabase.storage.from(bucket).createSignedUrl(objectPath, expiresIn);
-  if (error || !data?.signedUrl) {
-    const reason = error ? ` (${error.message})` : "";
-    throw new Error(`Could not generate download link for "${params.course}" at ${bucket}/${objectPath}${reason}`);
+  // Build candidate paths to try in priority order
+  const candidatePaths: string[] = [];
+
+  // 1. Try DB lookup first if available
+  const dbPath = await resolveObjectPathFromDb(params.course);
+  if (dbPath) candidatePaths.push(dbPath);
+
+  // 2. Try explicit faculty PDF mappings
+  const mappedPaths = FACULTY_PDF_MAP[normalizedCourse];
+  if (mappedPaths) {
+    mappedPaths.forEach((path) => {
+      if (!candidatePaths.includes(path)) candidatePaths.push(path);
+    });
   }
 
-  const fallbackName = `${slugifyCourse(params.course)}.pdf`;
-  const derivedName = objectPath.split("/").pop() || fallbackName;
-  return { url: data.signedUrl, filename: derivedName };
+  // 3. Fallbacks with different naming conventions
+  const courseSlug = slugifyCourse(params.course);
+  const fallbacks = [
+    `${DEFAULT_FOLDER}/${courseSlug}.pdf`,
+    `${DEFAULT_FOLDER}/${params.course.trim()}.pdf`,
+    `${DEFAULT_FOLDER}/${params.course.trim().replace(/\s+/g, "_")}.pdf`,
+    `${DEFAULT_FOLDER}/${params.course.trim().replace(/\s+/g, "-")}.pdf`,
+  ];
+
+  fallbacks.forEach((fb) => {
+    if (!candidatePaths.includes(fb)) candidatePaths.push(fb);
+  });
+
+  let lastError: any = null;
+
+  for (const objectPath of candidatePaths) {
+    const { data, error } = await supabase.storage.from(bucket).createSignedUrl(objectPath, expiresIn);
+    if (!error && data?.signedUrl) {
+      const derivedName = objectPath.split("/").pop() || `${courseSlug}.pdf`;
+      return { url: data.signedUrl, filename: derivedName };
+    }
+    lastError = error;
+  }
+
+  const reason = lastError ? ` (${lastError.message})` : "";
+  throw new Error(`Could not generate download link for "${params.course}"${reason}`);
 }
 
 export function triggerBrowserDownload(url: string, filename: string): void {

@@ -1,19 +1,29 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ApartmentIcon,
-  BedDoubleIcon,
-  BedIcon,
-  Building01Icon,
-  House01Icon,
-  Location01Icon,
-  RulerIcon,
-  Wallet01Icon,
-} from "hugeicons-react";
+  RiBuilding4Line,
+  RiBuilding2Line,
+  RiMapPin2Line,
+  RiMoneyDollarCircleLine,
+  RiShieldCheckLine,
+} from "react-icons/ri";
+import {
+  PiBedDuotone,
+  PiBedBold,
+  PiMapPinDuotone,
+  PiHouseLineDuotone,
+} from "react-icons/pi";
+import {
+  TbHomeCheck,
+  TbBuildingCommunity,
+  TbRuler,
+  TbWallet,
+} from "react-icons/tb";
 import { SEO } from "./SEO";
 import { PublicShell } from "./PublicShell";
 import { supabase } from "../../lib/supabase";
 import { hasSupabaseEnv } from "../../lib/env";
+import { whatsappLink, whatsappMessages } from "../../lib/whatsapp";
 
 export interface AccommodationRow {
   id: string;
@@ -43,12 +53,12 @@ export function formatPrice(price: number | null): string {
 
 export function roomTypeStyle(roomType: string | null): { band: string; icon: React.ReactNode } {
   const key = (roomType ?? "").toLowerCase();
-  if (key.includes("self")) return { band: "#EEF2FC", icon: <House01Icon size={28} color={PRIMARY} /> };
-  if (key.includes("double")) return { band: "#E7F6EC", icon: <BedDoubleIcon size={28} color="#16A34A" /> };
-  if (key.includes("single")) return { band: "#FEF1D6", icon: <BedIcon size={28} color="#B7791F" /> };
-  if (key.includes("flat")) return { band: "#E8ECF4", icon: <ApartmentIcon size={28} color="#4B5563" /> };
-  if (key.includes("hostel")) return { band: "#FBE7E2", icon: <Building01Icon size={28} color="#C2410C" /> };
-  return { band: "#EEF2FC", icon: <House01Icon size={28} color={PRIMARY} /> };
+  if (key.includes("self")) return { band: "#EEF2FC", icon: <TbHomeCheck size={28} color={PRIMARY} /> };
+  if (key.includes("double")) return { band: "#E7F6EC", icon: <PiBedDuotone size={28} color="#16A34A" /> };
+  if (key.includes("single")) return { band: "#FEF1D6", icon: <PiBedBold size={28} color="#B7791F" /> };
+  if (key.includes("flat")) return { band: "#E8ECF4", icon: <RiBuilding2Line size={28} color="#4B5563" /> };
+  if (key.includes("hostel")) return { band: "#FBE7E2", icon: <TbBuildingCommunity size={28} color="#C2410C" /> };
+  return { band: "#EEF2FC", icon: <PiHouseLineDuotone size={28} color={PRIMARY} /> };
 }
 
 export function Accommodation() {
@@ -82,9 +92,6 @@ export function Accommodation() {
 
       <div className="border-b" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
         <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
-          <p className="mb-3 text-xs font-semibold tracking-[0.18em]" style={{ color: PRIMARY }}>
-            ACCOMMODATION
-          </p>
           <h1 className="max-w-2xl text-4xl font-bold tracking-tight md:text-5xl" style={{ color: INK }}>
             A place to stay, without the hostel hunt stress.
           </h1>
@@ -105,7 +112,7 @@ export function Accommodation() {
         ) : listings.length === 0 ? (
           <div className="rounded-2xl border bg-white px-6 py-20 text-center" style={{ borderColor: BORDER }}>
             <span className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor: "#EEF2FC" }}>
-              <House01Icon size={32} color={PRIMARY} />
+              <TbHomeCheck size={32} color={PRIMARY} />
             </span>
             <h2 className="text-xl font-bold tracking-tight" style={{ color: INK }}>
               No listings available yet
@@ -156,12 +163,12 @@ export function Accommodation() {
                     <div className="space-y-1.5 text-sm" style={{ color: MUTED }}>
                       {listing.location && (
                         <p className="flex items-center gap-1.5">
-                          <Location01Icon size={14} color={PRIMARY} /> {listing.location}
+                          <PiMapPinDuotone size={16} color={PRIMARY} /> {listing.location}
                         </p>
                       )}
                       {listing.distance_from_school && (
                         <p className="flex items-center gap-1.5">
-                          <RulerIcon size={14} color={PRIMARY} /> {listing.distance_from_school} from school
+                          <TbRuler size={16} color={PRIMARY} /> {listing.distance_from_school} from school
                         </p>
                       )}
                     </div>
@@ -195,7 +202,7 @@ export function Accommodation() {
         <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border p-6 md:flex-row" style={{ borderColor: "#D1D9F0", backgroundColor: "#EEF2FC" }}>
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: "#FFFFFF" }}>
-              <Wallet01Icon size={20} color={PRIMARY} />
+              <TbWallet size={20} color={PRIMARY} />
             </span>
             <div>
               <p className="text-sm font-semibold" style={{ color: INK }}>
@@ -207,7 +214,7 @@ export function Accommodation() {
             </div>
           </div>
           <a
-            href="https://wa.link/wx16gs"
+            href={whatsappLink(whatsappMessages.accommodationListing())}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90"

@@ -77,28 +77,47 @@ function initializeQuestions(): void {
 function mapFacultyToFolderKey(faculty: string): string {
   const upper = faculty.toUpperCase();
 
-  if (
-    upper.includes("MEDICINE") ||
-    upper.includes("PHARMACY") ||
-    upper.includes("NURSING") ||
-    upper.includes("DENTISTRY")
-  ) {
+  const medicineFolders = [
+    "AGRICULTURE",
+    "ALLIED HEALTH SCIENCES",
+    "BASIC MEDICAL SCIENCES",
+    "CLINICAL SCIENCES",
+    "DENTISTRY",
+    "PHARMACEUTICAL SCIENCES",
+    "SCHOOL OF SCIENCE LABORATORY TECHNOLOGY"
+  ];
+
+  const engineeringFolders = [
+    "COMPUTING",
+    "ENGINEERING",
+    "SCIENCE"
+  ];
+
+  const lawFolders = [
+    "COMMUNICATION AND MEDIA STUDIES",
+    "EDUCATION",
+    "HUMANITIES",
+    "LAW"
+  ];
+
+  const managementFolders = [
+    "MANAGEMENT SCIENCES",
+    "SOCIAL SCIENCES"
+  ];
+
+  if (medicineFolders.includes(upper)) {
     return "MEDICINE, PHARMACY, ANATOMY PHYSIOLOGY NURSING, DENTISTRY AND SSLT";
   }
 
-  if (
-    upper.includes("ENGINEERING") ||
-    upper.includes("COMPUTING") ||
-    upper.includes("GEOLOGY")
-  ) {
+  if (engineeringFolders.includes(upper)) {
     return "FACULTY OF ENGINEERING, COMPUTING, GEOLOGY, INDUSTRIAL CHEMISTRY";
   }
 
-  if (upper.includes("LAW") || upper.includes("HUMANITIES")) {
+  if (lawFolders.includes(upper)) {
     return "LAW, HUMANITIES AND COMMUNICATION AND MEDIA STUDIES";
   }
 
-  if (upper.includes("MANAGEMENT") || upper.includes("SOCIAL")) {
+  if (managementFolders.includes(upper)) {
     return "FACULTY OF MANAGEMENT AND SOCIAL SCIENCES";
   }
 

@@ -106,6 +106,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
     });
     if (error) throw new Error(error.message);
+    if (data.email_opt_in) {
+      await supabase.from('newsletter_subscribers').insert({ email: data.email }).select();
+    }
     return { requiresEmailConfirmation: !authData.session };
   };
 

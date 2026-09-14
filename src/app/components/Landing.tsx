@@ -1,22 +1,36 @@
 import { Link } from "react-router-dom";
 import {
-  AnalyticsUpIcon,
-  ArrowRight01Icon,
-  Calendar03Icon,
-  CheckListIcon,
-  CheckmarkCircle02Icon,
-  Clock01Icon,
-  DocumentValidationIcon,
-  GraduationScrollIcon,
-  House01Icon,
-  Location01Icon,
-  Notification03Icon,
-  QuestionIcon,
-  Route01Icon,
-  StarIcon,
-  Target01Icon,
-  UserGroupIcon,
-} from "hugeicons-react";
+  RiNotification3Line,
+  RiCalendarEventLine,
+  RiQuestionAnswerLine,
+  RiVipCrownLine,
+  RiSparklingFill,
+  RiBuilding4Line,
+  RiArrowRightLine,
+  RiShieldCheckLine,
+} from "react-icons/ri";
+import {
+  HiOutlineSparkles,
+  HiOutlineAcademicCap,
+  HiOutlineMegaphone,
+  HiOutlineTicket,
+} from "react-icons/hi2";
+import {
+  PiCalendarCheckDuotone,
+  PiGraduationCapBold,
+  PiBedDuotone,
+  PiCompassDuotone,
+  PiCheckCircleFill,
+  PiClockCountdownDuotone,
+  PiChartLineUpBold,
+} from "react-icons/pi";
+import {
+  TbTargetArrow,
+  TbHomeCheck,
+  TbCertificate,
+  TbFilePencil,
+  TbStar,
+} from "react-icons/tb";
 import { SEO } from "./SEO";
 import { useAuth } from "../../context/AuthContext";
 
@@ -45,24 +59,34 @@ function CampusGuideLogo({ size = 40, className = "" }: { size?: number; classNa
 
 const ecosystemCards = [
   {
-    icon: <Notification03Icon size={22} color={PRIMARY} />,
+    icon: <RiVipCrownLine size={22} color="#D97706" />,
+    title: "Face of Campus Guide (F.O.C.G)",
+    text: "Official Pageantry & Student Voting",
+    to: "/pageant/vote",
+  },
+  {
+    icon: <HiOutlineMegaphone size={22} color={PRIMARY} />,
     title: "UNIPORT Updates",
     text: "Verified news and what to do",
+    to: "/updates",
   },
   {
-    icon: <Calendar03Icon size={22} color={PRIMARY} />,
+    icon: <PiCalendarCheckDuotone size={22} color={PRIMARY} />,
     title: "Important Dates",
     text: "JAMB to registration deadlines",
+    to: "/dates",
   },
   {
-    icon: <UserGroupIcon size={22} color={PRIMARY} />,
+    icon: <HiOutlineTicket size={22} color={PRIMARY} />,
     title: "Events",
     text: "Freshers hangouts and meetups",
+    to: "/events",
   },
   {
-    icon: <QuestionIcon size={22} color={PRIMARY} />,
+    icon: <RiQuestionAnswerLine size={22} color={PRIMARY} />,
     title: "Ask Campus Guide",
     text: "Straight answers, any question",
+    to: "/ask",
   },
 ];
 
@@ -76,20 +100,21 @@ export function Landing() {
     <div className="min-h-screen bg-white" style={{ color: INK }}>
       <SEO
         title="Campus Guide UNIPORT: Post-UTME Practice, Admission Guides, Accommodation and Events"
-        description="Campus Guide is the digital ecosystem for UNIPORT aspirants and new intakes: post-UTME practice, admission guides, fresher steps, accommodation, events and verified updates."
+        description="Campus Guide is the student platform for UNIPORT aspirants and new intakes: post-UTME practice, admission guides, fresher steps, accommodation, events and updates."
         canonical="https://campusguide.ng"
       />
 
       {/* TOP BAR */}
-      <header className="border-b bg-white" style={{ borderColor: BORDER }}>
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-          <Link to="/" className="flex items-center gap-3">
-            <CampusGuideLogo size={36} />
-            <span className="text-lg font-semibold tracking-tight" style={{ color: PRIMARY }}>
+      <header className="border-b bg-white sticky top-0 z-30" style={{ borderColor: BORDER }}>
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-3 sm:px-4 gap-2">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <CampusGuideLogo size={32} />
+            <span className="text-base sm:text-lg font-semibold tracking-tight truncate" style={{ color: PRIMARY }}>
               Campus Guide
             </span>
           </Link>
 
+          {/* Desktop Nav */}
           <div className="hidden items-center gap-3 sm:flex">
             <div className="hidden items-center gap-5 sm:flex">
               <Link to="/about" className="text-sm font-medium transition-colors duration-150 hover:opacity-70" style={{ color: INK }}>
@@ -115,6 +140,25 @@ export function Landing() {
               Get Started
             </Link>
           </div>
+
+          {/* Mobile Quick Action Buttons */}
+          <div className="flex items-center gap-2 sm:hidden shrink-0">
+            <Link
+              to={signedInTarget}
+              className="rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition-colors duration-150"
+              style={{ borderColor: BORDER, color: PRIMARY }}
+            >
+              Log In
+            </Link>
+            <Link
+              to={signedInTarget}
+              state={signupState}
+              className="rounded-lg px-3 py-1.5 text-xs font-semibold text-white transition-opacity duration-150"
+              style={{ backgroundColor: PRIMARY }}
+            >
+              Get Started
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -123,7 +167,7 @@ export function Landing() {
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-16 md:grid-cols-2 md:gap-10 md:py-20">
           <div>
             <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight md:text-5xl" style={{ color: INK }}>
-              One platform for the whole UNIPORT journey.
+              One platform for UNIPORT students and aspirants.
             </h1>
             <p className="mt-5 max-w-md text-base leading-relaxed md:text-lg" style={{ color: MUTED }}>
               From JAMB to post-UTME, clearance to fresher life. Practice, guides, dates, housing and
@@ -167,7 +211,7 @@ export function Landing() {
               style={{ borderColor: BORDER }}
             >
               <div className="flex items-center gap-2">
-                <AnalyticsUpIcon size={16} color={PRIMARY} />
+                <PiChartLineUpBold size={16} color={PRIMARY} />
                 <div>
                   <p className="text-xs font-semibold" style={{ color: INK }}>Score 340 / 400</p>
                   <p className="text-[10px]" style={{ color: MUTED }}>50 questions scored</p>
@@ -179,7 +223,7 @@ export function Landing() {
               style={{ borderColor: BORDER }}
             >
               <div className="flex items-center gap-2">
-                <CheckmarkCircle02Icon size={16} color="#16A34A" />
+                <PiCheckCircleFill size={16} color="#16A34A" />
                 <div>
                   <p className="text-xs font-semibold" style={{ color: INK }}>Acceptance step done</p>
                   <p className="text-[10px]" style={{ color: MUTED }}>Fresher checklist</p>
@@ -197,7 +241,7 @@ export function Landing() {
             Everything you need, from aspirant to student.
           </h2>
           <p className="mt-4 text-lg leading-relaxed" style={{ color: MUTED }}>
-            Not just post-UTME practice. The whole campus experience, in one ecosystem.
+            Not just post-UTME practice. Everything you need for campus life.
           </p>
         </div>
 
@@ -212,7 +256,7 @@ export function Landing() {
         <FeatureRow
           reversed={true}
           title="Full-length JAMB Mock Exams"
-          description="Simulate the actual UTME with comprehensive, standard mock exams covering all your chosen subjects. Track timing, review correct answers, and prepare to ace the official JAMB test."
+          description="Simulate the actual UTME with standard mock exams covering all your chosen subjects. Track timing, review correct answers, and prepare for the official JAMB test."
           ctaLabel="Try JAMB Mock Exam"
           to="/jamb"
           state={null}
@@ -241,6 +285,15 @@ export function Landing() {
           description="Student housing around Choba with price, distance from school, room type and amenities on every listing, photos included. Compare before you visit."
           ctaLabel="Browse accommodation"
           visual={<AccommodationVisual />}
+        />
+
+        <FeatureRow
+          reversed={false}
+          title="Never miss what is happening on campus"
+          description="Seminars, workshops and student gatherings around UNIPORT. Event listings with dates, venues, and easy ticket purchases."
+          ctaLabel="See upcoming events"
+          to="/events"
+          visual={<EventsVisual />}
         />
       </section>
 
@@ -273,23 +326,23 @@ export function Landing() {
           Built for every stage
         </h2>
         <div className="grid gap-8 md:grid-cols-3">
-          <div className="flex flex-col items-center text-center rounded-xl border bg-white p-8" style={{ borderColor: BORDER }}>
-            <span className="flex h-14 w-14 items-center justify-center rounded-xl" style={{ backgroundColor: "#EEF2FC" }}>
-              <Target01Icon size={28} color={PRIMARY} />
+          <div className="flex flex-col items-center text-center rounded-2xl border bg-white p-8 shadow-sm hover:shadow-md transition-shadow" style={{ borderColor: BORDER }}>
+            <span className="flex h-14 w-14 items-center justify-center rounded-2xl" style={{ backgroundColor: "#EEF2FC" }}>
+              <TbTargetArrow size={30} color={PRIMARY} />
             </span>
             <h3 className="mt-4 text-lg font-bold tracking-tight" style={{ color: INK }}>Aspirant</h3>
             <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>Cut-off marks, subject combinations and aggregate calculators for your faculty.</p>
           </div>
-          <div className="flex flex-col items-center text-center rounded-xl border bg-white p-8" style={{ borderColor: BORDER }}>
-            <span className="flex h-14 w-14 items-center justify-center rounded-xl" style={{ backgroundColor: "#EEF2FC" }}>
-              <GraduationScrollIcon size={28} color={PRIMARY} />
+          <div className="flex flex-col items-center text-center rounded-2xl border bg-white p-8 shadow-sm hover:shadow-md transition-shadow" style={{ borderColor: BORDER }}>
+            <span className="flex h-14 w-14 items-center justify-center rounded-2xl" style={{ backgroundColor: "#EEF2FC" }}>
+              <PiGraduationCapBold size={30} color={PRIMARY} />
             </span>
             <h3 className="mt-4 text-lg font-bold tracking-tight" style={{ color: INK }}>Admitted</h3>
             <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>Acceptance, clearance, school fees and registration, step by step.</p>
           </div>
-          <div className="flex flex-col items-center text-center rounded-xl border bg-white p-8" style={{ borderColor: BORDER }}>
-            <span className="flex h-14 w-14 items-center justify-center rounded-xl" style={{ backgroundColor: "#EEF2FC" }}>
-              <House01Icon size={28} color={PRIMARY} />
+          <div className="flex flex-col items-center text-center rounded-2xl border bg-white p-8 shadow-sm hover:shadow-md transition-shadow" style={{ borderColor: BORDER }}>
+            <span className="flex h-14 w-14 items-center justify-center rounded-2xl" style={{ backgroundColor: "#EEF2FC" }}>
+              <RiBuilding4Line size={30} color={PRIMARY} />
             </span>
             <h3 className="mt-4 text-lg font-bold tracking-tight" style={{ color: INK }}>Student</h3>
             <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>Accommodation, events, updates and important dates around campus.</p>
@@ -301,7 +354,7 @@ export function Landing() {
       <section className="mx-auto max-w-6xl px-4 py-20 md:py-24">
         <div className="rounded-2xl px-8 py-12 text-center md:px-16 md:py-14" style={{ backgroundColor: PRIMARY }}>
           <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Your UNIPORT journey starts here.
+            Get started with Campus Guide.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/80">
             Join free. Practice for your post-UTME, plan your admission, and walk into UNIPORT prepared.
@@ -339,10 +392,11 @@ export function Landing() {
               </span>
             </div>
             <p className="max-w-md text-center text-sm leading-relaxed" style={{ color: MUTED }}>
-              The digital ecosystem for UNIPORT aspirants and students.
+              The platform for UNIPORT aspirants and students.
             </p>
             <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
               {[
+                { label: "Face of Campus Guide (F.O.C.G)", to: "/pageant/vote" },
                 { label: "About", to: "/about" },
                 { label: "Contact", to: "/contact" },
                 { label: "Log In", to: "/login" },
@@ -416,7 +470,7 @@ function FeatureRow({
           style={{ color: PRIMARY }}
         >
           {ctaLabel}
-          <ArrowRight01Icon size={16} />
+          <RiArrowRightLine size={16} />
         </Link>
       </div>
       <div className={reversed ? "md:order-1" : ""}>{visual}</div>
@@ -432,7 +486,7 @@ function PracticeVisual() {
         <div className="mb-4 flex items-center justify-between">
           <p className="text-xs font-semibold" style={{ color: MUTED }}>Question 12 of 50</p>
           <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold" style={{ backgroundColor: "#FEF6E4", color: "#B7791F" }}>
-            <Clock01Icon size={12} /> 24:11
+            <PiClockCountdownDuotone size={14} /> 24:11
           </span>
         </div>
         <div className="mb-4 h-3 w-3/4 rounded-full" style={{ backgroundColor: "#E5E7EB" }} />
@@ -449,7 +503,7 @@ function PracticeVisual() {
       </div>
       <div className="absolute -right-2 -top-4 rounded-lg border bg-white px-4 py-2.5 shadow-md sm:right-4" style={{ borderColor: BORDER }}>
         <div className="flex items-center gap-2">
-          <AnalyticsUpIcon size={18} color={PRIMARY} />
+          <PiChartLineUpBold size={18} color={PRIMARY} />
           <div>
             <p className="text-xs font-bold" style={{ color: INK }}>Score: 340 / 400</p>
             <p className="text-[11px]" style={{ color: MUTED }}>50 questions scored</p>
@@ -467,7 +521,7 @@ function AspirantVisual() {
       <div className="relative w-full max-w-sm space-y-3">
         <div className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm" style={{ borderColor: BORDER }}>
           <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: "#FEF1D6" }}>
-            <Target01Icon size={20} color="#B7791F" />
+            <TbTargetArrow size={22} color="#B7791F" />
           </div>
           <div className="flex-1">
             <p className="text-xs font-semibold" style={{ color: INK }}>Cut-off marks by faculty</p>
@@ -478,7 +532,7 @@ function AspirantVisual() {
         </div>
         <div className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm" style={{ borderColor: BORDER }}>
           <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: "#E4E9F7" }}>
-            <DocumentValidationIcon size={20} color={PRIMARY} />
+            <TbCertificate size={22} color={PRIMARY} />
           </div>
           <div className="flex-1">
             <p className="text-xs font-semibold" style={{ color: INK }}>Your subject combination</p>
@@ -487,7 +541,7 @@ function AspirantVisual() {
         </div>
         <div className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm" style={{ borderColor: BORDER }}>
           <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: "#E7F6EC" }}>
-            <CheckmarkCircle02Icon size={20} color="#16A34A" />
+            <PiCheckCircleFill size={22} color="#16A34A" />
           </div>
           <div className="flex-1">
             <p className="text-xs font-semibold" style={{ color: INK }}>Aggregate score calculated</p>
@@ -505,33 +559,33 @@ function FreshersVisual() {
       <div className="absolute h-56 w-56 rounded-full blur-3xl" style={{ backgroundColor: "#DCE9E4" }} />
       <div className="relative w-full max-w-sm overflow-hidden rounded-xl border bg-white shadow-md" style={{ borderColor: BORDER }}>
         <div className="flex items-center gap-2 px-5 py-4" style={{ backgroundColor: PRIMARY }}>
-          <GraduationScrollIcon size={20} color="#FFFFFF" />
+          <PiGraduationCapBold size={20} color="#FFFFFF" />
           <span className="text-sm font-semibold text-white">Fresher checklist</span>
         </div>
         <div className="space-y-1 p-5">
           <div className="flex items-center gap-2.5 rounded-lg px-2 py-2">
-            <CheckmarkCircle02Icon size={18} color="#16A34A" />
+            <PiCheckCircleFill size={18} color="#16A34A" />
             <div className="flex-1">
               <p className="text-xs font-semibold" style={{ color: INK }}>Acceptance</p>
               <p className="text-[10px]" style={{ color: MUTED }}>Offer accepted on CAPS</p>
             </div>
           </div>
           <div className="flex items-center gap-2.5 rounded-lg px-2 py-2" style={{ backgroundColor: SECTION_BG }}>
-            <CheckmarkCircle02Icon size={18} color="#16A34A" />
+            <PiCheckCircleFill size={18} color="#16A34A" />
             <div className="flex-1">
               <p className="text-xs font-semibold" style={{ color: INK }}>Clearance</p>
               <p className="text-[10px]" style={{ color: MUTED }}>Documents submitted</p>
             </div>
           </div>
           <div className="flex items-center gap-2.5 rounded-lg px-2 py-2">
-            <CheckListIcon size={18} color="#F0C868" />
+            <TbFilePencil size={18} color="#F0C868" />
             <div className="flex-1">
               <p className="text-xs font-semibold" style={{ color: INK }}>School fees</p>
               <p className="text-[10px]" style={{ color: MUTED }}>Next up: payment and receipts</p>
             </div>
           </div>
           <div className="flex items-center gap-2.5 rounded-lg px-2 py-2">
-            <CheckListIcon size={18} color={BORDER} />
+            <TbFilePencil size={18} color={BORDER} />
             <div className="flex-1">
               <p className="text-xs font-semibold" style={{ color: MUTED }}>Registration</p>
               <p className="text-[10px]" style={{ color: MUTED }}>After fees, in your faculty</p>
@@ -550,7 +604,7 @@ function AccommodationVisual() {
       <div className="relative w-full max-w-sm overflow-hidden rounded-xl border bg-white shadow-md" style={{ borderColor: BORDER }}>
         <div className="flex items-center justify-between px-5 py-4" style={{ backgroundColor: PRIMARY }}>
           <div className="flex items-center gap-2">
-            <House01Icon size={20} color="#FFFFFF" />
+            <TbHomeCheck size={20} color="#FFFFFF" />
             <span className="text-sm font-semibold text-white">Self-con. near East-West Road</span>
           </div>
         </div>
@@ -560,7 +614,7 @@ function AccommodationVisual() {
             <p className="text-2xl font-bold tracking-tight" style={{ color: INK }}>&#8358;280,000</p>
           </div>
           <div className="flex items-center gap-1.5 text-xs" style={{ color: MUTED }}>
-            <Location01Icon size={14} color={PRIMARY} /> 8 minutes from UNIPORT main gate
+            <RiBuilding4Line size={14} color={PRIMARY} /> 8 minutes from UNIPORT main gate
           </div>
           <div className="flex flex-wrap gap-2 pt-1">
             {["Single room", "Water", "Power", "Wi-Fi"].map((amenity) => (
@@ -602,6 +656,39 @@ function JAMBVisual() {
             <div className="rounded-lg border p-2 text-center text-xs font-semibold text-white" style={{ backgroundColor: PRIMARY }}>
               Submit Exam
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EventsVisual() {
+  return (
+    <div className="relative mx-auto flex h-72 max-w-md items-center justify-center">
+      <div className="absolute h-56 w-56 rounded-full blur-3xl" style={{ backgroundColor: "#E0E7FF" }} />
+      <div className="relative w-full max-w-sm overflow-hidden rounded-xl border bg-white shadow-md" style={{ borderColor: BORDER }}>
+        <div className="flex items-center gap-2 px-5 py-4" style={{ backgroundColor: PRIMARY }}>
+          <RiCalendarEventLine size={20} color="#FFFFFF" />
+          <span className="text-sm font-semibold text-white">Upcoming event</span>
+        </div>
+        <div className="p-5">
+          <div className="flex items-start gap-3">
+            <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-lg" style={{ backgroundColor: "#EEF2FC" }}>
+              <span className="text-[10px] font-semibold uppercase" style={{ color: PRIMARY }}>Oct</span>
+              <span className="text-lg font-bold leading-none" style={{ color: INK }}>15</span>
+            </div>
+            <div>
+              <p className="text-sm font-bold" style={{ color: INK }}>Freshers Orientation Night</p>
+              <p className="mt-0.5 text-xs" style={{ color: MUTED }}>Convocation Arena, 6:00 PM</p>
+              <div className="mt-2 flex items-center gap-2">
+                <span className="rounded-full border px-2.5 py-0.5 text-[10px] font-semibold" style={{ borderColor: BORDER, color: INK }}>Free Entry</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 flex items-center justify-between rounded-lg border p-3" style={{ borderColor: "#D1D9F0", backgroundColor: "#F9FAFB" }}>
+            <span className="text-xs" style={{ color: MUTED }}>120 students going</span>
+            <span className="text-xs font-semibold" style={{ color: PRIMARY }}>View event</span>
           </div>
         </div>
       </div>

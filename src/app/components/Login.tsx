@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Alert02Icon, ArrowLeft01Icon, Cancel01Icon, CheckmarkCircle02Icon, DocumentValidationIcon, GraduationScrollIcon, Loading01Icon, Target01Icon } from 'hugeicons-react';
+import { Alert02Icon, ArrowLeft01Icon, Cancel01Icon, CheckmarkCircle02Icon, DocumentValidationIcon, GraduationScrollIcon, Loading01Icon, Mail01Icon, Target01Icon } from 'hugeicons-react';
 import { useAuth } from '../../context/AuthContext';
 import { supabase } from '../../lib/supabase';
 
@@ -27,10 +27,47 @@ export function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [usernameStatus, setUsernameStatus] = useState<AvailabilityStatus>('idle');
+  const [signedUpEmail, setSignedUpEmail] = useState<string | null>(null);
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Real-time username availability check
+  // Helper function to check username availability against Supabase
+  const checkUsernameAvailability = async (targetUsername: string): Promise<AvailabilityStatus> => {
+    const trimmed = targetUsername.trim().toLowerCase();
+    if (!trimmed || trimmed.length < 3) {
+      return 'idle';
+    }
+
+    try {
+      // 1. Try RPC check first if exists
+      const { data: rpcData, error: rpcError } = await supabase.rpc('check_username_available', {
+        req_username: trimmed,
+      });
+
+      if (!rpcError && typeof rpcData === 'boolean') {
+        return rpcData ? 'available' : 'taken';
+      }
+
+      // 2. Direct query fallback on profiles table
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('username')
+        .ilike('username', trimmed)
+        .maybeSingle();
+
+      if (error) {
+        console.error('Username availability check error:', error);
+        return 'error';
+      }
+
+      return data ? 'taken' : 'available';
+    } catch (err) {
+      console.error('Error checking username:', err);
+      return 'error';
+    }
+  };
+
+  // Real-time username availability check effect
   useEffect(() => {
     if (mode !== 'signup') return;
 
@@ -46,23 +83,9 @@ export function Login() {
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
     debounceRef.current = setTimeout(async () => {
-      try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('username')
-          .ilike('username', trimmed)
-          .maybeSingle();
-
-        if (error) {
-          setUsernameStatus('error');
-          return;
-        }
-
-        setUsernameStatus(data ? 'taken' : 'available');
-      } catch {
-        setUsernameStatus('error');
-      }
-    }, 500);
+      const status = await checkUsernameAvailability(trimmed);
+      setUsernameStatus(status);
+    }, 400);
 
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -85,24 +108,38 @@ export function Login() {
           return;
         }
 
-        if (usernameStatus === 'taken') {
-          setError('That username is already taken. Please choose another.');
+        const trimmedUsername = username.trim().toLowerCase();
+        if (!trimmedUsername || trimmedUsername.length < 3) {
+          setError('Please choose a username of at least 3 characters.');
           setIsLoading(false);
           return;
         }
 
-        if (usernameStatus === 'checking') {
-          setError('Please wait while we check your username.');
+        // Re-check username availability status right before submit
+        let currentStatus = usernameStatus;
+        if (currentStatus === 'idle' || currentStatus === 'checking') {
+          setUsernameStatus('checking');
+          currentStatus = await checkUsernameAvailability(trimmedUsername);
+          setUsernameStatus(currentStatus);
+        }
+
+        if (currentStatus === 'taken') {
+          setError('Username exists, use something more unique ;-)');
           setIsLoading(false);
           return;
         }
 
-        const derivedUsername = username.trim().toLowerCase() || name.split(' ')[0].toLowerCase() || normalizedEmail.split('@')[0];
+        if (currentStatus === 'error') {
+          setError('Unable to verify username availability. Please try again or choose a different username.');
+          setIsLoading(false);
+          return;
+        }
+
         const derivedCourse = course || 'Post UTME Candidate';
 
         const { requiresEmailConfirmation } = await signup({
-          name,
-          username: derivedUsername,
+          name: name.trim(),
+          username: trimmedUsername,
           email: normalizedEmail,
           password,
           course: derivedCourse,
@@ -110,16 +147,14 @@ export function Login() {
           user_type: userType || 'aspirant',
         });
 
-        setInfo(requiresEmailConfirmation
-          ? 'Account created. Check your email and confirm your address before logging in.'
-          : 'Account created successfully. You can now continue to your dashboard.');
-        if (!requiresEmailConfirmation) {
+        if (requiresEmailConfirmation) {
+          setSignedUpEmail(normalizedEmail);
+          setIsLoading(false);
+          return;
+        } else {
           navigate('/dashboard');
           return;
         }
-        setMode('login');
-        setEmail('');
-        setPassword('');
       } else if (mode === 'forgot') {
         await resetPasswordForEmail(normalizedEmail);
         setInfo('If an account exists for that email, a secure password-reset link has been sent.');
@@ -132,13 +167,18 @@ export function Login() {
     } catch (err: any) {
       const message = err?.message || 'Something went wrong';
 
-      if (message.toLowerCase().includes('duplicate') || message.toLowerCase().includes('already')) {
-        if (message.toLowerCase().includes('username')) {
-          setError('This username is already taken. Please choose a different username.');
-        } else if (message.toLowerCase().includes('email')) {
-          setError('An account already exists with this email. Switch to login.');
+      if (
+        message.toLowerCase().includes('duplicate') ||
+        message.toLowerCase().includes('already') ||
+        message.toLowerCase().includes('database error') ||
+        message.toLowerCase().includes('profiles_username_key') ||
+        message.toLowerCase().includes('saving new user')
+      ) {
+        if (message.toLowerCase().includes('email')) {
+          setError('An account already exists with this email address. Please switch to login.');
         } else {
-          setError('An account with these details already exists. Please try a different username or email.');
+          setError('Username exists, use something more unique ;-)');
+          setUsernameStatus('taken');
         }
       } else if (
         message.toLowerCase().includes('invalid login credentials') ||
@@ -167,6 +207,7 @@ export function Login() {
     setUsername('');
     setEmailOptIn(false);
     setUsernameStatus('idle');
+    setSignedUpEmail(null);
   };
 
   const handleRoleSelect = (type: 'aspirant' | 'student') => {
@@ -178,22 +219,29 @@ export function Login() {
     if (usernameStatus === 'idle') return null;
     if (usernameStatus === 'checking') {
       return (
-        <span className="flex items-center gap-1 mt-1 text-sm text-slate-500">
-          <Loading01Icon size={14} className="animate-spin" /> Checking...
+        <span className="flex items-center gap-1 mt-1 text-[#6B7280] font-medium text-[#000000]/70" style={{ fontSize: '0.85rem' }}>
+          <Loading01Icon size={14} className="animate-spin text-[#2F4EA2]" /> Checking username availability...
         </span>
       );
     }
     if (usernameStatus === 'available') {
       return (
-        <span className="flex items-center gap-1 mt-1 text-sm text-green-600">
-          <CheckmarkCircle02Icon size={14} /> Available
+        <span className="flex items-center gap-1 mt-1 text-emerald-600 font-medium" style={{ fontSize: '0.85rem' }}>
+          <CheckmarkCircle02Icon size={14} /> Username is available!
         </span>
       );
     }
     if (usernameStatus === 'taken') {
       return (
-        <span className="flex items-center gap-1 mt-1 text-sm text-red-600">
-          <Cancel01Icon size={14} /> Already taken
+        <span className="flex items-center gap-1 mt-1 text-red-600 font-medium" style={{ fontSize: '0.85rem' }}>
+          <Cancel01Icon size={14} /> Username exists, use something more unique ;-)
+        </span>
+      );
+    }
+    if (usernameStatus === 'error') {
+      return (
+        <span className="flex items-center gap-1 mt-1 text-amber-600 font-medium" style={{ fontSize: '0.85rem' }}>
+          <Alert02Icon size={14} /> Couldn't check availability. Will verify on submit.
         </span>
       );
     }
@@ -201,7 +249,55 @@ export function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white px-4">
+    <div className="relative flex min-h-screen items-center justify-center bg-white px-4 py-8">
+      {/* Full-Screen Email Confirmation Pop-Up Modal */}
+      {signedUpEmail && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 p-4 backdrop-blur-md animate-fadeIn">
+          <div className="w-full max-w-md rounded-2xl bg-white p-6 sm:p-8 shadow-2xl text-center border border-gray-100 transform transition-all">
+            <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-blue-50 text-[#2F4EA2] ring-8 ring-blue-50/50">
+              <Mail01Icon size={40} className="text-[#2F4EA2]" />
+            </div>
+
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Check Your Email
+            </h2>
+
+            <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+              An email has been sent to your email address:
+              <br />
+              <span className="font-semibold text-gray-900 text-base underline decoration-[#2F4EA2]/30">{signedUpEmail}</span>
+            </p>
+
+            <div className="mb-6 rounded-xl bg-blue-50 p-4 text-left border border-blue-200/80">
+              <div className="flex items-start gap-2.5">
+                <Alert02Icon size={18} className="mt-0.5 shrink-0 text-[#2F4EA2]" />
+                <p className="text-xs text-[#2F4EA2] font-medium leading-relaxed">
+                  Confirm the email and log in with your password.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setSignedUpEmail(null);
+                setMode('login');
+                setPassword('');
+                setError('');
+                setInfo('An email has been sent to your email address. Confirm the email and log in with your password.');
+              }}
+              className="w-full rounded-xl py-3.5 font-semibold text-white transition-all shadow-md hover:shadow-lg active:scale-[0.98]"
+              style={{ backgroundColor: '#2F4EA2' }}
+            >
+              Go to Log In
+            </button>
+
+            <p className="mt-4 text-xs text-gray-500">
+              Didn't receive the email? Check your spam folder or try again later.
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="w-full max-w-md">
         <div className="mb-6">
           <button
@@ -300,17 +396,17 @@ export function Login() {
         /* Form Step */
         <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-lg">
           {error && (
-            <div className="mb-4 rounded bg-red-100 p-3 text-red-700 text-sm">{error}</div>
+            <div className="mb-4 rounded bg-red-100 p-3 text-red-700 text-sm font-medium">{error}</div>
           )}
           {info && (
-            <div className="mb-4 rounded bg-green-100 p-3 text-green-700 text-sm">{info}</div>
+            <div className="mb-4 rounded bg-green-100 p-3 text-green-700 text-sm font-medium">{info}</div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             {mode === 'signup' && (
               <>
                 <div>
-                  <label htmlFor="name" className="mb-2 block text-black">Full Name</label>
+                  <label htmlFor="name" className="mb-2 block text-black font-medium">Full Name</label>
                   <input
                     id="name"
                     type="text"
@@ -323,20 +419,23 @@ export function Login() {
                 </div>
 
                 <div>
-                  <label htmlFor="username" className="mb-2 block text-black">Username</label>
+                  <label htmlFor="username" className="mb-2 block text-black font-medium">
+                    Username <span className="text-red-500">*</span>
+                  </label>
                   <input
                     id="username"
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className={`w-full rounded-lg border px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full rounded-lg border px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 ${
                       usernameStatus === 'taken'
-                        ? 'border-red-400'
+                        ? 'border-red-500 focus:ring-red-500 bg-red-50/20'
                         : usernameStatus === 'available'
-                        ? 'border-green-400'
-                        : 'border-gray-300'
+                        ? 'border-emerald-500 focus:ring-emerald-500 bg-emerald-50/10'
+                        : 'border-gray-300 focus:ring-blue-500'
                     }`}
-                    placeholder="Choose a username"
+                    placeholder="Choose a unique username"
+                    required
                   />
                   <UsernameIndicator />
                 </div>
@@ -344,7 +443,7 @@ export function Login() {
             )}
 
             <div>
-              <label htmlFor="email" className="mb-2 block text-black">Email Address</label>
+              <label htmlFor="email" className="mb-2 block text-black font-medium">Email Address</label>
               <input
                 id="email"
                 type="email"
@@ -358,7 +457,7 @@ export function Login() {
             </div>
 
             {mode !== 'forgot' && <div>
-              <label htmlFor="password" className="mb-2 block text-black">Password</label>
+              <label htmlFor="password" className="mb-2 block text-black font-medium">Password</label>
               <div className="relative">
                 <input
                   id="password"
@@ -379,7 +478,7 @@ export function Login() {
                 </button>
               </div>
               {mode === 'signup' && password.length > 0 && password.length < 8 && (
-                <p className="mt-1 text-sm text-red-600">Password must be at least 8 characters.</p>
+                <p className="mt-1 text-sm text-red-600 font-medium">Password must be at least 8 characters.</p>
               )}
             </div>}
 
@@ -394,7 +493,7 @@ export function Login() {
             {mode === 'signup' && (
               <>
                 <div>
-                  <label htmlFor="course" className="mb-2 block text-black">Course of Study / Faculty</label>
+                  <label htmlFor="course" className="mb-2 block text-black font-medium">Course of Study / Faculty</label>
                   <select
                     id="course"
                     value={course}
@@ -403,23 +502,22 @@ export function Login() {
                     required
                   >
                     <option value="">Select your course / Faculty</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Medicine and Surgery">Medicine and Surgery</option>
-                    <option value="Pharmacy">Pharmacy</option>
-                    <option value="Law">Law</option>
-                    <option value="Sciences">Sciences</option>
-                    <option value="Computing">Computing</option>
-                    <option value="Anatomy">Anatomy</option>
-                    <option value="Physiology">Physiology</option>
-                    <option value="SSLT">SSLT</option>
-                    <option value="Dentistry">Dentistry</option>
-                    <option value="Geology">Geology</option>
-                    <option value="Industrial Chemistry/Physics">Industrial Chemistry/Physics</option>
-                    <option value="Humanities/Communication &amp; Media Studies">Humanities/Communication &amp; Media Studies</option>
-                    <option value="Nursing">Nursing</option>
-                    <option value="Social Sciences">Social Sciences</option>
-                    <option value="Management Sciences">Management Sciences</option>
+                    <option value="Agriculture">Agriculture</option>
                     <option value="Allied Health Sciences">Allied Health Sciences</option>
+                    <option value="Basic Medical Sciences">Basic Medical Sciences</option>
+                    <option value="Clinical Sciences">Clinical Sciences</option>
+                    <option value="Communication and Media Studies">Communication and Media Studies</option>
+                    <option value="Computing">Computing</option>
+                    <option value="Dentistry">Dentistry</option>
+                    <option value="Education">Education</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Humanities">Humanities</option>
+                    <option value="Law">Law</option>
+                    <option value="Management Sciences">Management Sciences</option>
+                    <option value="Pharmaceutical Sciences">Pharmaceutical Sciences</option>
+                    <option value="School of Science Laboratory Technology">School of Science Laboratory Technology</option>
+                    <option value="Science">Science</option>
+                    <option value="Social Sciences">Social Sciences</option>
                   </select>
 
                   {course && (
@@ -450,7 +548,7 @@ export function Login() {
 
             <button
               type="submit"
-              disabled={isLoading || (mode === 'signup' && (password.length < 8 || usernameStatus === 'taken' || usernameStatus === 'checking'))}
+              disabled={isLoading || (mode === 'signup' && (password.length < 8 || !username.trim() || usernameStatus === 'taken' || usernameStatus === 'checking'))}
               className="w-full rounded-lg py-3 font-medium text-white transition-all hover:opacity-90 disabled:opacity-50"
               style={{ backgroundColor: '#2F4EA2' }}
             >

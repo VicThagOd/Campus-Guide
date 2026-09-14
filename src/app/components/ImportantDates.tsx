@@ -118,15 +118,12 @@ export function ImportantDates() {
 
       <div className="border-b" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
         <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
-          <p className="mb-3 text-xs font-semibold tracking-[0.18em]" style={{ color: PRIMARY }}>
-            IMPORTANT DATES
-          </p>
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl" style={{ color: INK }}>
             Every deadline, in one place.
           </h1>
           <p className="mt-4 max-w-2xl leading-relaxed" style={{ color: MUTED }}>
             JAMB, post-UTME, screening, admission, acceptance, clearance and registration. Check the dates
-            that matter for your UNIPORT journey.
+            that matter for UNIPORT.
           </p>
         </div>
       </div>

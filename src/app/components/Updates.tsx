@@ -75,9 +75,6 @@ export function Updates() {
 
       <div className="border-b" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
         <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
-          <p className="mb-3 text-xs font-semibold tracking-[0.18em]" style={{ color: PRIMARY }}>
-            UNIPORT UPDATES
-          </p>
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl" style={{ color: INK }}>
             Verified news, no rumours.
           </h1>

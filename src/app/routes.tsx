@@ -24,93 +24,164 @@ import { NotFound } from "./components/NotFound";
 import { OrganizerDashboard } from "./components/OrganizerDashboard";
 import { ResetPassword } from "./components/ResetPassword";
 
+import { PageantRegister } from "./components/PageantRegister";
+import { PageantVoting } from "./components/PageantVoting";
+
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: Landing,
+    element: <Landing />,
+  },
+  {
+    path: "/pageant",
+    element: <PageantVoting />,
+  },
+  {
+    path: "/pageant/vote",
+    element: <PageantVoting />,
+  },
+  {
+    path: "/vote",
+    element: <PageantVoting />,
+  },
+  {
+    path: "/pageant/register",
+    element: <PageantRegister />,
+  },
+  {
+    path: "/register",
+    element: <PageantRegister />,
   },
   {
     path: "/login",
-    Component: Login,
+    element: <Login />,
   },
   {
     path: "/reset-password",
-    Component: ResetPassword,
+    element: <ResetPassword />,
   },
   {
     path: "/dashboard",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(Dashboard)),
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/post-utme",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(PostUtmeHub)),
+    element: (
+      <ProtectedRoute>
+        <PostUtmeHub />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/aspirant-services",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(AspirantServices)),
+    element: (
+      <ProtectedRoute>
+        <AspirantServices />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/accommodation",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(Accommodation)),
+    element: (
+      <ProtectedRoute>
+        <Accommodation />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/accommodation/:id",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(AccommodationDetail)),
+    element: (
+      <ProtectedRoute>
+        <AccommodationDetail />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/events",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(Events)),
+    element: (
+      <ProtectedRoute>
+        <Events />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/organizers",
-    Component: OrganizerDashboard,
+    element: <OrganizerDashboard />,
+  },
+  {
+    path: "/admin",
+    element: <OrganizerDashboard />,
   },
   {
     path: "/updates",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(Updates)),
+    element: (
+      <ProtectedRoute>
+        <Updates />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/dates",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(ImportantDates)),
+    element: (
+      <ProtectedRoute>
+        <ImportantDates />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/freshers",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(FreshersHub)),
+    element: (
+      <ProtectedRoute>
+        <FreshersHub />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/ask",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(AskCampusGuide)),
+    element: (
+      <ProtectedRoute>
+        <AskCampusGuide />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/about",
-    Component: About,
+    element: <About />,
   },
   {
     path: "/payment/confirm",
-    Component: () => React.createElement(ProtectedRoute, null, React.createElement(PaymentConfirmation)),
+    element: (
+      <ProtectedRoute>
+        <PaymentConfirmation />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/contact",
-    Component: Contact,
+    element: <Contact />,
   },
   {
     path: "/test-warning",
-    Component: TestWarning,
+    element: <TestWarning />,
   },
   {
     path: "/test",
-    Component: TestInterface,
+    element: <TestInterface />,
   },
   {
     path: "/results",
-    Component: Results,
+    element: <Results />,
   },
   {
     path: "/review/:resultId",
-    Component: ExamReview,
+    element: <ExamReview />,
   },
   {
     path: "*",
-    Component: NotFound,
+    element: <NotFound />,
   },
 ]);

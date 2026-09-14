@@ -129,12 +129,12 @@ export function AccommodationDetail() {
           </Link>
         </div>
       ) : listing ? (
-        <div className="mx-auto max-w-4xl px-4 py-10">
+        <div className="mx-auto max-w-4xl px-3 sm:px-4 py-6 sm:py-10">
           <SEO title={listing.title} description={listing.description ?? `${listing.title} on Campus Guide`} />
 
           <Link
             to="/accommodation"
-            className="mb-6 inline-flex items-center gap-1.5 rounded-lg border px-4 py-1.5 text-sm font-semibold transition-colors duration-150 hover:bg-white"
+            className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 rounded-lg border px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold transition-colors duration-150 hover:bg-white"
             style={{ color: PRIMARY, border: `1px solid ${BORDER}` }}
           >
             <ArrowLeft01Icon size={14} />
@@ -143,41 +143,41 @@ export function AccommodationDetail() {
 
           <div className="overflow-hidden rounded-2xl border bg-white" style={{ borderColor: BORDER }}>
             {listing.image_urls && listing.image_urls.length > 0 ? (
-              <div className="grid gap-1 md:grid-cols-2">
+              <div className="grid gap-1 sm:grid-cols-2">
                 {listing.image_urls.slice(0, 2).map((url, index) => (
                   <img
                     key={url}
                     src={url}
                     alt={`${listing.title} photo ${index + 1}`}
-                    className="h-56 w-full object-cover md:h-64"
+                    className="h-52 sm:h-56 md:h-64 w-full object-cover"
                     loading="lazy"
                   />
                 ))}
               </div>
             ) : (
-              <div className="relative flex h-56 items-center justify-center md:h-64" style={{ backgroundColor: roomTypeStyle(listing.room_type).band }}>
+              <div className="relative flex h-52 sm:h-56 items-center justify-center md:h-64" style={{ backgroundColor: roomTypeStyle(listing.room_type).band }}>
                 <div className="flex flex-col items-center gap-2">
-                  <span className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white" style={{ border: `1px solid ${BORDER}` }}>
+                  <span className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-2xl bg-white" style={{ border: `1px solid ${BORDER}` }}>
                     {roomTypeStyle(listing.room_type).icon}
                   </span>
                   {listing.room_type && (
-                    <span className="text-sm font-semibold" style={{ color: INK }}>{listing.room_type}</span>
+                    <span className="text-xs sm:text-sm font-semibold" style={{ color: INK }}>{listing.room_type}</span>
                   )}
                 </div>
               </div>
             )}
             {listing.video_url && (
-              <div className="border-t p-4" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
+              <div className="border-t p-3 sm:p-4" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
                 <video src={listing.video_url} controls className="max-h-72 w-full rounded-lg bg-black" preload="metadata" />
               </div>
             )}
 
-            <div className="p-6 md:p-8">
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <h1 className="max-w-md text-2xl font-bold tracking-tight md:text-3xl" style={{ color: INK }}>
+            <div className="p-4 sm:p-6 md:p-8">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+                <h1 className="max-w-md text-xl sm:text-2xl md:text-3xl font-bold tracking-tight" style={{ color: INK }}>
                   {listing.title}
                 </h1>
-                <p className="text-3xl font-bold tracking-tight" style={{ color: PRIMARY }}>
+                <p className="text-2xl sm:text-3xl font-bold tracking-tight shrink-0" style={{ color: PRIMARY }}>
                   {formatPrice(listing.price)}
                 </p>
               </div>

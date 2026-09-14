@@ -1,16 +1,26 @@
 import { SiWhatsapp } from "react-icons/si";
 import {
-  Building01Icon,
-  CheckListIcon,
-  CheckmarkCircle02Icon,
-  DocumentValidationIcon,
-  File01Icon,
-  GraduationScrollIcon,
-  House01Icon,
-  Money01Icon,
-  Shield01Icon,
-  UserGroupIcon,
-} from "hugeicons-react";
+  RiMoneyDollarCircleLine,
+  RiFileList3Line,
+  RiHeartPulseLine,
+  RiBuilding4Line,
+  RiCompassDiscoverLine,
+  RiFolderReceivedLine,
+} from "react-icons/ri";
+import {
+  PiCheckCircleDuotone,
+  PiBedDuotone,
+  PiUsersThreeDuotone,
+  PiCertificateDuotone,
+} from "react-icons/pi";
+import {
+  TbHomeCheck,
+  TbFirstAidKit,
+  TbReceipt,
+  TbId,
+  TbFolderCheck,
+} from "react-icons/tb";
+import { HiOutlineAcademicCap } from "react-icons/hi2";
 import { SEO } from "./SEO";
 import { PublicShell } from "./PublicShell";
 
@@ -34,7 +44,7 @@ interface FresherStage {
 const stages: FresherStage[] = [
   {
     title: "Acceptance",
-    icon: <CheckmarkCircle02Icon size={22} color={PRIMARY} />,
+    icon: <PiCheckCircleDuotone size={24} color="#16A34A" />,
     description: "You got admitted. Secure your place officially.",
     steps: [
       "Check JAMB CAPS and accept your admission offer",
@@ -44,7 +54,7 @@ const stages: FresherStage[] = [
   },
   {
     title: "Clearance",
-    icon: <DocumentValidationIcon size={22} color={PRIMARY} />,
+    icon: <PiCertificateDuotone size={24} color={PRIMARY} />,
     description: "Prove your credentials to the university.",
     steps: [
       "Gather your O'Level results, JAMB result and birth certificate",
@@ -54,7 +64,7 @@ const stages: FresherStage[] = [
   },
   {
     title: "School Fees",
-    icon: <Money01Icon size={22} color={PRIMARY} />,
+    icon: <TbReceipt size={24} color="#D97706" />,
     description: "Pay acceptance and tuition fees.",
     steps: [
       "Generate your payment invoice on the school portal",
@@ -64,7 +74,7 @@ const stages: FresherStage[] = [
   },
   {
     title: "Registration",
-    icon: <File01Icon size={22} color={PRIMARY} />,
+    icon: <TbId size={24} color={PRIMARY} />,
     description: "Register as a student of the university.",
     steps: [
       "Complete online registration in your faculty",
@@ -74,7 +84,7 @@ const stages: FresherStage[] = [
   },
   {
     title: "Medicals",
-    icon: <Shield01Icon size={22} color={PRIMARY} />,
+    icon: <RiHeartPulseLine size={24} color="#E11D48" />,
     description: "Complete the school health requirement.",
     steps: [
       "Visit the university health centre",
@@ -84,7 +94,7 @@ const stages: FresherStage[] = [
   },
   {
     title: "Faculty Requirements",
-    icon: <Building01Icon size={22} color={PRIMARY} />,
+    icon: <HiOutlineAcademicCap size={24} color={PRIMARY} />,
     description: "Report to your faculty and department.",
     steps: [
       "Attend your faculty's orientation briefing",
@@ -94,7 +104,7 @@ const stages: FresherStage[] = [
   },
   {
     title: "Accommodation",
-    icon: <House01Icon size={22} color={PRIMARY} />,
+    icon: <TbHomeCheck size={24} color={PRIMARY} />,
     description: "Find somewhere to stay before resumption chaos.",
     steps: [
       "Start looking early, good hostels fill fast",
@@ -104,7 +114,7 @@ const stages: FresherStage[] = [
   },
   {
     title: "Orientation",
-    icon: <UserGroupIcon size={22} color={PRIMARY} />,
+    icon: <PiUsersThreeDuotone size={24} color="#2563EB" />,
     description: "Settle in and learn how UNIPORT works.",
     steps: [
       "Attend the freshers' orientation programme",
@@ -114,7 +124,7 @@ const stages: FresherStage[] = [
   },
   {
     title: "Important Documents",
-    icon: <CheckListIcon size={22} color={PRIMARY} />,
+    icon: <TbFolderCheck size={24} color="#059669" />,
     description: "Keep these safe and accessible.",
     steps: [
       "JAMB result and admission letter",
@@ -151,9 +161,6 @@ export function FreshersHub() {
 
       <div className="border-b" style={{ borderColor: BORDER, backgroundColor: SECTION_BG }}>
         <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
-          <p className="mb-3 text-xs font-semibold tracking-[0.18em]" style={{ color: PRIMARY }}>
-            FRESHERS HUB
-          </p>
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl" style={{ color: INK }}>
             You got admitted. Now what?
           </h1>
@@ -166,10 +173,7 @@ export function FreshersHub() {
 
       <div className="mx-auto max-w-5xl px-4 py-12">
         <div className="mb-8 rounded-2xl border bg-white p-6" style={{ borderColor: BORDER }}>
-          <p className="text-xs font-semibold tracking-[0.18em]" style={{ color: PRIMARY }}>
-            TO DO / ROADMAP
-          </p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight" style={{ color: INK }}>
+          <h2 className="text-2xl font-bold tracking-tight" style={{ color: INK }}>
             Physical clearance checklist
           </h2>
           <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>
@@ -178,7 +182,7 @@ export function FreshersHub() {
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             {clearanceNote.steps.map((step) => (
               <div key={step} className="flex items-start gap-2 rounded-lg bg-gray-50 px-4 py-3">
-                <CheckmarkCircle02Icon size={16} color="#16A34A" className="mt-0.5 shrink-0" />
+                <PiCheckCircleDuotone size={18} color="#16A34A" className="mt-0.5 shrink-0" />
                 <span className="text-sm" style={{ color: INK }}>{step}</span>
               </div>
             ))}
@@ -203,7 +207,7 @@ export function FreshersHub() {
               <ul className="mt-4 space-y-2.5 border-t pt-4" style={{ borderColor: BORDER }}>
                 {stage.steps.map((step) => (
                   <li key={step} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: INK }}>
-                    <CheckmarkCircle02Icon size={16} color="#16A34A" className="mt-0.5 shrink-0" />
+                    <PiCheckCircleDuotone size={18} color="#16A34A" className="mt-0.5 shrink-0" />
                     {step}
                   </li>
                 ))}
@@ -214,7 +218,7 @@ export function FreshersHub() {
 
         <div className="mt-16 rounded-2xl px-8 py-12 text-center" style={{ backgroundColor: PRIMARY }}>
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full" style={{ backgroundColor: "#F0C868" }}>
-            <GraduationScrollIcon size={24} color="#7A5417" />
+            <HiOutlineAcademicCap size={24} color="#7A5417" />
           </div>
           <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
             Stuck at any step? We have done this before.

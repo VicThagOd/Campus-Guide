@@ -14,6 +14,7 @@ import {
 } from "../lib/appState";
 import { fetchUserAccess, isCbtAccessExpired, UserAccess } from "../lib/userAccess";
 import { createPastQuestionsDownloadUrl, triggerBrowserDownload } from "../lib/pastQuestionsPdf";
+import { whatsappLink, whatsappMessages } from "../../lib/whatsapp";
 
 type PaymentType = "pdf" | "cbt" | null;
 
@@ -245,6 +246,33 @@ export function PostUtmeHub() {
           </div>
         </div>
 
+      </div>
+
+      <div className="mx-auto max-w-4xl px-4 pb-10">
+        <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border p-6 md:flex-row" style={{ borderColor: "#D1D9F0", backgroundColor: "#EEF2FC" }}>
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: "#FFFFFF" }}>
+              <Alert02Icon size={20} color={PRIMARY} />
+            </span>
+            <div>
+              <p className="text-sm font-semibold" style={{ color: INK }}>
+                Need help with Post-UTME?
+              </p>
+              <p className="text-sm" style={{ color: MUTED }}>
+                Talk to the Campus Guide team on WhatsApp.
+              </p>
+            </div>
+          </div>
+          <a
+            href={whatsappLink(whatsappMessages.postUtmeHelp())}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90"
+            style={{ backgroundColor: "#25D366" }}
+          >
+            Chat on WhatsApp
+          </a>
+        </div>
       </div>
 
       {activePayment && (

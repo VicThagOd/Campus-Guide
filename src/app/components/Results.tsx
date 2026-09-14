@@ -50,21 +50,21 @@ export function Results() {
             <MetricTile label="Points" value={`${pointsEarned}/${pointsPossible}`} />
           </div>
 
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <Link
               to="/test-warning"
-              className="flex items-center gap-2 rounded-lg px-6 py-3 transition-opacity duration-150 hover:opacity-90"
-              style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
+              className="flex items-center justify-center gap-2 rounded-lg px-6 py-3 transition-opacity duration-150 hover:opacity-90 text-sm font-semibold"
+              style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF" }}
             >
-              <RefreshIcon size={20} />
+              <RefreshIcon size={18} />
               Retry Test
             </Link>
             <Link
               to="/post-utme"
-              className="flex items-center gap-2 rounded-lg border-2 px-6 py-3 transition-colors duration-150 hover:bg-gray-50"
-              style={{ borderColor: "#2F4EA2", color: "#2F4EA2", fontWeight: 500 }}
+              className="flex items-center justify-center gap-2 rounded-lg border-2 px-6 py-3 transition-colors duration-150 hover:bg-gray-50 text-sm font-semibold"
+              style={{ borderColor: "#2F4EA2", color: "#2F4EA2" }}
             >
-              <Home01Icon size={20} />
+              <Home01Icon size={18} />
               Back to Practice
             </Link>
           </div>

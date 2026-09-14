@@ -1,23 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft01Icon, CallIcon, Location01Icon, Mail01Icon } from "hugeicons-react";
 import { SiFacebook, SiTiktok, SiWhatsapp } from "react-icons/si";
+import { useAuth } from "../../context/AuthContext";
 import { SEO } from "./SEO";
-
 
 export function Contact() {
   const navigate = useNavigate();
- return (
-  <div className="min-h-screen bg-white">
-    <SEO
-      title="Contact Us"
-      description="Reach the Campus Guide team via email, phone, WhatsApp, Facebook or TikTok. We're here to help you prepare for your UNIPORT Post UTME."
-      canonical="https://campusguide.ng/contact"
-    />
+  const { user } = useAuth();
+  const backTarget = user ? "/dashboard" : "/";
+  const backLabel = user ? "Back to Dashboard" : "Back to Home";
+
+  return (
+    <div className="min-h-screen bg-white">
+      <SEO
+        title="Contact Us"
+        description="Reach the Campus Guide team via email, phone, WhatsApp, Facebook or TikTok. We're here to help you prepare for your UNIPORT Post UTME."
+        canonical="https://campusguide.ng/contact"
+      />
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-6">
-          
           <button
-                      onClick={() => navigate('/')}
+            onClick={() => navigate(backTarget)}
                       className="flex items-center gap-1.5 rounded-lg border px-4 py-1.5 text-sm font-semibold transition-colors duration-150 hover:bg-white"
                       style={{ color: '#2F4EA2', border: '1px solid #BFC3C6' }}
                     >
@@ -180,11 +183,11 @@ export function Contact() {
 
         <div className="text-center">
           <Link
-            to="/"
+            to={backTarget}
             className="inline-block px-8 py-3 rounded-lg border-2 transition-all hover:opacity-70"
             style={{ borderColor: '#2F4EA2', color: '#2F4EA2', fontWeight: 500 }}
           >
-            Back to Home
+            {backLabel}
           </Link>
         </div>
       </div>

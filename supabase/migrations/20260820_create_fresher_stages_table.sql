@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS fresher_stages (
 
 ALTER TABLE fresher_stages ENABLE ROW LEVEL SECURITY;
 
--- Public read access for freshers hub stages
+DROP POLICY IF EXISTS fresher_stages_public_select ON fresher_stages;
 CREATE POLICY fresher_stages_public_select ON fresher_stages
     FOR SELECT USING (true);
+

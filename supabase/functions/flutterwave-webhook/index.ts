@@ -172,34 +172,84 @@ Deno.serve(async (req) => {
         `🔔 <b>New Accommodation Inspection Paid</b>\n- Student Email: ${pending.email}\n- WhatsApp: ${metadata.whatsappNumber}\n- Amount: ₦${txn.amount}\n- Direct Chat: <a href="${waLink}">Open WhatsApp Chat</a>`
       );
 
-    } else if (pending.payment_type === "ticket") {
-      const tierName = String(metadata.tierName || "Regular");
-      const ticketPrice = Number(metadata.ticketPrice || metadata.basePrice || txn.amount);
-      const ticketCode = createTicketCode();
+    } else if (pending.payment_type === "ticket" || pending.payment_type === "tier") {
       const receiptNumber = createReceiptNumber();
+      const purchaserUserId = pending.user_id === "anonymous_user" ? null : pending.user_id;
+      const purchaserName = txn.customer?.name || pending.email;
+      const purchaserEmail = pending.email;
+      const ticketRows: any[] = [];
 
-      // Insert purchased ticket
-      const { error: ticketError } = await supabase.from("event_tickets").insert({
-        event_id: metadata.eventId,
-        user_id: pending.user_id,
-        tier_name: tierName,
-        tier_price: ticketPrice,
-        ticket_code: ticketCode,
-        payment_reference: String(flwTransactionId),
-        whatsapp_number: metadata.whatsappNumber,
-        checked_in: false,
-        receipt_number: receiptNumber,
-        purchaser_name: txn.customer?.name || pending.email,
-        purchaser_email: pending.email,
-      });
+      if (metadata.items && Array.isArray(metadata.items) && metadata.items.length > 0) {
+        for (const item of metadata.items) {
+          const qty = Number(item.quantity) || 1;
+          const tierPrice = Number(item.tierPrice) || 0;
+          const tierName = String(item.tierName || "Regular");
+
+          for (let i = 0; i < qty; i++) {
+            ticketRows.push({
+              event_id: metadata.eventId,
+              user_id: purchaserUserId,
+              tier_name: tierName,
+              tier_price: tierPrice,
+              ticket_code: createTicketCode(),
+              payment_reference: String(flwTransactionId),
+              whatsapp_number: metadata.whatsappNumber || '',
+              checked_in: false,
+              receipt_number: receiptNumber,
+              purchaser_name: purchaserName,
+              purchaser_email: purchaserEmail,
+            });
+          }
+        }
+      } else {
+        const tierName = String(metadata.tierName || "Regular");
+        const ticketPrice = Number(metadata.ticketPrice || metadata.basePrice || txn.amount);
+        ticketRows.push({
+          event_id: metadata.eventId,
+          user_id: purchaserUserId,
+          tier_name: tierName,
+          tier_price: ticketPrice,
+          ticket_code: createTicketCode(),
+          payment_reference: String(flwTransactionId),
+          whatsapp_number: metadata.whatsappNumber || '',
+          checked_in: false,
+          receipt_number: receiptNumber,
+          purchaser_name: purchaserName,
+          purchaser_email: purchaserEmail,
+        });
+      }
+
+      // Insert purchased tickets
+      const { error: ticketError } = await supabase.from("event_tickets").insert(ticketRows);
 
       if (ticketError) throw ticketError;
-      console.log("Event ticket logged successfully. Ticket code:", ticketCode);
+      console.log(`Created ${ticketRows.length} event ticket(s) under receipt ${receiptNumber}`);
 
+      const ticketCodesList = ticketRows.map((t) => t.ticket_code).join(", ");
       // Send Telegram notification to admin/organizers
-      const waLink = `https://wa.me/${metadata.whatsappNumber.replace(/\D/g, "")}`;
       await sendTelegramAlert(
-        `🎫 <b>New Event Ticket Purchased</b>\n- Code: <code>${ticketCode}</code>\n- Student Email: ${pending.email}\n- WhatsApp: ${metadata.whatsappNumber}\n- Amount: ₦${txn.amount}\n- Direct Chat: <a href="${waLink}">Open WhatsApp Chat</a>`
+        `🎫 <b>New Event Ticket(s) Purchased</b>\n- Qty: ${ticketRows.length}\n- Receipt: <code>${receiptNumber}</code>\n- Codes: <code>${ticketCodesList}</code>\n- Student: ${purchaserEmail} (${purchaserName})\n- Amount: ₦${txn.amount}`
+      );
+    } else if (pending.payment_type === "pageant") {
+      const contestantId = metadata.contestantId;
+      if (contestantId) {
+        const { error: pageantErr } = await supabase
+          .from("pageant_contestants")
+          .update({
+            payment_status: "completed",
+            payment_reference: String(flwTransactionId),
+          })
+          .eq("id", contestantId);
+
+        if (pageantErr) {
+          console.error("Failed to update contestant payment status:", pageantErr);
+        } else {
+          console.log("Contestant payment completed successfully for id:", contestantId);
+        }
+      }
+
+      await sendTelegramAlert(
+        `👑 <b>New Pageant Contestant Registered & Paid</b>\n- Email: ${pending.email}\n- Amount: ₦${txn.amount}\n- Contestant ID: ${contestantId || "N/A"}`
       );
     }
 
