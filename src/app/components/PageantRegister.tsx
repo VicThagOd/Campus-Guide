@@ -142,6 +142,30 @@ export function PageantRegister() {
   const [standingPhotoFile, setStandingPhotoFile] = useState<File | null>(null);
   const [standingPhotoPreview, setStandingPhotoPreview] = useState<string | null>(null);
 
+  // Settings & Schedule
+  const [targetDeadline, setTargetDeadline] = useState<Date>(new Date("2026-09-24T23:59:59+01:00"));
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState<boolean>(true);
+
+  useEffect(() => {
+    async function loadPageantSettings() {
+      try {
+        const { data } = await supabase.from("pageant_settings").select("*").limit(1);
+        if (data && data[0]) {
+          const s = data[0];
+          setIsRegistrationOpen(s.registration_open !== false);
+          if (s.registration_end_date) {
+            setTargetDeadline(new Date(s.registration_end_date));
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load pageant settings:", err);
+      }
+    }
+    loadPageantSettings();
+  }, []);
+
+  const isClosed = !isRegistrationOpen || new Date() > targetDeadline;
+
   const handlePhotoSelect = (e: React.ChangeEvent<HTMLInputElement>, type: "cover" | "seated" | "standing") => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -385,7 +409,16 @@ export function PageantRegister() {
         </div>
 
         {/* Live Timer */}
-        <RegistrationTimer targetDate={new Date('2026-09-24T23:59:59+01:00')} />
+        <RegistrationTimer targetDate={targetDeadline} />
+
+        {isClosed && (
+          <div className="mb-8 p-6 bg-amber-50 border border-amber-200 text-amber-900 rounded-2xl text-center shadow-sm">
+            <h3 className="text-base font-bold mb-1">Registration Portal Closed</h3>
+            <p className="text-xs text-amber-700 leading-relaxed">
+              Pageant registration for Face of Campus Guide is currently closed. If you have already registered, check the voting portal for updates.
+            </p>
+          </div>
+        )}
 
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm">
@@ -731,13 +764,15 @@ export function PageantRegister() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || isClosed}
               className="w-full sm:w-auto px-8 py-3 bg-[#2F4EA2] text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 text-sm"
             >
               {loading ? (
                 <>
                   <TbLoader2 className="w-4 h-4 animate-spin" /> Uploading & Processing...
                 </>
+              ) : isClosed ? (
+                <>Registration Closed</>
               ) : (
                 <>
                   Submit & Pay ₦1,000

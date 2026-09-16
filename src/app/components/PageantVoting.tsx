@@ -179,6 +179,31 @@ export function PageantVoting() {
   const [votingContestantId, setVotingContestantId] = useState<string | null>(null);
   const [voteSuccessMessage, setVoteSuccessMessage] = useState<string | null>(null);
 
+  // Settings & Schedule State
+  const [votingLive, setVotingLive] = useState<boolean>(true);
+  const [votingStartDate, setVotingStartDate] = useState<Date | null>(null);
+  const [votingEndDate, setVotingEndDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const { data } = await supabase.from("pageant_settings").select("*").limit(1);
+        if (data && data[0]) {
+          const s = data[0];
+          setVotingLive(s.voting_live !== false);
+          if (s.voting_start_date) setVotingStartDate(new Date(s.voting_start_date));
+          if (s.voting_end_date) setVotingEndDate(new Date(s.voting_end_date));
+        }
+      } catch (err) {
+        console.error("Failed to load voting settings:", err);
+      }
+    }
+    loadSettings();
+  }, []);
+
+  const now = new Date();
+  const isVotingOpen = votingLive && (!votingStartDate || now >= votingStartDate) && (!votingEndDate || now <= votingEndDate);
+
   // Fetch contestants with client-side SWR caching
   const fetchContestants = async (forceRefresh = false) => {
     if (forceRefresh) {
@@ -237,6 +262,11 @@ export function PageantVoting() {
 
   // Handle Cast Vote
   const handleVote = async (contestant: Contestant) => {
+    if (!isVotingOpen) {
+      alert("Voting is currently closed by the organizers.");
+      return;
+    }
+
     if (!user) {
       alert("Please log in to your student account to vote.");
       return;
@@ -357,6 +387,20 @@ export function PageantVoting() {
             )}
           </div>
         </div>
+
+        {!isVotingOpen && (
+          <div className="mb-8 p-6 bg-amber-50 border border-amber-200 text-amber-900 rounded-2xl text-center shadow-sm">
+            <h3 className="text-base font-bold mb-1">Voting Portal Currently Closed</h3>
+            <p className="text-xs text-amber-700 leading-relaxed">
+              Voting for Mr & Miss Campus Guide is currently paused or closed by the organizers.
+              {votingStartDate && now < votingStartDate && (
+                <span className="block mt-1 font-semibold">
+                  Scheduled to open on: {votingStartDate.toLocaleDateString()} at {votingStartDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              )}
+            </p>
+          </div>
+        )}
 
         {voteSuccessMessage && (
           <div className="mb-6 p-4 bg-emerald-50 border border-emerald-300 text-emerald-800 rounded-xl text-sm font-medium">
