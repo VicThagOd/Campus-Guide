@@ -56,9 +56,9 @@ Deno.serve(async (req) => {
 
   try {
     const secretKey = Deno.env.get("FLW_SECRET_KEY");
-    const publicBaseUrl = Deno.env.get("PUBLIC_SITE_URL");
+    const publicBaseUrl = Deno.env.get("PUBLIC_SITE_URL") || "https://campusguide.ng";
 
-    if (!secretKey || !publicBaseUrl) {
+    if (!secretKey) {
       return new Response("Flutterwave payment environment is not configured.", {
         status: 500,
         headers: CORS_HEADERS,
@@ -81,7 +81,10 @@ Deno.serve(async (req) => {
       contestantId,
     } = payload;
 
-    const userId = payload.userId || "anonymous_user";
+    const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    const userId = (payload.userId && UUID_REGEX.test(payload.userId))
+      ? payload.userId
+      : "00000000-0000-0000-0000-000000000000";
     const course = payload.course || "General";
 
     if (!email || !name) {
@@ -91,7 +94,7 @@ Deno.serve(async (req) => {
     // Verify amount based on product type
     let basePrice = 0;
     if (paymentType === "cbt" || paymentType === "pdf") {
-      basePrice = paymentType === "cbt" ? 2000 : 1500;
+      basePrice = 2000;
     } else if (paymentType === "inspection") {
       basePrice = 5000;
       if (!accommodationId || !whatsappNumber) {
@@ -156,16 +159,30 @@ Deno.serve(async (req) => {
     const flwFee = basePrice * 0.014;
     const expectedAmount = paymentType === "pageant" ? 1000 : (basePrice + flwFee);
 
-    // Verify amount is within a reasonable difference (allowing minor rounding differences or flat price)
+    // Verify amount is within a reasonable difference (allowing minor rounding differences, card fees, or flat price)
     if (paymentType === "pageant") {
-      if (Math.abs(amount - 1000) > 20.0 && Math.abs(amount - 1014) > 20.0) {
+      if (Math.abs(amount - 1000) > 50.0 && Math.abs(amount - 1014) > 50.0) {
         return new Response(`Pageant payment amount mismatch. Expected ₦1,000.`, {
           status: 400,
           headers: CORS_HEADERS,
         });
       }
+    } else if (paymentType === "cbt" || paymentType === "pdf") {
+      if (amount < 1950 || amount > 2100) {
+        return new Response(`Payment amount does not match the product cost (expected: ₦${expectedAmount.toFixed(2)}).`, {
+          status: 400,
+          headers: CORS_HEADERS,
+        });
+      }
+    } else if (paymentType === "inspection") {
+      if (amount < 4900 || amount > 5200) {
+        return new Response(`Payment amount mismatch for accommodation inspection. Expected ₦5,000.`, {
+          status: 400,
+          headers: CORS_HEADERS,
+        });
+      }
     } else {
-      if (Math.abs(amount - expectedAmount) > 10.0 && Math.abs(amount - basePrice) > 10.0) {
+      if (Math.abs(amount - expectedAmount) > 100.0 && Math.abs(amount - basePrice) > 100.0) {
         return new Response(`Payment amount does not match the product cost (expected: ₦${expectedAmount.toFixed(2)}).`, {
           status: 400,
           headers: CORS_HEADERS,
@@ -258,12 +275,13 @@ Deno.serve(async (req) => {
       console.error("Flutterwave initialize error", flwJson);
       // Clean up pending payment
       await supabase.from("pending_payments").delete().eq("reference", txRef);
-      return new Response("Could not initialize Flutterwave payment.", { status: 502, headers: CORS_HEADERS });
+      const errMsg = flwJson?.message || "Could not initialize Flutterwave payment.";
+      return new Response(errMsg, { status: 502, headers: CORS_HEADERS });
     }
 
     return Response.json({ checkoutUrl, reference: txRef }, { headers: CORS_HEADERS });
-  } catch (error) {
-    console.error(error);
-    return new Response("Payment initialization failed.", { status: 500, headers: CORS_HEADERS });
+  } catch (error: any) {
+    console.error("Payment initialization exception:", error);
+    return new Response(error?.message || "Payment initialization failed.", { status: 500, headers: CORS_HEADERS });
   }
 });

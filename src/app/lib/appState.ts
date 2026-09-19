@@ -373,6 +373,6 @@ export const testConfig = {
   durationSeconds: 30 * 60,
   totalPoints: 400,
   freeTrialLimit: FREE_TRIAL_LIMIT,
-  pdfPrice: 2010.75,
-  liveTestPrice: 2010.75,
+  pdfPrice: 2000,
+  liveTestPrice: 2000,
 };

@@ -172,10 +172,19 @@ Deno.serve(async (req) => {
 
     // 7. Process based on payment type
     if (pending.payment_type === "cbt" || pending.payment_type === "pdf") {
-      // Verify CBT/PDF amount (₦2,000 / ₦1,500 + card fees)
-      const expected = pending.payment_type === "cbt" ? 2010.75 : 2010.75; // standard fallback
       // Grant CBT/PDF access
-      await grantUserAccess(pending.user_id, pending.email, pending.payment_type);
+      const accessUserId = (pending.user_id && pending.user_id !== "00000000-0000-0000-0000-000000000000" && pending.user_id !== "anonymous_user")
+        ? pending.user_id
+        : null;
+
+      if (accessUserId) {
+        await grantUserAccess(accessUserId, pending.email, pending.payment_type);
+      } else {
+        const { data: profile } = await supabase.from("profiles").select("id").eq("email", pending.email).maybeSingle();
+        if (profile?.id) {
+          await grantUserAccess(profile.id, pending.email, pending.payment_type);
+        }
+      }
       console.log(`Access granted to ${pending.payment_type} for user: ${pending.user_id}`);
       
       // Send Telegram notification
@@ -184,9 +193,11 @@ Deno.serve(async (req) => {
       );
 
     } else if (pending.payment_type === "inspection") {
+      const inspectionUserId = (!pending.user_id || pending.user_id === "anonymous_user" || pending.user_id === "00000000-0000-0000-0000-000000000000") ? null : pending.user_id;
+
       // Insert verified hostel inspection fee payment
       const { error: insError } = await supabase.from("inspection_payments").insert({
-        user_id: pending.user_id,
+        user_id: inspectionUserId,
         accommodation_id: metadata.accommodationId,
         amount: metadata.basePrice || 5000,
         payment_reference: String(flwTransactionId),
@@ -211,7 +222,7 @@ Deno.serve(async (req) => {
 
     } else if (pending.payment_type === "ticket" || pending.payment_type === "tier") {
       const receiptNumber = createReceiptNumber();
-      const purchaserUserId = pending.user_id === "anonymous_user" ? null : pending.user_id;
+      const purchaserUserId = (!pending.user_id || pending.user_id === "anonymous_user" || pending.user_id === "00000000-0000-0000-0000-000000000000") ? null : pending.user_id;
       const purchaserName = txn.customer?.name || pending.email;
       const purchaserEmail = pending.email;
       const ticketRows: any[] = [];

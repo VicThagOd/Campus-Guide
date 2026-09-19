@@ -133,7 +133,7 @@ export function PostUtmeHub() {
     ? "Begin Test"
     : freeTrialsRemaining > 0
       ? `${freeTrialsRemaining} free trial${freeTrialsRemaining === 1 ? "" : "s"} left`
-      : "Pay ₦2,010.75 to unlock";
+      : "Pay ₦2,000 to unlock";
 
   const liveTestDescription = cbtActive
     ? `Take your full UNIPORT-style CBT mock examination`

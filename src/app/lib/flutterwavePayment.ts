@@ -33,7 +33,16 @@ export async function initializeFlutterwavePayment(
   });
 
   if (error) {
-    throw new Error(error.message || "Unable to initialize payment.");
+    let message = error.message || "Unable to initialize payment.";
+    if (error.context && typeof error.context.text === "function") {
+      try {
+        const bodyText = await error.context.text();
+        if (bodyText) {
+          message = bodyText;
+        }
+      } catch (_) {}
+    }
+    throw new Error(message);
   }
 
   const checkoutUrl = data?.checkoutUrl;
