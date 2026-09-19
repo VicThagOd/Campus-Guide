@@ -10,6 +10,9 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
+      devOptions: {
+        enabled: false,
+      },
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "icon-*.png"],
       manifest: {
         name: "Campus Guide Post UTME",
@@ -67,6 +70,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+        importScripts: ["https://cdn.pushalert.co/sw-91191.js"],
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         runtimeCaching: [
           {

@@ -3,6 +3,7 @@ import { AuthProvider } from "../context/AuthContext";
 import { router } from "./routes";
 import { HelmetProvider } from "react-helmet-async";
 import { hasSupabaseEnv, missingSupabaseEnvVars } from "../lib/env";
+import { NotificationPrompt } from "../components/NotificationPrompt";
 
 export default function App() {
   if (!hasSupabaseEnv) {
@@ -36,9 +37,9 @@ export default function App() {
   return (
     <HelmetProvider>
       <AuthProvider>
+        <NotificationPrompt />
         <RouterProvider router={router} />
       </AuthProvider>
     </HelmetProvider>
   );
 }
-
