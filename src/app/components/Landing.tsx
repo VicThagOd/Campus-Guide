@@ -220,7 +220,7 @@ export function Landing() {
         <FeatureRow
           reversed
           title="Everything between JAMB and admission day"
-          description="Admission requirements, cut-off marks by faculty, subject combinations and the aggregate calculator. Laid out clearly, without the rumour mill."
+          description="Admission requirements, subject combinations, and the aggregate score calculator. Laid out clearly, without the rumour mill."
           ctaLabel="Explore the aspirant hub"
           visual={<AspirantVisual />}
         />
@@ -285,7 +285,7 @@ export function Landing() {
               <TbTargetArrow size={30} color={PRIMARY} />
             </span>
             <h3 className="mt-4 text-lg font-bold tracking-tight" style={{ color: INK }}>Aspirant</h3>
-            <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>Cut-off marks, subject combinations and aggregate calculators for your faculty.</p>
+            <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>Subject combinations, requirements and aggregate calculators for your faculty.</p>
           </div>
           <div className="flex flex-col items-center text-center rounded-2xl border bg-white p-8 shadow-sm hover:shadow-md transition-shadow" style={{ borderColor: BORDER }}>
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl" style={{ backgroundColor: "#EEF2FC" }}>
@@ -478,7 +478,7 @@ function AspirantVisual() {
             <TbTargetArrow size={22} color="#B7791F" />
           </div>
           <div className="flex-1">
-            <p className="text-xs font-semibold" style={{ color: INK }}>Cut-off marks by faculty</p>
+            <p className="text-xs font-semibold" style={{ color: INK }}>Aggregate score calculator</p>
             <div className="mt-1.5 h-2 w-full rounded-full" style={{ backgroundColor: "#E5E7EB" }}>
               <div className="h-2 w-3/5 rounded-full" style={{ backgroundColor: ACCENT }} />
             </div>

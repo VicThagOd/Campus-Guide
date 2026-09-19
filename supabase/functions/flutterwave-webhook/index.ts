@@ -63,6 +63,37 @@ async function sendTelegramAlert(message: string) {
   }
 }
 
+async function sendPushAlertNotification(title: string, message: string, url = "https://campusguide.ng") {
+  const apiKey = Deno.env.get("PUSHALERT_API_KEY");
+  if (!apiKey) {
+    console.warn("PushAlert API key not configured in Edge Function secrets.");
+    return;
+  }
+  try {
+    const formData = new URLSearchParams();
+    formData.append("title", title);
+    formData.append("message", message);
+    formData.append("url", url);
+    formData.append("icon", "https://campusguide.ng/icon-192x192.png");
+
+    const res = await fetch("https://api.pushalert.co/rest/v1/send", {
+      method: "POST",
+      headers: {
+        api_key: apiKey,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: formData.toString(),
+    });
+    if (!res.ok) {
+      console.error("PushAlert notification dispatch failed:", await res.text());
+    } else {
+      console.log("PushAlert notification dispatched successfully");
+    }
+  } catch (err) {
+    console.error("PushAlert alert dispatch error:", err);
+  }
+}
+
 Deno.serve(async (req) => {
   try {
     // 1. Get raw body
@@ -170,6 +201,12 @@ Deno.serve(async (req) => {
       const waLink = `https://wa.me/${metadata.whatsappNumber.replace(/\D/g, "")}`;
       await sendTelegramAlert(
         `🔔 <b>New Accommodation Inspection Paid</b>\n- Student Email: ${pending.email}\n- WhatsApp: ${metadata.whatsappNumber}\n- Amount: ₦${txn.amount}\n- Direct Chat: <a href="${waLink}">Open WhatsApp Chat</a>`
+      );
+
+      // Send PushAlert notification to Admin subscribers
+      await sendPushAlertNotification(
+        "🏠 New Accommodation Inspection Paid!",
+        `A student paid ₦${txn.amount} for hostel inspection (${metadata.whatsappNumber || pending.email}). Open dashboard to review.`
       );
 
     } else if (pending.payment_type === "ticket" || pending.payment_type === "tier") {

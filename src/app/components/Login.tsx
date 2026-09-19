@@ -343,7 +343,7 @@ export function Login() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Target01Icon size={14} color="#2F4EA2" />
-                  Cut-off marks and subject combinations
+                  Requirements and subject combinations
                 </li>
                 <li className="flex items-center gap-2">
                   <DocumentValidationIcon size={14} color="#2F4EA2" />

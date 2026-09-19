@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AggregateCalculator } from "./AggregateCalculator";
 import {
   RiFileList3Line,
   RiPrinterLine,
@@ -112,11 +113,11 @@ const guideCards = [
   },
   {
     icon: <TbTargetArrow size={24} color={PRIMARY} />,
-    title: "Cut-off Information",
+    title: "Aggregate Scoring",
     items: [
-      "Your JAMB score and Post-UTME score are combined into an aggregate",
-      "Cut-off scores differ by faculty, and competitive courses sit higher",
-      "Figures are verified before publication, no rumour mill",
+      "Your JAMB score and Post-UTME score are combined into your aggregate score",
+      "Calculated using the official formula: (Post-UTME/400 + JAMB/400) / 2",
+      "Equal 50% weighting given to both exams for fair ranking",
     ],
   },
   {
@@ -258,6 +259,10 @@ export function AspirantServices() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section id="calculator">
+          <AggregateCalculator />
         </section>
 
         <section>
