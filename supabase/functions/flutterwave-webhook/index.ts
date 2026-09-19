@@ -70,16 +70,20 @@ async function sendPushAlertNotification(title: string, message: string, url = "
     return;
   }
   try {
+    const cleanTitle = title.trim().slice(0, 64);
+    const cleanMessage = message.trim().slice(0, 192);
+
     const formData = new URLSearchParams();
-    formData.append("title", title);
-    formData.append("message", message);
+    formData.append("title", cleanTitle);
+    formData.append("message", cleanMessage);
     formData.append("url", url);
     formData.append("icon", "https://campusguide.ng/icon-192x192.png");
 
     const res = await fetch("https://api.pushalert.co/rest/v1/send", {
       method: "POST",
       headers: {
-        api_key: apiKey,
+        "Authorization": `api_key=${apiKey}`,
+        "api_key": apiKey,
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: formData.toString(),
@@ -87,7 +91,8 @@ async function sendPushAlertNotification(title: string, message: string, url = "
     if (!res.ok) {
       console.error("PushAlert notification dispatch failed:", await res.text());
     } else {
-      console.log("PushAlert notification dispatched successfully");
+      const data = await res.json().catch(() => null);
+      console.log("PushAlert notification dispatched successfully:", data);
     }
   } catch (err) {
     console.error("PushAlert alert dispatch error:", err);
