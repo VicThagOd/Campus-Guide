@@ -1,9 +1,11 @@
-const ADMIN_WHATSAPP = "2349155856826";
-export const OFFICIAL_WA_LINK = "https://wa.link/wx16gs";
+const ADMIN_WHATSAPP = "2348109030024";
+export const OFFICIAL_WA_LINK = "https://wa.me/2348109030024";
 
-function buildUrl(phone: string, message: string): string {
+function buildUrl(phone: string, message?: string): string {
   const cleanPhone = phone.replace(/\D/g, "");
-  return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+  return message && message.trim()
+    ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message.trim())}`
+    : `https://wa.me/${cleanPhone}`;
 }
 
 export function whatsappLink(message?: string): string {

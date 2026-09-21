@@ -42,7 +42,7 @@ const SECTION_BG = "#F7F8FA";
 const ACCENT = "#F5B942";
 const WHATSAPP_GREEN = "#25D366";
 
-const WHATSAPP_URL = "https://wa.link/wx16gs";
+const WHATSAPP_URL = "https://wa.me/2348109030024";
 
 function CampusGuideLogo({ size = 40, className = "" }: { size?: number; className?: string }) {
   return (

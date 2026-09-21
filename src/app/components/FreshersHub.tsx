@@ -23,6 +23,7 @@ import {
 import { HiOutlineAcademicCap } from "react-icons/hi2";
 import { SEO } from "./SEO";
 import { PublicShell } from "./PublicShell";
+import { whatsappLink, whatsappMessages } from "../../lib/whatsapp";
 
 const PRIMARY = "#2F4EA2";
 const INK = "#111827";
@@ -30,8 +31,6 @@ const MUTED = "#6B7280";
 const BORDER = "#BFC3C6";
 const SECTION_BG = "#F7F8FA";
 const ACCENT = "#F5B942";
-
-const WHATSAPP_URL = "https://wa.link/wx16gs";
 
 interface FresherStage {
   title: string;
@@ -228,7 +227,7 @@ export function FreshersHub() {
             day on campus.
           </p>
           <a
-            href={WHATSAPP_URL}
+            href={whatsappLink(whatsappMessages.freshersHelp())}
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 rounded-lg px-8 py-3.5 font-semibold transition-opacity duration-150 hover:opacity-90"

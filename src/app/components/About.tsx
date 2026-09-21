@@ -10,6 +10,7 @@ import {
 import { SiWhatsapp } from "react-icons/si";
 import { SEO } from "./SEO";
 import { PublicShell } from "./PublicShell";
+import { whatsappLink, whatsappMessages } from "../../lib/whatsapp";
 
 const PRIMARY = "#2F4EA2";
 const INK = "#111827";
@@ -100,7 +101,7 @@ export function About() {
               <p className="mt-1 text-sm" style={{ color: PRIMARY }}>ehreekig@gmail.com</p>
             </a>
             <a
-              href="tel:+2349155856826"
+              href="tel:+2348109030024"
               className="rounded-xl border bg-white p-6 transition-colors duration-150 hover:border-[#2F4EA2]"
               style={{ borderColor: BORDER }}
             >
@@ -108,11 +109,11 @@ export function About() {
                 <CallIcon size={20} color={PRIMARY} />
               </span>
               <p className="text-sm font-semibold" style={{ color: INK }}>Phone</p>
-              <p className="mt-1 text-sm" style={{ color: PRIMARY }}>+234 915 585 6826</p>
-              <p className="text-sm" style={{ color: PRIMARY }}>+234 810 903 0024</p>
+              <p className="mt-1 text-sm" style={{ color: PRIMARY }}>+234 810 903 0024</p>
+              <p className="text-xs text-gray-400 mt-0.5">Alt: +234 915 585 6826</p>
             </a>
             <a
-              href="https://wa.link/wx16gs"
+              href={whatsappLink(whatsappMessages.generalInquiry())}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border bg-white p-6 transition-colors duration-150 hover:border-[#2F4EA2]"
@@ -122,7 +123,7 @@ export function About() {
                 <SiWhatsapp size={20} color="#25D366" />
               </span>
               <p className="text-sm font-semibold" style={{ color: INK }}>WhatsApp</p>
-              <p className="mt-1 text-sm" style={{ color: "#25D366" }}>Chat with us</p>
+              <p className="mt-1 text-sm font-medium" style={{ color: "#25D366" }}>Chat with us</p>
             </a>
           </div>
           <p className="mt-6 text-xs" style={{ color: "#9CA3AF" }}>

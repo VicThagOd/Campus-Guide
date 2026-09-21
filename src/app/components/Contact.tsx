@@ -3,6 +3,7 @@ import { ArrowLeft01Icon, CallIcon, Location01Icon, Mail01Icon } from "hugeicons
 import { SiFacebook, SiTiktok, SiWhatsapp } from "react-icons/si";
 import { useAuth } from "../../context/AuthContext";
 import { SEO } from "./SEO";
+import { whatsappLink, whatsappMessages } from "../../lib/whatsapp";
 
 export function Contact() {
   const navigate = useNavigate();
@@ -68,28 +69,18 @@ export function Contact() {
                   Phone
                 </h3>
                 <a
-                  href="tel:+2349155856826"
-                  className="hover:opacity-70 transition-opacity"
-                  style={{ color: '#2F4EA2' }}
-                >
-                  +234 915 585 6826
-                
-                </a>
-                 <a
-                  href=""
-                 
-                  style={{ color: '#000000' }}
-                >
-                     ,     
-                
-                </a>
-                 <a
                   href="tel:+2348109030024"
-                  className="hover:opacity-70 transition-opacity"
+                  className="hover:opacity-70 transition-opacity block"
                   style={{ color: '#2F4EA2' }}
                 >
                   +234 810 903 0024
-                
+                </a>
+                <a
+                  href="tel:+2349155856826"
+                  className="hover:opacity-70 transition-opacity block text-xs mt-1"
+                  style={{ color: '#6B7280' }}
+                >
+                  Alt: +234 915 585 6826
                 </a>
               </div>
             </div>
@@ -122,13 +113,13 @@ export function Contact() {
         WhatsApp
       </h3>
       <a
-        href="https://wa.link/wx16gs"
+        href={whatsappLink(whatsappMessages.generalInquiry())}
         target="_blank"
         rel="noopener noreferrer"
-        className="hover:opacity-70 transition-opacity"
+        className="hover:opacity-70 transition-opacity font-medium"
         style={{ color: '#25D366' }}
       >
-        Chat with us
+        Chat with us (+234 810 903 0024)
       </a>
     </div>
   </div>
