@@ -4,6 +4,7 @@ import { Alert02Icon, CheckmarkCircle02Icon, Loading01Icon } from "hugeicons-rea
 import { useAuth } from "../../context/AuthContext";
 import { fetchUserAccess, isCbtAccessExpired } from "../lib/userAccess";
 import { supabase } from "../../lib/supabase";
+import { PageantSuccessModal, PageantContestantDetails } from "./PageantSuccessModal";
 
 type PaymentStatus = "checking" | "success" | "failed";
 
@@ -13,24 +14,35 @@ export function PaymentConfirmation() {
   const { user } = useAuth();
   const [status, setStatus] = useState<PaymentStatus>("checking");
   const [message, setMessage] = useState("We are confirming your payment and unlocking your access.");
+  const [contestantDetails, setContestantDetails] = useState<PageantContestantDetails | null>(null);
 
   const paymentType = useMemo(() => {
     const raw = searchParams.get("product");
-    return raw === "pdf" || raw === "cbt" || raw === "ticket" || raw === "inspection" ? raw : null;
+    return raw === "pdf" || raw === "cbt" || raw === "ticket" || raw === "inspection" || raw === "pageant" ? raw : null;
   }, [searchParams]);
 
   const gatewayStatus = searchParams.get("status");
 
   useEffect(() => {
-    if (!user?.id || !paymentType) {
+    if (!paymentType) {
       setStatus("failed");
-      setMessage("We could not match this payment to a product. Please return to your dashboard and try again.");
+      setMessage("We could not match this payment to a product. Please return to your dashboard or home page and try again.");
       return;
     }
 
-    if (gatewayStatus?.toLowerCase() === "failed") {
+    if ((paymentType === "pdf" || paymentType === "cbt") && !user?.id) {
       setStatus("failed");
-      setMessage("Your payment was not completed. Please try again.");
+      setMessage("Please sign in to your student account so we can link your study access.");
+      return;
+    }
+
+    if (gatewayStatus?.toLowerCase() === "failed" || gatewayStatus?.toLowerCase() === "cancelled") {
+      setStatus("failed");
+      setMessage(
+        paymentType === "pageant"
+          ? "Your pageant registration payment was not completed or was cancelled. Please try again."
+          : "Your payment was not completed. Please try again."
+      );
       return;
     }
 
@@ -42,37 +54,107 @@ export function PaymentConfirmation() {
       try {
         let unlocked = false;
 
-        if (paymentType === "pdf" || paymentType === "cbt") {
-          const access = await fetchUserAccess(user.id);
-          unlocked =
-            paymentType === "pdf"
-              ? access.pdf_access
-              : access.cbt_access && !isCbtAccessExpired(access.cbt_expires_at);
-        } else if (paymentType === "ticket") {
-          // Check for a ticket purchased in the last 5 minutes
-          const { data } = await supabase
-            .from("event_tickets")
-            .select("id, created_at")
-            .eq("user_id", user.id)
-            .order("created_at", { ascending: false })
-            .limit(1);
+        if (paymentType === "pageant") {
+          const contestantIdParam = searchParams.get("contestant_id");
+          const txRef = searchParams.get("tx_ref");
+          const transactionId = searchParams.get("transaction_id");
+          let targetContestantId = contestantIdParam;
 
-          if (data && data.length > 0) {
-            const timeDiff = new Date().getTime() - new Date(data[0].created_at).getTime();
-            unlocked = timeDiff < 300000; // 5 minutes
+          // If no contestant_id in URL, try to resolve from pending_payments
+          if (!targetContestantId && txRef) {
+            const { data: pending } = await supabase
+              .from("pending_payments")
+              .select("metadata")
+              .eq("reference", txRef)
+              .maybeSingle();
+
+            if (pending?.metadata?.contestantId) {
+              targetContestantId = pending.metadata.contestantId;
+            }
+          }
+
+          let contestantQuery = supabase
+            .from("pageant_contestants")
+            .select("id, name, gender, category, category_number, contestant_number, contestant_code, payment_status, payment_reference, cover_photo_url, department, level");
+
+          if (targetContestantId) {
+            contestantQuery = contestantQuery.eq("id", targetContestantId);
+          } else if (transactionId) {
+            contestantQuery = contestantQuery.eq("payment_reference", String(transactionId));
+          } else if (user?.id) {
+            contestantQuery = contestantQuery.eq("user_id", user.id).order("created_at", { ascending: false }).limit(1);
+          }
+
+          const { data: cData } = await contestantQuery.maybeSingle();
+
+          if (cData) {
+            const isGatewaySuccess = gatewayStatus?.toLowerCase() === "successful";
+            const isDbCompleted = cData.payment_status === "completed";
+
+            // If Flutterwave verified success or database confirmed completion
+            if (isGatewaySuccess || isDbCompleted) {
+              const num = cData.category_number || cData.contestant_number || 1;
+              const isFemale = cData.gender === "female" || cData.category === "miss_campus_guide";
+              const code = cData.contestant_code || (isFemale ? `contestants_f_${String(num).padStart(2, "0")}` : `contestants_m_${String(num).padStart(2, "0")}`);
+
+              setContestantDetails({
+                id: cData.id,
+                name: cData.name,
+                code,
+                number: num,
+                gender: cData.gender,
+                category: cData.category,
+                department: cData.department,
+                level: cData.level,
+                coverPhotoUrl: cData.cover_photo_url,
+              });
+
+              unlocked = true;
+            }
+          }
+        } else if (paymentType === "pdf" || paymentType === "cbt") {
+          if (user?.id) {
+            const access = await fetchUserAccess(user.id);
+            unlocked =
+              paymentType === "pdf"
+                ? access.pdf_access
+                : access.cbt_access && !isCbtAccessExpired(access.cbt_expires_at);
+          }
+        } else if (paymentType === "ticket") {
+          const userId = user?.id;
+          if (userId) {
+            const { data } = await supabase
+              .from("event_tickets")
+              .select("id, created_at")
+              .eq("user_id", userId)
+              .order("created_at", { ascending: false })
+              .limit(1);
+
+            if (data && data.length > 0) {
+              const timeDiff = new Date().getTime() - new Date(data[0].created_at).getTime();
+              unlocked = timeDiff < 300000; // 5 minutes
+            }
+          } else {
+            // Guest ticket checkout
+            unlocked = gatewayStatus?.toLowerCase() === "successful";
           }
         } else if (paymentType === "inspection") {
-          // Check for a hostel inspection payment logged in the last 5 minutes
-          const { data } = await supabase
-            .from("inspection_payments")
-            .select("id, created_at")
-            .eq("user_id", user.id)
-            .order("created_at", { ascending: false })
-            .limit(1);
+          const userId = user?.id;
+          if (userId) {
+            const { data } = await supabase
+              .from("inspection_payments")
+              .select("id, created_at")
+              .eq("user_id", userId)
+              .order("created_at", { ascending: false })
+              .limit(1);
 
-          if (data && data.length > 0) {
-            const timeDiff = new Date().getTime() - new Date(data[0].created_at).getTime();
-            unlocked = timeDiff < 300000; // 5 minutes
+            if (data && data.length > 0) {
+              const timeDiff = new Date().getTime() - new Date(data[0].created_at).getTime();
+              unlocked = timeDiff < 300000; // 5 minutes
+            }
+          } else {
+            // Guest inspection payment
+            unlocked = gatewayStatus?.toLowerCase() === "successful";
           }
         }
 
@@ -101,6 +183,7 @@ export function PaymentConfirmation() {
               if (!cancelled) navigate("/accommodation");
             }, 2500);
           }
+          // For pageant, no auto-redirect — modal page stays open so contestant can read and copy codes!
           return;
         }
 
@@ -108,11 +191,15 @@ export function PaymentConfirmation() {
 
         if (attempts >= maxAttempts) {
           setStatus("failed");
-          setMessage("Payment confirmation is taking longer than expected. Give it a minute, then check your dashboard.");
+          setMessage(
+            paymentType === "pageant"
+              ? "Payment confirmation is taking slightly longer than usual. Please check back on the pageant page or contact support."
+              : "Payment confirmation is taking longer than expected. Give it a minute, then check your dashboard."
+          );
           return;
         }
 
-        window.setTimeout(pollAccess, 3000);
+        window.setTimeout(pollAccess, 2500);
       } catch {
         if (!cancelled) {
           attempts += 1;
@@ -121,7 +208,7 @@ export function PaymentConfirmation() {
             setMessage("We could not confirm your payment right now. Please check your page shortly.");
             return;
           }
-          window.setTimeout(pollAccess, 3000);
+          window.setTimeout(pollAccess, 2500);
         }
       }
     };
@@ -131,15 +218,28 @@ export function PaymentConfirmation() {
     return () => {
       cancelled = true;
     };
-  }, [gatewayStatus, paymentType, user?.id, navigate]);
+  }, [gatewayStatus, paymentType, user?.id, navigate, searchParams]);
+
+  // If pageant payment is confirmed, render dedicated pageant success modal page
+  if (paymentType === "pageant" && status === "success" && contestantDetails) {
+    return (
+      <PageantSuccessModal
+        isOpen={true}
+        contestant={contestantDetails}
+        isStandalonePage={true}
+      />
+    );
+  }
 
   const getRedirectPath = () => {
+    if (paymentType === "pageant") return "/pageant";
     if (paymentType === "ticket") return "/events";
     if (paymentType === "inspection") return "/accommodation";
     return "/post-utme";
   };
 
   const getRedirectLabel = () => {
+    if (paymentType === "pageant") return "Go to Pageant Portal";
     if (paymentType === "ticket") return "Go to Events";
     if (paymentType === "inspection") return "Go to Accommodation";
     return "Go to Practice";
@@ -171,7 +271,7 @@ export function PaymentConfirmation() {
             {status === "checking"
               ? "Confirming Payment"
               : status === "success"
-                ? "Access Ready"
+                ? "Payment Confirmed"
                 : "Confirmation Pending"}
           </h1>
 
@@ -192,18 +292,30 @@ export function PaymentConfirmation() {
                     ? "Event Ticket"
                     : paymentType === "inspection"
                       ? "Hostel Inspection Fee"
-                      : "Unknown"}
+                      : paymentType === "pageant"
+                        ? "Face of Campus Guide Pageant Registration"
+                        : "Unknown"}
             </p>
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Link
-              to={getRedirectPath()}
-              className="rounded-lg px-5 py-3 text-center transition-opacity duration-150 hover:opacity-90"
-              style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
-            >
-              {getRedirectLabel()}
-            </Link>
+            {status === "failed" && paymentType === "pageant" ? (
+              <Link
+                to="/pageant/register"
+                className="rounded-lg px-5 py-3 text-center transition-opacity duration-150 hover:opacity-90"
+                style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
+              >
+                Try Registration Again
+              </Link>
+            ) : (
+              <Link
+                to={getRedirectPath()}
+                className="rounded-lg px-5 py-3 text-center transition-opacity duration-150 hover:opacity-90"
+                style={{ backgroundColor: "#2F4EA2", color: "#FFFFFF", fontWeight: 500 }}
+              >
+                {getRedirectLabel()}
+              </Link>
+            )}
             <Link
               to="/contact"
               className="rounded-lg border border-gray-300 px-5 py-3 text-center transition-all hover:bg-gray-50"

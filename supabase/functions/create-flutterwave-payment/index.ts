@@ -191,7 +191,10 @@ Deno.serve(async (req) => {
     }
 
     const txRef = buildTxRef(paymentType);
-    const redirectUrl = `${publicBaseUrl.replace(/\/$/, "")}/payment/confirm?product=${paymentType}`;
+    let redirectUrl = `${publicBaseUrl.replace(/\/$/, "")}/payment/confirm?product=${paymentType}`;
+    if (paymentType === "pageant" && contestantId) {
+      redirectUrl += `&contestant_id=${encodeURIComponent(contestantId)}`;
+    }
 
     // Save pending payment record (with metadata JSONB for ticket/inspection/pageant parameter pass)
     const { error: pendingError } = await supabase.from("pending_payments").insert({

@@ -154,11 +154,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/payment/confirm",
-    element: (
-      <ProtectedRoute>
-        <PaymentConfirmation />
-      </ProtectedRoute>
-    ),
+    element: <PaymentConfirmation />,
   },
   {
     path: "/contact",

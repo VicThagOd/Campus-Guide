@@ -9,9 +9,9 @@ import { PublicShell } from "./PublicShell";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../context/AuthContext";
 import { initializeFlutterwavePayment } from "../lib/flutterwavePayment";
-
 import { compressImage } from "../lib/imageCompressor";
 import { invalidateCache } from "../lib/queryCache";
+import { PageantSuccessModal } from "./PageantSuccessModal";
 
 const PRIMARY = "#2F4EA2";
 const ACCENT = "#F5B942";
@@ -273,9 +273,9 @@ export function PageantRegister() {
           cover_photo_url: coverUrl,
           seated_photo_url: seatedUrl,
           standing_photo_url: standingUrl,
-          payment_status: "completed",
+          payment_status: "pending",
         })
-        .select("id, contestant_number, category_number, contestant_code, name, gender")
+        .select("id, contestant_number, category_number, contestant_code, name, gender, category")
         .single();
 
       if (insertErr || !contestant) {
@@ -308,6 +308,7 @@ export function PageantRegister() {
           code: contestant.contestant_code || contestantCode,
           name: contestant.name,
           gender: contestant.gender,
+          category: contestant.category || category,
         });
       }
     } catch (err: any) {
@@ -318,61 +319,23 @@ export function PageantRegister() {
   };
 
   if (successContestant) {
-    const isFemale = successContestant.gender === "female";
-    const badgeLabel = isFemale
-      ? `Contestant F-${String(successContestant.number).padStart(2, "0")}`
-      : `Contestant M-${String(successContestant.number).padStart(2, "0")}`;
-
     return (
       <PublicShell>
         <SEO
           title="Registration Successful | Campus Guide Pageantry"
           description="Your registration for Face of Campus Guide has been submitted successfully."
         />
-        <div className="max-w-xl mx-auto py-16 px-4 text-center">
-          <div className="w-16 h-16 bg-[#EEF2FC] rounded-2xl flex items-center justify-center mx-auto mb-6 text-[#2F4EA2]">
-            <RiVipCrownLine className="w-8 h-8" />
-          </div>
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-800">
-              {badgeLabel}
-            </span>
-            <span className="bg-gray-100 text-gray-700 text-xs font-mono px-2.5 py-1 rounded-md">
-              Code: {successContestant.code}
-            </span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-            You are Officially Registered
-          </h1>
-          <p className="text-gray-600 mb-6 text-sm sm:text-base leading-relaxed">
-            Congratulations <strong>{successContestant.name}</strong>. Your profile has been assigned <strong>{badgeLabel}</strong> ({successContestant.code}) for {isFemale ? "Miss Campus Guide" : "Mr Campus Guide"}.
-          </p>
-
-          <div className="border border-gray-200 rounded-2xl p-6 mb-8 text-left bg-gray-50">
-            <h3 className="font-semibold text-gray-900 mb-2">
-              What Happens Next?
-            </h3>
-            <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
-              <li>Your profile will be showcased in the official voting portal.</li>
-              <li>Tell voters to search for your code <strong>{badgeLabel}</strong> or your name to vote.</li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/pageant/vote"
-              className="px-6 py-2.5 bg-[#2F4EA2] text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors text-sm"
-            >
-              View Voting Portal
-            </Link>
-            <Link
-              to={user ? "/dashboard" : "/"}
-              className="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors text-sm"
-            >
-              {user ? "Back to Dashboard" : "Back to Home"}
-            </Link>
-          </div>
-        </div>
+        <PageantSuccessModal
+          isOpen={true}
+          isStandalonePage={true}
+          contestant={{
+            name: successContestant.name,
+            code: successContestant.code,
+            number: successContestant.number,
+            gender: successContestant.gender,
+            category: successContestant.category,
+          }}
+        />
       </PublicShell>
     );
   }
