@@ -51,9 +51,25 @@ interface Contestant {
   created_at: string;
 }
 
+export function isContestantFemale(c: Partial<Contestant>): boolean {
+  const g = String(c.gender || "").trim().toLowerCase();
+  const cat = String(c.category || "").trim().toLowerCase();
+  const code = String(c.contestant_code || "").trim().toLowerCase();
+  return (
+    g === "female" ||
+    g === "f" ||
+    cat === "miss_campus_guide" ||
+    cat === "mrs_campus_guide" ||
+    cat === "female" ||
+    code.startsWith("contestants_f") ||
+    code.startsWith("f-") ||
+    code.startsWith("f_")
+  );
+}
+
 export function formatContestantBadge(c: Contestant): string {
   const num = c.category_number || c.contestant_number || 1;
-  const prefix = c.gender === "female" ? "F" : "M";
+  const prefix = isContestantFemale(c) ? "F" : "M";
   return `Contestant ${prefix}-${String(num).padStart(2, "0")}`;
 }
 
@@ -279,7 +295,7 @@ export function PageantVoting() {
       return;
     }
 
-    const effectiveCategory = contestant.gender === "female" ? "miss_campus_guide" : "mr_campus_guide";
+    const effectiveCategory = isContestantFemale(contestant) ? "miss_campus_guide" : "mr_campus_guide";
 
     if (userVotes[effectiveCategory]) {
       alert(
@@ -335,18 +351,18 @@ export function PageantVoting() {
 
   // In-memory filtered list
   const filteredContestants = contestants.filter((c) => {
-    const isFemale = c.gender === "female" || c.category === "miss_campus_guide" || c.category === "mrs_campus_guide";
+    const isFemale = isContestantFemale(c);
     const targetFemale = activeCategory === "miss_campus_guide";
     if (targetFemale !== isFemale) return false;
 
     if (!searchQuery.trim()) return true;
     const query = searchQuery.toLowerCase().trim();
 
-    const matchesName = c.name.toLowerCase().includes(query);
+    const matchesName = (c.name || "").toLowerCase().includes(query);
     const matchesCode = (c.contestant_code || "").toLowerCase().includes(query);
     const numStr = String(c.category_number || c.contestant_number || "");
     const matchesNum = numStr === query || `#${numStr}`.includes(query);
-    const matchesDept = c.department.toLowerCase().includes(query);
+    const matchesDept = (c.department || "").toLowerCase().includes(query);
 
     return matchesName || matchesCode || matchesNum || matchesDept;
   });
@@ -621,7 +637,7 @@ export function PageantVoting() {
               <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50">
                 <div className="flex items-center gap-2">
                   <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-                    selectedContestant.gender === "female" ? "bg-pink-100 text-pink-900" : "bg-blue-100 text-blue-900"
+                    isContestantFemale(selectedContestant) ? "bg-pink-100 text-pink-900" : "bg-blue-100 text-blue-900"
                   }`}>
                     {formatContestantBadge(selectedContestant)}
                   </span>

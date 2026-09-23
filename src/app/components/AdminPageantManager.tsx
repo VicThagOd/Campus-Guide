@@ -16,7 +16,7 @@ import { TbLoader2, TbRefresh, TbTrash, TbCheck, TbPhoto } from "react-icons/tb"
 import { PiGenderFemaleBold, PiGenderMaleBold, PiMedalDuotone } from "react-icons/pi";
 import { supabase } from "../../lib/supabase";
 import { invalidateCache } from "../lib/queryCache";
-import { formatContestantBadge } from "./PageantVoting";
+import { formatContestantBadge, isContestantFemale } from "./PageantVoting";
 
 interface ContestantAdminRow {
   id: string;
@@ -126,8 +126,8 @@ export function AdminPageantManager() {
 
   // Stats calculation
   const totalContestants = contestants.length;
-  const femaleContestants = contestants.filter((c) => c.gender === "female" || c.category === "miss_campus_guide" || c.category === "mrs_campus_guide");
-  const maleContestants = contestants.filter((c) => c.gender === "male" || c.category === "mr_campus_guide");
+  const femaleContestants = contestants.filter((c) => isContestantFemale(c));
+  const maleContestants = contestants.filter((c) => !isContestantFemale(c));
   const totalVotesCast = contestants.reduce((acc, c) => acc + (c.votes_count || 0), 0);
   const totalRevenue = totalContestants * 1000;
 
