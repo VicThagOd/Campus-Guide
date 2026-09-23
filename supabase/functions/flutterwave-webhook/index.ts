@@ -290,6 +290,7 @@ Deno.serve(async (req) => {
           .from("pageant_contestants")
           .update({
             payment_status: "completed",
+            is_approved: true,
             payment_reference: String(flwTransactionId),
           })
           .eq("id", contestantId);
@@ -297,7 +298,7 @@ Deno.serve(async (req) => {
         if (pageantErr) {
           console.error("Failed to update contestant payment status:", pageantErr);
         } else {
-          console.log("Contestant payment completed successfully for id:", contestantId);
+          console.log("Contestant payment completed and approved for id:", contestantId);
         }
       }
 

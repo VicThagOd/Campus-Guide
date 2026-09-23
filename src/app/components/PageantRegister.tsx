@@ -227,6 +227,24 @@ export function PageantRegister() {
     setLoading(true);
 
     try {
+      // 0. Prevent duplicate registrations
+      const trimmedEmail = email.trim().toLowerCase();
+      const trimmedPhone = phoneNumber.trim();
+      const trimmedName = fullName.trim().toLowerCase();
+
+      const { data: existingReg } = await supabase
+        .from("pageant_contestants")
+        .select("id, name, contestant_code")
+        .or(`email.ilike.${trimmedEmail},phone_number.eq.${trimmedPhone},name.ilike.${trimmedName}${user?.id ? `,user_id.eq.${user.id}` : ""}`)
+        .limit(1)
+        .maybeSingle();
+
+      if (existingReg) {
+        setError(`A registration for "${existingReg.name}" (${existingReg.contestant_code || "Registered"}) already exists. Multiple registrations are prohibited and duplicate entries will be deleted without refunds.`);
+        setLoading(false);
+        return;
+      }
+
       // 1. Upload photos to storage (compressed automatically)
       const [coverUrl, seatedUrl, standingUrl] = await Promise.all([
         uploadPhotoToSupabase(coverPhotoFile, "cover"),
@@ -274,6 +292,7 @@ export function PageantRegister() {
           seated_photo_url: seatedUrl,
           standing_photo_url: standingUrl,
           payment_status: "pending",
+          is_approved: false,
         })
         .select("id, contestant_number, category_number, contestant_code, name, gender, category")
         .single();
@@ -282,35 +301,21 @@ export function PageantRegister() {
         throw new Error(insertErr?.message || "Failed to register contestant profile.");
       }
 
-      // Invalidate public cached query so new contestant shows immediately
-      invalidateCache("pageant_contestants");
-
       // 4. Trigger Flutterwave Payment (Flat ₦1,000)
       const totalAmount = 1000;
 
-      try {
-        const checkoutUrl = await initializeFlutterwavePayment({
-          amount: totalAmount,
-          paymentType: "pageant",
-          userId: user?.id || contestant.id,
-          email: email.trim(),
-          name: fullName.trim(),
-          course: department.trim() || "Student",
-          contestantId: contestant.id,
-        });
+      const checkoutUrl = await initializeFlutterwavePayment({
+        amount: totalAmount,
+        paymentType: "pageant",
+        userId: user?.id || contestant.id,
+        email: email.trim(),
+        name: fullName.trim(),
+        course: department.trim() || "Student",
+        contestantId: contestant.id,
+      });
 
-        // Redirect to payment gateway
-        window.location.assign(checkoutUrl);
-      } catch (payErr: any) {
-        console.warn("Payment initialization notice:", payErr);
-        setSuccessContestant({
-          number: contestant.category_number || nextNum,
-          code: contestant.contestant_code || contestantCode,
-          name: contestant.name,
-          gender: contestant.gender,
-          category: contestant.category || category,
-        });
-      }
+      // Redirect to Flutterwave payment gateway
+      window.location.assign(checkoutUrl);
     } catch (err: any) {
       setError(err?.message || "An unexpected error occurred. Please try again.");
     } finally {
@@ -384,10 +389,18 @@ export function PageantRegister() {
         )}
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm">
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm font-medium">
             {error}
           </div>
         )}
+
+        {/* Anti-Duplicate Warning Banner */}
+        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3 text-amber-950 shadow-sm">
+          <RiShieldCheckLine className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+          <div className="text-xs sm:text-sm leading-relaxed">
+            <strong className="font-bold text-amber-900">Strict Registration Policy:</strong> Only one registration is permitted per contestant. Multiple or duplicate registrations under the same or similar names/details will be deleted without refunds. Please submit your registration only once.
+          </div>
+        </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-8">

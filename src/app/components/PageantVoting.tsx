@@ -57,6 +57,11 @@ export function formatContestantBadge(c: Contestant): string {
   return `Contestant ${prefix}-${String(num).padStart(2, "0")}`;
 }
 
+export function getFirstName(name: string): string {
+  const parts = String(name || "").trim().split(/\s+/);
+  return parts[0] || "Contestant";
+}
+
 export function ContestantPhotoCarousel({
   photos,
   contestantName,
@@ -202,6 +207,8 @@ export function PageantVoting() {
   }, []);
 
   const now = new Date();
+  const isVotingUpcoming = Boolean(votingStartDate && now < votingStartDate);
+  const isVotingClosed = !votingLive || Boolean(votingEndDate && now > votingEndDate);
   const isVotingOpen = votingLive && (!votingStartDate || now >= votingStartDate) && (!votingEndDate || now <= votingEndDate);
 
   // Fetch contestants with client-side SWR caching
@@ -567,9 +574,11 @@ export function PageantVoting() {
 
                       <button
                         onClick={() => handleVote(contestant)}
-                        disabled={hasVotedInCategory || votingContestantId === contestant.id}
+                        disabled={!isVotingOpen || hasVotedInCategory || votingContestantId === contestant.id}
                         className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 ${
-                          isVotedForThis
+                          !isVotingOpen
+                            ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200"
+                            : isVotedForThis
                             ? "bg-emerald-600 text-white cursor-default"
                             : hasVotedInCategory
                             ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200"
@@ -580,6 +589,10 @@ export function PageantVoting() {
                           <>
                             <TbLoader2 className="w-4 h-4 animate-spin" /> Recording...
                           </>
+                        ) : !isVotingOpen ? (
+                          <>
+                            <RiShieldCheckLine className="w-4 h-4 text-gray-400" /> Voting {isVotingUpcoming ? "Not Started" : "Closed"}
+                          </>
                         ) : isVotedForThis ? (
                           <>
                             <TbCheck className="w-4 h-4" /> Voted
@@ -588,7 +601,7 @@ export function PageantVoting() {
                           <>Already Voted</>
                         ) : (
                           <>
-                            <RiHeart3Fill className="w-4 h-4 text-pink-300" /> Vote for {formatContestantBadge(contestant).replace("Contestant ", "")}
+                            <RiHeart3Fill className="w-4 h-4 text-pink-300" /> Vote for {getFirstName(contestant.name)}
                           </>
                         )}
                       </button>
@@ -716,9 +729,11 @@ export function PageantVoting() {
 
                 <button
                   onClick={() => handleVote(selectedContestant)}
-                  disabled={Boolean(userVotes[selectedContestant.category]) || votingContestantId === selectedContestant.id}
+                  disabled={!isVotingOpen || Boolean(userVotes[selectedContestant.category]) || votingContestantId === selectedContestant.id}
                   className={`px-6 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow ${
-                    userVotes[selectedContestant.category] === selectedContestant.id
+                    !isVotingOpen
+                      ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                      : userVotes[selectedContestant.category] === selectedContestant.id
                       ? "bg-emerald-600 text-white"
                       : userVotes[selectedContestant.category]
                       ? "bg-gray-200 text-gray-400 cursor-not-allowed"
@@ -729,15 +744,19 @@ export function PageantVoting() {
                     <>
                       <TbLoader2 className="w-4 h-4 animate-spin" /> Recording Vote...
                     </>
+                  ) : !isVotingOpen ? (
+                    <>
+                      Voting {isVotingUpcoming ? "Not Started" : "Closed"}
+                    </>
                   ) : userVotes[selectedContestant.category] === selectedContestant.id ? (
                     <>
-                      <TbCheck className="w-4 h-4" /> Voted for this candidate
+                      <TbCheck className="w-4 h-4" /> Voted for {getFirstName(selectedContestant.name)}
                     </>
                   ) : userVotes[selectedContestant.category] ? (
                     <>Already Voted in Category</>
                   ) : (
                     <>
-                      <RiHeart3Fill className="w-4 h-4 text-pink-300" /> Cast Your Vote for #{selectedContestant.contestant_number}
+                      <RiHeart3Fill className="w-4 h-4 text-pink-300" /> Vote for {getFirstName(selectedContestant.name)}
                     </>
                   )}
                 </button>

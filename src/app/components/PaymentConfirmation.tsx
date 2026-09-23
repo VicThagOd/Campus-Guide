@@ -87,30 +87,24 @@ export function PaymentConfirmation() {
 
           const { data: cData } = await contestantQuery.maybeSingle();
 
-          if (cData) {
-            const isGatewaySuccess = gatewayStatus?.toLowerCase() === "successful";
-            const isDbCompleted = cData.payment_status === "completed";
+          if (cData && cData.payment_status === "completed") {
+            const num = cData.category_number || cData.contestant_number || 1;
+            const isFemale = cData.gender === "female" || cData.category === "miss_campus_guide";
+            const code = cData.contestant_code || (isFemale ? `contestants_f_${String(num).padStart(2, "0")}` : `contestants_m_${String(num).padStart(2, "0")}`);
 
-            // If Flutterwave verified success or database confirmed completion
-            if (isGatewaySuccess || isDbCompleted) {
-              const num = cData.category_number || cData.contestant_number || 1;
-              const isFemale = cData.gender === "female" || cData.category === "miss_campus_guide";
-              const code = cData.contestant_code || (isFemale ? `contestants_f_${String(num).padStart(2, "0")}` : `contestants_m_${String(num).padStart(2, "0")}`);
+            setContestantDetails({
+              id: cData.id,
+              name: cData.name,
+              code,
+              number: num,
+              gender: cData.gender,
+              category: cData.category,
+              department: cData.department,
+              level: cData.level,
+              coverPhotoUrl: cData.cover_photo_url,
+            });
 
-              setContestantDetails({
-                id: cData.id,
-                name: cData.name,
-                code,
-                number: num,
-                gender: cData.gender,
-                category: cData.category,
-                department: cData.department,
-                level: cData.level,
-                coverPhotoUrl: cData.cover_photo_url,
-              });
-
-              unlocked = true;
-            }
+            unlocked = true;
           }
         } else if (paymentType === "pdf" || paymentType === "cbt") {
           if (user?.id) {
