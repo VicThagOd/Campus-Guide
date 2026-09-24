@@ -285,6 +285,8 @@ Deno.serve(async (req) => {
       );
     } else if (pending.payment_type === "pageant") {
       const contestantId = metadata.contestantId;
+      const contestantData = metadata.contestantData;
+
       if (contestantId) {
         const { error: pageantErr } = await supabase
           .from("pageant_contestants")
@@ -300,10 +302,47 @@ Deno.serve(async (req) => {
         } else {
           console.log("Contestant payment completed and approved for id:", contestantId);
         }
+      } else if (contestantData) {
+        // Fallback insert if contestant wasn't pre-registered
+        const contestantUserId = (!pending.user_id || pending.user_id === "anonymous_user" || pending.user_id === "00000000-0000-0000-0000-000000000000") ? null : pending.user_id;
+        const gender = contestantData.gender === "male" ? "male" : "female";
+        const category = contestantData.category || (gender === "male" ? "mr_campus_guide" : "miss_campus_guide");
+
+        const { data: newContestant, error: pageantErr } = await supabase
+          .from("pageant_contestants")
+          .insert({
+            user_id: contestantUserId,
+            name: contestantData.name,
+            email: pending.email,
+            phone_number: contestantData.phone_number,
+            matric_number: contestantData.matric_number || null,
+            gender: gender,
+            category: category,
+            department: contestantData.department || "General",
+            level: contestantData.level || "100L",
+            state_of_origin: contestantData.state_of_origin || null,
+            bio: contestantData.bio || null,
+            why_face_of_cg: contestantData.why_face_of_cg || null,
+            social_handles: contestantData.social_handles || {},
+            cover_photo_url: contestantData.cover_photo_url,
+            seated_photo_url: contestantData.seated_photo_url,
+            standing_photo_url: contestantData.standing_photo_url,
+            payment_status: "completed",
+            is_approved: true,
+            payment_reference: String(flwTransactionId),
+          })
+          .select("id, name, contestant_code")
+          .single();
+
+        if (pageantErr) {
+          console.error("Failed to insert completed contestant:", pageantErr);
+        } else {
+          console.log("Contestant successfully registered & paid:", newContestant?.name, newContestant?.contestant_code);
+        }
       }
 
       await sendTelegramAlert(
-        `👑 <b>New Pageant Contestant Registered & Paid</b>\n- Email: ${pending.email}\n- Amount: ₦${txn.amount}\n- Contestant ID: ${contestantId || "N/A"}`
+        `👑 <b>New Pageant Contestant Registered & Paid</b>\n- Name: ${contestantData?.name || pending.email}\n- Email: ${pending.email}\n- Amount: ₦${txn.amount}`
       );
     }
 

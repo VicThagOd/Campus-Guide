@@ -83,6 +83,8 @@ export function PaymentConfirmation() {
             contestantQuery = contestantQuery.eq("payment_reference", String(transactionId));
           } else if (user?.id) {
             contestantQuery = contestantQuery.eq("user_id", user.id).order("created_at", { ascending: false }).limit(1);
+          } else if (user?.email) {
+            contestantQuery = contestantQuery.eq("email", user.email).order("created_at", { ascending: false }).limit(1);
           }
 
           const { data: cData } = await contestantQuery.maybeSingle();

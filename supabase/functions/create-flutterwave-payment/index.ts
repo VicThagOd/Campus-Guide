@@ -34,6 +34,7 @@ interface CreatePaymentPayload {
   accommodationId?: string;
   whatsappNumber?: string;
   contestantId?: string;
+  contestantData?: any;
 }
 
 // Build a unique tx_ref for Flutterwave
@@ -79,6 +80,7 @@ Deno.serve(async (req) => {
       accommodationId,
       whatsappNumber,
       contestantId,
+      contestantData,
     } = payload;
 
     const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -190,10 +192,55 @@ Deno.serve(async (req) => {
       }
     }
 
+    let activeContestantId = contestantId;
+
+    // For pageant registrations, securely pre-register the contestant via service_role
+    if (paymentType === "pageant" && contestantData && !activeContestantId) {
+      try {
+        const contestantUserId = (!userId || userId === "00000000-0000-0000-0000-000000000000") ? null : userId;
+        const gender = contestantData.gender === "male" ? "male" : "female";
+        const category = contestantData.category || (gender === "male" ? "mr_campus_guide" : "miss_campus_guide");
+
+        const { data: newContestant, error: contestantErr } = await supabase
+          .from("pageant_contestants")
+          .insert({
+            user_id: contestantUserId,
+            name: contestantData.name,
+            email: email.trim(),
+            phone_number: contestantData.phone_number,
+            matric_number: contestantData.matric_number || null,
+            gender: gender,
+            category: category,
+            department: contestantData.department || "General",
+            level: contestantData.level || "100L",
+            state_of_origin: contestantData.state_of_origin || null,
+            bio: contestantData.bio || null,
+            why_face_of_cg: contestantData.why_face_of_cg || null,
+            social_handles: contestantData.social_handles || {},
+            cover_photo_url: contestantData.cover_photo_url,
+            seated_photo_url: contestantData.seated_photo_url,
+            standing_photo_url: contestantData.standing_photo_url,
+            payment_status: "pending",
+            is_approved: false,
+          })
+          .select("id, contestant_code, category_number")
+          .single();
+
+        if (contestantErr) {
+          console.error("Failed to pre-register contestant via service_role:", contestantErr);
+        } else if (newContestant) {
+          activeContestantId = newContestant.id;
+          console.log("Contestant pre-registered successfully via service_role:", newContestant.id, newContestant.contestant_code);
+        }
+      } catch (err) {
+        console.error("Exception pre-registering contestant:", err);
+      }
+    }
+
     const txRef = buildTxRef(paymentType);
     let redirectUrl = `${publicBaseUrl.replace(/\/$/, "")}/payment/confirm?product=${paymentType}`;
-    if (paymentType === "pageant" && contestantId) {
-      redirectUrl += `&contestant_id=${encodeURIComponent(contestantId)}`;
+    if (paymentType === "pageant" && activeContestantId) {
+      redirectUrl += `&contestant_id=${encodeURIComponent(activeContestantId)}`;
     }
 
     // Save pending payment record (with metadata JSONB for ticket/inspection/pageant parameter pass)
@@ -210,7 +257,8 @@ Deno.serve(async (req) => {
         items,
         accommodationId,
         whatsappNumber,
-        contestantId,
+        contestantId: activeContestantId,
+        contestantData,
         basePrice,
       },
     });

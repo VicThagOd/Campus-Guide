@@ -23,6 +23,7 @@ export interface InitializeFlutterwavePaymentParams {
   accommodationId?: string;
   whatsappNumber?: string;
   contestantId?: string;
+  contestantData?: any;
 }
 
 export async function initializeFlutterwavePayment(

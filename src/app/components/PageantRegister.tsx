@@ -111,12 +111,14 @@ export function PageantRegister() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [successContestant, setSuccessContestant] = useState<{
     number: number;
     code: string;
     name: string;
     gender: "male" | "female";
+    category?: string;
   } | null>(null);
 
   // Form Fields
@@ -170,8 +172,8 @@ export function PageantRegister() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (file.size > 15 * 1024 * 1024) {
-      alert("Please select an image smaller than 15MB");
+    if (file.size > 20 * 1024 * 1024) {
+      alert("Please select an image smaller than 20MB");
       return;
     }
 
@@ -189,21 +191,28 @@ export function PageantRegister() {
   };
 
   const uploadPhotoToSupabase = async (file: File, prefix: string): Promise<string> => {
-    const compressed = await compressImage(file);
-    const fileExt = compressed.name.split(".").pop() || "jpg";
-    const fileName = `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
+    let uploadFile = file;
+    try {
+      uploadFile = await compressImage(file);
+    } catch (compressErr) {
+      console.warn("Image compression fallback:", compressErr);
+    }
+
+    const rawExt = (file.name || "").split(".").pop() || "jpg";
+    const cleanExt = rawExt.toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+    const fileName = `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${cleanExt}`;
     const filePath = `contestants/${fileName}`;
 
     const { error: uploadErr } = await supabase.storage
       .from("pageant_photos")
-      .upload(filePath, compressed, {
+      .upload(filePath, uploadFile, {
         cacheControl: "31536000",
         upsert: true,
-        contentType: "image/jpeg",
+        contentType: uploadFile.type || "image/jpeg",
       });
 
     if (uploadErr) {
-      throw new Error(`Failed to upload photo (${prefix}): ` + uploadErr.message);
+      throw new Error(`Failed to upload ${prefix} photo: ` + uploadErr.message);
     }
 
     const { data: publicData } = supabase.storage.from("pageant_photos").getPublicUrl(filePath);
@@ -219,12 +228,21 @@ export function PageantRegister() {
       return;
     }
 
-    if (!coverPhotoFile || !seatedPhotoFile || !standingPhotoFile) {
-      setError("All 3 photos (Cover Picture, Seated Picture, Standing Picture) are required.");
+    if (!coverPhotoFile) {
+      setError("Cover Photo is required. Please tap 'Upload Cover Photo' to choose your photo.");
+      return;
+    }
+    if (!seatedPhotoFile) {
+      setError("Seated Photo is required. Please tap 'Upload Seated Photo' to choose your photo.");
+      return;
+    }
+    if (!standingPhotoFile) {
+      setError("Standing Photo is required. Please tap 'Upload Standing Photo' to choose your photo.");
       return;
     }
 
     setLoading(true);
+    setUploadProgress("Verifying registration...");
 
     try {
       // 0. Prevent duplicate registrations
@@ -242,42 +260,40 @@ export function PageantRegister() {
       if (existingReg) {
         setError(`A registration for "${existingReg.name}" (${existingReg.contestant_code || "Registered"}) already exists. Multiple registrations are prohibited and duplicate entries will be deleted without refunds.`);
         setLoading(false);
+        setUploadProgress(null);
         return;
       }
 
-      // 1. Upload photos to storage (compressed automatically)
-      const [coverUrl, seatedUrl, standingUrl] = await Promise.all([
-        uploadPhotoToSupabase(coverPhotoFile, "cover"),
-        uploadPhotoToSupabase(seatedPhotoFile, "seated"),
-        uploadPhotoToSupabase(standingPhotoFile, "standing"),
-      ]);
+      // 1. Upload photos to storage with progress feedback
+      setUploadProgress("Uploading Cover Photo...");
+      const coverUrl = await uploadPhotoToSupabase(coverPhotoFile, "cover");
+
+      setUploadProgress("Uploading Seated Photo...");
+      const seatedUrl = await uploadPhotoToSupabase(seatedPhotoFile, "seated");
+
+      setUploadProgress("Uploading Standing Photo...");
+      const standingUrl = await uploadPhotoToSupabase(standingPhotoFile, "standing");
 
       const category = gender === "male" ? "mr_campus_guide" : "miss_campus_guide";
 
-      // 2. Count existing contestants in this gender category to ensure sequential code
-      const { count } = await supabase
-        .from("pageant_contestants")
-        .select("id", { count: "exact", head: true })
-        .eq("gender", gender);
+      // 2. Trigger Flutterwave Payment with contestant payload stored in payment metadata
+      setUploadProgress("Connecting to Payment Gateway...");
+      const totalAmount = 1000;
 
-      const nextNum = (count || 0) + 1;
-      const contestantCode = gender === "female"
-        ? `contestants_f_${String(nextNum).padStart(2, "0")}`
-        : `contestants_m_${String(nextNum).padStart(2, "0")}`;
-
-      // 3. Insert contestant record
-      const { data: contestant, error: insertErr } = await supabase
-        .from("pageant_contestants")
-        .insert({
-          user_id: user?.id || null,
+      const checkoutUrl = await initializeFlutterwavePayment({
+        amount: totalAmount,
+        paymentType: "pageant",
+        userId: user?.id || "00000000-0000-0000-0000-000000000000",
+        email: email.trim(),
+        name: fullName.trim(),
+        course: department.trim() || "Student",
+        contestantData: {
           name: fullName.trim(),
           email: email.trim(),
           phone_number: phoneNumber.trim(),
           matric_number: matricNumber.trim() || null,
           gender,
           category,
-          category_number: nextNum,
-          contestant_code: contestantCode,
           department: department.trim() || "General",
           level,
           state_of_origin: stateOfOrigin.trim() || null,
@@ -291,27 +307,7 @@ export function PageantRegister() {
           cover_photo_url: coverUrl,
           seated_photo_url: seatedUrl,
           standing_photo_url: standingUrl,
-          payment_status: "pending",
-          is_approved: false,
-        })
-        .select("id, contestant_number, category_number, contestant_code, name, gender, category")
-        .single();
-
-      if (insertErr || !contestant) {
-        throw new Error(insertErr?.message || "Failed to register contestant profile.");
-      }
-
-      // 4. Trigger Flutterwave Payment (Flat ₦1,000)
-      const totalAmount = 1000;
-
-      const checkoutUrl = await initializeFlutterwavePayment({
-        amount: totalAmount,
-        paymentType: "pageant",
-        userId: user?.id || contestant.id,
-        email: email.trim(),
-        name: fullName.trim(),
-        course: department.trim() || "Student",
-        contestantId: contestant.id,
+        },
       });
 
       // Redirect to Flutterwave payment gateway
@@ -320,6 +316,7 @@ export function PageantRegister() {
       setError(err?.message || "An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
+      setUploadProgress(null);
     }
   };
 
@@ -455,30 +452,44 @@ export function PageantRegister() {
                 </span>
                 <p className="text-[11px] text-gray-500 mb-2">Main showcase portrait</p>
                 {coverPhotoPreview ? (
-                  <div className="relative w-full h-44 rounded-lg overflow-hidden group shadow-inner mb-2">
+                  <div className="relative w-full h-44 rounded-lg overflow-hidden group shadow-inner mb-2 border border-gray-200">
                     <img src={coverPhotoPreview} alt="Cover Preview" className="w-full h-full object-cover" />
                     <button
                       type="button"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setCoverPhotoFile(null);
                         setCoverPhotoPreview(null);
                       }}
-                      className="absolute top-2 right-2 bg-red-600 text-white p-1.5 rounded-full shadow hover:bg-red-700 transition-colors"
+                      className="absolute top-2 right-2 z-20 bg-red-600 text-white p-2 rounded-full shadow hover:bg-red-700 transition-colors"
+                      title="Remove photo"
                     >
                       <TbTrash className="w-4 h-4" />
                     </button>
+                    <label className="absolute bottom-2 inset-x-2 z-20 bg-black/60 backdrop-blur-sm text-white text-[11px] py-1.5 rounded text-center cursor-pointer hover:bg-black/80 transition-colors">
+                      Change Photo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        onClick={(e) => { (e.target as HTMLInputElement).value = ""; }}
+                        onChange={(e) => handlePhotoSelect(e, "cover")}
+                      />
+                    </label>
                   </div>
                 ) : (
-                  <label className="w-full h-44 border border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 hover:bg-white transition-all p-4">
-                    <TbCameraPlus className="w-8 h-8 text-gray-400 mb-1" />
-                    <span className="text-xs text-[#2F4EA2] font-medium">Upload Cover</span>
+                  <div className="relative w-full h-44 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center p-4 bg-white hover:border-[#2F4EA2] transition-all cursor-pointer group">
                     <input
                       type="file"
                       accept="image/*"
-                      className="hidden"
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                      onClick={(e) => { (e.target as HTMLInputElement).value = ""; }}
                       onChange={(e) => handlePhotoSelect(e, "cover")}
                     />
-                  </label>
+                    <TbCameraPlus className="w-8 h-8 text-gray-400 group-hover:text-[#2F4EA2] mb-1 transition-colors" />
+                    <span className="text-xs text-[#2F4EA2] font-semibold">Tap to Upload</span>
+                    <span className="text-[10px] text-gray-400 mt-1">Camera or Gallery</span>
+                  </div>
                 )}
               </div>
 
@@ -489,30 +500,44 @@ export function PageantRegister() {
                 </span>
                 <p className="text-[11px] text-gray-500 mb-2">Seated posture pose</p>
                 {seatedPhotoPreview ? (
-                  <div className="relative w-full h-44 rounded-lg overflow-hidden group shadow-inner mb-2">
+                  <div className="relative w-full h-44 rounded-lg overflow-hidden group shadow-inner mb-2 border border-gray-200">
                     <img src={seatedPhotoPreview} alt="Seated Preview" className="w-full h-full object-cover" />
                     <button
                       type="button"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setSeatedPhotoFile(null);
                         setSeatedPhotoPreview(null);
                       }}
-                      className="absolute top-2 right-2 bg-red-600 text-white p-1.5 rounded-full shadow hover:bg-red-700 transition-colors"
+                      className="absolute top-2 right-2 z-20 bg-red-600 text-white p-2 rounded-full shadow hover:bg-red-700 transition-colors"
+                      title="Remove photo"
                     >
                       <TbTrash className="w-4 h-4" />
                     </button>
+                    <label className="absolute bottom-2 inset-x-2 z-20 bg-black/60 backdrop-blur-sm text-white text-[11px] py-1.5 rounded text-center cursor-pointer hover:bg-black/80 transition-colors">
+                      Change Photo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        onClick={(e) => { (e.target as HTMLInputElement).value = ""; }}
+                        onChange={(e) => handlePhotoSelect(e, "seated")}
+                      />
+                    </label>
                   </div>
                 ) : (
-                  <label className="w-full h-44 border border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 hover:bg-white transition-all p-4">
-                    <TbCameraPlus className="w-8 h-8 text-gray-400 mb-1" />
-                    <span className="text-xs text-[#2F4EA2] font-medium">Upload Seated</span>
+                  <div className="relative w-full h-44 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center p-4 bg-white hover:border-[#2F4EA2] transition-all cursor-pointer group">
                     <input
                       type="file"
                       accept="image/*"
-                      className="hidden"
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                      onClick={(e) => { (e.target as HTMLInputElement).value = ""; }}
                       onChange={(e) => handlePhotoSelect(e, "seated")}
                     />
-                  </label>
+                    <TbCameraPlus className="w-8 h-8 text-gray-400 group-hover:text-[#2F4EA2] mb-1 transition-colors" />
+                    <span className="text-xs text-[#2F4EA2] font-semibold">Tap to Upload</span>
+                    <span className="text-[10px] text-gray-400 mt-1">Camera or Gallery</span>
+                  </div>
                 )}
               </div>
 
@@ -523,30 +548,44 @@ export function PageantRegister() {
                 </span>
                 <p className="text-[11px] text-gray-500 mb-2">Full-length standing pose</p>
                 {standingPhotoPreview ? (
-                  <div className="relative w-full h-44 rounded-lg overflow-hidden group shadow-inner mb-2">
+                  <div className="relative w-full h-44 rounded-lg overflow-hidden group shadow-inner mb-2 border border-gray-200">
                     <img src={standingPhotoPreview} alt="Standing Preview" className="w-full h-full object-cover" />
                     <button
                       type="button"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setStandingPhotoFile(null);
                         setStandingPhotoPreview(null);
                       }}
-                      className="absolute top-2 right-2 bg-red-600 text-white p-1.5 rounded-full shadow hover:bg-red-700 transition-colors"
+                      className="absolute top-2 right-2 z-20 bg-red-600 text-white p-2 rounded-full shadow hover:bg-red-700 transition-colors"
+                      title="Remove photo"
                     >
                       <TbTrash className="w-4 h-4" />
                     </button>
+                    <label className="absolute bottom-2 inset-x-2 z-20 bg-black/60 backdrop-blur-sm text-white text-[11px] py-1.5 rounded text-center cursor-pointer hover:bg-black/80 transition-colors">
+                      Change Photo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        onClick={(e) => { (e.target as HTMLInputElement).value = ""; }}
+                        onChange={(e) => handlePhotoSelect(e, "standing")}
+                      />
+                    </label>
                   </div>
                 ) : (
-                  <label className="w-full h-44 border border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 hover:bg-white transition-all p-4">
-                    <TbCameraPlus className="w-8 h-8 text-gray-400 mb-1" />
-                    <span className="text-xs text-[#2F4EA2] font-medium">Upload Standing</span>
+                  <div className="relative w-full h-44 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center p-4 bg-white hover:border-[#2F4EA2] transition-all cursor-pointer group">
                     <input
                       type="file"
                       accept="image/*"
-                      className="hidden"
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                      onClick={(e) => { (e.target as HTMLInputElement).value = ""; }}
                       onChange={(e) => handlePhotoSelect(e, "standing")}
                     />
-                  </label>
+                    <TbCameraPlus className="w-8 h-8 text-gray-400 group-hover:text-[#2F4EA2] mb-1 transition-colors" />
+                    <span className="text-xs text-[#2F4EA2] font-semibold">Tap to Upload</span>
+                    <span className="text-[10px] text-gray-400 mt-1">Camera or Gallery</span>
+                  </div>
                 )}
               </div>
             </div>
@@ -745,7 +784,7 @@ export function PageantRegister() {
             >
               {loading ? (
                 <>
-                  <TbLoader2 className="w-4 h-4 animate-spin" /> Uploading & Processing...
+                  <TbLoader2 className="w-4 h-4 animate-spin" /> {uploadProgress || "Uploading & Processing..."}
                 </>
               ) : isClosed ? (
                 <>Registration Closed</>
